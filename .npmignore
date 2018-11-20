@@ -1,0 +1,7 @@
+test
+.rpt2_cache
+.prettierrc
+.lintstagedrc
+.travis.yml
+tslint.json
+src

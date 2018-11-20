@@ -1,7 +1,7 @@
 import typescript from 'rollup-plugin-typescript2';
 
 export default {
-    input: 'webview-bridge.ts',
+    input: 'index.ts',
     plugins: [typescript()],
     output: [
         {

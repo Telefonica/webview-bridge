@@ -1,12 +1,6 @@
 export {isWebViewBridgeAvailable} from './src/post-message';
-
-export {nativeConfirm, nativeAlert, nativeMessage} from './src/native-dialogs';
-
-export {
-    requestSimIcc,
-    requestSimImsi,
-    requestDeviceImei,
-    attachToEmail,
-    setWebViewTitle,
-    notifyPageLoaded,
-} from './src/native-utils';
+export {nativeConfirm, nativeAlert, nativeMessage} from './src/dialogs';
+export {requestSimIcc, requestSimImsi, requestDeviceImei} from './src/device';
+export {attachToEmail, setWebViewTitle, notifyPageLoaded} from './src/utils';
+export {createCalendarEvent} from './src/calendar';
+export {requestContact} from './src/contacts';

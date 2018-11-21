@@ -5,11 +5,6 @@ export default {
     plugins: [typescript()],
     output: [
         {
-            file: 'dist/webview-bridge-iife.js',
-            format: 'iife',
-            name: 'ReconnectingWebSocket',
-        },
-        {
             file: 'dist/webview-bridge-amd.js',
             format: 'amd',
             name: 'ReconnectingWebSocket',
@@ -20,10 +15,6 @@ export default {
         },
         {
             file: 'dist/webview-bridge.mjs',
-            format: 'es',
-        },
-        {
-            file: 'dist/webview-bridge-mjs.js',
             format: 'es',
         },
     ],

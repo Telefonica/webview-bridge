@@ -6,7 +6,7 @@
     "module": "./dist/webview-bridge.mjs",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "build": "npm run clean && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js",
+        "build": "npm run clean && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-amd.min.js dist/webview-bridge-amd.js",
         "test": "nyc --reporter=text-summary --reporter=lcov ava --verbose --serial test/test.js",
         "clean": "del dist && del coverage && del .nyc_output",
         "report": "nyc report --reporter=html && opn coverage/index.html",

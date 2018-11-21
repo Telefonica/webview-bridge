@@ -1,16 +1,76 @@
 import {getId} from './message-id';
 
 type MessageTypeToResponseMap = {
-    SIM_ICC: {id: string; type: 'SIM_ICC'; payload: {icc: string}};
-    IMEI: {id: string; type: 'IMEI'; payload: {imei: string}};
-    IMSI: {id: string; type: 'IMSI'; payload: {imsi: string}};
-    ATTACH_TO_EMAIL: {id: string; type: 'ATTACH_TO_EMAIL'; payload: void};
-    SET_TITLE: {id: string; type: 'SET_TITLE'; payload: void};
-    PAGE_LOADED: {id: string; type: 'PAGE_LOADED'; payload: void};
-    ALERT: {id: string; type: 'ALERT'; payload: void};
-    MESSAGE: {id: string; type: 'MESSAGE'; payload: void};
-    CONFIRM: {id: string; type: 'CONFIRM'; payload: {result: boolean}};
-    ERROR: {id: string; type: 'ERROR'; payload: {code: number; reason: string}};
+    SIM_ICC: {
+        id: string;
+        type: 'SIM_ICC';
+        payload: {icc: string};
+    };
+    IMEI: {
+        id: string;
+        type: 'IMEI';
+        payload: {imei: string};
+    };
+    IMSI: {
+        id: string;
+        type: 'IMSI';
+        payload: {imsi: string};
+    };
+    ATTACH_TO_EMAIL: {
+        id: string;
+        type: 'ATTACH_TO_EMAIL';
+        payload: void;
+    };
+    SET_TITLE: {
+        id: string;
+        type: 'SET_TITLE';
+        payload: void;
+    };
+    PAGE_LOADED: {
+        id: string;
+        type: 'PAGE_LOADED';
+        payload: void;
+    };
+    ALERT: {
+        id: string;
+        type: 'ALERT';
+        payload: void;
+    };
+    MESSAGE: {
+        id: string;
+        type: 'MESSAGE';
+        payload: void;
+    };
+    CONFIRM: {
+        id: string;
+        type: 'CONFIRM';
+        payload: {result: boolean};
+    };
+    CREATE_CALENDAR_EVENT: {
+        id: string;
+        type: 'CREATE_CALENDAR_EVENT';
+        payload: void;
+    };
+    GET_CONTACT_DATA: {
+        id: string;
+        type: 'GET_CONTACT_DATA';
+        payload: {
+            name?: string;
+            email?: string;
+            phoneNumber?: string;
+            address?: {
+                street?: string;
+                city?: string;
+                country?: string;
+                postalCode?: string;
+            };
+        };
+    };
+    ERROR: {
+        id: string;
+        type: 'ERROR';
+        payload: {code: number; reason: string};
+    };
 };
 
 type Response = MessageTypeToResponseMap[keyof MessageTypeToResponseMap];

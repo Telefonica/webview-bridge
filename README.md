@@ -1,6 +1,6 @@
 # webview-bridge
 
-JavaScript library to access to native functionality. Assumes webview with a
+JavaScript library to access to native functionality. Requires a webview with a
 postMessage bridge.
 
 ## Install
@@ -23,8 +23,12 @@ AMD builds available (see package dist folder)
 
 ### requestContact
 
+Show native picker UI in order to let the user select a contact.
+
+Picker UI elements can be filtered by available phones (default) or emails
+
 ```typescript
-requestContact: () => Promise<{
+requestContact: ({filter: 'phone' | 'email'}) => Promise<{
     name?: string;
     email?: string;
     phoneNumber?: string;
@@ -47,6 +51,14 @@ createCalendarEvent: ({beginTime: number, endTime: number, title: string}) => Pr
 
 `beginTime` and `endTime` are timestamps with millisecond precision
 
+### Error handling
+
+If an error occurs, promise will be rejected with an error object
+
+```
+{code: number, description: string}
+```
+
 ## Examples
 
 ### Get contact data
@@ -57,7 +69,7 @@ import {requestContactData} from '@novum/webview-bridge';
 requestContact().then((contact) => {
     console.log(contact);
 }).catch(err => {
-    console.error('something went wrong:', err);
+    console.error(err);
 };
 ```
 
@@ -73,7 +85,7 @@ createCalendarEvent({
 }).then(() => {
     console.log('event created');
 }).catch(err => {
-    console.error('something went wrong:', err);
+    console.error(err);
 };
 ```
 

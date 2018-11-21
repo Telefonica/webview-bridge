@@ -1,3 +1,5 @@
+export {isWebViewBridgeAvailable} from './src/post-message';
+
 export {nativeConfirm, nativeAlert, nativeMessage} from './src/native-dialogs';
 
 export {

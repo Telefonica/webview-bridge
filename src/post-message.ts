@@ -1,4 +1,4 @@
-import {getId} from './id';
+import {getId} from './message-id';
 
 type MessageTypeToResponseMap = {
     SIM_ICC: {id: string; type: 'SIM_ICC'; payload: {icc: string}};
@@ -67,7 +67,7 @@ const unsubscribe = (listener: Listener) => {
 /**
  * Returns true if there is a WebView Bridge installed
  */
-export const isWebViewPostMessageAvailable = (): boolean =>
+export const isWebViewBridgeAvailable = (): boolean =>
     hasAndroidPostMessage() || hasWebKitPostMessage();
 
 /**

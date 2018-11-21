@@ -1,7 +1,9 @@
-test
-.rpt2_cache
-.prettierrc
+./src
+./test
+.huskyrc
 .lintstagedrc
+.prettierrc
+.rpt2_cache
 .travis.yml
 tslint.json
-src
+tsconfig.json

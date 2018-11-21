@@ -1,3 +1,5 @@
+export {nativeConfirm, nativeAlert, nativeMessage} from './src/native-dialogs';
+
 export {
     requestSimIcc,
     requestSimImsi,

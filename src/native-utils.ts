@@ -37,3 +37,6 @@ export const attachToEmail = ({
 
 export const setWebViewTitle = (title: string): Promise<void> =>
     postMessageToNativeApp({type: 'SET_TITLE', payload: {title}});
+
+export const notifyPageLoaded = (): Promise<void> =>
+    postMessageToNativeApp({type: 'PAGE_LOADED'});

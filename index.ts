@@ -8,4 +8,5 @@ export {
     requestDeviceImei,
     attachToEmail,
     setWebViewTitle,
+    notifyPageLoaded,
 } from './src/native-utils';

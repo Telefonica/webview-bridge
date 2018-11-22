@@ -6,6 +6,7 @@
         "target": "es5",
         "lib": ["es6", "dom"],
         "declaration": true,
-        "downlevelIteration": true
+        "downlevelIteration": true,
+        "esModuleInterop": true
     }
 }

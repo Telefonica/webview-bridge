@@ -96,7 +96,6 @@ const getWebViewPostMessage = (): NovumPostMessage | null => {
     // Android
     if (hasAndroidPostMessage()) {
         return jsonMessage => {
-            console.log('postMessage to Android WebView', jsonMessage);
             window!.tuentiWebView!.postMessage!(jsonMessage);
         };
     }
@@ -104,7 +103,6 @@ const getWebViewPostMessage = (): NovumPostMessage | null => {
     // iOS
     if (hasWebKitPostMessage()) {
         return jsonMessage => {
-            console.log('postMessage to iOS WebView', jsonMessage);
             window.webkit!.messageHandlers!.tuentiWebView!.postMessage!(
                 jsonMessage,
             );
@@ -154,7 +152,10 @@ export const postMessageToNativeApp = <
         });
     }
 
-    postMessage(message);
+    // ensure postMessage call is async (so tests behave like a real webview)
+    setTimeout(() => {
+        postMessage(message);
+    });
 
     return new Promise((resolve, reject) => {
         let timedOut = false;

@@ -11,7 +11,7 @@ issue if you need a different build.
 
 ## Usage
 
-### npm
+### NPM
 
 We recommend to manage your dependencies using `npm` or `yarn` and use module
 bundler like [webpack](https://webpack.js.org/) or
@@ -37,7 +37,7 @@ import {setWebviewTitle} from '@novum/webview-bridge';
 setWebviewTitle('Hello, world');
 ```
 
-### cdn
+### CDN
 
 Alternatively, you can import the library directly from a CDN:
 
@@ -127,6 +127,112 @@ export declare const setWebViewTitle: (title: string) => Promise<void>;
 
 ```javascript
 import {setWebViewTitle} from '@novum/webview-bridge';
+
+setWebViewTitle('My new title');
+```
+
+### nativeConfirm
+
+Show a native confirm dialog
+
+```typescript
+export declare const nativeConfirm: (
+    {
+        message,
+        title,
+        acceptText,
+        cancelText,
+    }: {
+        message: string;
+        title?: string;
+        acceptText?: string;
+        cancelText?: string;
+    },
+) => Promise<boolean>;
+```
+
+#### Example
+
+```javascript
+import {nativeConfirm} from '@novum/webview-bridge';
+
+nativeConfirm({
+    title: 'Confirm',
+    message: 'Send message?',
+    acceptText: 'Yes',
+    cancelText: 'No',
+}).then(res => {
+    if (res) {
+        console.log('message sent');
+    }
+});
+```
+
+### nativeAlert
+
+Show a native alert dialog
+
+```typescript
+export declare const nativeAlert: (
+    {
+        message,
+        title,
+        buttonText,
+    }: {
+        message: string;
+        title?: string;
+        buttonText?: string;
+    },
+) => Promise<void>;
+```
+
+#### Example
+
+```javascript
+import {nativeAlert} from '@novum/webview-bridge';
+
+nativeAlert({
+    message: 'Purchase completed!',
+    title: 'Ok!',
+}).then(res => {
+    console.log('alert closed');
+});
+```
+
+### nativeMessage
+
+Show a native message dialog
+
+```typescript
+export declare const nativeMessage: (
+    {
+        message,
+        duration,
+        buttonText,
+        type,
+    }: {
+        message: string;
+        duration?: number; // milliseconds
+        buttonText?: string;
+        type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS';
+    },
+) => Promise<void>;
+```
+
+#### Example
+
+Show a native "snackbar" with a configurable duration and optional close button
+
+```javascript
+import {nativeMessage} from '@novum/webview-bridge';
+
+nativeMessage({
+    message: 'Operation finished!',
+    buttonText: 'Ok',
+    duration: 5000, // 5 seconds
+}).then(res => {
+    console.log('alert closed');
+});
 ```
 
 ### Error handling

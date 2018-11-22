@@ -42,7 +42,7 @@ setWebviewTitle('Hello, world');
 Alternatively, you can import the library directly from a CDN:
 
 ```html
-<script src="https://unpkg.com/@novum/webview-bridge/dist/webview-bridge-umd.js"></script>
+<script src="https://unpkg.com/@tef-novum/webview-bridge/dist/webview-bridge-umd.min.js"></script>
 
 <script>
     webviewBridge.setWebViewTitle('Hello, world');

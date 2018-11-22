@@ -14,6 +14,11 @@ export default {
             format: 'cjs',
         },
         {
+            file: 'dist/webview-bridge-umd.js',
+            format: 'umd',
+            name: 'webviewBridge',
+        },
+        {
             file: 'dist/webview-bridge.mjs',
             format: 'es',
         },

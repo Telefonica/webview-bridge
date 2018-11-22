@@ -3,21 +3,51 @@
 JavaScript library to access to native functionality. Requires a webview with a
 postMessage bridge.
 
-## Install
+Library size ~1.2 Kb (min + gzip)
 
-Using `npm`:
+AMD, UMD, ES builds available (see
+[package dist folder](https://unpkg.com/@novum/webview-bridge/dist)). Open an
+issue if you need a different build.
+
+## Usage
+
+### npm
+
+We recommend to manage your dependencies using `npm` or `yarn` and use module
+bundler like [webpack](https://webpack.js.org/) or
+[parcel](https://parceljs.org/). Once configured, you can use ES imports.
+
+Install using `npm`:
 
 ```
 npm i @novum/webview-bridge
 ```
 
-Using `yarn`:
+Install using `yarn`:
 
 ```
 yarn add @novum/webview-bridge
 ```
 
-AMD builds available (see package dist folder)
+Import required function and use it:
+
+```javascript
+import {setWebviewTitle} from '@novum/webview-bridge';
+
+setWebviewTitle('Hello, world');
+```
+
+### cdn
+
+Alternatively, you can import the library directly from a CDN:
+
+```html
+<script src="https://unpkg.com/@novum/webview-bridge/dist/webview-bridge-umd.js"></script>
+
+<script>
+    webviewBridge.setWebViewTitle('Hello, world');
+</script>
+```
 
 ## API
 
@@ -83,6 +113,20 @@ createCalendarEvent({
 }).catch(err => {
     console.error(err);
 };
+```
+
+### setWebViewTitle
+
+Update webview title
+
+```typescript
+export declare const setWebViewTitle: (title: string) => Promise<void>;
+```
+
+#### Example
+
+```javascript
+import {setWebViewTitle} from '@novum/webview-bridge';
 ```
 
 ### Error handling

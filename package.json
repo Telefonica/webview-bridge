@@ -6,12 +6,10 @@
     "module": "./dist/webview-bridge.mjs",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "build": "npm run clean && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-amd.min.js dist/webview-bridge-amd.js",
+        "build": "del dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js",
         "test": "jest",
-        "clean": "del dist && del coverage && del .nyc_output",
-        "report": "nyc report --reporter=html && opn coverage/index.html",
         "lint": "tslint *.ts",
-        "prepublishOnly": "npm run clean && npm run lint && npm run build && npm test"
+        "prepublishOnly": "npm run lint && npm test && npm run build"
     },
     "repository": {
         "type": "git",

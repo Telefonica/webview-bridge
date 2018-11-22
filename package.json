@@ -1,5 +1,5 @@
 {
-  "name": "@novum/webview-bridge",
+  "name": "@tef-novum/webview-bridge",
   "version": "1.0.0",
   "description": "JavaScript library to access to native functionality. Requires a webview with a postMessage bridge.",
   "main": "./dist/webview-bridge-cjs.js",

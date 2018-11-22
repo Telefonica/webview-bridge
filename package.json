@@ -1,5 +1,5 @@
 {
-    "name": "@tef-novum/webview-bridge",
+    "name": "@novum/webview-bridge",
     "version": "1.0.0",
     "description": "",
     "main": "./dist/webview-bridge-cjs.js",

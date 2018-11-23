@@ -21,7 +21,9 @@
     "url": "https://github.com/tef-novum/webview-bridge/issues"
   },
   "homepage": "https://github.com/tef-novum/webview-bridge#readme",
-  "dependencies": {},
+  "dependencies": {
+    "@types/google.analytics": "0.0.39"
+  },
   "devDependencies": {
     "@types/jest": "^23.3.9",
     "cpx": "^1.5.0",

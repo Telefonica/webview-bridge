@@ -6,7 +6,7 @@
   "module": "./dist/webview-bridge.mjs",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "del dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js",
+    "build": "del dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && cpx ./src/webview-bridge-cjs.flow ./dist",
     "test": "jest",
     "lint": "tslint *.ts",
     "prepublishOnly": "npm run lint && npm test && npm run build"
@@ -24,6 +24,7 @@
   "dependencies": {},
   "devDependencies": {
     "@types/jest": "^23.3.9",
+    "cpx": "^1.5.0",
     "del-cli": "^1.1.0",
     "husky": "^1.2.0",
     "jest": "^23.6.0",

@@ -1,0 +1,57 @@
+// hand written definitions based on auto-generated d.ts
+
+declare module.exports: {
+
+    // calendar
+    createCalendarEvent: ({
+        beginTime: number;
+        endTime: number;
+        title: string;
+    }) => Promise<void>;
+
+    // contacts
+    requestContact: ({filter: "phone" | "email" | void} | void) => Promise<{
+        name?: string;
+        email?: string;
+        phoneNumber?: string;
+        address?: {
+            street?: string;
+            city?: string;
+            country?: string;
+            postalCode?: string;
+        };
+    }>;
+
+    // device
+
+    requestSimIcc: () => Promise<string | null>;
+
+    requestSimImsi: () => Promise<string | null>;
+
+    requestDeviceImei: () => Promise<string | null>;
+
+    // dialogs
+    nativeConfirm: ({
+        message: string;
+        title?: string;
+        acceptText?: string;
+        cancelText?: string;
+    }) => Promise<boolean>;
+
+    nativeAlert: ({
+        message: string;
+        title?: string;
+        buttonText?: string;
+    }) => Promise<void>;
+
+    nativeMessage: ({
+        message: string;
+        duration?: number;
+        buttonText?: string;
+        type?: "INFORMATIVE" | "CRITICAL" | "SUCCESS";
+    }) => Promise<void>;
+
+	// postMessage
+    isWebViewBridgeAvailable: () => boolean;
+
+}

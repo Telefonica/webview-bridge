@@ -20,19 +20,19 @@ bundler like [webpack](https://webpack.js.org/) or
 Install using `npm`:
 
 ```
-npm i @novum/webview-bridge
+npm i @tef-novum/webview-bridge
 ```
 
 Install using `yarn`:
 
 ```
-yarn add @novum/webview-bridge
+yarn add @tef-novum/webview-bridge
 ```
 
 Import required function and use it:
 
 ```javascript
-import {setWebviewTitle} from '@novum/webview-bridge';
+import {setWebviewTitle} from '@tef-novum/webview-bridge';
 
 setWebviewTitle('Hello, world');
 ```
@@ -76,7 +76,7 @@ All fields in response object are optional
 #### Example
 
 ```javascript
-import {requestContact} from '@novum/webview-bridge';
+import {requestContact} from '@tef-novum/webview-bridge';
 
 requestContact({filter: 'phone'}).then((contact) => {
     console.log(contact);
@@ -102,7 +102,7 @@ createCalendarEvent: ({
 #### Example
 
 ```javascript
-import {createCalendarEvent} from '@novum/webview-bridge';
+import {createCalendarEvent} from '@tef-novum/webview-bridge';
 
 createCalendarEvent({
     beginTime: new Date(2019, 10, 06).getTime(),
@@ -126,7 +126,7 @@ export declare const setWebViewTitle: (title: string) => Promise<void>;
 #### Example
 
 ```javascript
-import {setWebViewTitle} from '@novum/webview-bridge';
+import {setWebViewTitle} from '@tef-novum/webview-bridge';
 
 setWebViewTitle('My new title');
 ```
@@ -154,7 +154,7 @@ export declare const nativeConfirm: (
 #### Example
 
 ```javascript
-import {nativeConfirm} from '@novum/webview-bridge';
+import {nativeConfirm} from '@tef-novum/webview-bridge';
 
 nativeConfirm({
     title: 'Confirm',
@@ -189,7 +189,7 @@ export declare const nativeAlert: (
 #### Example
 
 ```javascript
-import {nativeAlert} from '@novum/webview-bridge';
+import {nativeAlert} from '@tef-novum/webview-bridge';
 
 nativeAlert({
     message: 'Purchase completed!',
@@ -224,7 +224,7 @@ export declare const nativeMessage: (
 Show a native "snackbar" with a configurable duration and optional close button
 
 ```javascript
-import {nativeMessage} from '@novum/webview-bridge';
+import {nativeMessage} from '@tef-novum/webview-bridge';
 
 nativeMessage({
     message: 'Operation finished!',

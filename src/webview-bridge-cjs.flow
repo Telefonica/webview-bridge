@@ -51,7 +51,7 @@ declare module.exports: {
         type?: "INFORMATIVE" | "CRITICAL" | "SUCCESS";
     }) => Promise<void>;
 
-	// postMessage
+    // postMessage
     isWebViewBridgeAvailable: () => boolean;
 
 }

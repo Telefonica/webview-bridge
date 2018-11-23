@@ -1,4 +1,3 @@
-import '../types';
 import '../post-message';
 
 it('installs bridge', () => {

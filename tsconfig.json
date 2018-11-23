@@ -8,6 +8,5 @@
         "declaration": true,
         "downlevelIteration": true,
         "esModuleInterop": true
-    },
-    "exclude": ["**/__tests__/**"]
+    }
 }

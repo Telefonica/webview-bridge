@@ -6,8 +6,8 @@ postMessage bridge.
 Library size ~1.2 Kb (min + gzip)
 
 AMD, UMD, ES builds available (see
-[package dist folder](https://unpkg.com/@novum/webview-bridge/dist)). Open an
-issue if you need a different build.
+[package dist folder](https://unpkg.com/@tef-novum/webview-bridge/dist/)). Open
+an issue if you need a different build.
 
 ## Usage
 

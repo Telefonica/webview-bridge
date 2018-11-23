@@ -1,3 +1,4 @@
+import '../types';
 import {createCalendarEvent} from '../calendar';
 
 test('set a calendar event', async cb => {

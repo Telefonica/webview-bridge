@@ -2,7 +2,11 @@ import typescript from 'rollup-plugin-typescript2';
 
 export default {
     input: 'index.ts',
-    plugins: [typescript()],
+    plugins: [
+        typescript({
+            tsconfig: './tsconfig.production.json',
+        }),
+    ],
     output: [
         {
             file: 'dist/webview-bridge-amd.js',

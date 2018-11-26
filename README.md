@@ -51,6 +51,7 @@ Alternatively, you can import the library directly from a CDN:
 
 ## API
 
+-   [isWebViewBridgeAvailable](#isWebViewBridgeAvailable)
 -   [requestContact](#requestcontact)
 -   [createCalendarEvent](#createcalendarevent)
 -   [setWebViewTitle](#setwebviewtitle)
@@ -60,6 +61,27 @@ Alternatively, you can import the library directly from a CDN:
 -   [logEvent](#logevent)
 -   [setScreenName](#setscreenname)
 -   [Error handling](#error-handling)
+
+### isWebViewBridgeAvailable
+
+Returns true if WebView Bridge is available. Use this function to implement
+fallbacks in case the bridge is not available.
+
+```typescript
+isWebViewBridgeAvailable: () => boolean;
+```
+
+#### Example
+
+```javascript
+import {isWebViewBridgeAvailable, nativeAlert} from '@tef-novum/webview-bridge';
+
+if (isWebViewBridgeAvailable()) {
+    nativeAlert('Hello'); // use bridge
+} else {
+    myCustomAlert('Hello'); // use alternative implementation
+}
+```
 
 ### requestContact
 
@@ -131,7 +153,8 @@ createCalendarEvent({
 
 ### setWebViewTitle
 
-Update webview title
+Update webview title. If the bridge is not present, automatically fallbacks to a
+`document.title` update.
 
 ```typescript
 export declare const setWebViewTitle: (title: string) => Promise<void>;
@@ -147,7 +170,10 @@ setWebViewTitle('My new title');
 
 ### nativeConfirm
 
-Show a native confirm dialog
+Show a native confirm dialog.
+
+If the bridge is not present (eg. showing the page in browser), fallbacks to a
+browser confirm.
 
 <img width="350" src="./doc/webview-bridge-confirm.png">
 
@@ -186,7 +212,10 @@ nativeConfirm({
 
 ### nativeAlert
 
-Show a native alert dialog
+Show a native alert dialog.
+
+If the bridge is not present (eg. showing the page in browser), fallbacks to a
+browser alert.
 
 <img width="350" src="./doc/webview-bridge-alert.png">
 
@@ -220,6 +249,9 @@ nativeAlert({
 ### nativeMessage
 
 Show a native message dialog. Use it to display feedback messages.
+
+If the bridge is not present (eg. showing the page in browser), fallbacks to a
+browser alert.
 
 -   `buttonText` property is ignored in iOS.
 

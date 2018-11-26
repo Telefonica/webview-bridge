@@ -1,4 +1,4 @@
-import {postMessageToNativeApp} from './post-message';
+import {postMessageToNativeApp, isWebViewBridgeAvailable} from './post-message';
 
 export const nativeConfirm = ({
     message,
@@ -10,11 +10,16 @@ export const nativeConfirm = ({
     title?: string;
     acceptText?: string;
     cancelText?: string;
-}): Promise<boolean> =>
-    postMessageToNativeApp({
-        type: 'CONFIRM',
-        payload: {message, title, acceptText, cancelText},
-    }).then(({result}) => result);
+}): Promise<boolean> => {
+    if (isWebViewBridgeAvailable()) {
+        return postMessageToNativeApp({
+            type: 'CONFIRM',
+            payload: {message, title, acceptText, cancelText},
+        }).then(({result}) => result);
+    } else {
+        return Promise.resolve(confirm(message));
+    }
+};
 
 export const nativeAlert = ({
     message,
@@ -24,11 +29,17 @@ export const nativeAlert = ({
     message: string;
     title?: string;
     buttonText?: string;
-}): Promise<void> =>
-    postMessageToNativeApp({
-        type: 'ALERT',
-        payload: {title, message, buttonText},
-    });
+}): Promise<void> => {
+    if (isWebViewBridgeAvailable()) {
+        return postMessageToNativeApp({
+            type: 'ALERT',
+            payload: {title, message, buttonText},
+        });
+    } else {
+        alert(message);
+        return Promise.resolve();
+    }
+};
 
 export const nativeMessage = ({
     message,
@@ -40,8 +51,14 @@ export const nativeMessage = ({
     duration?: number; // milliseconds
     buttonText?: string;
     type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS';
-}): Promise<void> =>
-    postMessageToNativeApp({
-        type: 'MESSAGE',
-        payload: {message, duration, buttonText, type},
-    });
+}): Promise<void> => {
+    if (isWebViewBridgeAvailable()) {
+        return postMessageToNativeApp({
+            type: 'MESSAGE',
+            payload: {message, duration, buttonText, type},
+        });
+    } else {
+        alert(message);
+        return Promise.resolve();
+    }
+};

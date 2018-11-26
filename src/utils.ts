@@ -1,4 +1,4 @@
-import {postMessageToNativeApp} from './post-message';
+import {postMessageToNativeApp, isWebViewBridgeAvailable} from './post-message';
 
 export const attachToEmail = ({
     url,
@@ -18,8 +18,14 @@ export const attachToEmail = ({
         payload: {url, subject, fileName, recipient, body},
     });
 
-export const setWebViewTitle = (title: string): Promise<void> =>
-    postMessageToNativeApp({type: 'SET_TITLE', payload: {title}});
+export const setWebViewTitle = (title: string): Promise<void> => {
+    if (isWebViewBridgeAvailable()) {
+        return postMessageToNativeApp({type: 'SET_TITLE', payload: {title}});
+    } else {
+        document.title = title;
+        return Promise.resolve();
+    }
+};
 
 export const notifyPageLoaded = (): Promise<void> =>
     postMessageToNativeApp({type: 'PAGE_LOADED'});

@@ -235,6 +235,50 @@ nativeMessage({
 });
 ```
 
+### logEvent
+
+Log an event to firebase
+
+```typescript
+logEvent: ({
+    category: string; // Typically the object that was interacted with (e.g. 'Video')
+    action: string; // The type of interaction (e.g. 'play')
+    label?: string; // Useful for categorizing events (e.g. 'Fall Campaign')
+    value?: number; // A numeric value associated with the event (e.g. 43)
+}) => Promise<void>;
+```
+
+#### Example
+
+```javascript
+import {logEvent} from '@tef-novum/webview-bridge';
+
+logEvent({
+    category: 'topup-flow',
+    action: 'topup',
+}).then(() => {
+    console.log('event logged');
+});
+```
+
+### setScreenName
+
+Log the current screen name (or page name) to firebase
+
+```typescript
+setScreenName: (screenName: string) => Promise<void>;
+```
+
+#### Example
+
+```javascript
+import {setScreenName} from '@tef-novum/webview-bridge';
+
+setScreenName('Topup Flow').then(() => {
+    console.log('screen name logged');
+});
+```
+
 ### Error handling
 
 If an error occurs, promise will be rejected with an error object:

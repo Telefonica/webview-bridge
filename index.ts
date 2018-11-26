@@ -4,3 +4,4 @@ export {requestSimIcc, requestSimImsi, requestDeviceImei} from './src/device';
 export {attachToEmail, setWebViewTitle, notifyPageLoaded} from './src/utils';
 export {createCalendarEvent} from './src/calendar';
 export {requestContact} from './src/contacts';
+export {logEvent, setScreenName} from './src/analytics';

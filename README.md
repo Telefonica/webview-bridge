@@ -51,11 +51,23 @@ Alternatively, you can import the library directly from a CDN:
 
 ## API
 
+-   [requestContact](#requestcontact)
+-   [createCalendarEvent](#createcalendarevent)
+-   [setWebViewTitle](#setwebviewtitle)
+-   [nativeConfirm](#nativeconfirm)
+-   [nativeAlert](#nativealert)
+-   [nativeMessage](#nativemessage)
+-   [logEvent](#logevent)
+-   [setScreenName](#setscreenname)
+-   [Error handling](#error-handling)
+
 ### requestContact
 
 Show native picker UI in order to let the user select a contact.
 
 Picker UI elements can be filtered by available phones (default) or emails
+
+<img width="350" src="./doc/webview-bridge-contact.png">
 
 ```typescript
 requestContact: ({filter}?: {filter?: 'phone' | 'email'}) => Promise<{
@@ -88,6 +100,8 @@ requestContact({filter: 'phone'}).then((contact) => {
 ### createCalendarEvent
 
 Inserts an event in calendar
+
+<img width="350" src="./doc/webview-bridge-calendar.png">
 
 ```typescript
 createCalendarEvent: ({
@@ -135,6 +149,8 @@ setWebViewTitle('My new title');
 
 Show a native confirm dialog
 
+<img width="350" src="./doc/webview-bridge-confirm.png">
+
 ```typescript
 export declare const nativeConfirm: (
     {
@@ -172,6 +188,8 @@ nativeConfirm({
 
 Show a native alert dialog
 
+<img width="350" src="./doc/webview-bridge-alert.png">
+
 ```typescript
 export declare const nativeAlert: (
     {
@@ -201,7 +219,11 @@ nativeAlert({
 
 ### nativeMessage
 
-Show a native message dialog
+Show a native message dialog. Use it to display feedback messages.
+
+-   `buttonText` property is ignored in iOS.
+
+<img width="350" src="./doc/webview-bridge-message.png">
 
 ```typescript
 export declare const nativeMessage: (
@@ -213,7 +235,7 @@ export declare const nativeMessage: (
     }: {
         message: string;
         duration?: number; // milliseconds
-        buttonText?: string;
+        buttonText?: string; // Android only
         type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS';
     },
 ) => Promise<void>;

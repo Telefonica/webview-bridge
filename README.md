@@ -5,7 +5,8 @@ postMessage bridge.
 
 Library size ~1.2 Kb (min + gzip)
 
-AMD, UMD, ES builds available (see
+[AMD](https://github.com/amdjs/amdjs-api/wiki/AMD),
+[UMD](https://github.com/umdjs/umd), ES builds available (see
 [package dist folder](https://unpkg.com/@tef-novum/webview-bridge/dist/)). Open
 an issue if you need a different build.
 
@@ -13,19 +14,20 @@ an issue if you need a different build.
 
 ### NPM
 
-We recommend to manage your dependencies using `npm` or `yarn` and use module
-bundler like [webpack](https://webpack.js.org/) or
-[parcel](https://parceljs.org/). Once configured, you can use ES imports.
+We recommend to manage your dependencies using `npm` or `yarn` and use a bundler
+like [webpack](https://webpack.js.org/) or [parcel](https://parceljs.org/). Once
+configured, you can use
+[ES imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
 Install using `npm`:
 
-```
+```bash
 npm i @tef-novum/webview-bridge
 ```
 
 Install using `yarn`:
 
-```
+```bash
 yarn add @tef-novum/webview-bridge
 ```
 

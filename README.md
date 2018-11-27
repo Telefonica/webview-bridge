@@ -91,8 +91,7 @@ Show native picker UI in order to let the user select a contact.
 
 Picker UI elements can be filtered by available phones (default) or emails
 
-<img height="550" src="doc/webview-bridge-contact-ios.png">
-<img height="550" src="doc/webview-bridge-contact-android.png">
+<img height="550" src="doc/webview-bridge-contact-ios.png"><img height="550" src="doc/webview-bridge-contact-android.png">
 
 ```typescript
 requestContact: ({filter}?: {filter?: 'phone' | 'email'}) => Promise<{
@@ -126,8 +125,7 @@ requestContact({filter: 'phone'}).then((contact) => {
 
 Inserts an event in calendar
 
-<img height="550" src="doc/webview-bridge-calendar-ios.png">
-<img height="550" src="doc/webview-bridge-calendar-android.png">
+<img height="550" src="doc/webview-bridge-calendar-ios.png"><img height="550" src="doc/webview-bridge-calendar-android.png">
 
 ```typescript
 createCalendarEvent: ({
@@ -179,8 +177,7 @@ Show a native confirm dialog.
 If the bridge is not present (eg. showing the page in browser), fallbacks to a
 browser confirm.
 
-<img height="550" src="doc/webview-bridge-confirm-ios.png">
-<img height="550" src="doc/webview-bridge-confirm-android.png">
+<img height="550" src="doc/webview-bridge-confirm-ios.png"><img height="550" src="doc/webview-bridge-confirm-android.png">
 
 ```typescript
 export declare const nativeConfirm: (
@@ -222,8 +219,7 @@ Show a native alert dialog.
 If the bridge is not present (eg. showing the page in browser), fallbacks to a
 browser alert.
 
-<img height="550" src="doc/webview-bridge-alert-ios.png">
-<img height="550" src="doc/webview-bridge-alert-android.png">
+<img height="550" src="doc/webview-bridge-alert-ios.png"><img height="550" src="doc/webview-bridge-alert-android.png">
 
 ```typescript
 export declare const nativeAlert: (
@@ -261,8 +257,7 @@ browser alert.
 
 -   `buttonText` property is ignored in iOS.
 
-<img height="550" src="doc/webview-bridge-message-ios.png">
-<img height="550" src="doc/webview-bridge-message-android.png">
+<img height="550" src="doc/webview-bridge-message-ios.png"><img height="550" src="doc/webview-bridge-message-android.png">
 
 ```typescript
 export declare const nativeMessage: (

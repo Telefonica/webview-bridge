@@ -1,4 +1,6 @@
-# webview-bridge
+<p align="center">
+  <img width="75%" src="./doc/webview-bridge-logo.png"/>
+</p>
 
 JavaScript library to access to native functionality. Requires a webview with a
 postMessage bridge.

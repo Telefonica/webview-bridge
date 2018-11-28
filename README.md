@@ -2,6 +2,8 @@
   <img width="75%" src="./doc/webview-bridge-logo.png"/>
 </p>
 
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/fastlane/fastlane/blob/master/LICENSE)
+##
 JavaScript library to access to native functionality. Requires a webview with a
 postMessage bridge.
 
@@ -347,4 +349,4 @@ If an error occurs, promise will be rejected with an error object:
 
 ## License
 
-MIT
+This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE) file.

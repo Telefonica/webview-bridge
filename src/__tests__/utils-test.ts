@@ -4,6 +4,8 @@ import {
     removeFakeAndroidPostMessage,
 } from './fake-post-message';
 
+const ANY_STRING = 'any-string';
+
 test('attach to email', async cb => {
     const PARAMS = {
         url: 'any-url',
@@ -32,12 +34,10 @@ test('attach to email', async cb => {
 });
 
 test('set webview title', async cb => {
-    const ANY_TITLE = 'any-title';
-
     createFakeAndroidPostMessage({
         checkMessage: message => {
             expect(message.type).toBe('SET_TITLE');
-            expect(message.payload).toEqual({title: ANY_TITLE});
+            expect(message.payload).toEqual({title: ANY_STRING});
         },
         getResponse: message => ({
             type: message.type,
@@ -45,9 +45,19 @@ test('set webview title', async cb => {
         }),
     });
 
-    setWebViewTitle(ANY_TITLE).then(res => {
+    setWebViewTitle(ANY_STRING).then(res => {
         expect(res).toBeUndefined();
         removeFakeAndroidPostMessage();
+        cb();
+    });
+});
+
+test('set webview title fallbacks to document.title update', async cb => {
+    document.title = '';
+
+    setWebViewTitle(ANY_STRING).then(res => {
+        expect(res).toBeUndefined();
+        expect(document.title).toBe(ANY_STRING);
         cb();
     });
 });

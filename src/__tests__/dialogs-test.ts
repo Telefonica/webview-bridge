@@ -11,6 +11,10 @@ const ANY_ACCEPT_TEXT = 'any-accept-text';
 const ANY_CANCEL_TEXT = 'any-cancel-text';
 const ANY_DURATION = 5000;
 
+afterEach(() => {
+    removeFakeAndroidPostMessage();
+});
+
 test('native alert', async cb => {
     createFakeAndroidPostMessage({
         checkMessage: message => {
@@ -33,7 +37,6 @@ test('native alert', async cb => {
         buttonText: ANY_BUTTON_TEXT,
     }).then(res => {
         expect(res).toBeUndefined();
-        removeFakeAndroidPostMessage();
         cb();
     });
 });
@@ -63,7 +66,6 @@ test('native confirm', async cb => {
         cancelText: ANY_CANCEL_TEXT,
     }).then(res => {
         expect(res).toBe(true);
-        removeFakeAndroidPostMessage();
         cb();
     });
 });
@@ -90,7 +92,55 @@ test('native message', async cb => {
         buttonText: ANY_BUTTON_TEXT,
     }).then(res => {
         expect(res).toBeUndefined();
-        removeFakeAndroidPostMessage();
         cb();
     });
+});
+
+test('native alert fallbacks to browser alert', async cb => {
+    const alert = jest.fn();
+    window.alert = alert;
+
+    nativeAlert({
+        message: ANY_MESSAGE,
+    }).then(res => {
+        expect(res).toBeUndefined();
+        expect(alert.mock.calls.length).toBe(1);
+        expect(alert.mock.calls[0][0]).toBe(ANY_MESSAGE);
+        cb();
+    });
+
+    delete window.alert;
+});
+
+test('native confirm fallbacks to browser confirm', async cb => {
+    const confirm = jest.fn().mockReturnValue(true);
+
+    window.confirm = confirm;
+
+    nativeConfirm({
+        message: ANY_MESSAGE,
+    }).then(res => {
+        expect(res).toBe(true);
+        expect(confirm.mock.calls.length).toBe(1);
+        expect(confirm.mock.calls[0][0]).toBe(ANY_MESSAGE);
+        cb();
+    });
+
+    delete window.confirm;
+});
+
+test('native message fallbacks to browser alert', async cb => {
+    const alert = jest.fn();
+    window.alert = alert;
+
+    nativeMessage({
+        message: ANY_MESSAGE,
+    }).then(res => {
+        expect(res).toBeUndefined();
+        expect(alert.mock.calls.length).toBe(1);
+        expect(alert.mock.calls[0][0]).toBe(ANY_MESSAGE);
+        cb();
+    });
+
+    delete window.alert;
 });

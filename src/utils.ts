@@ -2,7 +2,7 @@ import {postMessageToNativeApp, isWebViewBridgeAvailable} from './post-message';
 
 export const attachToEmail = ({
     url,
-    subject = '',
+    subject,
     fileName,
     recipient,
     body,

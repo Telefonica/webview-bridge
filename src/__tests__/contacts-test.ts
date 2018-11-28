@@ -20,6 +20,25 @@ test('request contact', async cb => {
     createFakeAndroidPostMessage({
         checkMessage: message => {
             expect(message.type).toBe('GET_CONTACT_DATA');
+        },
+        getResponse: message => ({
+            type: message.type,
+            id: message.id,
+            payload: ANY_CONTACT,
+        }),
+    });
+
+    requestContact().then(res => {
+        expect(res).toEqual(ANY_CONTACT);
+        removeFakeAndroidPostMessage();
+        cb();
+    });
+});
+
+test('request contact filtered', async cb => {
+    createFakeAndroidPostMessage({
+        checkMessage: message => {
+            expect(message.type).toBe('GET_CONTACT_DATA');
             expect(message.payload).toEqual({
                 filter: 'email',
             });

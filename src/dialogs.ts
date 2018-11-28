@@ -2,7 +2,7 @@ import {postMessageToNativeApp, isWebViewBridgeAvailable} from './post-message';
 
 export const nativeConfirm = ({
     message,
-    title = '',
+    title,
     acceptText,
     cancelText,
 }: {
@@ -17,13 +17,13 @@ export const nativeConfirm = ({
             payload: {message, title, acceptText, cancelText},
         }).then(({result}) => result);
     } else {
-        return Promise.resolve(confirm(message));
+        return Promise.resolve(window.confirm(message));
     }
 };
 
 export const nativeAlert = ({
     message,
-    title = '',
+    title,
     buttonText,
 }: {
     message: string;
@@ -36,7 +36,7 @@ export const nativeAlert = ({
             payload: {title, message, buttonText},
         });
     } else {
-        alert(message);
+        window.alert(message);
         return Promise.resolve();
     }
 };
@@ -58,7 +58,7 @@ export const nativeMessage = ({
             payload: {message, duration, buttonText, type},
         });
     } else {
-        alert(message);
+        window.alert(message);
         return Promise.resolve();
     }
 };

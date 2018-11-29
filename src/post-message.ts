@@ -140,19 +140,15 @@ export const postMessageToNativeApp = <
     const postMessage = getWebViewPostMessage();
 
     if (!postMessage) {
-        return Promise.reject();
-    }
-
-    const message = JSON.stringify({type, id, payload});
-
-    if (!postMessage) {
         return Promise.reject({
             code: 500,
             reason: 'WebView postMessage not available',
         });
     }
 
-    // ensure postMessage call is async (so tests behave like a real webview)
+    const message = JSON.stringify({type, id, payload});
+
+    // ensure postMessage call is async
     setTimeout(() => {
         postMessage(message);
     });

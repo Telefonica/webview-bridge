@@ -1,14 +1,14 @@
 module.exports = {
     moduleFileExtensions: ['js', 'ts', 'tsx'],
     transform: {
-        '^.+\\.(ts|tsx|js)$': 'ts-jest',
+        '^.+\\.ts$': 'ts-jest',
     },
     globals: {
         'ts-jest': {
             tsConfig: 'tsconfig.json',
         },
     },
-    testMatch: ['**/__tests__/*.+(ts|tsx|js)'],
+    testMatch: ['**/__tests__/*-test.ts'],
     preset: 'ts-jest/presets/js-with-ts',
     collectCoverage: true,
     collectCoverageFrom: ['**/src/*.{ts}', '!**/__tests__/**', '!**/dist/**'],

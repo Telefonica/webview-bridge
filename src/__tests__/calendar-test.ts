@@ -29,6 +29,7 @@ test('set a calendar event', async cb => {
         title: 'some title',
     }).then(res => {
         expect(res).toBeUndefined();
+        delete window.tuentiWebView;
         cb();
     });
 });

@@ -93,7 +93,8 @@ if (isWebViewBridgeAvailable()) {
 
 Show native picker UI in order to let the user select a contact.
 
-Picker UI elements can be filtered by available phones (default) or emails
+-   Android only: picker UI elements can be filtered by available phones
+    (default) or emails. `filter` property is ignored by iOS devices
 
 <img height="550" src="doc/webview-bridge-contact-ios.png"><img height="550" src="doc/webview-bridge-contact-android.png">
 
@@ -163,7 +164,7 @@ Update webview title. If the bridge is not present, automatically fallbacks to a
 `document.title` update.
 
 ```typescript
-export declare const setWebViewTitle: (title: string) => Promise<void>;
+setWebViewTitle: (title: string) => Promise<void>;
 ```
 
 #### Example
@@ -184,7 +185,7 @@ browser confirm.
 <img height="550" src="doc/webview-bridge-confirm-ios.png"><img height="550" src="doc/webview-bridge-confirm-android.png">
 
 ```typescript
-export declare const nativeConfirm: (
+nativeConfirm: (
     {
         message,
         title,
@@ -226,7 +227,7 @@ browser alert.
 <img height="550" src="doc/webview-bridge-alert-ios.png"><img height="550" src="doc/webview-bridge-alert-android.png">
 
 ```typescript
-export declare const nativeAlert: (
+nativeAlert: (
     {
         message,
         title,
@@ -264,7 +265,7 @@ browser alert.
 <img height="550" src="doc/webview-bridge-message-ios.png"><img height="550" src="doc/webview-bridge-message-android.png">
 
 ```typescript
-export declare const nativeMessage: (
+nativeMessage: (
     {
         message,
         duration,

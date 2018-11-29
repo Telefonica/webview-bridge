@@ -1,4 +1,8 @@
 import {createCalendarEvent} from '../calendar';
+import {
+    createFakeAndroidPostMessage,
+    removeFakeAndroidPostMessage,
+} from './fake-post-message';
 
 test('set a calendar event', async cb => {
     expect.assertions(4);
@@ -6,22 +10,17 @@ test('set a calendar event', async cb => {
     const t1 = 1000;
     const t2 = 2000;
 
-    window.tuentiWebView = {
-        postMessage: jsonMessage => {
-            const message = JSON.parse(jsonMessage);
-
-            expect(message.type).toBe('CREATE_CALENDAR_EVENT');
-            expect(message.payload.beginTime).toBe(1);
-            expect(message.payload.endTime).toBe(2);
-
-            window.__tuenti_webview_bridge!.postMessage(
-                JSON.stringify({
-                    type: 'CREATE_CALENDAR_EVENT',
-                    id: message.id,
-                }),
-            );
+    createFakeAndroidPostMessage({
+        checkMessage: msg => {
+            expect(msg.type).toBe('CREATE_CALENDAR_EVENT');
+            expect(msg.payload.beginTime).toBe(1);
+            expect(msg.payload.endTime).toBe(2);
         },
-    };
+        getResponse: msg => ({
+            type: 'CREATE_CALENDAR_EVENT',
+            id: msg.id,
+        }),
+    });
 
     createCalendarEvent({
         beginTime: t1,
@@ -29,7 +28,7 @@ test('set a calendar event', async cb => {
         title: 'some title',
     }).then(res => {
         expect(res).toBeUndefined();
-        delete window.tuentiWebView;
+        removeFakeAndroidPostMessage();
         cb();
     });
 });

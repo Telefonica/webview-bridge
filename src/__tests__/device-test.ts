@@ -6,6 +6,10 @@ import {
 
 const ANY_STRING = 'any-string';
 
+afterEach(() => {
+    removeFakeAndroidPostMessage();
+});
+
 test('request sim icc', async cb => {
     createFakeAndroidPostMessage({
         checkMessage: message => {
@@ -21,7 +25,6 @@ test('request sim icc', async cb => {
 
     requestSimIcc().then(res => {
         expect(res).toEqual(ANY_STRING);
-        removeFakeAndroidPostMessage();
         cb();
     });
 });
@@ -41,7 +44,6 @@ test('request sim imsi', async cb => {
 
     requestSimImsi().then(res => {
         expect(res).toEqual(ANY_STRING);
-        removeFakeAndroidPostMessage();
         cb();
     });
 });
@@ -61,7 +63,6 @@ test('request device imei', async cb => {
 
     requestDeviceImei().then(res => {
         expect(res).toEqual(ANY_STRING);
-        removeFakeAndroidPostMessage();
         cb();
     });
 });
@@ -77,7 +78,6 @@ test('request sim icc (failed)', async cb => {
 
     requestSimIcc().then(res => {
         expect(res).toBeNull();
-        removeFakeAndroidPostMessage();
         cb();
     });
 });
@@ -93,7 +93,6 @@ test('request sim imsi (failed)', async cb => {
 
     requestSimImsi().then(res => {
         expect(res).toBeNull();
-        removeFakeAndroidPostMessage();
         cb();
     });
 });
@@ -109,7 +108,6 @@ test('request device imei (failed)', async cb => {
 
     requestDeviceImei().then(res => {
         expect(res).toBeNull();
-        removeFakeAndroidPostMessage();
         cb();
     });
 });

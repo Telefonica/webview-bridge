@@ -6,6 +6,10 @@ import {
 
 const ANY_STRING = 'any-string';
 
+afterEach(() => {
+    removeFakeAndroidPostMessage();
+});
+
 test('attach to email', async cb => {
     const PARAMS = {
         url: 'any-url',
@@ -28,7 +32,6 @@ test('attach to email', async cb => {
 
     attachToEmail(PARAMS).then(res => {
         expect(res).toBeUndefined();
-        removeFakeAndroidPostMessage();
         cb();
     });
 });
@@ -47,7 +50,6 @@ test('set webview title', async cb => {
 
     setWebViewTitle(ANY_STRING).then(res => {
         expect(res).toBeUndefined();
-        removeFakeAndroidPostMessage();
         cb();
     });
 });
@@ -76,7 +78,6 @@ test('notify page loaded', async cb => {
 
     notifyPageLoaded().then(res => {
         expect(res).toBeUndefined();
-        removeFakeAndroidPostMessage();
         cb();
     });
 });

@@ -16,6 +16,10 @@ const ANY_CONTACT = {
     },
 };
 
+afterEach(() => {
+    removeFakeAndroidPostMessage();
+});
+
 test('request contact', async cb => {
     createFakeAndroidPostMessage({
         checkMessage: message => {
@@ -30,7 +34,6 @@ test('request contact', async cb => {
 
     requestContact().then(res => {
         expect(res).toEqual(ANY_CONTACT);
-        removeFakeAndroidPostMessage();
         cb();
     });
 });
@@ -54,7 +57,6 @@ test('request contact filtered', async cb => {
         filter: 'email',
     }).then(res => {
         expect(res).toEqual(ANY_CONTACT);
-        removeFakeAndroidPostMessage();
         cb();
     });
 });

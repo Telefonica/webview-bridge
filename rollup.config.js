@@ -23,6 +23,11 @@ export default {
             name: 'webviewBridge',
         },
         {
+            file: 'dist/webview-bridge-iife.js',
+            format: 'iife',
+            name: 'webviewBridge',
+        },
+        {
             file: 'dist/webview-bridge.mjs',
             format: 'es',
         },

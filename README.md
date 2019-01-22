@@ -10,7 +10,7 @@ postMessage bridge.
 Library size ~1.2 Kb (min + gzip)
 
 [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD),
-[UMD](https://github.com/umdjs/umd), ES builds available (see
+[UMD](https://github.com/umdjs/umd), IIFE, ES builds available (see
 [package dist folder](https://unpkg.com/@tef-novum/webview-bridge/dist/)). Open
 an issue if you need a different build.
 

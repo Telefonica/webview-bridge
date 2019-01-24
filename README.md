@@ -10,7 +10,9 @@ postMessage bridge.
 Library size ~1.2 Kb (min + gzip)
 
 [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD),
-[UMD](https://github.com/umdjs/umd), IIFE, ES builds available (see
+[UMD](https://github.com/umdjs/umd), 
+[IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE), 
+[ES Module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) builds available (see
 [package dist folder](https://unpkg.com/@tef-novum/webview-bridge/dist/)). Open
 an issue if you need a different build.
 
@@ -48,7 +50,7 @@ setWebviewTitle('Hello, world');
 Alternatively, you can import the library directly from a CDN:
 
 ```html
-<script src="https://unpkg.com/@tef-novum/webview-bridge/dist/webview-bridge-umd.min.js"></script>
+<script src="https://unpkg.com/@tef-novum/webview-bridge/dist/webview-bridge-iife.min.js"></script>
 
 <script>
     webviewBridge.setWebViewTitle('Hello, world');

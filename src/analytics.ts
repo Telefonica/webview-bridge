@@ -97,7 +97,7 @@ export const logEvent = ({
 };
 
 export const logTiming = ({
-    category = 'development_timer',
+    category = 'performance_timer',
     variable,
     value,
     label,

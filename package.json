@@ -13,14 +13,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/tef-novum/webview-bridge.git"
+        "url": "git+https://github.com/tef-dig/webview-bridge.git"
     },
     "author": "appscore@tuenti.com",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/tef-novum/webview-bridge/issues"
+        "url": "https://github.com/tef-dig/webview-bridge/issues"
     },
-    "homepage": "https://github.com/tef-novum/webview-bridge#readme",
+    "homepage": "https://github.com/tef-dig/webview-bridge#readme",
     "dependencies": {},
     "devDependencies": {
         "@types/google.analytics": "0.0.39",

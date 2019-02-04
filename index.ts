@@ -4,4 +4,15 @@ export {requestSimIcc, requestSimImsi, requestDeviceImei} from './src/device';
 export {attachToEmail, setWebViewTitle, notifyPageLoaded} from './src/utils';
 export {createCalendarEvent} from './src/calendar';
 export {requestContact} from './src/contacts';
-export {logEvent, setScreenName} from './src/analytics';
+export {
+    logEvent,
+    logTiming,
+    setScreenName,
+    setUserProperty,
+    setUserProperties,
+    setUserId,
+    setCustomDimension,
+    CD_WEBAPP_INSTALLED,
+    CD_NOVUM_UID,
+    CD_EVENT_VALUE,
+} from './src/analytics';

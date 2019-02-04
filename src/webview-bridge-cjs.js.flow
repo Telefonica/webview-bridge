@@ -1,0 +1,123 @@
+// @flow
+// hand written definitions based on auto-generated d.ts
+
+// analytics
+export type TrackingEvent = {
+    category: string, // Typically the object that was interacted with (e.g. 'Video')
+    action: string, // The type of interaction (e.g. 'play')
+    label?: string, // Useful for categorizing events (e.g. 'Fall Campaign')
+    value?: number, // A numeric value associated with the event (e.g. 43)
+    [key: string]: any,
+};
+
+export type CustomDimensionIdx = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+export type UserPropertyName =
+    | 'obIds'
+    | 'paymentModels'
+    | 'serviceWorkerStatus'
+    | 'isAdmin'
+    | 'hasIpComms';
+
+declare export function logEvent(TrackingEvent): Promise<void>;
+
+declare export function logTiming({|
+    category?: string,
+    variable: string,
+    value: number,
+    label?: string,
+|}): Promise<void>;
+
+declare export function setScreenName(
+    screenName: string,
+    fieldsObject?: {},
+): Promise<void>;
+
+declare export function setUserProperty(
+    name: UserPropertyName,
+    value: string,
+): Promise<void>;
+
+declare export function setUserProperties(userProperties: {
+    [key: UserPropertyName]: string,
+}): void;
+
+declare export function setUserId(userId: string): Promise<void>;
+
+declare export function setCustomDimension(
+    idx: CustomDimensionIdx,
+    value: string,
+): Promise<void>;
+
+declare export var CD_WEBAPP_INSTALLED: CustomDimensionIdx;
+
+declare export var CD_NOVUM_UID: CustomDimensionIdx;
+
+declare export var CD_EVENT_VALUE: CustomDimensionIdx;
+
+// calendar
+declare export function createCalendarEvent({|
+    beginTime: number,
+    endTime: number,
+    title: string,
+|}): Promise<void>;
+
+// contacts
+declare export function requestContact(
+    {|filter: 'phone' | 'email' | void|} | void,
+): Promise<{|
+    name?: string,
+    email?: string,
+    phoneNumber?: string,
+    address?: {
+        street?: string,
+        city?: string,
+        country?: string,
+        postalCode?: string,
+    },
+|}>;
+
+// device
+
+declare export function requestSimIcc(): Promise<string | null>;
+
+declare export function requestSimImsi(): Promise<string | null>;
+
+declare export function requestDeviceImei(): Promise<string | null>;
+
+// dialogs
+declare export function nativeConfirm({|
+    message: string,
+    title?: string,
+    acceptText?: string,
+    cancelText?: string,
+|}): Promise<boolean>;
+
+declare export function nativeAlert({|
+    message: string,
+    title?: string,
+    buttonText?: string,
+|}): Promise<void>;
+
+declare export function nativeMessage({|
+    message: string,
+    duration?: number,
+    buttonText?: string,
+    type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS',
+|}): Promise<void>;
+
+// postMessage
+declare export function isWebViewBridgeAvailable(): boolean;
+
+// utils
+declare export function attachToEmail({|
+    url: string,
+    subject?: string,
+    fileName: string,
+    recipient?: string,
+    body?: string,
+|}): Promise<void>;
+
+declare export function notifyPageLoaded(): Promise<void>;
+
+declare export function setWebViewTitle(title: string): Promise<void>;

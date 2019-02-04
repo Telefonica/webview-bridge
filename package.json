@@ -6,7 +6,7 @@
     "module": "./dist/webview-bridge.mjs",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "build": "del dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && cpx ./src/webview-bridge-cjs.flow ./dist",
+        "build": "del dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && cpx ./src/webview-bridge-cjs.js.flow ./dist",
         "test": "jest",
         "lint": "tslint *.ts",
         "prepublishOnly": "npm run lint && npm test && npm run build"

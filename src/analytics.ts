@@ -170,7 +170,7 @@ export const setScreenName = (screenName: string, fieldsObject?: {}) => {
         onIos(iosFirebase) {
             iosFirebase.postMessage({
                 command: 'setScreenName',
-                screenName,
+                name: screenName,
             });
             return Promise.resolve();
         },
@@ -252,5 +252,37 @@ export const setUserProperty = (name: UserPropertyName, value: string) => {
             ga('set', {[`dimension${dimensionIdx}`]: String(value)});
             return Promise.resolve();
         },
+    });
+};
+
+export const setUserId = (userId: string) => {
+    // @ts-ignore
+    if (!window.ga || !window.ga.loaded) {
+        return Promise.resolve();
+    }
+    window.ga('set', 'userId', userId);
+    return Promise.resolve();
+};
+
+/*
+ * WARN: you probably need to use setUserProperty instead of this. Only use this method if you are logging a
+ * google-analytics-only custom dimension. If you want it to be logged inside a webview too, don't use this
+ * method
+ */
+export const setCustomDimension = (idx: CustomDimensionIdx, value: string) => {
+    // @ts-ignore
+    if (!window.ga || !window.ga.loaded) {
+        return Promise.resolve();
+    }
+    window.ga('set', {[`dimension${idx}`]: String(value)});
+    return Promise.resolve();
+};
+
+export const setUserProperties = (
+    userProperties: {[key in UserPropertyName]?: string},
+): void => {
+    Object.entries(userProperties).forEach(([property, value]) => {
+        // @ts-ignore
+        setUserProperty(property, value);
     });
 };

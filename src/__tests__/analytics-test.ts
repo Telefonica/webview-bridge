@@ -102,7 +102,7 @@ test('set screen name in iOS', async () => {
 
     expect(iosFirebaseMock.postMessage).toBeCalledWith({
         command: 'setScreenName',
-        screenName: SCREEN_NAME,
+        name: SCREEN_NAME,
     });
 });
 

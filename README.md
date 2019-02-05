@@ -2,7 +2,7 @@
   <img width="75%" src="./doc/webview-bridge-logo.png"/>
 </p>
 
-[![GitHub tag](https://img.shields.io/github/tag/tef-dig/webview-bridge.svg)](https://github.com/tef-dig/webview-bridge) [![npm version](https://badge.fury.io/js/%40tef-dig%2Fwebview-bridge.svg)](https://badge.fury.io/js/%40tef-dig%2Fwebview-bridge) [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/tef-dig/webview-bridge/blob/master/LICENSE)
+[![GitHub tag](https://img.shields.io/github/tag/tef-dig/webview-bridge.svg)](https://github.com/tef-dig/webview-bridge) [![npm version](https://badge.fury.io/js/%40tef-novum%2Fwebview-bridge.svg)](https://badge.fury.io/js/%40tef-novum%2Fwebview-bridge) [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/tef-dig/webview-bridge/blob/master/LICENSE)
 ##
 JavaScript library to access to native functionality. Requires a webview with a
 postMessage bridge.

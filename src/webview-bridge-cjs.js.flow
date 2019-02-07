@@ -10,15 +10,6 @@ export type TrackingEvent = {
     [key: string]: any,
 };
 
-export type CustomDimensionIdx = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
-
-export type UserPropertyName =
-    | 'obIds'
-    | 'paymentModels'
-    | 'serviceWorkerStatus'
-    | 'isAdmin'
-    | 'hasIpComms';
-
 declare export function logEvent(TrackingEvent): Promise<void>;
 
 declare export function logTiming({|
@@ -34,26 +25,14 @@ declare export function setScreenName(
 ): Promise<void>;
 
 declare export function setUserProperty(
-    name: UserPropertyName,
+    name:
+        | 'obIds'
+        | 'paymentModels'
+        | 'serviceWorkerStatus'
+        | 'isAdmin'
+        | 'hasIpComms',
     value: string,
 ): Promise<void>;
-
-declare export function setUserProperties(userProperties: {
-    [key: UserPropertyName]: string,
-}): void;
-
-declare export function setUserId(userId: string): Promise<void>;
-
-declare export function setCustomDimension(
-    idx: CustomDimensionIdx,
-    value: string,
-): Promise<void>;
-
-declare export var CD_WEBAPP_INSTALLED: CustomDimensionIdx;
-
-declare export var CD_NOVUM_UID: CustomDimensionIdx;
-
-declare export var CD_EVENT_VALUE: CustomDimensionIdx;
 
 // calendar
 declare export function createCalendarEvent({|

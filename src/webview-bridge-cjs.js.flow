@@ -25,12 +25,7 @@ declare export function setScreenName(
 ): Promise<void>;
 
 declare export function setUserProperty(
-    name:
-        | 'obIds'
-        | 'paymentModels'
-        | 'serviceWorkerStatus'
-        | 'isAdmin'
-        | 'hasIpComms',
+    name: string,
     value: string,
 ): Promise<void>;
 

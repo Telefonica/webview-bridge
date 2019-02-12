@@ -10,6 +10,12 @@ export type TrackingEvent = {
     [key: string]: any,
 };
 
+export type CustomDimensionIdx = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+
+declare export var CD_WEBAPP_INSTALLED: CustomDimensionIdx;
+declare export var CD_NOVUM_UID: CustomDimensionIdx;
+declare export var CD_EVENT_VALUE: CustomDimensionIdx;
+
 declare export function logEvent(TrackingEvent): Promise<void>;
 
 declare export function logTiming({|

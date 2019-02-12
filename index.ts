@@ -9,4 +9,7 @@ export {
     logTiming,
     setScreenName,
     setUserProperty,
+    CD_WEBAPP_INSTALLED,
+    CD_NOVUM_UID,
+    CD_EVENT_VALUE,
 } from './src/analytics';

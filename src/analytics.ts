@@ -170,7 +170,7 @@ export const setScreenName = (screenName: string, fieldsObject?: {}) => {
         onIos(iosFirebase) {
             iosFirebase.postMessage({
                 command: 'setScreenName',
-                screenName,
+                name: screenName,
             });
             return Promise.resolve();
         },

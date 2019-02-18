@@ -1,6 +1,8 @@
 {
     "defaultSeverity": "error",
-    "extends": ["tslint:recommended"],
+    "extends": [
+        "tslint:recommended"
+    ],
     "jsRules": {},
     "rules": {
         "object-literal-sort-keys": false,
@@ -13,5 +15,5 @@
         "interface-name": false,
         "semicolon": false
     },
-    "rulesDirectory": []
+    "rulesDirectory": [],
 }

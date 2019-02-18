@@ -66,6 +66,11 @@ type MessageTypeToResponseMap = {
             };
         };
     };
+    NAVIGATION_BAR: {
+        id: string;
+        type: 'NAVIGATION_BAR';
+        payload: void;
+    };
     ERROR: {
         id: string;
         type: 'ERROR';

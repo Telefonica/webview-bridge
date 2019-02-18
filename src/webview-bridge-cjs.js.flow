@@ -1,6 +1,5 @@
 // @flow
 // hand written definitions based on auto-generated d.ts
-
 // analytics
 export type TrackingEvent = {
     category: string, // Typically the object that was interacted with (e.g. 'Video')

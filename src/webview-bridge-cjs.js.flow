@@ -100,3 +100,11 @@ declare export function attachToEmail({|
 declare export function notifyPageLoaded(): Promise<void>;
 
 declare export function setWebViewTitle(title: string): Promise<void>;
+
+declare export function updateNavigationBar: ({ visible, title, showBackButton, showReloadButton, backgroundColor, }: {|
+    visible?: boolean,
+    title?: string,
+    showBackButton?: boolean,
+    showReloadButton?: boolean,
+    backgroundColor?: string,
+|}) => Promise<void>;

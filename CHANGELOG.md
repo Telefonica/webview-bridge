@@ -1,20 +1,21 @@
 # CHANGELOG
 
-## next
+## v.1.1.1 - 2019-02-19
 
--   default values set for label and value fields when logging analytics events
+-   Default values set for `label` and `value` fields when logging analytics
+    events
 
-## v1.1.0 (2019-02-12)
+## v1.1.0 - 2019-02-12
 
--   exported functions from analytics module:
+-   Exported functions from analytics module:
 
-    -   logTiming
-    -   setUserProperty
+    -   `logTiming`
+    -   `setUserProperty`
 
--   exported constants from analytics module:
+-   Exported constants from analytics module:
 
-    -   CD_WEBAPP_INSTALLED
-    -   CD_NOVUM_UID
-    -   CD_EVENT_VALUE
+    -   `CD_WEBAPP_INSTALLED`
+    -   `CD_NOVUM_UID`
+    -   `CD_EVENT_VALUE`
 
--   added flow definitions file
+-   Added flow definitions file

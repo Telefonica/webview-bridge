@@ -18,11 +18,46 @@ export const attachToEmail = ({
         payload: {url, subject, fileName, recipient, body},
     });
 
+/**
+ * @deprecated
+ */
 export const setWebViewTitle = (title: string): Promise<void> => {
     if (isWebViewBridgeAvailable()) {
         return postMessageToNativeApp({type: 'SET_TITLE', payload: {title}});
     } else {
         document.title = title;
+        return Promise.resolve();
+    }
+};
+
+export const updateNavigationBar = ({
+    visible,
+    title,
+    showBackButton,
+    showReloadButton,
+    backgroundColor,
+}: {
+    visible?: boolean;
+    title?: string;
+    showBackButton?: boolean;
+    showReloadButton?: boolean;
+    backgroundColor?: string;
+}): Promise<void> => {
+    if (isWebViewBridgeAvailable()) {
+        return postMessageToNativeApp({
+            type: 'NAVIGATION_BAR',
+            payload: {
+                visible,
+                title,
+                showBackButton,
+                showReloadButton,
+                backgroundColor,
+            },
+        });
+    } else {
+        if (typeof title !== 'undefined') {
+            document.title = title;
+        }
         return Promise.resolve();
     }
 };

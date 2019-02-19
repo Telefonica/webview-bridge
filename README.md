@@ -2,17 +2,22 @@
   <img width="75%" src="./doc/webview-bridge-logo.png"/>
 </p>
 
-[![GitHub tag](https://img.shields.io/github/tag/tef-dig/webview-bridge.svg)](https://github.com/tef-dig/webview-bridge) [![npm version](https://badge.fury.io/js/%40tef-novum%2Fwebview-bridge.svg)](https://badge.fury.io/js/%40tef-novum%2Fwebview-bridge) [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/tef-dig/webview-bridge/blob/master/LICENSE)
+[![GitHub tag](https://img.shields.io/github/tag/tef-dig/webview-bridge.svg)](https://github.com/tef-dig/webview-bridge)
+[![npm version](https://badge.fury.io/js/%40tef-novum%2Fwebview-bridge.svg)](https://badge.fury.io/js/%40tef-novum%2Fwebview-bridge)
+[![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/tef-dig/webview-bridge/blob/master/LICENSE)
+
 ##
+
 JavaScript library to access to native functionality. Requires a webview with a
 postMessage bridge.
 
 Library size ~1.2 Kb (min + gzip)
 
 [AMD](https://github.com/amdjs/amdjs-api/wiki/AMD),
-[UMD](https://github.com/umdjs/umd), 
-[IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE), 
-[ES Module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) builds available (see
+[UMD](https://github.com/umdjs/umd),
+[IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE),
+[ES Module](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import)
+builds available (see
 [package dist folder](https://unpkg.com/@tef-novum/webview-bridge/dist/)). Open
 an issue if you need a different build.
 
@@ -40,9 +45,9 @@ yarn add @tef-novum/webview-bridge
 Import required function and use it:
 
 ```javascript
-import {setWebviewTitle} from '@tef-novum/webview-bridge';
+import {setWebViewTitle} from '@tef-novum/webview-bridge';
 
-setWebviewTitle('Hello, world');
+setWebViewTitle('Hello, world');
 ```
 
 ### CDN
@@ -63,6 +68,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [requestContact](#requestcontact)
 -   [createCalendarEvent](#createcalendarevent)
 -   [setWebViewTitle](#setwebviewtitle)
+-   [updateNavigationBar](#updateNavigationBar)
 -   [nativeConfirm](#nativeconfirm)
 -   [nativeAlert](#nativealert)
 -   [nativeMessage](#nativemessage)
@@ -352,4 +358,5 @@ If an error occurs, promise will be rejected with an error object:
 
 ## License
 
-This project is licensed under the terms of the MIT license. See the [LICENSE](LICENSE) file.
+This project is licensed under the terms of the MIT license. See the
+[LICENSE](LICENSE) file.

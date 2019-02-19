@@ -32,6 +32,28 @@ afterEach(() => {
     window.webkit = origWebkit;
 });
 
+test('log event with default values', async () => {
+    const anyWebviewMock = givenAndroidWebview();
+
+    const DEFAULT_LABEL = 'null_label';
+    const DEFAULT_VALUE = 0;
+
+    await logEvent({
+        category: 'anyCategory',
+        action: 'anyAction',
+    });
+
+    expect(anyWebviewMock.logEvent).toBeCalledWith(
+        'anyCategory',
+        JSON.stringify({
+            eventCategory: 'anyCategory',
+            eventAction: 'anyAction',
+            eventLabel: DEFAULT_LABEL,
+            eventValue: DEFAULT_VALUE,
+        }),
+    );
+});
+
 test('log event in Android', async () => {
     const androidFirebaseMock = givenAndroidWebview();
 

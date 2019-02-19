@@ -12,6 +12,9 @@ const CD_SUBSCRIPTION_WITH_IPCOMMS: CustomDimensionIdx = 6; // from sessionInfo
 export const CD_NOVUM_UID: CustomDimensionIdx = 7;
 export const CD_EVENT_VALUE: CustomDimensionIdx = 8;
 
+const DEFAULT_EVENT_LABEL = 'null_label';
+const DEFAULT_EVENT_VALUE = 0;
+
 const withAnalytics = ({
     onAndroid,
     onIos,
@@ -64,6 +67,14 @@ export const logEvent = ({
     }
 
     const name = category;
+
+    if (!label) {
+        label = DEFAULT_EVENT_LABEL;
+    }
+
+    if (!value) {
+        value = DEFAULT_EVENT_VALUE;
+    }
 
     const params = {
         eventCategory: category,

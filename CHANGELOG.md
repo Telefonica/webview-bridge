@@ -1,12 +1,11 @@
 # CHANGELOG
 
-## next
+## v.1.1.1 - 2019-02-19
 
--   Deprecate `setWebviewTitle` function
--   Create `updateNavigationBar` function (replaces `setWebviewTitle`).
-    Available since app version 10.7 (TO BE CONFIRMED)
+-   Default values set for `label` and `value` fields when logging analytics
+    events
 
-## v1.1.0 (2019-02-12)
+## v1.1.0 - 2019-02-12
 
 -   Exported functions from analytics module:
 
@@ -15,8 +14,8 @@
 
 -   Exported constants from analytics module:
 
-    -   CD_WEBAPP_INSTALLED
-    -   CD_NOVUM_UID
-    -   CD_EVENT_VALUE
+    -   `CD_WEBAPP_INSTALLED`
+    -   `CD_NOVUM_UID`
+    -   `CD_EVENT_VALUE`
 
 -   Added flow definitions file

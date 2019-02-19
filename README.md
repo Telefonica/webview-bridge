@@ -45,9 +45,9 @@ yarn add @tef-novum/webview-bridge
 Import required function and use it:
 
 ```javascript
-import {updateNavigationBar} from '@tef-novum/webview-bridge';
+import {setWebViewTitle} from '@tef-novum/webview-bridge';
 
-updateNavigationBar({title: 'Hello, world'});
+setWebViewTitle('Hello, world');
 ```
 
 ### CDN
@@ -67,7 +67,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [isWebViewBridgeAvailable](#isWebViewBridgeAvailable)
 -   [requestContact](#requestcontact)
 -   [createCalendarEvent](#createcalendarevent)
--   [setWebViewTitle](#setwebviewtitle) :warning: deprecated
+-   [setWebViewTitle](#setwebviewtitle)
 -   [updateNavigationBar](#updateNavigationBar)
 -   [nativeConfirm](#nativeconfirm)
 -   [nativeAlert](#nativealert)
@@ -168,8 +168,6 @@ createCalendarEvent({
 
 ### setWebViewTitle
 
-:warning: Deprecated. Use `updateNavigationBar`
-
 Update webview title. If the bridge is not present, automatically fallbacks to a
 `document.title` update.
 
@@ -183,34 +181,6 @@ setWebViewTitle: (title: string) => Promise<void>;
 import {setWebViewTitle} from '@tef-novum/webview-bridge';
 
 setWebViewTitle('My new title');
-```
-
-### updateNavigationBar
-
-Update Navigation Bar, you can update several properties of the Navigation bar.
-
-```typescript
-updateNavigationBar = ({
-    visible?: boolean;
-    title?: string;
-    showBackButton?: boolean;
-    showReloadButton?: boolean;
-    backgroundColor?: string;
-}) => Promise<void>
-```
-
-All properties are optional, if not provided, that property won't change.
-
-### Example
-
-```javascript
-import {updateNavigationBar} from '@tef-novum/webview-bridge';
-
-updateNavigationBar({
-    title: 'My new title',
-    showBackButton: true,
-    showReloadButton: false,
-});
 ```
 
 ### nativeConfirm

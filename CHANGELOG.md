@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## next
+
+-   default values set for label and value fields when logging analytics events
+
 ## v1.1.0 (2019-02-12)
 
 -   exported functions from analytics module:

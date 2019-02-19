@@ -15,5 +15,5 @@
         "interface-name": false,
         "semicolon": false
     },
-    "rulesDirectory": [],
+    "rulesDirectory": []
 }

@@ -1,7 +1,7 @@
 // Google Analytics custom dimension indices.
 // WARN: These numbers are defined in GA, don't change them
 
-type CustomDimensionIdx = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+type CustomDimensionIdx = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
 
 const CD_OB_IDS: CustomDimensionIdx = 1; // from sessionInfo
 const CD_PAYMENT_MODELS: CustomDimensionIdx = 2; // from sessionInfo
@@ -11,6 +11,11 @@ const CD_SUBSCRIPTION_ADMIN: CustomDimensionIdx = 5; // from sessionInfo
 const CD_SUBSCRIPTION_WITH_IPCOMMS: CustomDimensionIdx = 6; // from sessionInfo
 export const CD_NOVUM_UID: CustomDimensionIdx = 7;
 export const CD_EVENT_VALUE: CustomDimensionIdx = 8;
+const CD_AF_SOURCE: CustomDimensionIdx = 9;
+const CD_AF_CAMPAIGN: CustomDimensionIdx = 10;
+const CD_NOVUM_UID_SESSION: CustomDimensionIdx = 11;
+const CD_USER_LOGGED: CustomDimensionIdx = 12;
+const CD_CONVERGENTE_UID: CustomDimensionIdx = 13;
 
 const DEFAULT_EVENT_LABEL = 'null_label';
 const DEFAULT_EVENT_VALUE = 0;
@@ -219,6 +224,11 @@ const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
     serviceWorkerStatus: CD_SERVICE_WORKER_STATUS,
     isAdmin: CD_SUBSCRIPTION_ADMIN,
     hasIpComms: CD_SUBSCRIPTION_WITH_IPCOMMS,
+    af_source: CD_AF_SOURCE,
+    af_campaign: CD_AF_CAMPAIGN,
+    novum_uid_session: CD_NOVUM_UID_SESSION,
+    user_logged: CD_USER_LOGGED,
+    convergente_uid: CD_CONVERGENTE_UID,
 };
 
 type UserPropertyName = keyof typeof USER_PROPERTY_TO_CUSTOM_DIMENSION;

@@ -1,7 +1,22 @@
 // Google Analytics custom dimension indices.
 // WARN: These numbers are defined in GA, don't change them
 
-type CustomDimensionIdx = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13;
+type CustomDimensionIdx =
+    | 1
+    | 2
+    | 3
+    | 4
+    | 5
+    | 6
+    | 7
+    | 8
+    | 9
+    | 10
+    | 11
+    | 12
+    | 13
+    | 14
+    | 15;
 
 const CD_OB_IDS: CustomDimensionIdx = 1; // from sessionInfo
 const CD_PAYMENT_MODELS: CustomDimensionIdx = 2; // from sessionInfo
@@ -15,7 +30,9 @@ const CD_AF_SOURCE: CustomDimensionIdx = 9;
 const CD_AF_CAMPAIGN: CustomDimensionIdx = 10;
 const CD_NOVUM_UID_SESSION: CustomDimensionIdx = 11;
 const CD_USER_LOGGED: CustomDimensionIdx = 12;
-const CD_CONVERGENTE_UID: CustomDimensionIdx = 13;
+const CD_CURRENT_SUBSCRIPTION_ID: CustomDimensionIdx = 13;
+const CD_CURRENT_SUBSCRIPTION_TYPE: CustomDimensionIdx = 14;
+const CD_CURRENT_PAYMENT_MODEL: CustomDimensionIdx = 15;
 
 const DEFAULT_EVENT_LABEL = 'null_label';
 const DEFAULT_EVENT_VALUE = 0;
@@ -228,7 +245,9 @@ const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
     af_campaign: CD_AF_CAMPAIGN,
     novum_uid_session: CD_NOVUM_UID_SESSION,
     user_logged: CD_USER_LOGGED,
-    convergente_uid: CD_CONVERGENTE_UID,
+    currentSubscriptionId: CD_CURRENT_SUBSCRIPTION_ID,
+    currentSubscriptionType: CD_CURRENT_SUBSCRIPTION_TYPE,
+    currentPaymentModel: CD_CURRENT_PAYMENT_MODEL,
 };
 
 type UserPropertyName = keyof typeof USER_PROPERTY_TO_CUSTOM_DIMENSION;

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.1.3.0 - 2019-02-27
+
+-   Add new Google Analytics custom dimensions
+
 ## v.1.2.0 - 2019-02-19
 
 -   Add new Google Analytics custom dimensions

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.1.3.1 - 2019-03-05
+
+-   Remove visibility from navigation bar options
+
 ## v.1.3.0 - 2019-02-27
 
 -   Add new Google Analytics custom dimensions

@@ -31,13 +31,11 @@ export const setWebViewTitle = (title: string): Promise<void> => {
 };
 
 export const updateNavigationBar = ({
-    visible,
     title,
     showBackButton,
     showReloadButton,
     backgroundColor,
 }: {
-    visible?: boolean;
     title?: string;
     showBackButton?: boolean;
     showReloadButton?: boolean;
@@ -47,7 +45,6 @@ export const updateNavigationBar = ({
         return postMessageToNativeApp({
             type: 'NAVIGATION_BAR',
             payload: {
-                visible,
                 title,
                 showBackButton,
                 showReloadButton,

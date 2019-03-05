@@ -102,7 +102,6 @@ declare export function notifyPageLoaded(): Promise<void>;
 declare export function setWebViewTitle(title: string): Promise<void>;
 
 declare export function updateNavigationBar({|
-    visible?: boolean,
     title?: string,
     showBackButton?: boolean,
     showReloadButton?: boolean,

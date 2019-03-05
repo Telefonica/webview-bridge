@@ -89,7 +89,6 @@ test('update navigation bar, without options', async cb => {
 
 test('update navigation bar, with options', async cb => {
     const options = {
-        visible: true,
         title: ANY_STRING,
         showBackButton: true,
         showReloadButton: true,
@@ -127,7 +126,6 @@ test('update navigation bar, without bridge', async cb => {
     document.title = '';
 
     const options = {
-        visible: true,
         title: ANY_STRING,
         showBackButton: true,
         showReloadButton: true,

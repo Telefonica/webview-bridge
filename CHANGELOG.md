@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next
+
+-   Add share function
+
 ## v.1.3.1 - 2019-03-05
 
 -   Remove visibility from navigation bar options

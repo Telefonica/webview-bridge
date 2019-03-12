@@ -67,8 +67,8 @@ Alternatively, you can import the library directly from a CDN:
 -   [isWebViewBridgeAvailable](#isWebViewBridgeAvailable)
 -   [requestContact](#requestcontact)
 -   [createCalendarEvent](#createcalendarevent)
+-   [share](#share)
 -   [setWebViewTitle](#setwebviewtitle)
--   [updateNavigationBar](#updateNavigationBar)
 -   [nativeConfirm](#nativeconfirm)
 -   [nativeAlert](#nativealert)
 -   [nativeMessage](#nativemessage)
@@ -107,7 +107,7 @@ Show native picker UI in order to let the user select a contact.
 <img height="550" src="doc/webview-bridge-contact-ios.png"><img height="550" src="doc/webview-bridge-contact-android.png">
 
 ```typescript
-requestContact: ({filter}?: {filter?: 'phone' | 'email'}) => Promise<{
+requestContact: ({filter?: 'phone' | 'email'}) => Promise<{
     name?: string;
     email?: string;
     phoneNumber?: string;
@@ -166,6 +166,22 @@ createCalendarEvent({
 };
 ```
 
+### share
+
+Invokes the native sharing mechanism of the device
+
+```typescript
+share: ({
+    text?: string;
+    url?: string;
+}) => Promise<void>;
+```
+
+-   `url` (optional): URL to the shared file
+-   `text` (optional):
+
+#### Example
+
 ### setWebViewTitle
 
 Update webview title. If the bridge is not present, automatically fallbacks to a
@@ -193,19 +209,12 @@ browser confirm.
 <img height="550" src="doc/webview-bridge-confirm-ios.png"><img height="550" src="doc/webview-bridge-confirm-android.png">
 
 ```typescript
-nativeConfirm: (
-    {
-        message,
-        title,
-        acceptText,
-        cancelText,
-    }: {
-        message: string;
-        title?: string;
-        acceptText?: string;
-        cancelText?: string;
-    },
-) => Promise<boolean>;
+nativeConfirm: ({
+    message: string;
+    title?: string;
+    acceptText?: string;
+    cancelText?: string;
+}) => Promise<boolean>;
 ```
 
 #### Example
@@ -235,17 +244,11 @@ browser alert.
 <img height="550" src="doc/webview-bridge-alert-ios.png"><img height="550" src="doc/webview-bridge-alert-android.png">
 
 ```typescript
-nativeAlert: (
-    {
-        message,
-        title,
-        buttonText,
-    }: {
-        message: string;
-        title?: string;
-        buttonText?: string;
-    },
-) => Promise<void>;
+nativeAlert: ({
+    message: string;
+    title?: string;
+    buttonText?: string;
+}) => Promise<void>;
 ```
 
 #### Example
@@ -273,19 +276,12 @@ browser alert.
 <img height="550" src="doc/webview-bridge-message-ios.png"><img height="550" src="doc/webview-bridge-message-android.png">
 
 ```typescript
-nativeMessage: (
-    {
-        message,
-        duration,
-        buttonText,
-        type,
-    }: {
+nativeMessage: ({
         message: string;
         duration?: number; // milliseconds
         buttonText?: string; // Android only
         type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS';
-    },
-) => Promise<void>;
+}) => Promise<void>;
 ```
 
 #### Example

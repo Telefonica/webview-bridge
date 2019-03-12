@@ -18,6 +18,18 @@ export const attachToEmail = ({
         payload: {url, subject, fileName, recipient, body},
     });
 
+export const share = ({
+    text,
+    url,
+}: {
+    text?: string;
+    url?: string;
+}): Promise<void> =>
+    postMessageToNativeApp({
+        type: 'SHARE',
+        payload: {text, url},
+    });
+
 /**
  * @deprecated
  */

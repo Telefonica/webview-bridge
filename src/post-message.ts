@@ -71,6 +71,11 @@ type MessageTypeToResponseMap = {
         type: 'NAVIGATION_BAR';
         payload: void;
     };
+    SHARE: {
+        id: string;
+        type: 'SHARE';
+        payload: void;
+    };
     ERROR: {
         id: string;
         type: 'ERROR';

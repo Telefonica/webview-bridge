@@ -97,6 +97,17 @@ declare export function attachToEmail({|
     body?: string,
 |}): Promise<void>;
 
+type ShareOptions =
+    | {
+          text: string,
+      }
+    | {
+          url: string,
+          fileName: string,
+          text?: string,
+      };
+declare export function share(options: ShareOptions): Promise<void>;
+
 declare export function notifyPageLoaded(): Promise<void>;
 
 declare export function setWebViewTitle(title: string): Promise<void>;

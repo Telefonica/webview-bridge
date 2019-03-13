@@ -168,19 +168,39 @@ createCalendarEvent({
 
 ### share
 
-Invokes the native sharing mechanism of the device
+Invokes the native sharing mechanism of the device.
 
 ```typescript
-share: ({
-    text?: string;
-    url?: string;
-}) => Promise<void>;
+type ShareOptions =
+    | {
+          text: string;
+      }
+    | {
+          url: string;
+          fileName: string;
+          text?: string;
+      };
+
+share: (options: ShareOptions) => Promise<void>;
 ```
 
--   `url` (optional): URL to the shared file
--   `text` (optional):
+-   If no `url` is present, `text` is used as item to share
+-   If `url` param is present, it contains the URL to the shared file
+-   `fileName` param is mandatory if `url` is set
+-   If `url` and `text` are set, `text` is used as `Intent BODY` (if platform
+    allows it)
 
 #### Example
+
+```javascript
+import {share} from '@tef-novum/webview-bridge';
+
+// sharing a text string
+share({text: 'Hello, world!'});
+
+// sharing a file
+share({url: 'https://path/to/file', fileName: 'lolcats.png'});
+```
 
 ### setWebViewTitle
 

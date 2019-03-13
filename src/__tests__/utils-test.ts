@@ -3,6 +3,7 @@ import {
     setWebViewTitle,
     notifyPageLoaded,
     updateNavigationBar,
+    share,
 } from '../utils';
 import {
     createFakeAndroidPostMessage,
@@ -36,6 +37,30 @@ test('attach to email', async cb => {
     });
 
     attachToEmail(PARAMS).then(res => {
+        expect(res).toBeUndefined();
+        cb();
+    });
+});
+
+test('share', async cb => {
+    const PARAMS = {
+        url: 'any-url',
+        fileName: 'file-name',
+        text: 'any-text',
+    };
+
+    createFakeAndroidPostMessage({
+        checkMessage: message => {
+            expect(message.type).toBe('SHARE');
+            expect(message.payload).toEqual(PARAMS);
+        },
+        getResponse: message => ({
+            type: message.type,
+            id: message.id,
+        }),
+    });
+
+    share(PARAMS).then(res => {
         expect(res).toBeUndefined();
         cb();
     });

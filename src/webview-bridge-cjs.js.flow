@@ -97,7 +97,7 @@ declare export function attachToEmail({|
     body?: string,
 |}): Promise<void>;
 
-type ShareOptions =
+export type ShareOptions =
     | {
           text: string,
       }

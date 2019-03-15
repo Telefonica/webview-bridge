@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## Next
+## v.1.4.0 - 2019-03-15
 
 -   Add share function
 

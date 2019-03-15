@@ -3,6 +3,7 @@ import {
     setWebViewTitle,
     notifyPageLoaded,
     updateNavigationBar,
+    share,
 } from '../utils';
 import {
     createFakeAndroidPostMessage,
@@ -15,7 +16,7 @@ afterEach(() => {
     removeFakeAndroidPostMessage();
 });
 
-test('attach to email', async cb => {
+test('attach to email', cb => {
     const PARAMS = {
         url: 'any-url',
         subject: 'any-subject',
@@ -41,7 +42,31 @@ test('attach to email', async cb => {
     });
 });
 
-test('set webview title', async cb => {
+test('share', cb => {
+    const PARAMS = {
+        url: 'any-url',
+        fileName: 'file-name',
+        text: 'any-text',
+    };
+
+    createFakeAndroidPostMessage({
+        checkMessage: message => {
+            expect(message.type).toBe('SHARE');
+            expect(message.payload).toEqual(PARAMS);
+        },
+        getResponse: message => ({
+            type: message.type,
+            id: message.id,
+        }),
+    });
+
+    share(PARAMS).then(res => {
+        expect(res).toBeUndefined();
+        cb();
+    });
+});
+
+test('set webview title', cb => {
     createFakeAndroidPostMessage({
         checkMessage: message => {
             expect(message.type).toBe('SET_TITLE');
@@ -59,7 +84,7 @@ test('set webview title', async cb => {
     });
 });
 
-test('set webview title fallbacks to document.title update', async cb => {
+test('set webview title fallbacks to document.title update', cb => {
     document.title = '';
 
     setWebViewTitle(ANY_STRING).then(res => {
@@ -69,7 +94,7 @@ test('set webview title fallbacks to document.title update', async cb => {
     });
 });
 
-test('update navigation bar, without options', async cb => {
+test('update navigation bar, without options', cb => {
     createFakeAndroidPostMessage({
         checkMessage: message => {
             expect(message.type).toBe('NAVIGATION_BAR');
@@ -87,7 +112,7 @@ test('update navigation bar, without options', async cb => {
     });
 });
 
-test('update navigation bar, with options', async cb => {
+test('update navigation bar, with options', cb => {
     const options = {
         title: ANY_STRING,
         showBackButton: true,
@@ -112,7 +137,7 @@ test('update navigation bar, with options', async cb => {
     });
 });
 
-test('update navigation bar, without options and without bridge', async cb => {
+test('update navigation bar, without options and without bridge', cb => {
     document.title = ANY_STRING;
 
     updateNavigationBar({}).then(res => {
@@ -122,7 +147,7 @@ test('update navigation bar, without options and without bridge', async cb => {
     });
 });
 
-test('update navigation bar, without bridge', async cb => {
+test('update navigation bar, without bridge', cb => {
     document.title = '';
 
     const options = {
@@ -139,7 +164,7 @@ test('update navigation bar, without bridge', async cb => {
     });
 });
 
-test('notify page loaded', async cb => {
+test('notify page loaded', cb => {
     createFakeAndroidPostMessage({
         checkMessage: message => {
             expect(message.type).toBe('PAGE_LOADED');

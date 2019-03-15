@@ -18,6 +18,22 @@ export const attachToEmail = ({
         payload: {url, subject, fileName, recipient, body},
     });
 
+type ShareOptions =
+    | {
+          text: string;
+      }
+    | {
+          url: string;
+          fileName: string;
+          text?: string;
+      };
+
+export const share = (options: ShareOptions): Promise<void> =>
+    postMessageToNativeApp({
+        type: 'SHARE',
+        payload: options,
+    });
+
 /**
  * @deprecated
  */

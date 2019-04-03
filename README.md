@@ -170,6 +170,10 @@ createCalendarEvent({
 
 Invokes the native sharing mechanism of the device.
 
+-   Available for app versions 10.7 and higher
+-   Returning promise will be rejected if not supported (app versions lower than
+    10.7)
+
 ```typescript
 type ShareOptions =
     | {

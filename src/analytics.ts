@@ -16,7 +16,8 @@ type CustomDimensionIdx =
     | 12
     | 13
     | 14
-    | 15;
+    | 15
+    | 16;
 
 const CD_OB_IDS: CustomDimensionIdx = 1; // from sessionInfo
 const CD_PAYMENT_MODELS: CustomDimensionIdx = 2; // from sessionInfo
@@ -33,6 +34,7 @@ const CD_USER_LOGGED: CustomDimensionIdx = 12;
 const CD_CURRENT_SUBSCRIPTION_ID: CustomDimensionIdx = 13;
 const CD_CURRENT_SUBSCRIPTION_TYPE: CustomDimensionIdx = 14;
 const CD_CURRENT_PAYMENT_MODEL: CustomDimensionIdx = 15;
+const CD_WEBVIEW_BROWSER_VERSION: CustomDimensionIdx = 16;
 
 const DEFAULT_EVENT_LABEL = 'null_label';
 const DEFAULT_EVENT_VALUE = 0;
@@ -248,6 +250,7 @@ const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
     currentSubscriptionId: CD_CURRENT_SUBSCRIPTION_ID,
     currentSubscriptionType: CD_CURRENT_SUBSCRIPTION_TYPE,
     currentPaymentModel: CD_CURRENT_PAYMENT_MODEL,
+    webviewBrowserVersion: CD_WEBVIEW_BROWSER_VERSION:
 };
 
 type UserPropertyName = keyof typeof USER_PROPERTY_TO_CUSTOM_DIMENSION;

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.1.5.0 - 2019-04-05
+
+-   Add new Google Analytics custom dimensions
+
 ## v.1.4.0 - 2019-03-15
 
 -   Add share function

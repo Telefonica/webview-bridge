@@ -250,7 +250,7 @@ const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
     currentSubscriptionId: CD_CURRENT_SUBSCRIPTION_ID,
     currentSubscriptionType: CD_CURRENT_SUBSCRIPTION_TYPE,
     currentPaymentModel: CD_CURRENT_PAYMENT_MODEL,
-    webviewBrowserVersion: CD_WEBVIEW_BROWSER_VERSION:
+    webviewBrowserVersion: CD_WEBVIEW_BROWSER_VERSION,
 };
 
 type UserPropertyName = keyof typeof USER_PROPERTY_TO_CUSTOM_DIMENSION;

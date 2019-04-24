@@ -75,13 +75,10 @@ type TrackingEvent = {
     [key: string]: any;
 };
 
-export const logEvent = ({
-    category,
-    action,
-    label,
-    value,
-    ...fieldsObject
-}: TrackingEvent) => {
+export const logEvent = (
+    name: string,
+    {category, action, label, value, ...fieldsObject}: TrackingEvent,
+) => {
     if (!category || !action) {
         console.warn('Analytics event should have "category" and "action"', {
             category,
@@ -90,7 +87,7 @@ export const logEvent = ({
         return Promise.resolve();
     }
 
-    const name = category;
+    //const name = category;
 
     if (!label) {
         label = DEFAULT_EVENT_LABEL;

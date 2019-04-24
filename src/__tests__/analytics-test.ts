@@ -38,13 +38,13 @@ test('log event with default values', async () => {
     const DEFAULT_LABEL = 'null_label';
     const DEFAULT_VALUE = 0;
 
-    await logEvent({
+    await logEvent(name, {
         category: 'anyCategory',
         action: 'anyAction',
     });
 
     expect(anyWebviewMock.logEvent).toBeCalledWith(
-        'anyCategory',
+        name,
         JSON.stringify({
             eventCategory: 'anyCategory',
             eventAction: 'anyAction',
@@ -59,7 +59,7 @@ test('log event in Android', async () => {
 
     const ANY_VALUE = 5;
 
-    await logEvent({
+    await logEvent(name, {
         category: 'anyCategory',
         action: 'anyAction',
         label: 'anyLabel',
@@ -68,7 +68,7 @@ test('log event in Android', async () => {
     });
 
     expect(androidFirebaseMock.logEvent).toBeCalledWith(
-        'anyCategory',
+        name,
         JSON.stringify({
             eventCategory: 'anyCategory',
             eventAction: 'anyAction',
@@ -84,7 +84,7 @@ test('log event in iOS', async () => {
 
     const ANY_VALUE = 5;
 
-    await logEvent({
+    await logEvent(name, {
         category: 'anyCategory',
         action: 'anyAction',
         label: 'anyLabel',
@@ -94,7 +94,7 @@ test('log event in iOS', async () => {
 
     expect(iosFirebaseMock.postMessage).toBeCalledWith({
         command: 'logEvent',
-        name: 'anyCategory',
+        name,
         parameters: {
             eventCategory: 'anyCategory',
             eventAction: 'anyAction',

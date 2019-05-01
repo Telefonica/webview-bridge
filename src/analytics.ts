@@ -68,6 +68,7 @@ const withAnalytics = ({
 };
 
 type TrackingEvent = {
+    name: string; // Event name, can only contain spaces and underscores
     category: string; // Typically the object that was interacted with (e.g. 'Video')
     action: string; // The type of interaction (e.g. 'play')
     label?: string; // Useful for categorizing events (e.g. 'Fall Campaign')
@@ -76,7 +77,7 @@ type TrackingEvent = {
 };
 
 export const logEvent = (
-    name: string,
+    name: TrackingEvent['name'],
     {category, action, label, value, ...fieldsObject}: TrackingEvent,
 ) => {
     if (!category || !action) {

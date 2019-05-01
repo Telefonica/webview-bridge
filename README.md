@@ -329,7 +329,7 @@ nativeMessage({
 Log an event to firebase
 
 ```typescript
-logEvent: ({
+logEvent: (name: string, {
     category: string; // Typically the object that was interacted with (e.g. 'Video')
     action: string; // The type of interaction (e.g. 'play')
     label?: string; // Useful for categorizing events (e.g. 'Fall Campaign')
@@ -342,7 +342,7 @@ logEvent: ({
 ```javascript
 import {logEvent} from '@tef-novum/webview-bridge';
 
-logEvent({
+logEvent('eventName', {
     category: 'topup-flow',
     action: 'topup',
 }).then(() => {

@@ -77,7 +77,7 @@ type TrackingEvent = {
 };
 
 export const logEvent = (
-    name: TrackingEvent['name'],
+    name: TrackingEvent['name'] | TrackingEvent['category'],
     {category, action, label, value, ...fieldsObject}: TrackingEvent,
 ) => {
     if (!category || !action) {

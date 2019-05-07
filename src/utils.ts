@@ -77,3 +77,7 @@ export const updateNavigationBar = ({
 
 export const notifyPageLoaded = (): Promise<void> =>
     postMessageToNativeApp({type: 'PAGE_LOADED'});
+
+export const requestRemoteConfig = (): Promise<{
+    result: {[s: string]: string};
+}> => postMessageToNativeApp({type: 'GET_REMOTE_CONFIG'});

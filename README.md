@@ -223,6 +223,27 @@ import {setWebViewTitle} from '@tef-novum/webview-bridge';
 setWebViewTitle('My new title');
 ```
 
+### requestRemoteConfig
+
+Request a map with all remote configuration values. A/B testing relies on this
+map.
+
+```typescript
+requestRemoteConfig: () => Promise<{result: {[s: string]: string}}>;
+```
+
+#### Example
+
+```javascript
+import {requestRemoteConfig} from '@tef-novum/webview-bridge';
+
+requestCorequestRemoteConfigntact().then((config) => {
+    console.log(config);
+}).catch(err => {
+    console.error(err);
+};
+```
+
 ### nativeConfirm
 
 Show a native confirm dialog.

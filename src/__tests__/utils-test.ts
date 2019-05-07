@@ -4,6 +4,7 @@ import {
     notifyPageLoaded,
     updateNavigationBar,
     share,
+    requestRemoteConfig,
 } from '../utils';
 import {
     createFakeAndroidPostMessage,
@@ -178,6 +179,33 @@ test('notify page loaded', cb => {
 
     notifyPageLoaded().then(res => {
         expect(res).toBeUndefined();
+        cb();
+    });
+});
+
+test('request A/B testing configuration', cb => {
+    const AB_TESTING_CONFIGURATION = {
+        result: {
+            key1: 'value1',
+            key2: 'value2',
+            key3: 'value3',
+        },
+    };
+
+    createFakeAndroidPostMessage({
+        checkMessage: message => {
+            expect(message.type).toBe('GET_REMOTE_CONFIG');
+            expect(message.payload).toBeUndefined();
+        },
+        getResponse: message => ({
+            type: message.type,
+            id: message.id,
+            payload: AB_TESTING_CONFIGURATION,
+        }),
+    });
+
+    requestRemoteConfig().then(res => {
+        expect(res).toEqual(AB_TESTING_CONFIGURATION);
         cb();
     });
 });

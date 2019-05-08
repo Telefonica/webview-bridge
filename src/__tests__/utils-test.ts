@@ -183,8 +183,8 @@ test('notify page loaded', cb => {
     });
 });
 
-test('request A/B testing configuration', cb => {
-    const AB_TESTING_CONFIGURATION = {
+test('request remote configuration', cb => {
+    const REMOTE_CONFIGURATION = {
         result: {
             key1: 'value1',
             key2: 'value2',
@@ -200,12 +200,12 @@ test('request A/B testing configuration', cb => {
         getResponse: message => ({
             type: message.type,
             id: message.id,
-            payload: AB_TESTING_CONFIGURATION,
+            payload: REMOTE_CONFIGURATION,
         }),
     });
 
     requestRemoteConfig().then(res => {
-        expect(res).toEqual(AB_TESTING_CONFIGURATION);
+        expect(res).toEqual(REMOTE_CONFIGURATION);
         cb();
     });
 });

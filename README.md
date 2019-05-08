@@ -228,6 +228,10 @@ setWebViewTitle('My new title');
 Request a map with all remote configuration values. A/B testing relies on this
 map.
 
+-   Available for app versions 10.8 and higher
+-   Returning promise will be rejected if not supported (app versions lower than
+    10.8)
+
 ```typescript
 requestRemoteConfig: () => Promise<{result: {[s: string]: string}}>;
 ```
@@ -237,7 +241,7 @@ requestRemoteConfig: () => Promise<{result: {[s: string]: string}}>;
 ```javascript
 import {requestRemoteConfig} from '@tef-novum/webview-bridge';
 
-requestCorequestRemoteConfigntact().then((config) => {
+requestRemoteConfig().then((config) => {
     console.log(config);
 }).catch(err => {
     console.error(err);

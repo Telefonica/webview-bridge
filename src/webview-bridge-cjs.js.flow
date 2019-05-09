@@ -119,8 +119,4 @@ declare export function updateNavigationBar({|
     backgroundColor?: string,
 |}): Promise<void>;
 
-declare export function requestRemoteConfig(): Promise<{|
-    result: {
-        [s: string]: string,
-    },
-|}>;
+declare export function isABTestingAvailable(): Promise<boolean>;

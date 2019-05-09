@@ -223,26 +223,25 @@ import {setWebViewTitle} from '@tef-novum/webview-bridge';
 setWebViewTitle('My new title');
 ```
 
-### requestRemoteConfig
+### isABTestingAvailable
 
-Request a map with all remote configuration values. A/B testing relies on this
-map.
+Returns true if A/B testing named with the key is available.
 
 -   Available for app versions 10.8 and higher
 -   Returning promise will be rejected if not supported (app versions lower than
     10.8)
 
 ```typescript
-requestRemoteConfig: () => Promise<{result: {[s: string]: string}}>;
+isABTestingAvailable: (key: string) => Promise<boolean>;
 ```
 
 #### Example
 
 ```javascript
-import {requestRemoteConfig} from '@tef-novum/webview-bridge';
+import {isABTestingAvailable} from '@tef-novum/webview-bridge';
 
-requestRemoteConfig().then((config) => {
-    console.log(config);
+isABTestingAvailable('key').then((isAvailable) => {
+    console.log(isAvailable);
 }).catch(err => {
     console.error(err);
 };

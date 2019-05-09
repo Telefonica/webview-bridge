@@ -7,7 +7,7 @@ export {
     setWebViewTitle,
     updateNavigationBar,
     notifyPageLoaded,
-    requestRemoteConfig,
+    isABTestingAvailable,
 } from './src/utils';
 export {createCalendarEvent} from './src/calendar';
 export {requestContact} from './src/contacts';

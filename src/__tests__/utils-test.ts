@@ -4,7 +4,7 @@ import {
     notifyPageLoaded,
     updateNavigationBar,
     share,
-    requestRemoteConfig,
+    isABTestingAvailable,
 } from '../utils';
 import {
     createFakeAndroidPostMessage,
@@ -186,9 +186,9 @@ test('notify page loaded', cb => {
 test('request remote configuration', cb => {
     const REMOTE_CONFIGURATION = {
         result: {
-            key1: 'value1',
-            key2: 'value2',
-            key3: 'value3',
+            key1: 'true',
+            key2: 'false',
+            key3: 'true',
         },
     };
 
@@ -204,8 +204,12 @@ test('request remote configuration', cb => {
         }),
     });
 
-    requestRemoteConfig().then(res => {
-        expect(res).toEqual(REMOTE_CONFIGURATION);
+    isABTestingAvailable('key1').then(res => {
+        expect(res).toEqual(true);
+        cb();
+    });
+    isABTestingAvailable('key2').then(res => {
+        expect(res).toEqual(false);
         cb();
     });
 });

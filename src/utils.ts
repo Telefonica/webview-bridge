@@ -78,6 +78,22 @@ export const updateNavigationBar = ({
 export const notifyPageLoaded = (): Promise<void> =>
     postMessageToNativeApp({type: 'PAGE_LOADED'});
 
-export const requestRemoteConfig = (): Promise<{
-    result: {[s: string]: string};
-}> => postMessageToNativeApp({type: 'GET_REMOTE_CONFIG'});
+type RemoteConfig = {result: {[s: string]: string}};
+
+let remoteConfig: null | RemoteConfig = null;
+
+const isRemoteConfigAvailable = (key: string) =>
+    (remoteConfig as RemoteConfig).result[key] === 'true';
+
+export const isABTestingAvailable = (key: string): Promise<boolean> => {
+    if (!remoteConfig) {
+        return new Promise(resolve => {
+            postMessageToNativeApp({type: 'GET_REMOTE_CONFIG'}).then(res => {
+                remoteConfig = res;
+                resolve(isRemoteConfigAvailable(key));
+            });
+        });
+    } else {
+        return new Promise(resolve => resolve(isRemoteConfigAvailable(key)));
+    }
+};

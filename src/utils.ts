@@ -87,13 +87,11 @@ const isRemoteConfigAvailable = (key: string) =>
 
 export const isABTestingAvailable = (key: string): Promise<boolean> => {
     if (!remoteConfig) {
-        return new Promise(resolve => {
-            postMessageToNativeApp({type: 'GET_REMOTE_CONFIG'}).then(res => {
-                remoteConfig = res;
-                resolve(isRemoteConfigAvailable(key));
-            });
+        return postMessageToNativeApp({type: 'GET_REMOTE_CONFIG'}).then(res => {
+            remoteConfig = res;
+            return isRemoteConfigAvailable(key);
         });
     } else {
-        return new Promise(resolve => resolve(isRemoteConfigAvailable(key)));
+        return Promise.resolve(isRemoteConfigAvailable(key));
     }
 };

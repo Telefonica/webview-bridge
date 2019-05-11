@@ -81,6 +81,11 @@ type MessageTypeToResponseMap = {
         type: 'ERROR';
         payload: {code: number; reason: string};
     };
+    GET_REMOTE_CONFIG: {
+        id: string;
+        type: 'GET_REMOTE_CONFIG';
+        payload: {result: {[s: string]: string}};
+    };
 };
 
 type Response = MessageTypeToResponseMap[keyof MessageTypeToResponseMap];

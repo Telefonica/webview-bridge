@@ -4,6 +4,7 @@ import {
     notifyPageLoaded,
     updateNavigationBar,
     share,
+    isABTestingAvailable,
 } from '../utils';
 import {
     createFakeAndroidPostMessage,
@@ -178,6 +179,37 @@ test('notify page loaded', cb => {
 
     notifyPageLoaded().then(res => {
         expect(res).toBeUndefined();
+        cb();
+    });
+});
+
+test('request remote configuration', cb => {
+    const REMOTE_CONFIGURATION = {
+        result: {
+            key1: 'true',
+            key2: 'false',
+            key3: 'true',
+        },
+    };
+
+    createFakeAndroidPostMessage({
+        checkMessage: message => {
+            expect(message.type).toBe('GET_REMOTE_CONFIG');
+            expect(message.payload).toBeUndefined();
+        },
+        getResponse: message => ({
+            type: message.type,
+            id: message.id,
+            payload: REMOTE_CONFIGURATION,
+        }),
+    });
+
+    isABTestingAvailable('key1').then(res => {
+        expect(res).toEqual(true);
+        cb();
+    });
+    isABTestingAvailable('key2').then(res => {
+        expect(res).toEqual(false);
         cb();
     });
 });

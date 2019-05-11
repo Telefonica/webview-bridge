@@ -1,10 +1,16 @@
 # CHANGELOG
 
+## v.1.6.0 - 2019-05-11
+
+-   Exported functions to A/B testing
+
+    -   `isABTestingAvailable`
+
 ## v.1.5.0 - 2019-04-05
 
 -   Add new Google Analytics custom dimensions
-    
-    - `webviewBrowserVersion`
+
+    -   `webviewBrowserVersion`
 
 ## v.1.4.0 - 2019-03-15
 

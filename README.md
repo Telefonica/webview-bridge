@@ -223,6 +223,30 @@ import {setWebViewTitle} from '@tef-novum/webview-bridge';
 setWebViewTitle('My new title');
 ```
 
+### isABTestingAvailable
+
+Returns true if A/B testing named with the key is available.
+
+-   Available for app versions 10.8 and higher
+-   Returning promise will be rejected if not supported (app versions lower than
+    10.8)
+
+```typescript
+isABTestingAvailable: (key: string) => Promise<boolean>;
+```
+
+#### Example
+
+```javascript
+import {isABTestingAvailable} from '@tef-novum/webview-bridge';
+
+isABTestingAvailable('key').then((isAvailable) => {
+    console.log(isAvailable);
+}).catch(err => {
+    console.error(err);
+};
+```
+
 ### nativeConfirm
 
 Show a native confirm dialog.

@@ -118,3 +118,5 @@ declare export function updateNavigationBar({|
     showReloadButton?: boolean,
     backgroundColor?: string,
 |}): Promise<void>;
+
+declare export function isABTestingAvailable(): Promise<boolean>;

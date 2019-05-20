@@ -119,4 +119,4 @@ declare export function updateNavigationBar({|
     backgroundColor?: string,
 |}): Promise<void>;
 
-declare export function isABTestingAvailable(): Promise<boolean>;
+declare export function isABTestingAvailable(key: string): Promise<boolean>;

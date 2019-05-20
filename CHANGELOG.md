@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.1.6.1 - 2019-05-20
+
+-   Fix `isABTestingAvailable` flow type.
+
 ## v.1.6.0 - 2019-05-11
 
 -   Exported functions to A/B testing

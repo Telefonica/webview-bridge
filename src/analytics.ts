@@ -1,6 +1,5 @@
 // Google Analytics custom dimension indices.
 // WARN: These numbers are defined in GA, don't change them
-
 type CustomDimensionIdx =
     | 1
     | 2
@@ -38,6 +37,11 @@ const CD_WEBVIEW_BROWSER_VERSION: CustomDimensionIdx = 16;
 
 const DEFAULT_EVENT_LABEL = 'null_label';
 const DEFAULT_EVENT_VALUE = 0;
+
+const VALID_TRACKERS = ['NovumTracker', 'OBARGTracker'];
+
+const isTrackerValid = (tracker: UniversalAnalytics.Tracker) =>
+    VALID_TRACKERS.indexOf(tracker.get('name')) >= 0;
 
 const withAnalytics = ({
     onAndroid,
@@ -125,7 +129,10 @@ export const logEvent = ({
         },
         onWeb(ga) {
             return new Promise(resolve => {
-                ga('send', 'event', {...params, hitCallback: resolve});
+                ga('NovumTracker.send', 'event', {
+                    ...params,
+                    hitCallback: resolve,
+                });
             });
         },
     });
@@ -176,7 +183,7 @@ export const logTiming = ({
         },
         onWeb(ga) {
             return new Promise(resolve => {
-                ga('send', {
+                ga('NovumTracker.send', {
                     hitType: 'timing',
                     hitCallback: resolve,
                     [`dimension${CD_EVENT_VALUE}`]: String(value),
@@ -220,7 +227,7 @@ export const setScreenName = (screenName: string, fieldsObject?: {}) => {
                     currentPageName = pageName;
                     ga(() => {
                         // we have two trackers in movistar ARG, we want to track the PV in both trackers
-                        const trackers = ga.getAll();
+                        const trackers = ga.getAll().filter(isTrackerValid);
                         trackers.forEach(tracker => {
                             tracker.set('page', pageName);
                             tracker.send('pageView', {
@@ -243,10 +250,10 @@ const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
     serviceWorkerStatus: CD_SERVICE_WORKER_STATUS,
     isAdmin: CD_SUBSCRIPTION_ADMIN,
     hasIpComms: CD_SUBSCRIPTION_WITH_IPCOMMS,
-    af_source: CD_AF_SOURCE,
-    af_campaign: CD_AF_CAMPAIGN,
-    novum_uid_session: CD_NOVUM_UID_SESSION,
-    user_logged: CD_USER_LOGGED,
+    af_source: CD_AF_SOURCE, // eslint-disable-line @typescript-eslint/camelcase
+    af_campaign: CD_AF_CAMPAIGN, // eslint-disable-line @typescript-eslint/camelcase
+    novum_uid_session: CD_NOVUM_UID_SESSION, // eslint-disable-line @typescript-eslint/camelcase
+    user_logged: CD_USER_LOGGED, // eslint-disable-line @typescript-eslint/camelcase
     currentSubscriptionId: CD_CURRENT_SUBSCRIPTION_ID,
     currentSubscriptionType: CD_CURRENT_SUBSCRIPTION_TYPE,
     currentPaymentModel: CD_CURRENT_PAYMENT_MODEL,
@@ -292,7 +299,9 @@ export const setUserProperty = (name: UserPropertyName, value: string) => {
                 return Promise.resolve();
             }
 
-            ga('set', {[`dimension${dimensionIdx}`]: String(value)});
+            ga('NovumTracker.set', {
+                [`dimension${dimensionIdx}`]: String(value),
+            });
             return Promise.resolve();
         },
     });

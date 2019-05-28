@@ -6,9 +6,9 @@
     "module": "./dist/webview-bridge.mjs",
     "types": "./dist/index.d.ts",
     "scripts": {
-        "build": "del dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && cpx ./src/webview-bridge-cjs.js.flow ./dist",
+        "build": "del dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && cp ./src/webview-bridge-cjs.js.flow ./dist",
         "test": "jest",
-        "lint": "tslint *.ts",
+        "lint": "eslint src/*.ts",
         "prepublishOnly": "npm run lint && npm test && npm run build"
     },
     "repository": {
@@ -24,19 +24,19 @@
     "dependencies": {},
     "devDependencies": {
         "@types/google.analytics": "0.0.39",
-        "@types/jest": "^24.0.6",
-        "cpx": "^1.5.0",
+        "@types/jest": "^24.0.13",
+        "@typescript-eslint/eslint-plugin": "^1.9.0",
+        "@typescript-eslint/parser": "^1.9.0",
         "del-cli": "^1.1.0",
-        "husky": "^1.3.1",
-        "jest": "^23.6.0",
-        "lint-staged": "^8.1.4",
-        "opn-cli": "^4.0.0",
-        "prettier": "^1.16.4",
-        "rollup": "^1.2.1",
-        "rollup-plugin-typescript2": "^0.19.2",
-        "ts-jest": "^23.10.5",
-        "tslint": "^5.12.1",
-        "typescript": "^3.3.3",
+        "eslint": "^5.16.0",
+        "husky": "^2.3.0",
+        "jest": "^24.8.0",
+        "lint-staged": "^8.1.7",
+        "prettier": "^1.17.1",
+        "rollup": "^1.12.4",
+        "rollup-plugin-typescript2": "^0.21.1",
+        "ts-jest": "^24.0.2",
+        "typescript": "^3.4.5",
         "uglify-es": "^3.3.9"
     }
 }

@@ -8,7 +8,7 @@
     "scripts": {
         "build": "del dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && cp ./src/webview-bridge-cjs.js.flow ./dist",
         "test": "jest",
-        "lint": "eslint src/*.ts",
+        "lint": "eslint src/**/*.ts",
         "prepublishOnly": "npm run lint && npm test && npm run build"
     },
     "repository": {

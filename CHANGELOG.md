@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.0.0 - 2019-05-29
+
+-   Only send GA events to selected Trackers
+
 ## v.1.6.1 - 2019-05-20
 
 -   Fix `isABTestingAvailable` flow type.
@@ -7,13 +11,11 @@
 ## v.1.6.0 - 2019-05-11
 
 -   Exported functions to A/B testing
-
     -   `isABTestingAvailable`
 
 ## v.1.5.0 - 2019-04-05
 
 -   Add new Google Analytics custom dimensions
-
     -   `webviewBrowserVersion`
 
 ## v.1.4.0 - 2019-03-15
@@ -45,9 +47,7 @@
     -   `setUserProperty`
 
 -   Exported constants from analytics module:
-
     -   `CD_WEBAPP_INSTALLED`
     -   `CD_NOVUM_UID`
     -   `CD_EVENT_VALUE`
-
 -   Added flow definitions file

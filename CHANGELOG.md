@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.0.1 - 2019-06-27
+
+-   Update TrackingEvent type for flow
+
 ## v.2.0.0 - 2019-05-29
 
 -   Only send GA events to selected Trackers

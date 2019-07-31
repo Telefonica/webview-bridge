@@ -95,3 +95,17 @@ export const isABTestingAvailable = (key: string): Promise<boolean> => {
         return Promise.resolve(isRemoteConfigAvailable(key));
     }
 };
+
+export const reportStatus = ({
+    feature,
+    status,
+    reason,
+}: {
+    feature: string;
+    status: 'CRITICAL' | 'GOOD' | 'BAD';
+    reason: string;
+}) =>
+    postMessageToNativeApp({
+        type: 'STATUS_REPORT',
+        payload: {status, reason, feature},
+    });

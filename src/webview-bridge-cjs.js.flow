@@ -121,3 +121,9 @@ declare export function updateNavigationBar({|
 |}): Promise<void>;
 
 declare export function isABTestingAvailable(key: string): Promise<boolean>;
+
+declare export function reportStatus({|
+    status: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS',,
+    reason: string,
+    feature: string,
+|}): Promise<void>;

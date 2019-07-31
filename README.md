@@ -390,6 +390,24 @@ setScreenName('Topup Flow').then(() => {
 });
 ```
 
+### reportStatus
+
+Sends a postmessage to the app with the status,
+
+-   Available for app versions 11.2 and higher
+
+```typescript
+reportStatus: ({status: 'CRITICAL' | 'GOOD' | 'BAD', reason: string, feature: string}) => Promise<void>;
+```
+
+#### Example
+
+```javascript
+import {reportStatus} from '@tef-novum/webview-bridge';
+
+reportStatus({status: 'GOOD', reason: 'whatever', feature: 'ACCOUNT'});
+```
+
 ### Error handling
 
 If an error occurs, promise will be rejected with an error object:

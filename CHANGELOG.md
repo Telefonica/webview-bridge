@@ -2,7 +2,7 @@
 
 ## v.2.1.0 - 2019-07-31
 
--   Added new function reportStatus in utils.js
+-   New function: `reportStatus`
 
 ## v.2.0.1 - 2019-06-27
 

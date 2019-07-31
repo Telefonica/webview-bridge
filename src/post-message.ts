@@ -86,6 +86,11 @@ type MessageTypeToResponseMap = {
         type: 'GET_REMOTE_CONFIG';
         payload: {result: {[s: string]: string}};
     };
+    STATUS_REPORT: {
+        id: string;
+        type: 'STATUS_REPORT';
+        payload: void;
+    };
 };
 
 type Response = MessageTypeToResponseMap[keyof MessageTypeToResponseMap];

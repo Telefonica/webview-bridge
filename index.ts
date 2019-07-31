@@ -8,6 +8,7 @@ export {
     updateNavigationBar,
     notifyPageLoaded,
     isABTestingAvailable,
+    reportStatus,
 } from './src/utils';
 export {createCalendarEvent} from './src/calendar';
 export {requestContact} from './src/contacts';

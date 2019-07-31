@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.1.0 - 2019-07-31
+
+-   Added new function reportStatus in utils.js
+
 ## v.2.0.1 - 2019-06-27
 
 -   Update TrackingEvent type for flow

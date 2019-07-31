@@ -5,6 +5,7 @@ import {
     updateNavigationBar,
     share,
     isABTestingAvailable,
+    reportStatus,
 } from '../utils';
 import {
     createFakeAndroidPostMessage,
@@ -210,6 +211,32 @@ test('request remote configuration', cb => {
     });
     isABTestingAvailable('key2').then(res => {
         expect(res).toEqual(false);
+        cb();
+    });
+});
+
+test('report account status', async cb => {
+    createFakeAndroidPostMessage({
+        checkMessage: message => {
+            expect(message.type).toBe('STATUS_REPORT');
+            expect(message.payload).toEqual({
+                feature: 'ACCOUNT',
+                status: 'GOOD',
+                reason: 'whatever reason',
+            });
+        },
+        getResponse: message => ({
+            type: message.type,
+            id: message.id,
+        }),
+    });
+
+    reportStatus({
+        feature: 'ACCOUNT',
+        status: 'GOOD',
+        reason: 'whatever reason',
+    }).then(res => {
+        expect(res).toBeUndefined();
         cb();
     });
 });

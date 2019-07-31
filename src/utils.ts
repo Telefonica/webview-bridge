@@ -101,11 +101,11 @@ export const reportStatus = ({
     status,
     reason,
 }: {
-    feature: string;
+    feature: 'ACCOUNT';
     status: 'CRITICAL' | 'GOOD' | 'BAD';
     reason: string;
 }) =>
     postMessageToNativeApp({
         type: 'STATUS_REPORT',
-        payload: {status, reason, feature},
+        payload: {feature, status, reason},
     });

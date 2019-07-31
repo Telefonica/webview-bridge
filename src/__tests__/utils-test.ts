@@ -220,9 +220,9 @@ test('report account status', async cb => {
         checkMessage: message => {
             expect(message.type).toBe('STATUS_REPORT');
             expect(message.payload).toEqual({
+                feature: 'ACCOUNT',
                 status: 'GOOD',
                 reason: 'whatever reason',
-                feature: 'whatever',
             });
         },
         getResponse: message => ({
@@ -232,9 +232,9 @@ test('report account status', async cb => {
     });
 
     reportStatus({
+        feature: 'ACCOUNT',
         status: 'GOOD',
         reason: 'whatever reason',
-        feature: 'whatever',
     }).then(res => {
         expect(res).toBeUndefined();
         cb();

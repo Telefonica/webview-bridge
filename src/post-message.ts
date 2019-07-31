@@ -89,11 +89,7 @@ type MessageTypeToResponseMap = {
     STATUS_REPORT: {
         id: string;
         type: 'STATUS_REPORT';
-        payload: {
-            status: 'CRITICAL' | 'BAD' | 'GOOD';
-            reason: string;
-            feature: string;
-        };
+        payload: void;
     };
 };
 

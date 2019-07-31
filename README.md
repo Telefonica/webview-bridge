@@ -392,12 +392,12 @@ setScreenName('Topup Flow').then(() => {
 
 ### reportStatus
 
-Sends a postmessage to the app with the status,
+Report a given feature status
 
 -   Available for app versions 11.2 and higher
 
 ```typescript
-reportStatus: ({status: 'CRITICAL' | 'GOOD' | 'BAD', reason: string, feature: string}) => Promise<void>;
+reportStatus: ({feature: 'ACCOUNT', status: 'CRITICAL' | 'GOOD' | 'BAD', reason: string}) => Promise<void>;
 ```
 
 #### Example
@@ -405,7 +405,7 @@ reportStatus: ({status: 'CRITICAL' | 'GOOD' | 'BAD', reason: string, feature: st
 ```javascript
 import {reportStatus} from '@tef-novum/webview-bridge';
 
-reportStatus({status: 'GOOD', reason: 'whatever', feature: 'ACCOUNT'});
+reportStatus({feature: 'ACCOUNT', status: 'GOOD', reason: 'whatever'});
 ```
 
 ### Error handling

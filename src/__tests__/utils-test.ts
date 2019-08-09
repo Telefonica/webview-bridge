@@ -215,6 +215,24 @@ test('request remote configuration', cb => {
     });
 });
 
+test('get remote config timeouts to false in 5s', cb => {
+    jest.useFakeTimers();
+    createFakeAndroidPostMessage({
+        checkMessage: message => {
+            expect(message.type).toBe('GET_REMOTE_CONFIG');
+            expect(message.payload).toBeUndefined();
+        },
+        getResponse: () => new Promise(() => {}), // never respond
+    });
+
+    const promise = isABTestingAvailable('any key');
+    jest.advanceTimersByTime(5000);
+    promise.then(res => {
+        expect(res).toEqual(false);
+        cb();
+    });
+});
+
 test('report account status', async cb => {
     createFakeAndroidPostMessage({
         checkMessage: message => {

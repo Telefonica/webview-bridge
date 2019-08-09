@@ -5,16 +5,16 @@ export const createFakeAndroidPostMessage = ({
     getResponse = msg => msg,
 }: {
     checkMessage?: (msg: Message) => void;
-    getResponse?: (msg: Message) => Message;
+    getResponse?: (msg: Message) => Message | Promise<Message>;
 } = {}) => {
     window.tuentiWebView = {
-        postMessage: jsonMessage => {
-            const message = JSON.parse(jsonMessage);
+        postMessage: async jsonMessage => {
+            const message: Message = JSON.parse(jsonMessage);
 
             checkMessage(message);
 
             window.__tuenti_webview_bridge!.postMessage(
-                JSON.stringify(getResponse(message)),
+                JSON.stringify(await getResponse(message)),
             );
         },
     };

@@ -231,9 +231,10 @@ test('get remote config timeouts to false in 5s', cb => {
         expect(res).toEqual(false);
         cb();
     });
+    jest.useRealTimers();
 });
 
-test('report account status', async cb => {
+test('report account status', cb => {
     createFakeAndroidPostMessage({
         checkMessage: message => {
             expect(message.type).toBe('STATUS_REPORT');

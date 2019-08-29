@@ -72,7 +72,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [nativeMessage](#nativemessage)
 -   [logEvent](#logevent)
 -   [setScreenName](#setscreenname)
--   [Error handling](#error-handling)
+-   [reportStatus](#setscreenname)
 
 ### isWebViewBridgeAvailable
 
@@ -408,7 +408,7 @@ import {reportStatus} from '@tef-novum/webview-bridge';
 reportStatus({feature: 'ACCOUNT', status: 'GOOD', reason: 'whatever'});
 ```
 
-### Error handling
+## Error handling
 
 If an error occurs, promise will be rejected with an error object:
 

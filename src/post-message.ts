@@ -239,14 +239,6 @@ export const onEvent = (handler: EventHandler) => {
                 event: message.payload.event,
             });
 
-            console.log({
-                type: 'EVENT',
-                id: message.id,
-                payload: {
-                    action: response.action || 'default',
-                },
-            });
-
             const postMessage = getWebViewPostMessage();
             if (postMessage) {
                 postMessage(

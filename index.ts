@@ -1,4 +1,4 @@
-export {isWebViewBridgeAvailable} from './src/post-message';
+export {isWebViewBridgeAvailable, onEvent} from './src/post-message';
 export {nativeConfirm, nativeAlert, nativeMessage} from './src/dialogs';
 export {requestSimIcc, requestSimImsi, requestDeviceImei} from './src/device';
 export {

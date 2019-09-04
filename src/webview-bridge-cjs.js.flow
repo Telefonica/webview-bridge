@@ -127,3 +127,7 @@ declare export function reportStatus({|
     status: 'CRITICAL' | 'BAD' | 'GOOD',
     reason: string,
 |}): Promise<void>;
+
+declare export function onNativeEvent(
+    ({event: string}) => {action: 'default'},
+): () => void;

@@ -230,9 +230,13 @@ window[BRIDGE] = window[BRIDGE] || {
     },
 };
 
-export type EventHandler = ({event}: {event: string}) => {action: 'default'};
+export type NativeEventHandler = ({
+    event,
+}: {
+    event: string;
+}) => {action: 'default'};
 
-export const onNativeEvent = (handler: EventHandler) => {
+export const onNativeEvent = (handler: NativeEventHandler) => {
     const listener: Listener = message => {
         if (message.type === 'NATIVE_EVENT') {
             const response = handler({

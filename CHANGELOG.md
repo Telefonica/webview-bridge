@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.2.0 - 2019-09.04
+
+-   New function: `onNativeEvent`
+
 ## v.2.1.0 - 2019-07-31
 
 -   New function: `reportStatus`

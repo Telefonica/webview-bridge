@@ -3,7 +3,7 @@ import {
     isWebViewBridgeAvailable,
     postMessageToNativeApp,
     onNativeEvent,
-    EventHandler,
+    NativeEventHandler,
 } from '../post-message';
 import {
     createFakeAndroidPostMessage,
@@ -125,7 +125,7 @@ test('onNativeEvent subscription', () => {
     const handler = jest.fn(({event}) => {
         expect(event).toBe(ANY_EVENT_NAME);
         return {action: 'default'};
-    }) as EventHandler;
+    }) as NativeEventHandler;
 
     const unsubscribe = onNativeEvent(handler);
 

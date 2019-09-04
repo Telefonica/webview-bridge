@@ -129,5 +129,5 @@ declare export function reportStatus({|
 |}): Promise<void>;
 
 declare export function onNativeEvent(
-    ({event: string}) => {action: 'default'},
+    ({|event: 'tappedNavigationBarBackButton'|}) => {|action: 'default'|},
 ): () => void;

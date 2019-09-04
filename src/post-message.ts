@@ -9,7 +9,7 @@ import {getId} from './message-id';
 type IncomingMessageMap = {
     // Requests
     EVENT: {
-        type: 'EVENT';
+        type: 'NATIVE_EVENT';
         id: string;
         payload: {event: string};
     };
@@ -187,7 +187,7 @@ export const postMessageToNativeApp = <T extends keyof IncomingMessageMap>(
     return new Promise((resolve, reject) => {
         let timedOut = false;
 
-        const listener = (response: IncomingMessageMap[T]): void => {
+        const listener: Listener = response => {
             if (response.id === id && !timedOut) {
                 if (response.type === type) {
                     resolve(response.payload);
@@ -232,9 +232,9 @@ window[BRIDGE] = window[BRIDGE] || {
 
 export type EventHandler = ({event}: {event: string}) => {action: 'default'};
 
-export const onEvent = (handler: EventHandler) => {
+export const onNativeEvent = (handler: EventHandler) => {
     const listener: Listener = message => {
-        if (message.type === 'EVENT') {
+        if (message.type === 'NATIVE_EVENT') {
             const response = handler({
                 event: message.payload.event,
             });
@@ -243,7 +243,7 @@ export const onEvent = (handler: EventHandler) => {
             if (postMessage) {
                 postMessage(
                     JSON.stringify({
-                        type: 'EVENT',
+                        type: 'NATIVE_EVENT',
                         id: message.id,
                         payload: {
                             action: response.action || 'default',

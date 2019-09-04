@@ -2,7 +2,7 @@ import '../post-message';
 import {
     isWebViewBridgeAvailable,
     postMessageToNativeApp,
-    onEvent,
+    onNativeEvent,
     EventHandler,
 } from '../post-message';
 import {
@@ -100,18 +100,18 @@ test('malformed json throws', () => {
     }).toThrow();
 });
 
-test('onEvent subscription', () => {
+test('onNativeEvent subscription', () => {
     const ANY_ID = '123';
     const ANY_EVENT_NAME = 'any-event-name';
 
     const request = {
-        type: 'EVENT',
+        type: 'NATIVE_EVENT',
         id: ANY_ID,
         payload: {event: ANY_EVENT_NAME},
     };
 
     const expectedResponse = {
-        type: 'EVENT',
+        type: 'NATIVE_EVENT',
         id: ANY_ID,
         payload: {action: 'default'},
     };
@@ -127,7 +127,7 @@ test('onEvent subscription', () => {
         return {action: 'default'};
     }) as EventHandler;
 
-    const unsubscribe = onEvent(handler);
+    const unsubscribe = onNativeEvent(handler);
 
     window.__tuenti_webview_bridge!.postMessage(JSON.stringify(request));
 

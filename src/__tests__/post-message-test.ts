@@ -2,6 +2,8 @@ import '../post-message';
 import {
     isWebViewBridgeAvailable,
     postMessageToNativeApp,
+    onNativeEvent,
+    NativeEventHandler,
 } from '../post-message';
 import {
     createFakeAndroidPostMessage,
@@ -96,4 +98,42 @@ test('malformed json throws', () => {
     expect(() => {
         window.__tuenti_webview_bridge!.postMessage('{bad;json}');
     }).toThrow();
+});
+
+test('onNativeEvent subscription', () => {
+    const ANY_ID = '123';
+    const ANY_EVENT_NAME = 'any-event-name';
+
+    const request = {
+        type: 'NATIVE_EVENT',
+        id: ANY_ID,
+        payload: {event: ANY_EVENT_NAME},
+    };
+
+    const expectedResponse = {
+        type: 'NATIVE_EVENT',
+        id: ANY_ID,
+        payload: {action: 'default'},
+    };
+
+    createFakeWebKitPostMessage({
+        checkMessage: msg => {
+            expect(msg).toMatchObject(expectedResponse);
+        },
+    });
+
+    const handler = jest.fn(({event}) => {
+        expect(event).toBe(ANY_EVENT_NAME);
+        return {action: 'default'};
+    }) as NativeEventHandler;
+
+    const unsubscribe = onNativeEvent(handler);
+
+    window.__tuenti_webview_bridge!.postMessage(JSON.stringify(request));
+
+    unsubscribe();
+
+    window.__tuenti_webview_bridge!.postMessage(JSON.stringify(request));
+
+    expect(handler).toHaveBeenCalledTimes(1);
 });

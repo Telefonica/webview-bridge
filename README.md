@@ -408,6 +408,34 @@ import {reportStatus} from '@tef-novum/webview-bridge';
 reportStatus({feature: 'ACCOUNT', status: 'GOOD', reason: 'whatever'});
 ```
 
+### onNativeEvent
+
+Listens to native app events
+
+-   Available for app versions 11.3 and higher
+
+```typescript
+type NativeEventHandler = ({ event }: {event: string}) => {action: 'default'};
+
+onNativeEvent: (handler: NativeEventHandler) => () => void;
+```
+
+#### Example
+
+```typescript
+onNativeEvent(({event}) => {
+    if (event === 'tappedNavigationBarBackButton') {
+        // do something
+    }
+    return {action: 'default'};
+});
+```
+
+#### Available events
+
+-   `tappedNavigationBarBackButton`: fired when the user taps on the back button
+    of the native Navigation Bar. Allowed response actions: `default`
+
 ## Error handling
 
 If an error occurs, promise will be rejected with an error object:

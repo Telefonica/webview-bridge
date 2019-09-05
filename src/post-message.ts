@@ -1,6 +1,19 @@
 import {getId} from './message-id';
 
-type MessageTypeToResponseMap = {
+/**
+ * This type map represents all the possible messages we can receive from native app
+ * Those messages can be:
+ *     - Requests: native app initiates the dialog
+ *     - Responses: native app responds to a request initiated by the web
+ */
+type IncomingMessageMap = {
+    // Requests
+    EVENT: {
+        type: 'NATIVE_EVENT';
+        id: string;
+        payload: {event: string};
+    };
+    // Responses
     SIM_ICC: {
         id: string;
         type: 'SIM_ICC';
@@ -93,7 +106,7 @@ type MessageTypeToResponseMap = {
     };
 };
 
-type Response = MessageTypeToResponseMap[keyof MessageTypeToResponseMap];
+type Response = IncomingMessageMap[keyof IncomingMessageMap];
 type Listener = (message: Response) => void;
 
 const BRIDGE = '__tuenti_webview_bridge';
@@ -149,14 +162,12 @@ export const isWebViewBridgeAvailable = (): boolean =>
     hasAndroidPostMessage() || hasWebKitPostMessage();
 
 /**
- * Send message to native app
+ * Send message to native app and waits for response
  */
-export const postMessageToNativeApp = <
-    T extends keyof MessageTypeToResponseMap
->(
+export const postMessageToNativeApp = <T extends keyof IncomingMessageMap>(
     {type, id = getId(), payload}: {type: T; id?: string; payload?: Object},
     timeout?: number,
-): Promise<MessageTypeToResponseMap[T]['payload']> => {
+): Promise<IncomingMessageMap[T]['payload']> => {
     const postMessage = getWebViewPostMessage();
 
     if (!postMessage) {
@@ -176,7 +187,7 @@ export const postMessageToNativeApp = <
     return new Promise((resolve, reject) => {
         let timedOut = false;
 
-        const listener = (response: MessageTypeToResponseMap[T]): void => {
+        const listener: Listener = response => {
             if (response.id === id && !timedOut) {
                 if (response.type === type) {
                     resolve(response.payload);
@@ -217,4 +228,38 @@ window[BRIDGE] = window[BRIDGE] || {
         }
         messageListeners.forEach(f => f(message));
     },
+};
+
+export type NativeEventHandler = ({
+    event,
+}: {
+    event: string;
+}) => {action: 'default'};
+
+export const onNativeEvent = (handler: NativeEventHandler) => {
+    const listener: Listener = message => {
+        if (message.type === 'NATIVE_EVENT') {
+            const response = handler({
+                event: message.payload.event,
+            });
+
+            const postMessage = getWebViewPostMessage();
+            if (postMessage) {
+                postMessage(
+                    JSON.stringify({
+                        type: 'NATIVE_EVENT',
+                        id: message.id,
+                        payload: {
+                            action: response.action || 'default',
+                        },
+                    }),
+                );
+            }
+        }
+    };
+    subscribe(listener);
+
+    return () => {
+        unsubscribe(listener);
+    };
 };

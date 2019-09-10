@@ -109,3 +109,19 @@ export const reportStatus = ({
         type: 'STATUS_REPORT',
         payload: {feature, status, reason},
     });
+
+export const fetch = ({
+    url,
+    method,
+    headers,
+    body,
+}: {
+    url: string;
+    method: 'GET' | 'POST';
+    headers: {[key: string]: string};
+    body: string;
+}) =>
+    postMessageToNativeApp({
+        type: 'FETCH',
+        payload: {url, method, headers, body},
+    });

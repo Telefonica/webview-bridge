@@ -104,6 +104,15 @@ type IncomingMessageMap = {
         type: 'STATUS_REPORT';
         payload: void;
     };
+    FETCH: {
+        id: string;
+        type: 'FETCH';
+        payload: {
+            status: number;
+            headers: {[key: string]: string};
+            data: string;
+        };
+    };
 };
 
 type Response = IncomingMessageMap[keyof IncomingMessageMap];

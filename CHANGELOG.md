@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## v.2.2.0 - 2019-09.04
+## v.2.3.0 - 2019-09-11
+
+-   Internal features. See `APPS-5331`
+
+## v.2.2.0 - 2019-09-04
 
 -   New function: `onNativeEvent`
 

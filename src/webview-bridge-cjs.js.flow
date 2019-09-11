@@ -138,11 +138,7 @@ declare export function fetch({|
     headers: {[string]: string, ...},
     body: string,
 |}): Promise<{|
-    id: string,
-    type: 'FETCH',
-    payload: {
-        status: number,
-        headers: {[string]: string, ...},
-        body: string,
-    },
+    status: number,
+    headers: {[string]: string, ...},
+    body: string,
 |}>;

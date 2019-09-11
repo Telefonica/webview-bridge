@@ -6,11 +6,13 @@ import {
     share,
     isABTestingAvailable,
     reportStatus,
+    fetch,
 } from '../utils';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
 } from './fake-post-message';
+import {isWebViewBridgeAvailable} from '../post-message';
 
 const ANY_STRING = 'any-string';
 
@@ -184,12 +186,11 @@ test('notify page loaded', cb => {
     });
 });
 
-test('request remote configuration', cb => {
+test('isABTestingAvailable happy case', async () => {
     const REMOTE_CONFIGURATION = {
         result: {
             key1: 'true',
             key2: 'false',
-            key3: 'true',
         },
     };
 
@@ -205,13 +206,22 @@ test('request remote configuration', cb => {
         }),
     });
 
-    isABTestingAvailable('key1').then(res => {
+    await isABTestingAvailable('key1').then(res => {
         expect(res).toEqual(true);
-        cb();
     });
-    isABTestingAvailable('key2').then(res => {
+    await isABTestingAvailable('key2').then(res => {
         expect(res).toEqual(false);
-        cb();
+    });
+});
+
+test('isABTestingAvailable without bridge', async () => {
+    expect(isWebViewBridgeAvailable()).toBe(false);
+
+    await isABTestingAvailable('key3').then(res => {
+        expect(res).toEqual(false);
+    });
+    await isABTestingAvailable('key4').then(res => {
+        expect(res).toEqual(false);
     });
 });
 
@@ -238,5 +248,51 @@ test('report account status', async cb => {
     }).then(res => {
         expect(res).toBeUndefined();
         cb();
+    });
+});
+
+test('fetch happy case', async () => {
+    const request = {
+        url: 'https://example.com',
+        method: 'GET' as 'GET',
+        headers: {key1: 'value1', key2: 'value2'},
+        body: 'hello',
+    };
+
+    const response = {
+        status: 200,
+        headers: {key3: 'value3'},
+        body: 'bye',
+    };
+
+    createFakeAndroidPostMessage({
+        checkMessage: message => {
+            expect(message.type).toBe('FETCH');
+            expect(message.payload).toEqual(request);
+        },
+        getResponse: message => ({
+            type: message.type,
+            id: message.id,
+            payload: response,
+        }),
+    });
+
+    await fetch(request).then(res => {
+        expect(res).toEqual(response);
+    });
+});
+
+test('fetch without bridge', async () => {
+    await fetch({
+        url: 'https://example.com',
+        method: 'GET' as 'GET',
+        headers: {key1: 'value1', key2: 'value2'},
+        body: 'hello',
+    }).then(res => {
+        expect(res).toEqual({
+            status: 500,
+            headers: {},
+            body: 'Bridge not available',
+        });
     });
 });

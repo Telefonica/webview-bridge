@@ -13,6 +13,7 @@ export {
     notifyPageLoaded,
     isABTestingAvailable,
     reportStatus,
+    fetch,
 } from './src/utils';
 export {createCalendarEvent} from './src/calendar';
 export {requestContact} from './src/contacts';

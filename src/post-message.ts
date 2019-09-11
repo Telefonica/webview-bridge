@@ -6,7 +6,7 @@ import {getId} from './message-id';
  *     - Requests: native app initiates the dialog
  *     - Responses: native app responds to a request initiated by the web
  */
-type IncomingMessageMap = {
+export type IncomingMessageMap = {
     // Requests
     EVENT: {
         type: 'NATIVE_EVENT';
@@ -110,7 +110,7 @@ type IncomingMessageMap = {
         payload: {
             status: number;
             headers: {[key: string]: string};
-            data: string;
+            body: string;
         };
     };
 };
@@ -178,6 +178,14 @@ export const postMessageToNativeApp = <T extends keyof IncomingMessageMap>(
     timeout?: number,
 ): Promise<IncomingMessageMap[T]['payload']> => {
     const postMessage = getWebViewPostMessage();
+    const message = JSON.stringify({type, id, payload});
+
+    if (
+        process.env.NODE_ENV !== 'test' &&
+        process.env.NODE_ENV !== 'production'
+    ) {
+        console.debug('WebView Bridge SEND>', message);
+    }
 
     if (!postMessage) {
         return Promise.reject({
@@ -185,8 +193,6 @@ export const postMessageToNativeApp = <T extends keyof IncomingMessageMap>(
             reason: 'WebView postMessage not available',
         });
     }
-
-    const message = JSON.stringify({type, id, payload});
 
     // ensure postMessage call is async
     setTimeout(() => {
@@ -229,6 +235,13 @@ export const postMessageToNativeApp = <T extends keyof IncomingMessageMap>(
  */
 window[BRIDGE] = window[BRIDGE] || {
     postMessage: (jsonMessage: string) => {
+        if (
+            process.env.NODE_ENV !== 'test' &&
+            process.env.NODE_ENV !== 'production'
+        ) {
+            console.debug('WebView Bridge RECV>', jsonMessage);
+        }
+
         let message: Response;
         try {
             message = JSON.parse(jsonMessage);

@@ -296,3 +296,32 @@ test('fetch without bridge', async () => {
         });
     });
 });
+
+test('fetch call failure', async () => {
+    const request = {
+        url: 'https://example.com',
+        method: 'GET' as 'GET',
+        headers: {key1: 'value1', key2: 'value2'},
+        body: 'hello',
+    };
+
+    createFakeAndroidPostMessage({
+        checkMessage: message => {
+            expect(message.type).toBe('FETCH');
+            expect(message.payload).toEqual(request);
+        },
+        getResponse: message => ({
+            type: 'ERROR',
+            id: message.id,
+            payload: {reason: 'Unknown'},
+        }),
+    });
+
+    await fetch(request).then(res => {
+        expect(res).toEqual({
+            status: 500,
+            headers: {},
+            body: 'Bridge call failed',
+        });
+    });
+});

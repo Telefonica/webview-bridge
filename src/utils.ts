@@ -129,7 +129,11 @@ export const fetch = ({
         return postMessageToNativeApp({
             type: 'FETCH',
             payload: {url, method, headers, body},
-        });
+        }).catch(() => ({
+            status: 500,
+            headers: {},
+            body: 'Bridge call failed',
+        }));
     }
     return Promise.resolve({
         status: 500,

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.3.3 - 2019-10-02
+
+-   Update setWebViewTitle implementation
+
 ## v.2.3.2 - 2019-10-02
 
 -   Update documentation

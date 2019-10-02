@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.3.2 - 2019-10-02
+
+-   Update documentation
+
 ## v.2.3.0 - 2019-09-11
 
 -   Internal features. See `APPS-5331`

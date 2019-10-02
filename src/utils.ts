@@ -38,18 +38,6 @@ export const share = (options: ShareOptions): Promise<void> =>
         payload: options,
     });
 
-/**
- * @deprecated
- */
-export const setWebViewTitle = (title: string): Promise<void> => {
-    if (isWebViewBridgeAvailable()) {
-        return postMessageToNativeApp({type: 'SET_TITLE', payload: {title}});
-    } else {
-        document.title = title;
-        return Promise.resolve();
-    }
-};
-
 export const updateNavigationBar = ({
     title,
     showBackButton,
@@ -75,6 +63,18 @@ export const updateNavigationBar = ({
         if (typeof title !== 'undefined') {
             document.title = title;
         }
+        return Promise.resolve();
+    }
+};
+
+/**
+ * @deprecated
+ */
+export const setWebViewTitle = (title: string): Promise<void> => {
+    if (isWebViewBridgeAvailable()) {
+        return updateNavigationBar({title});
+    } else {
+        document.title = title;
         return Promise.resolve();
     }
 };

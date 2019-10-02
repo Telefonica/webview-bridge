@@ -73,7 +73,7 @@ test('share', cb => {
 test('set webview title', cb => {
     createFakeAndroidPostMessage({
         checkMessage: message => {
-            expect(message.type).toBe('SET_TITLE');
+            expect(message.type).toBe('NAVIGATION_BAR');
             expect(message.payload).toEqual({title: ANY_STRING});
         },
         getResponse: message => ({

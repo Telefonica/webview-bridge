@@ -180,13 +180,6 @@ export const postMessageToNativeApp = <T extends keyof IncomingMessageMap>(
     const postMessage = getWebViewPostMessage();
     const message = JSON.stringify({type, id, payload});
 
-    if (
-        process.env.NODE_ENV !== 'test' &&
-        process.env.NODE_ENV !== 'production'
-    ) {
-        console.debug('WebView Bridge SEND>', message);
-    }
-
     if (!postMessage) {
         return Promise.reject({
             code: 500,
@@ -235,13 +228,6 @@ export const postMessageToNativeApp = <T extends keyof IncomingMessageMap>(
  */
 window[BRIDGE] = window[BRIDGE] || {
     postMessage: (jsonMessage: string) => {
-        if (
-            process.env.NODE_ENV !== 'test' &&
-            process.env.NODE_ENV !== 'production'
-        ) {
-            console.debug('WebView Bridge RECV>', jsonMessage);
-        }
-
         let message: Response;
         try {
             message = JSON.parse(jsonMessage);

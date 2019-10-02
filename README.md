@@ -95,6 +95,24 @@ if (isWebViewBridgeAvailable()) {
 }
 ```
 
+You may want to detect if the page is displayed inside a regular browser or an
+Android or iOS WebView.
+
+```javascript
+import {isWebViewBridgeAvailable} from '@tef-novum/webview-bridge';
+
+/** Returns true if application is running inside a Novum App WebView */
+const isWebView = () => isWebViewBridgeAvailable();
+
+/** Returns true if application is running inside a Novum App WebView running on Android */
+const isAndroidWebView = () =>
+    isWebViewBridgeAvailable() && navigator.userAgent.includes('Android');
+
+/** Returns true if application is running inside a Novum App WebView running on iOS */
+const isIOSWebView = () =>
+    isWebViewBridgeAvailable() && !navigator.userAgent.includes('Android');
+```
+
 ### requestContact
 
 Show native picker UI in order to let the user select a contact.

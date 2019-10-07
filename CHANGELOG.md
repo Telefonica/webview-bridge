@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.3.4 - 2019-10-07
+
+-   Add 500ms timeout to remote config
+
 ## v.2.3.3 - 2019-10-02
 
 -   Update setWebViewTitle implementation

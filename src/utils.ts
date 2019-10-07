@@ -91,10 +91,21 @@ const isRemoteConfigAvailable = (key: string) =>
 
 export const isABTestingAvailable = (key: string): Promise<boolean> => {
     if (!remoteConfig) {
-        return postMessageToNativeApp({type: 'GET_REMOTE_CONFIG'}).then(res => {
+        // If GET_REMOTE_CONFIG takes more than 5s to respond, resolve to false
+        const timeoutP = new Promise<boolean>(resolve => {
+            setTimeout(() => {
+                resolve(false);
+            }, 500);
+        });
+
+        const configP = postMessageToNativeApp({
+            type: 'GET_REMOTE_CONFIG',
+        }).then(res => {
             remoteConfig = res;
             return isRemoteConfigAvailable(key);
         });
+
+        return Promise.race([timeoutP, configP]);
     } else {
         return Promise.resolve(isRemoteConfigAvailable(key));
     }

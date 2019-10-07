@@ -72,7 +72,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [nativeMessage](#nativemessage)
 -   [logEvent](#logevent)
 -   [setScreenName](#setscreenname)
--   [Error handling](#error-handling)
+-   [reportStatus](#setscreenname)
 
 ### isWebViewBridgeAvailable
 
@@ -93,6 +93,24 @@ if (isWebViewBridgeAvailable()) {
 } else {
     myCustomAlert('Hello'); // use alternative implementation
 }
+```
+
+You may want to detect if the page is displayed inside a regular browser or an
+Android or iOS WebView.
+
+```javascript
+import {isWebViewBridgeAvailable} from '@tef-novum/webview-bridge';
+
+/** Returns true if application is running inside a Novum App WebView */
+const isWebView = () => isWebViewBridgeAvailable();
+
+/** Returns true if application is running inside a Novum App WebView running on Android */
+const isAndroidWebView = () =>
+    isWebViewBridgeAvailable() && navigator.userAgent.includes('Android');
+
+/** Returns true if application is running inside a Novum App WebView running on iOS */
+const isIOSWebView = () =>
+    isWebViewBridgeAvailable() && !navigator.userAgent.includes('Android');
 ```
 
 ### requestContact
@@ -408,7 +426,35 @@ import {reportStatus} from '@tef-novum/webview-bridge';
 reportStatus({feature: 'ACCOUNT', status: 'GOOD', reason: 'whatever'});
 ```
 
-### Error handling
+### onNativeEvent
+
+Listens to native app events
+
+-   Available for app versions 11.3 and higher
+
+```typescript
+type NativeEventHandler = ({ event }: {event: string}) => {action: 'default'};
+
+onNativeEvent: (handler: NativeEventHandler) => () => void;
+```
+
+#### Example
+
+```typescript
+onNativeEvent(({event}) => {
+    if (event === 'tappedNavigationBarBackButton') {
+        // do something
+    }
+    return {action: 'default'};
+});
+```
+
+#### Available events
+
+-   `tappedNavigationBarBackButton`: fired when the user taps on the back button
+    of the native Navigation Bar. Allowed response actions: `default`
+
+## Error handling
 
 If an error occurs, promise will be rejected with an error object:
 

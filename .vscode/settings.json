@@ -1,7 +1,6 @@
 {
     "javascript.validate.enable": false,
-    "eslint.validate": [
-        "typescript"
-    ],
-    "typescript.tsdk": "node_modules/typescript/lib"
+    "eslint.validate": ["typescript"],
+    "typescript.tsdk": "node_modules/typescript/lib",
+    "editor.formatOnSave": true
 }

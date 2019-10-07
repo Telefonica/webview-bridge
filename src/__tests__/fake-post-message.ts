@@ -2,7 +2,7 @@ type Message = {id: string; type: string; payload?: any};
 
 export const createFakeAndroidPostMessage = ({
     checkMessage = () => {},
-    getResponse = msg => msg,
+    getResponse,
 }: {
     checkMessage?: (msg: Message) => void;
     getResponse?: (msg: Message) => Message | Promise<Message>;
@@ -13,16 +13,18 @@ export const createFakeAndroidPostMessage = ({
 
             checkMessage(message);
 
-            window.__tuenti_webview_bridge!.postMessage(
-                JSON.stringify(await getResponse(message)),
-            );
+            if (getResponse) {
+                window.__tuenti_webview_bridge!.postMessage(
+                    JSON.stringify(await getResponse(message)),
+                );
+            }
         },
     };
 };
 
 export const createFakeWebKitPostMessage = ({
     checkMessage = () => {},
-    getResponse = msg => msg,
+    getResponse,
 }: {
     checkMessage?: (msg: Message) => void;
     getResponse?: (msg: Message) => Message;
@@ -35,9 +37,11 @@ export const createFakeWebKitPostMessage = ({
 
                     checkMessage(message);
 
-                    window.__tuenti_webview_bridge!.postMessage(
-                        JSON.stringify(getResponse(message)),
-                    );
+                    if (getResponse) {
+                        window.__tuenti_webview_bridge!.postMessage(
+                            JSON.stringify(getResponse(message)),
+                        );
+                    }
                 },
             },
         },

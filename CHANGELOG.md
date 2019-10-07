@@ -1,5 +1,21 @@
 # CHANGELOG
 
+## v.2.3.3 - 2019-10-02
+
+-   Update setWebViewTitle implementation
+
+## v.2.3.2 - 2019-10-02
+
+-   Update documentation
+
+## v.2.3.0 - 2019-09-11
+
+-   Internal features. See `APPS-5331`
+
+## v.2.2.0 - 2019-09-04
+
+-   New function: `onNativeEvent`
+
 ## v.2.1.0 - 2019-07-31
 
 -   New function: `reportStatus`

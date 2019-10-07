@@ -127,3 +127,18 @@ declare export function reportStatus({|
     status: 'CRITICAL' | 'BAD' | 'GOOD',
     reason: string,
 |}): Promise<void>;
+
+declare export function onNativeEvent(
+    ({|event: 'tappedNavigationBarBackButton'|}) => {|action: 'default'|},
+): () => void;
+
+declare export function fetch({|
+    url: string,
+    method: 'GET' | 'POST',
+    headers: {[string]: string, ...},
+    body: string,
+|}): Promise<{|
+    status: number,
+    headers: {[string]: string, ...},
+    body: string,
+|}>;

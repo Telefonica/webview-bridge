@@ -11,5 +11,10 @@ module.exports = {
     testMatch: ['**/__tests__/*-test.ts'],
     preset: 'ts-jest/presets/js-with-ts',
     collectCoverage: true,
-    collectCoverageFrom: ['**/src/*.{ts}', '!**/__tests__/**', '!**/dist/**'],
+    collectCoverageFrom: [
+        '**/src/*.ts',
+        '!**/src/*d.ts',
+        '!**/__tests__/**',
+        '!**/dist/**',
+    ],
 };

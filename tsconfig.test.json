@@ -1,0 +1,13 @@
+{
+    "compilerOptions": {
+        "alwaysStrict": true,
+        "module": "ESNext",
+        "strict": true,
+        "target": "es5",
+        "lib": ["es2018", "dom"],
+        "declaration": true,
+        "downlevelIteration": true,
+        "esModuleInterop": true,
+        "inlineSourceMap": true
+    }
+}

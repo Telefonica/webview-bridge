@@ -1,4 +1,8 @@
-export {isWebViewBridgeAvailable} from './src/post-message';
+export {
+    isWebViewBridgeAvailable,
+    onNativeEvent,
+    NativeEventHandler,
+} from './src/post-message';
 export {nativeConfirm, nativeAlert, nativeMessage} from './src/dialogs';
 export {requestSimIcc, requestSimImsi, requestDeviceImei} from './src/device';
 export {
@@ -9,6 +13,7 @@ export {
     notifyPageLoaded,
     isABTestingAvailable,
     reportStatus,
+    fetch,
 } from './src/utils';
 export {createCalendarEvent} from './src/calendar';
 export {requestContact} from './src/contacts';

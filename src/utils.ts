@@ -1,4 +1,8 @@
-import {postMessageToNativeApp, isWebViewBridgeAvailable} from './post-message';
+import {
+    postMessageToNativeApp,
+    isWebViewBridgeAvailable,
+    IncomingMessageMap,
+} from './post-message';
 
 export const attachToEmail = ({
     url,
@@ -34,18 +38,6 @@ export const share = (options: ShareOptions): Promise<void> =>
         payload: options,
     });
 
-/**
- * @deprecated
- */
-export const setWebViewTitle = (title: string): Promise<void> => {
-    if (isWebViewBridgeAvailable()) {
-        return postMessageToNativeApp({type: 'SET_TITLE', payload: {title}});
-    } else {
-        document.title = title;
-        return Promise.resolve();
-    }
-};
-
 export const updateNavigationBar = ({
     title,
     showBackButton,
@@ -71,6 +63,18 @@ export const updateNavigationBar = ({
         if (typeof title !== 'undefined') {
             document.title = title;
         }
+        return Promise.resolve();
+    }
+};
+
+/**
+ * @deprecated
+ */
+export const setWebViewTitle = (title: string): Promise<void> => {
+    if (isWebViewBridgeAvailable()) {
+        return updateNavigationBar({title});
+    } else {
+        document.title = title;
         return Promise.resolve();
     }
 };
@@ -120,3 +124,31 @@ export const reportStatus = ({
         type: 'STATUS_REPORT',
         payload: {feature, status, reason},
     });
+
+export const fetch = ({
+    url,
+    method,
+    headers,
+    body,
+}: {
+    url: string;
+    method: 'GET' | 'POST';
+    headers: {[key: string]: string};
+    body: string;
+}): Promise<IncomingMessageMap['FETCH']['payload']> => {
+    if (isWebViewBridgeAvailable()) {
+        return postMessageToNativeApp({
+            type: 'FETCH',
+            payload: {url, method, headers, body},
+        }).catch(() => ({
+            status: 500,
+            headers: {},
+            body: 'Bridge call failed',
+        }));
+    }
+    return Promise.resolve({
+        status: 500,
+        headers: {},
+        body: 'Bridge not available',
+    });
+};

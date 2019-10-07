@@ -95,7 +95,7 @@ export const isABTestingAvailable = (key: string): Promise<boolean> => {
         const timeoutP = new Promise<boolean>(resolve => {
             setTimeout(() => {
                 resolve(false);
-            }, 5000);
+            }, 500);
         });
 
         const configP = postMessageToNativeApp({

@@ -242,7 +242,7 @@ setWebViewTitle('My new title');
 
 ### updateNavigationBar
 
-Customize NavigationBar properties
+Customize WebView NavigationBar properties
 
 -   You can set one or more properties in a single call
 -   Available for app versions 10.7 and higher

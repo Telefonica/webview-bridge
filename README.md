@@ -244,6 +244,11 @@ setWebViewTitle('My new title');
 
 Customize NavigationBar properties
 
+-   You can set one or more properties in a single call
+-   Available for app versions 10.7 and higher
+-   Returning promise will be rejected if not supported (app versions lower than
+    10.7)
+
 ```typescript
 updateNavigationBar = ({
     title?: string;
@@ -255,18 +260,15 @@ updateNavigationBar = ({
 
 -   `title`: updates NavigationBar title
 -   `showBackButton`: shows or hides NavigationBar Back button
--   `showReloadButton`: shows or hides NavigationBar Beload button
+-   `showReloadButton`: shows or hides NavigationBar Reload button
 -   `backgroundColor`: change NavigationBar background color, use a hex color
     string (for example: `'#FF128A'`)
-
--   You can set one or more properties in a single call
--   Available for app versions 10.7 and higher
--   Returning promise will be rejected if not supported (app versions lower than
-    10.7)
 
 #### Examples
 
 ```javascript
+import {updateNavigationBar} from '@tef-novum/webview-bridge';
+
 // updates WebView NavigationBar title
 updateNavigationBar({title: 'Hello, World!'});
 

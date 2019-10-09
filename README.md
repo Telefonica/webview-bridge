@@ -67,6 +67,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [createCalendarEvent](#createcalendarevent)
 -   [share](#share)
 -   [setWebViewTitle](#setwebviewtitle)
+-   [updateNavigationBar](#updateNavigationBar)
 -   [nativeConfirm](#nativeconfirm)
 -   [nativeAlert](#nativealert)
 -   [nativeMessage](#nativemessage)
@@ -237,6 +238,45 @@ setWebViewTitle: (title: string) => Promise<void>;
 import {setWebViewTitle} from '@tef-novum/webview-bridge';
 
 setWebViewTitle('My new title');
+```
+
+### updateNavigationBar
+
+Customize NavigationBar properties
+
+```typescript
+updateNavigationBar = ({
+    title?: string;
+    showBackButton?: boolean;
+    showReloadButton?: boolean;
+    backgroundColor?: string;
+}) => Promise<void>
+```
+
+-   `title`: updates NavigationBar title
+-   `showBackButton`: shows or hides NavigationBar Back button
+-   `showReloadButton`: shows or hides NavigationBar Beload button
+-   `backgroundColor`: change NavigationBar background color, use a hex color
+    string (for example: `'#FF128A'`)
+
+-   You can set one or more properties in a single call
+-   Available for app versions 10.7 and higher
+-   Returning promise will be rejected if not supported (app versions lower than
+    10.7)
+
+#### Examples
+
+```javascript
+// updates WebView NavigationBar title
+updateNavigationBar({title: 'Hello, World!'});
+
+// full featured example
+updateNavigationBar({
+    title: 'Hello',
+    showBackButton: true,
+    showReloadButton: false,
+    backgroundColor: '#FF0000', // red
+});
 ```
 
 ### isABTestingAvailable

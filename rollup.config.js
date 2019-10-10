@@ -11,7 +11,7 @@ export default {
         {
             file: 'dist/webview-bridge-amd.js',
             format: 'amd',
-            name: 'ReconnectingWebSocket',
+            name: 'webviewBridge',
         },
         {
             file: 'dist/webview-bridge-cjs.js',

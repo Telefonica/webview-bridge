@@ -66,7 +66,6 @@ Alternatively, you can import the library directly from a CDN:
 -   [requestContact](#requestcontact)
 -   [createCalendarEvent](#createcalendarevent)
 -   [share](#share)
--   [setWebViewTitle](#setwebviewtitle)
 -   [updateNavigationBar](#updateNavigationBar)
 -   [nativeConfirm](#nativeconfirm)
 -   [nativeAlert](#nativealert)
@@ -221,23 +220,6 @@ share({text: 'Hello, world!'});
 
 // sharing a file
 share({url: 'https://path/to/file', fileName: 'lolcats.png'});
-```
-
-### setWebViewTitle
-
-Update webview title. If the bridge is not present, automatically fallbacks to a
-`document.title` update.
-
-```typescript
-setWebViewTitle: (title: string) => Promise<void>;
-```
-
-#### Example
-
-```javascript
-import {setWebViewTitle} from '@tef-novum/webview-bridge';
-
-setWebViewTitle('My new title');
 ```
 
 ### updateNavigationBar

@@ -496,6 +496,49 @@ onNativeEvent(({event}) => {
 -   `tappedNavigationBarBackButton`: fired when the user taps on the back button
     of the native Navigation Bar. Allowed response actions: `default`
 
+### hasNotificationsPermissions
+
+Returns true if the app has notifications permissions.
+
+-   Available for app versions 11.4 and higher
+
+```typescript
+hasNotificationsPermissions: () => Promise<boolean>;
+```
+
+#### Example
+
+```javascript
+import {hasNotificationsPermissions} from '@tef-novum/webview-bridge';
+
+hasNotificationsPermissions().then((hasNotifications) => {
+    console.log(hasNotifications);
+}).catch(err => {
+    console.error(err);
+};
+```
+
+### internalNavigation
+
+Init a internal and native navigation to a feature specific of a device
+
+-   Available for app versions 11.4 and higher
+
+```typescript
+internalNavigation: (feature: string) => Promise<void>;
+```
+
+#### Example
+
+```javascript
+import {internalNavigation} from '@tef-novum/webview-bridge';
+
+internalNavigation('notification-settings')
+.catch(err => {
+    console.error(err);
+};
+```
+
 ## Error handling
 
 If an error occurs, promise will be rejected with an error object:

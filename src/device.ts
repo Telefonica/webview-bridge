@@ -16,3 +16,12 @@ export const requestDeviceImei = (): Promise<string | null> =>
     postMessageToNativeApp({type: 'IMEI'}, TIMEOUT)
         .then(({imei}) => imei)
         .catch(() => null);
+
+export const internalNavigation = (feature: string): Promise<void> => {
+    return postMessageToNativeApp({
+        type: 'INTERNAL_NAVIGATION',
+        payload: {
+            feature,
+        },
+    });
+};

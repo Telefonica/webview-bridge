@@ -4,7 +4,12 @@ export {
     NativeEventHandler,
 } from './src/post-message';
 export {nativeConfirm, nativeAlert, nativeMessage} from './src/dialogs';
-export {requestSimIcc, requestSimImsi, requestDeviceImei} from './src/device';
+export {
+    requestSimIcc,
+    requestSimImsi,
+    requestDeviceImei,
+    internalNavigation,
+} from './src/device';
 export {
     attachToEmail,
     share,
@@ -26,3 +31,4 @@ export {
     CD_NOVUM_UID,
     CD_EVENT_VALUE,
 } from './src/analytics';
+export {hasNotificationsPermissions} from './src/permission-status';

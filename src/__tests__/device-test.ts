@@ -1,4 +1,9 @@
-import {requestSimIcc, requestSimImsi, requestDeviceImei} from '../device';
+import {
+    requestSimIcc,
+    requestSimImsi,
+    requestDeviceImei,
+    internalNavigation,
+} from '../device';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -108,6 +113,25 @@ test('request device imei (failed)', async cb => {
 
     requestDeviceImei().then(res => {
         expect(res).toBeNull();
+        cb();
+    });
+});
+
+test('internal navigation', async cb => {
+    createFakeAndroidPostMessage({
+        checkMessage: msg => {
+            expect(msg.type).toBe('INTERNAL_NAVIGATION');
+            expect(msg.payload.feature).toBe('notification-settings');
+        },
+        getResponse: msg => ({
+            type: 'INTERNAL_NAVIGATION',
+            id: msg.id,
+        }),
+    });
+
+    internalNavigation('notification-settings').then(res => {
+        expect(res).toBeUndefined();
+        removeFakeAndroidPostMessage();
         cb();
     });
 });

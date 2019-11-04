@@ -19,7 +19,6 @@ export {
     isABTestingAvailable,
     reportStatus,
     fetch,
-    check,
     checkPermissionStatus,
 } from './src/utils';
 export {createCalendarEvent} from './src/calendar';

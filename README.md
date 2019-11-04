@@ -503,7 +503,7 @@ pass feature and required params for this request.
 
 -   Available for app versions 11.4 and higher
 
-You have these features avalaibles:
+Avalaible features:
 
 -   `notifications`
 
@@ -516,11 +516,11 @@ checkPermissionStatus: (feature: string, params?: {[key: string]: string},) => P
 ```javascript
 import {checkPermissionStatus} from '@tef-novum/webview-bridge';
 
-checkPermissionStatus('notifications',{channelId: 'default'}).then((hasPermissions) => {
-    console.log(hasPermissions);
-}).catch(err => {
-    console.error(err);
-};
+checkPermissionStatus('notifications', {channelId: 'default'}).then(
+    hasPermissions => {
+        console.log(hasPermissions);
+    },
+);
 ```
 
 ### internalNavigation
@@ -529,7 +529,7 @@ Init an internal and native navigation to a device specific feature
 
 -   Available for app versions 11.4 and higher
 
-You have these features avalaibles:
+Avalaible features:
 
 -   `notification-settings`
 
@@ -542,10 +542,7 @@ internalNavigation: (feature: string) => Promise<void>;
 ```javascript
 import {internalNavigation} from '@tef-novum/webview-bridge';
 
-internalNavigation('notification-settings')
-.catch(err => {
-    console.error(err);
-};
+internalNavigation('notification-settings');
 ```
 
 ## Error handling

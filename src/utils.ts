@@ -153,23 +153,16 @@ export const fetch = ({
     });
 };
 
-const TIMEOUT = 200;
-
 type PermissionsStatus = 'notifications';
 
 export const checkPermissionStatus = (
     feature: PermissionsStatus,
     params?: {[key: string]: string},
 ): Promise<boolean> =>
-    postMessageToNativeApp(
-        {
-            type: 'OS_PERMISSION_STATUS',
-            payload: {
-                feature,
-                params: params,
-            },
+    postMessageToNativeApp({
+        type: 'OS_PERMISSION_STATUS',
+        payload: {
+            feature,
+            params: params,
         },
-        TIMEOUT,
-    )
-        .then(({granted}) => granted)
-        .catch(() => false);
+    }).then(({granted}) => granted);

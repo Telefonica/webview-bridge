@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.2.4.0 - 2019-11-04
+
+-   New function: `checkPermissionStatus`
+-   New function: `internalNavigation`
+
 ## v.2.3.4 - 2019-10-07
 
 -   Add 500ms timeout to remote config

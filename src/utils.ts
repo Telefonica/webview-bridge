@@ -152,3 +152,17 @@ export const fetch = ({
         body: 'Bridge not available',
     });
 };
+
+type PermissionsStatus = 'notifications';
+
+export const checkPermissionStatus = (
+    feature: PermissionsStatus,
+    params?: {[key: string]: string},
+): Promise<boolean> =>
+    postMessageToNativeApp({
+        type: 'OS_PERMISSION_STATUS',
+        payload: {
+            feature,
+            params: params,
+        },
+    }).then(({granted}) => granted);

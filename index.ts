@@ -4,7 +4,12 @@ export {
     NativeEventHandler,
 } from './src/post-message';
 export {nativeConfirm, nativeAlert, nativeMessage} from './src/dialogs';
-export {requestSimIcc, requestSimImsi, requestDeviceImei} from './src/device';
+export {
+    requestSimIcc,
+    requestSimImsi,
+    requestDeviceImei,
+    internalNavigation,
+} from './src/device';
 export {
     attachToEmail,
     share,
@@ -14,6 +19,7 @@ export {
     isABTestingAvailable,
     reportStatus,
     fetch,
+    checkPermissionStatus,
 } from './src/utils';
 export {createCalendarEvent} from './src/calendar';
 export {requestContact} from './src/contacts';

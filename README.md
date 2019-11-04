@@ -478,6 +478,55 @@ onNativeEvent(({event}) => {
 -   `tappedNavigationBarBackButton`: fired when the user taps on the back button
     of the native Navigation Bar. Allowed response actions: `default`
 
+### checkPermissionStatus
+
+Returns true if the app has the specific notifications permissions. You have to
+pass feature and required params for this request.
+
+-   Available for app versions 11.4 and higher
+
+Avalaible features:
+
+-   `notifications`
+
+```typescript
+checkPermissionStatus: (feature: string, params?: {[key: string]: string},) => Promise<boolean>;
+```
+
+#### Example
+
+```javascript
+import {checkPermissionStatus} from '@tef-novum/webview-bridge';
+
+checkPermissionStatus('notifications', {channelId: 'default'}).then(
+    hasPermissions => {
+        console.log(hasPermissions);
+    },
+);
+```
+
+### internalNavigation
+
+Init an internal and native navigation to a device specific feature
+
+-   Available for app versions 11.4 and higher
+
+Avalaible features:
+
+-   `notification-settings`
+
+```typescript
+internalNavigation: (feature: string) => Promise<void>;
+```
+
+#### Example
+
+```javascript
+import {internalNavigation} from '@tef-novum/webview-bridge';
+
+internalNavigation('notification-settings');
+```
+
 ## Error handling
 
 If an error occurs, promise will be rejected with an error object:

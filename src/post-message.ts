@@ -113,6 +113,18 @@ export type IncomingMessageMap = {
             body: string;
         };
     };
+    OS_PERMISSION_STATUS: {
+        id: string;
+        type: 'OS_PERMISSION_STATUS';
+        payload: {
+            granted: boolean;
+        };
+    };
+    INTERNAL_NAVIGATION: {
+        type: 'INTERNAL_NAVIGATION';
+        id: string;
+        payload: void;
+    };
 };
 
 type Response = IncomingMessageMap[keyof IncomingMessageMap];

@@ -145,4 +145,7 @@ declare export function fetch({|
     body: string,
 |}>;
 
-declare export function hasNotificationsPermissions(): Promise<boolean>;
+declare export function checkPermissionStatus(
+    feature: string,
+    params?: {[string]: string},
+): Promise<boolean>;

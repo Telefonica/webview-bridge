@@ -19,6 +19,8 @@ export {
     isABTestingAvailable,
     reportStatus,
     fetch,
+    check,
+    checkPermissionStatus,
 } from './src/utils';
 export {createCalendarEvent} from './src/calendar';
 export {requestContact} from './src/contacts';
@@ -31,4 +33,3 @@ export {
     CD_NOVUM_UID,
     CD_EVENT_VALUE,
 } from './src/analytics';
-export {hasNotificationsPermissions} from './src/permission-status';

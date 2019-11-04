@@ -503,6 +503,10 @@ pass feature and required params for this request.
 
 -   Available for app versions 11.4 and higher
 
+You have these features avalaibles:
+
+-   `notifications`
+
 ```typescript
 checkPermissionStatus: (feature: string, params?: {[key: string]: string},) => Promise<boolean>;
 ```
@@ -524,6 +528,10 @@ checkPermissionStatus('notifications',{channelId: 'default'}).then((hasPermissio
 Init an internal and native navigation to a device specific feature
 
 -   Available for app versions 11.4 and higher
+
+You have these features avalaibles:
+
+-   `notification-settings`
 
 ```typescript
 internalNavigation: (feature: string) => Promise<void>;

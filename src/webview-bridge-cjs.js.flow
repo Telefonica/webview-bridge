@@ -65,7 +65,9 @@ declare export function requestSimImsi(): Promise<string | null>;
 
 declare export function requestDeviceImei(): Promise<string | null>;
 
-declare export function internalNavigation(feature: string): Promise<void>;
+declare export function internalNavigation(
+    feature: 'notification-settings',
+): Promise<void>;
 
 // dialogs
 declare export function nativeConfirm({|
@@ -146,6 +148,6 @@ declare export function fetch({|
 |}>;
 
 declare export function checkPermissionStatus(
-    feature: string,
+    feature: 'notifications',
     params?: {[string]: string},
 ): Promise<boolean>;

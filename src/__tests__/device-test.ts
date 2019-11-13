@@ -3,6 +3,7 @@ import {
     requestSimImsi,
     requestDeviceImei,
     internalNavigation,
+    dismiss,
 } from '../device';
 import {
     createFakeAndroidPostMessage,
@@ -130,6 +131,25 @@ test('internal navigation', async cb => {
     });
 
     internalNavigation('notification-settings').then(res => {
+        expect(res).toBeUndefined();
+        removeFakeAndroidPostMessage();
+        cb();
+    });
+});
+
+test('dismiss', async cb => {
+    createFakeAndroidPostMessage({
+        checkMessage: msg => {
+            expect(msg.type).toBe('DISMISS');
+            expect(msg.payload.onCompletionUrl).toBe('http://example.com');
+        },
+        getResponse: msg => ({
+            type: 'DISMISS',
+            id: msg.id,
+        }),
+    });
+
+    dismiss('http://example.com').then(res => {
         expect(res).toBeUndefined();
         removeFakeAndroidPostMessage();
         cb();

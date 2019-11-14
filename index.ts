@@ -9,6 +9,7 @@ export {
     requestSimImsi,
     requestDeviceImei,
     internalNavigation,
+    dismiss,
 } from './src/device';
 export {
     attachToEmail,

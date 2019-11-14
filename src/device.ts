@@ -26,3 +26,11 @@ export const internalNavigation = (feature: RoutesAvalaible): Promise<void> =>
             feature,
         },
     });
+
+export const dismiss = (onCompletionUrl?: string): Promise<void> =>
+    postMessageToNativeApp({
+        type: 'DISMISS',
+        payload: {
+            onCompletionUrl,
+        },
+    });

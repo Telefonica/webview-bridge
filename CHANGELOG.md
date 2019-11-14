@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.5.0 - 2019-11-14
+
+-   New function: `dismiss`
+
 ## v.2.4.0 - 2019-11-04
 
 -   New function: `checkPermissionStatus`

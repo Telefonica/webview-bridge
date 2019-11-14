@@ -72,7 +72,10 @@ Alternatively, you can import the library directly from a CDN:
 -   [nativeMessage](#nativemessage)
 -   [logEvent](#logevent)
 -   [setScreenName](#setscreenname)
--   [reportStatus](#setscreenname)
+-   [reportStatus](#reportStatus)
+-   [checkPermissionStatus](#checkPermissionStatus)
+-   [internalNavigation](#internalNavigation)
+-   [dismiss](#dismiss)
 
 ### isWebViewBridgeAvailable
 
@@ -525,6 +528,24 @@ internalNavigation: (feature: string) => Promise<void>;
 import {internalNavigation} from '@tef-novum/webview-bridge';
 
 internalNavigation('notification-settings');
+```
+
+### dismiss
+
+Dismiss the current webview and optionally navigate to another url
+
+-   Available for app versions 11.5 and higher
+
+```typescript
+dismiss: (onCompletionUrl?: string) => Promise<void>;
+```
+
+#### Example
+
+```javascript
+import {dismiss} from '@tef-novum/webview-bridge';
+
+dismiss('http://example.com');
 ```
 
 ## Error handling

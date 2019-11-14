@@ -125,6 +125,11 @@ export type IncomingMessageMap = {
         id: string;
         payload: void;
     };
+    DISMISS: {
+        type: 'DISMISS';
+        id: string;
+        payload: void;
+    };
 };
 
 type Response = IncomingMessageMap[keyof IncomingMessageMap];

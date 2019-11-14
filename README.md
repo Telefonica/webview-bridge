@@ -537,7 +537,7 @@ Dismiss the current webview and optionally navigate to another url
 -   Available for app versions 11.5 and higher
 
 ```typescript
-dismiss: (onCompletion: string) => Promise<void>;
+dismiss: (onCompletionUrl?: string) => Promise<void>;
 ```
 
 #### Example

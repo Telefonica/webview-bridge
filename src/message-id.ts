@@ -1,3 +1,3 @@
 let id = 1;
 
-export const getId = (): string => `${id++}`;
+export const getId = (): string => `webapp-${id++}`;

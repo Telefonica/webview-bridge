@@ -130,6 +130,11 @@ export type IncomingMessageMap = {
         id: string;
         payload: void;
     };
+    VIBRATION: {
+        type: 'VIBRATION';
+        id: string;
+        payload: void;
+    };
 };
 
 type Response = IncomingMessageMap[keyof IncomingMessageMap];

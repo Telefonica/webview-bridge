@@ -1,6 +1,6 @@
 .node_repl_history
 .nyc_output
-.nyc_output
+.idea
 .rpt2_cache
 coverage
 node_modules

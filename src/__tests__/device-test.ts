@@ -4,6 +4,7 @@ import {
     requestDeviceImei,
     internalNavigation,
     dismiss,
+    requestVibration,
 } from '../device';
 import {
     createFakeAndroidPostMessage,
@@ -154,4 +155,22 @@ test('dismiss', async cb => {
         removeFakeAndroidPostMessage();
         cb();
     });
+});
+
+test('requestVibration', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: msg => {
+            expect(msg.type).toBe('VIBRATION');
+            expect(msg.payload.type).toBe('success');
+        },
+        getResponse: msg => ({
+            type: 'VIBRATION',
+            id: msg.id,
+        }),
+    });
+
+    const res = await requestVibration('success');
+
+    expect(res).toBeUndefined();
+    removeFakeAndroidPostMessage();
 });

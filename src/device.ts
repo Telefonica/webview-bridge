@@ -35,9 +35,7 @@ export const dismiss = (onCompletionUrl?: string): Promise<void> =>
         },
     });
 
-type VibrationsAvailable = 'error' | 'success';
-
-export const requestVibration = (type: VibrationsAvailable): Promise<void> =>
+export const requestVibration = (type: 'error' | 'success'): Promise<void> =>
     postMessageToNativeApp({
         type: 'VIBRATION',
         payload: {

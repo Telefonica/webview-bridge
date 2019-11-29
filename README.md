@@ -548,6 +548,16 @@ import {dismiss} from '@tef-novum/webview-bridge';
 dismiss('http://example.com');
 ```
 
+### requestVibration
+
+Requests the phone to vibrate. Options are 'error' or 'success'.
+
+```javascript
+import {requestVibration} from '@tef-novum/webview-bridge';
+
+requestVibration('error');
+```
+
 ## Error handling
 
 If an error occurs, promise will be rejected with an error object:

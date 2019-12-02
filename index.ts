@@ -10,6 +10,7 @@ export {
     requestDeviceImei,
     internalNavigation,
     dismiss,
+    requestVibration,
 } from './src/device';
 export {
     attachToEmail,

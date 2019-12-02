@@ -34,3 +34,11 @@ export const dismiss = (onCompletionUrl?: string): Promise<void> =>
             onCompletionUrl,
         },
     });
+
+export const requestVibration = (type: 'error' | 'success'): Promise<void> =>
+    postMessageToNativeApp({
+        type: 'VIBRATION',
+        payload: {
+            type,
+        },
+    });

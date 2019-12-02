@@ -65,6 +65,8 @@ declare export function requestSimImsi(): Promise<string | null>;
 
 declare export function requestDeviceImei(): Promise<string | null>;
 
+declare export function requestVibration(type: 'error' | 'success'): Promise<null>
+
 declare export function internalNavigation(
     feature: 'notification-settings',
 ): Promise<void>;

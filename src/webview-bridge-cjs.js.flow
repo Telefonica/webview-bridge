@@ -57,6 +57,19 @@ declare export function requestContact(
     },
 |}>;
 
+declare export function matchContactData(
+    numbers: Array<string>,
+): Promise<{|
+    matches: {
+        [key: string]: {
+            name?: string,
+            middleName?: string,
+            surname?: string,
+            encodedAvatar?: string,
+        },
+    },
+|}>;
+
 // device
 
 declare export function requestSimIcc(): Promise<string | null>;
@@ -65,7 +78,9 @@ declare export function requestSimImsi(): Promise<string | null>;
 
 declare export function requestDeviceImei(): Promise<string | null>;
 
-declare export function requestVibration(type: 'error' | 'success'): Promise<null>
+declare export function requestVibration(
+    type: 'error' | 'success',
+): Promise<null>;
 
 declare export function internalNavigation(
     feature: 'notification-settings',

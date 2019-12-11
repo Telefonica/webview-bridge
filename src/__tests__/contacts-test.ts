@@ -1,4 +1,4 @@
-import {requestContact} from '../contacts';
+import {requestContact, matchContactData} from '../contacts';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -14,6 +14,13 @@ const ANY_CONTACT = {
         country: 'USA',
         postalCode: '49007',
     },
+};
+
+const ANY_MATCH_CONTACT = {
+    name: 'name',
+    middleName: 'middlename',
+    surname: 'surname',
+    encodedAvatar: 'avatar',
 };
 
 afterEach(() => {
@@ -57,6 +64,35 @@ test('request contact filtered', async cb => {
         filter: 'email',
     }).then(res => {
         expect(res).toEqual(ANY_CONTACT);
+        cb();
+    });
+});
+
+test('match contact data', cb => {
+    createFakeAndroidPostMessage({
+        checkMessage: message => {
+            expect(message.type).toBe('MATCH_CONTACT_DATA');
+            expect(message.payload).toEqual({numbers: ['123456', '789012']});
+        },
+        getResponse: message => ({
+            type: message.type,
+            id: message.id,
+            payload: {
+                matches: {
+                    ['123456']: ANY_MATCH_CONTACT,
+                    ['789012']: ANY_MATCH_CONTACT,
+                },
+            },
+        }),
+    });
+
+    matchContactData(['123456', '789012']).then(res => {
+        expect(res).toEqual({
+            matches: {
+                ['123456']: ANY_MATCH_CONTACT,
+                ['789012']: ANY_MATCH_CONTACT,
+            },
+        });
         cb();
     });
 });

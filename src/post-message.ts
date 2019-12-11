@@ -135,6 +135,20 @@ export type IncomingMessageMap = {
         id: string;
         payload: void;
     };
+    MATCH_CONTACT_DATA: {
+        id: string;
+        type: 'MATCH_CONTACT_DATA';
+        payload: {
+            matches: {
+                [key: string]: {
+                    name?: string;
+                    middleName?: string;
+                    surname?: string;
+                    encodedAvatar?: string;
+                };
+            };
+        };
+    };
 };
 
 type Response = IncomingMessageMap[keyof IncomingMessageMap];

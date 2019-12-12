@@ -61,12 +61,13 @@ declare export function matchContactData(
     numbers: Array<string>,
 ): Promise<{|
     matches: {
-        [key: string]: {
+        [key: string]: {|
             name?: string,
             middleName?: string,
             surname?: string,
             encodedAvatar?: string,
-        },
+        |},
+        ...,
     },
 |}>;
 

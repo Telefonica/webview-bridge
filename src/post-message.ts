@@ -135,19 +135,16 @@ export type IncomingMessageMap = {
         id: string;
         payload: void;
     };
-    MATCH_CONTACT_DATA: {
+    FETCH_CONTACTS_DATA: {
         id: string;
-        type: 'MATCH_CONTACT_DATA';
-        payload: {
-            matches: {
-                [key: string]: {
-                    name?: string;
-                    middleName?: string;
-                    surname?: string;
-                    encodedAvatar?: string;
-                };
-            };
-        };
+        type: 'FETCH_CONTACTS_DATA';
+        payload: Array<{
+            phoneNumber: string;
+            firstName?: string;
+            middleName?: string;
+            lastName?: string;
+            encodedAvatar?: string;
+        }>;
     };
 };
 

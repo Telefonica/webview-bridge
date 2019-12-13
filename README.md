@@ -76,7 +76,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [checkPermissionStatus](#checkPermissionStatus)
 -   [internalNavigation](#internalNavigation)
 -   [dismiss](#dismiss)
--   [matchContactData](#matchContactData)
+-   [fetchContactsByPhone](#fetchContactsByPhone)
 
 ### isWebViewBridgeAvailable
 
@@ -559,21 +559,18 @@ import {requestVibration} from '@tef-novum/webview-bridge';
 requestVibration('error');
 ```
 
-### matchContactData
+### fetchContactsByPhone
 
 Returns contacts info given an array of phone numbers.
 
 ```javascript
-matchContactData: (numbers: Array<string>) => Promise<{
-    matches: {
-        [key: string]: {
-            name?: string;
-            middleName?: string;
-            surname?: string;
-            encodedAvatar?: string;
-        };
-    };
-}>;
+fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
+    phoneNumber: string;
+    firstName?: string;
+    middleName?: string;
+    lastName?: string;
+    encodedAvatar?: string;
+}>>;
 ```
 
 ## Error handling

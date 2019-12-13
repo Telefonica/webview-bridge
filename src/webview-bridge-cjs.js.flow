@@ -57,19 +57,17 @@ declare export function requestContact(
     },
 |}>;
 
-declare export function matchContactData(
-    numbers: Array<string>,
-): Promise<{|
-    matches: {
-        [key: string]: {|
-            name?: string,
-            middleName?: string,
-            surname?: string,
-            encodedAvatar?: string,
-        |},
-        ...,
-    },
-|}>;
+declare export function fetchContactsByPhone(
+    phoneNumbers: Array<string>,
+): Promise<
+    Array<{|
+        phoneNumber: string,
+        firstName?: string,
+        middleName?: string,
+        lastName?: string,
+        encodedAvatar?: string,
+    |}>,
+>;
 
 // device
 

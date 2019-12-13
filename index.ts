@@ -24,7 +24,7 @@ export {
     checkPermissionStatus,
 } from './src/utils';
 export {createCalendarEvent} from './src/calendar';
-export {requestContact, matchContactData} from './src/contacts';
+export {requestContact, fetchContactsByPhone} from './src/contacts';
 export {
     logEvent,
     logTiming,

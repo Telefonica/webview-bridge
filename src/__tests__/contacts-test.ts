@@ -1,4 +1,4 @@
-import {requestContact, matchContactData} from '../contacts';
+import {requestContact, fetchContactsByPhone} from '../contacts';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -16,11 +16,20 @@ const ANY_CONTACT = {
     },
 };
 
-const ANY_MATCH_CONTACT = {
-    name: 'name',
+const ANY_CONTACT_DATA_1 = {
+    firstName: 'name',
     middleName: 'middlename',
-    surname: 'surname',
+    lastName: 'surname',
     encodedAvatar: 'avatar',
+    phoneNumber: '123456',
+};
+
+const ANY_CONTACT_DATA_2 = {
+    firstName: 'name',
+    middleName: 'middlename',
+    lastName: 'surname',
+    encodedAvatar: 'avatar',
+    phoneNumber: '789012',
 };
 
 afterEach(() => {
@@ -68,31 +77,23 @@ test('request contact filtered', async cb => {
     });
 });
 
-test('match contact data', cb => {
+test('fetch contacts by phone', cb => {
     createFakeAndroidPostMessage({
         checkMessage: message => {
-            expect(message.type).toBe('MATCH_CONTACT_DATA');
-            expect(message.payload).toEqual({numbers: ['123456', '789012']});
+            expect(message.type).toBe('FETCH_CONTACTS_DATA');
+            expect(message.payload).toEqual({
+                phoneNumbers: ['123456', '789012'],
+            });
         },
         getResponse: message => ({
             type: message.type,
             id: message.id,
-            payload: {
-                matches: {
-                    ['123456']: ANY_MATCH_CONTACT,
-                    ['789012']: ANY_MATCH_CONTACT,
-                },
-            },
+            payload: [ANY_CONTACT_DATA_1, ANY_CONTACT_DATA_2],
         }),
     });
 
-    matchContactData(['123456', '789012']).then(res => {
-        expect(res).toEqual({
-            matches: {
-                ['123456']: ANY_MATCH_CONTACT,
-                ['789012']: ANY_MATCH_CONTACT,
-            },
-        });
+    fetchContactsByPhone(['123456', '789012']).then(res => {
+        expect(res).toEqual([ANY_CONTACT_DATA_1, ANY_CONTACT_DATA_2]);
         cb();
     });
 });

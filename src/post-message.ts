@@ -135,6 +135,17 @@ export type IncomingMessageMap = {
         id: string;
         payload: void;
     };
+    FETCH_CONTACTS_DATA: {
+        id: string;
+        type: 'FETCH_CONTACTS_DATA';
+        payload: Array<{
+            phoneNumber: string;
+            firstName?: string;
+            middleName?: string;
+            lastName?: string;
+            encodedAvatar?: string;
+        }>;
+    };
 };
 
 type Response = IncomingMessageMap[keyof IncomingMessageMap];

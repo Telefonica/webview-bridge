@@ -76,6 +76,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [checkPermissionStatus](#checkPermissionStatus)
 -   [internalNavigation](#internalNavigation)
 -   [dismiss](#dismiss)
+-   [fetchContactsByPhone](#fetchContactsByPhone)
 
 ### isWebViewBridgeAvailable
 
@@ -556,6 +557,20 @@ Requests the phone to vibrate. Options are 'error' or 'success'.
 import {requestVibration} from '@tef-novum/webview-bridge';
 
 requestVibration('error');
+```
+
+### fetchContactsByPhone
+
+Returns contacts info given an array of phone numbers.
+
+```javascript
+fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
+    phoneNumber: string;
+    firstName?: string;
+    middleName?: string;
+    lastName?: string;
+    encodedAvatar?: string;
+}>>;
 ```
 
 ## Error handling

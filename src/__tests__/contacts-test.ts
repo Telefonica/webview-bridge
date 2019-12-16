@@ -1,4 +1,4 @@
-import {requestContact} from '../contacts';
+import {requestContact, fetchContactsByPhone} from '../contacts';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -14,6 +14,22 @@ const ANY_CONTACT = {
         country: 'USA',
         postalCode: '49007',
     },
+};
+
+const ANY_CONTACT_DATA_1 = {
+    firstName: 'name',
+    middleName: 'middlename',
+    lastName: 'surname',
+    encodedAvatar: 'avatar',
+    phoneNumber: '123456',
+};
+
+const ANY_CONTACT_DATA_2 = {
+    firstName: 'name',
+    middleName: 'middlename',
+    lastName: 'surname',
+    encodedAvatar: 'avatar',
+    phoneNumber: '789012',
 };
 
 afterEach(() => {
@@ -57,6 +73,27 @@ test('request contact filtered', async cb => {
         filter: 'email',
     }).then(res => {
         expect(res).toEqual(ANY_CONTACT);
+        cb();
+    });
+});
+
+test('fetch contacts by phone', cb => {
+    createFakeAndroidPostMessage({
+        checkMessage: message => {
+            expect(message.type).toBe('FETCH_CONTACTS_DATA');
+            expect(message.payload).toEqual({
+                phoneNumbers: ['123456', '789012'],
+            });
+        },
+        getResponse: message => ({
+            type: message.type,
+            id: message.id,
+            payload: [ANY_CONTACT_DATA_1, ANY_CONTACT_DATA_2],
+        }),
+    });
+
+    fetchContactsByPhone(['123456', '789012']).then(res => {
+        expect(res).toEqual([ANY_CONTACT_DATA_1, ANY_CONTACT_DATA_2]);
         cb();
     });
 });

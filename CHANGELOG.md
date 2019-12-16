@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.6.0 - 2019-12-16
+
+-   New function: `fetchContactsByPhone`
+
 ## v.2.5.0 - 2019-11-14
 
 -   New function: `dismiss`

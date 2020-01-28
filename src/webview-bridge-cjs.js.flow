@@ -91,14 +91,14 @@ declare export function dismiss(onCompletionUrl?: string): Promise<void>;
 declare export function nativeConfirm({|
     message: string,
     title?: string,
-    acceptText?: string,
-    cancelText?: string,
+    acceptText: string,
+    cancelText: string,
 |}): Promise<boolean>;
 
 declare export function nativeAlert({|
     message: string,
     title?: string,
-    buttonText?: string,
+    buttonText: string,
 |}): Promise<void>;
 
 declare export function nativeMessage({|

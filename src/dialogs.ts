@@ -8,8 +8,8 @@ export const nativeConfirm = ({
 }: {
     message: string;
     title?: string;
-    acceptText?: string;
-    cancelText?: string;
+    acceptText: string;
+    cancelText: string;
 }): Promise<boolean> => {
     if (isWebViewBridgeAvailable()) {
         return postMessageToNativeApp({
@@ -28,7 +28,7 @@ export const nativeAlert = ({
 }: {
     message: string;
     title?: string;
-    buttonText?: string;
+    buttonText: string;
 }): Promise<void> => {
     if (isWebViewBridgeAvailable()) {
         return postMessageToNativeApp({

@@ -304,8 +304,8 @@ browser confirm.
 nativeConfirm: ({
     message: string;
     title?: string;
-    acceptText?: string;
-    cancelText?: string;
+    acceptText: string;
+    cancelText: string;
 }) => Promise<boolean>;
 ```
 
@@ -339,7 +339,7 @@ browser alert.
 nativeAlert: ({
     message: string;
     title?: string;
-    buttonText?: string;
+    buttonText: string;
 }) => Promise<void>;
 ```
 

@@ -102,6 +102,7 @@ test('native alert fallbacks to browser alert', async cb => {
 
     nativeAlert({
         message: ANY_MESSAGE,
+        buttonText: ANY_BUTTON_TEXT,
     }).then(res => {
         expect(res).toBeUndefined();
         expect(alert.mock.calls.length).toBe(1);
@@ -119,6 +120,8 @@ test('native confirm fallbacks to browser confirm', async cb => {
 
     nativeConfirm({
         message: ANY_MESSAGE,
+        acceptText: ANY_ACCEPT_TEXT,
+        cancelText: ANY_CANCEL_TEXT,
     }).then(res => {
         expect(res).toBe(true);
         expect(confirm.mock.calls.length).toBe(1);

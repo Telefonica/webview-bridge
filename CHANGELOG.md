@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.7.1 - 2020-01-29
+
+-   Update nativeConfirm and nativeAlert arguments type.
+
 ## v.2.7.0 - 2019-12-16
 
 -   New function: `fetchContactsByPhone`

@@ -240,6 +240,7 @@ updateNavigationBar = ({
     title?: string;
     showBackButton?: boolean;
     showReloadButton?: boolean;
+    showProfileButton?: boolean;
     backgroundColor?: string;
 }) => Promise<void>
 ```
@@ -247,6 +248,8 @@ updateNavigationBar = ({
 -   `title`: updates NavigationBar title
 -   `showBackButton`: shows or hides NavigationBar Back button
 -   `showReloadButton`: shows or hides NavigationBar Reload button
+-   `showProfileButton`: shows or hides NavigationBar Profile button (which
+    navigates to user profile)
 -   `backgroundColor`: change NavigationBar background color, use a hex color
     string (for example: `'#FF128A'`)
 
@@ -263,6 +266,7 @@ updateNavigationBar({
     title: 'Hello',
     showBackButton: true,
     showReloadButton: false,
+    showProfileButton: false,
     backgroundColor: '#FF0000', // red
 });
 ```

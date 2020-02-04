@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.8.0 - 2020-02-04
+
+-   Add new flag `showProfileButton` to `updateNavigationBar()`.
+
 ## v.2.7.1 - 2020-01-29
 
 -   Update nativeConfirm and nativeAlert arguments type.

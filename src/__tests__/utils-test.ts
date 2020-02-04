@@ -121,6 +121,7 @@ test('update navigation bar, with options', cb => {
         title: ANY_STRING,
         showBackButton: true,
         showReloadButton: true,
+        showProfileButton: false,
         backgroundColor: '#AABBCC',
     };
 
@@ -158,6 +159,7 @@ test('update navigation bar, without bridge', cb => {
         title: ANY_STRING,
         showBackButton: true,
         showReloadButton: true,
+        showProfileButton: false,
         backgroundColor: '#AABBCC',
     };
 

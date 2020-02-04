@@ -187,7 +187,7 @@ const getWebViewPostMessage = (): NovumPostMessage | null => {
     return null;
 };
 
-let messageListeners: Listener[] = [];
+let messageListeners: Array<Listener> = [];
 
 const subscribe = (listener: Listener) => {
     messageListeners.push(listener);

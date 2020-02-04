@@ -42,11 +42,13 @@ export const updateNavigationBar = ({
     title,
     showBackButton,
     showReloadButton,
+    showProfileButton,
     backgroundColor,
 }: {
     title?: string;
     showBackButton?: boolean;
     showReloadButton?: boolean;
+    showProfileButton?: boolean;
     backgroundColor?: string;
 }): Promise<void> => {
     if (isWebViewBridgeAvailable()) {
@@ -56,6 +58,7 @@ export const updateNavigationBar = ({
                 title,
                 showBackButton,
                 showReloadButton,
+                showProfileButton,
                 backgroundColor,
             },
         });

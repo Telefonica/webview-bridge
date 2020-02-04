@@ -139,6 +139,7 @@ declare export function updateNavigationBar({|
     title?: string,
     showBackButton?: boolean,
     showReloadButton?: boolean,
+    showProfileButton?: boolean,
     backgroundColor?: string,
 |}): Promise<void>;
 

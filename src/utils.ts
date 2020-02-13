@@ -1,7 +1,7 @@
 import {
     postMessageToNativeApp,
     isWebViewBridgeAvailable,
-    IncomingMessageMap,
+    NativeAppResponsePayload,
 } from './post-message';
 
 export const attachToEmail = ({
@@ -138,7 +138,7 @@ export const fetch = ({
     method: 'GET' | 'POST';
     headers: {[key: string]: string};
     body: string;
-}): Promise<IncomingMessageMap['FETCH']['payload']> => {
+}): Promise<NativeAppResponsePayload<'FETCH'>> => {
     if (isWebViewBridgeAvailable()) {
         return postMessageToNativeApp({
             type: 'FETCH',

@@ -1,4 +1,4 @@
-import {postMessageToNativeApp, IncomingMessageMap} from './post-message';
+import {postMessageToNativeApp, NativeAppResponsePayload} from './post-message';
 
 export const requestContact = ({
     filter = 'phone',
@@ -7,7 +7,7 @@ export const requestContact = ({
 
 export const fetchContactsByPhone = (
     phoneNumbers: Array<string>,
-): Promise<IncomingMessageMap['FETCH_CONTACTS_DATA']['payload']> =>
+): Promise<NativeAppResponsePayload<'FETCH_CONTACTS_DATA'>> =>
     postMessageToNativeApp({
         type: 'FETCH_CONTACTS_DATA',
         payload: {phoneNumbers},

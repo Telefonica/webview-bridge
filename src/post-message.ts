@@ -1,19 +1,24 @@
 import {getId} from './message-id';
 
 /**
- * This type map represents all the possible messages we can receive from native app
- * Those messages can be:
- *     - Requests: native app initiates the dialog
- *     - Responses: native app responds to a request initiated by the web
+ * There are two possible kind of messages we can receive from native app:
+ *     - RequestsFromNativeApp: native app initiates the dialog
+ *     - ResponsesFromNativeApp: native app responds to a request initiated by the web
  */
-export type IncomingMessageMap = {
-    // Requests
-    EVENT: {
+type RequestsFromNativeApp = {
+    NATIVE_EVENT: {
         type: 'NATIVE_EVENT';
         id: string;
         payload: {event: string};
     };
-    // Responses
+    SESSION_RENEWED: {
+        type: 'SESSION_RENEWED';
+        id: string;
+        payload: {accessToken: string};
+    };
+};
+
+export type ResponsesFromNativeApp = {
     SIM_ICC: {
         id: string;
         type: 'SIM_ICC';
@@ -146,10 +151,27 @@ export type IncomingMessageMap = {
             encodedAvatar?: string;
         }>;
     };
+    RENEW_SESSION: {
+        type: 'RENEW_SESSION';
+        id: string;
+        payload: {accessToken: string};
+    };
 };
 
-type Response = IncomingMessageMap[keyof IncomingMessageMap];
-type Listener = (message: Response) => void;
+export type NativeAppResponsePayload<
+    Type extends keyof ResponsesFromNativeApp
+> = ResponsesFromNativeApp[Type]['payload'];
+
+type NativeAppRequestPayload<
+    Type extends keyof RequestsFromNativeApp
+> = RequestsFromNativeApp[Type]['payload'];
+
+type ResponseFromNative = ResponsesFromNativeApp[keyof ResponsesFromNativeApp];
+type RequestFromNative = RequestsFromNativeApp[keyof RequestsFromNativeApp];
+
+type RequestListener = (message: RequestFromNative) => void;
+type ResponseListener = (message: ResponseFromNative) => void;
+type MessageListener = RequestListener | ResponseListener;
 
 const BRIDGE = '__tuenti_webview_bridge';
 
@@ -187,13 +209,13 @@ const getWebViewPostMessage = (): NovumPostMessage | null => {
     return null;
 };
 
-let messageListeners: Array<Listener> = [];
+let messageListeners: Array<MessageListener> = [];
 
-const subscribe = (listener: Listener) => {
+const subscribe = (listener: MessageListener) => {
     messageListeners.push(listener);
 };
 
-const unsubscribe = (listener: Listener) => {
+const unsubscribe = (listener: MessageListener) => {
     messageListeners = messageListeners.filter(f => f !== listener);
 };
 
@@ -206,10 +228,10 @@ export const isWebViewBridgeAvailable = (): boolean =>
 /**
  * Send message to native app and waits for response
  */
-export const postMessageToNativeApp = <T extends keyof IncomingMessageMap>(
+export const postMessageToNativeApp = <T extends keyof ResponsesFromNativeApp>(
     {type, id = getId(), payload}: {type: T; id?: string; payload?: Object},
     timeout?: number,
-): Promise<IncomingMessageMap[T]['payload']> => {
+): Promise<NativeAppResponsePayload<T>> => {
     const postMessage = getWebViewPostMessage();
     const message = JSON.stringify({type, id, payload});
 
@@ -228,7 +250,7 @@ export const postMessageToNativeApp = <T extends keyof IncomingMessageMap>(
     return new Promise((resolve, reject) => {
         let timedOut = false;
 
-        const listener: Listener = response => {
+        const listener: ResponseListener = response => {
             if (response.id === id && !timedOut) {
                 if (response.type === type) {
                     resolve(response.payload);
@@ -261,7 +283,7 @@ export const postMessageToNativeApp = <T extends keyof IncomingMessageMap>(
  */
 window[BRIDGE] = window[BRIDGE] || {
     postMessage: (jsonMessage: string) => {
-        let message: Response;
+        let message: any;
         try {
             message = JSON.parse(jsonMessage);
         } catch (e) {
@@ -277,30 +299,50 @@ export type NativeEventHandler = ({
     event: string;
 }) => {action: 'default'};
 
-export const onNativeEvent = (handler: NativeEventHandler) => {
-    const listener: Listener = message => {
-        if (message.type === 'NATIVE_EVENT') {
-            const response = handler({
-                event: message.payload.event,
+export const listenToNativeMessage = <T extends keyof RequestsFromNativeApp>(
+    type: T,
+    handler: (
+        payload: NativeAppRequestPayload<T>,
+    ) => Object | void | Promise<Object>,
+) => {
+    const listener: RequestListener = message => {
+        if (message.type === type) {
+            Promise.resolve(handler(message.payload)).then(responsePayload => {
+                const postMessage = getWebViewPostMessage();
+                if (postMessage) {
+                    postMessage(
+                        JSON.stringify({
+                            type: message.type,
+                            id: message.id,
+                            payload: responsePayload,
+                        }),
+                    );
+                }
             });
-
-            const postMessage = getWebViewPostMessage();
-            if (postMessage) {
-                postMessage(
-                    JSON.stringify({
-                        type: 'NATIVE_EVENT',
-                        id: message.id,
-                        payload: {
-                            action: response.action || 'default',
-                        },
-                    }),
-                );
-            }
         }
     };
+
     subscribe(listener);
 
     return () => {
         unsubscribe(listener);
     };
 };
+
+export const onNativeEvent = (eventHandler: NativeEventHandler) => {
+    const handler = (payload: NativeAppRequestPayload<'NATIVE_EVENT'>) => {
+        const response = eventHandler({
+            event: payload.event,
+        });
+
+        return {
+            action: response.action || 'default',
+        };
+    };
+
+    return listenToNativeMessage('NATIVE_EVENT', handler);
+};
+
+export const onSessionRenewal = (
+    handler: (payload: {accessToken: string}) => void,
+) => listenToNativeMessage('SESSION_RENEWED', handler);

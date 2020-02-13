@@ -34,3 +34,4 @@ export {
     CD_NOVUM_UID,
     CD_EVENT_VALUE,
 } from './src/analytics';
+export {renewSession, onSessionRenewed} from './src/sessions';

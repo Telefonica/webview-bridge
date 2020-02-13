@@ -170,3 +170,9 @@ declare export function checkPermissionStatus(
     feature: 'notifications',
     params?: {[string]: string},
 ): Promise<boolean>;
+
+declare export function renewSession(): Promise<string>;
+
+declare export function onSessionRenewed(
+    (newAccessToken: string) => void,
+): void;

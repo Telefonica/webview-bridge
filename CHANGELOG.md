@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.9.0 - 2020-02-17
+
+-   Messages to renew webview session.
+
 ## v.2.8.0 - 2020-02-04
 
 -   Add new flag `showProfileButton` to `updateNavigationBar()`.

@@ -5,10 +5,11 @@ import {postMessageToNativeApp, listenToNativeMessage} from './post-message';
  * When webapp (running inside a webview) receives a 401 api response from server, uses this
  * bridge method to renew the session.
  */
-export const renewSession = (): Promise<string> =>
-    postMessageToNativeApp({type: 'RENEW_SESSION'}).then(
-        ({accessToken}) => accessToken,
-    );
+export const renewSession = (oldAccessToken: string | null): Promise<string> =>
+    postMessageToNativeApp({
+        type: 'RENEW_SESSION',
+        payload: {accessToken: oldAccessToken || null},
+    }).then(({accessToken}) => accessToken);
 
 /**
  * This method is used to listen for session renewals made by native app. Whenever the native app

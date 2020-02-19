@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.10.1 - 2020-02-19
+
+-   Fix flow types for renewSession
+
 ## v.2.10.0 - 2020-02-19
 
 -   Improve changes in 2.9.0. RENEW_SESSION request message now includes the old

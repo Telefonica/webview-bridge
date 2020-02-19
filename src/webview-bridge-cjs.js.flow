@@ -171,7 +171,7 @@ declare export function checkPermissionStatus(
     params?: {[string]: string},
 ): Promise<boolean>;
 
-declare export function renewSession(): Promise<string>;
+declare export function renewSession(oldAccessToken: string): Promise<string>;
 
 declare export function onSessionRenewed(
     (newAccessToken: string) => void,

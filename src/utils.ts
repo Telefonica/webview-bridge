@@ -169,3 +169,11 @@ export const checkPermissionStatus = (
             params: params,
         },
     }).then(({granted}) => granted);
+
+export const isAppInstalled = (appToken: string): Promise<boolean> =>
+    postMessageToNativeApp({
+        type: 'IS_APP_INSTALLED',
+        payload: {
+            appToken,
+        },
+    }).then(({isInstalled}) => isInstalled);

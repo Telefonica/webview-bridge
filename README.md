@@ -77,6 +77,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [internalNavigation](#internalNavigation)
 -   [dismiss](#dismiss)
 -   [fetchContactsByPhone](#fetchContactsByPhone)
+-   [isAppInstalled](#isAppInstalled)
 
 ### isWebViewBridgeAvailable
 
@@ -577,13 +578,30 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
 }>>;
 ```
 
+### isAppInstalled
+
+Check if an app is installed in the phone
+
+-   Available for app versions 11.8 and higher
+
+```typescript
+isAppInstalled: (appToken: string) => Promise<boolean>;
+```
+
+#### Example
+
+````javascript
+import {isAppInstalled} from '@tef-novum/webview-bridge';
+
+isAppInstalled('tokenAppToCheck').then(isInstalled => { ... });
+
 ## Error handling
 
 If an error occurs, promise will be rejected with an error object:
 
 ```typescript
 {code: number, description: string}
-```
+````
 
 ## License
 

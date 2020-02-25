@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.11.0 - 2019-02-25
+
+-   New function: `isAppInstalled`
+
 ## v.2.10.0 - 2020-02-19
 
 -   Improve changes in 2.9.0. RENEW_SESSION request message now includes the old

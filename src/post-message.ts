@@ -156,6 +156,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {accessToken: string};
     };
+    IS_APP_INSTALLED: {
+        type: 'IS_APP_INSTALLED';
+        id: string;
+        payload: {isInstalled: boolean};
+    };
 };
 
 export type NativeAppResponsePayload<

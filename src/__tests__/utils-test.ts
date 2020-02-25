@@ -389,3 +389,26 @@ test('app has not notifications permissions', async cb => {
         cb();
     });
 });
+
+import {isAppInstalled} from '../utils';
+
+test('app has application installed', async cb => {
+    const appToken = 'testToken';
+    createFakeAndroidPostMessage({
+        checkMessage: msg => {
+            expect(msg.type).toBe('IS_APP_INSTALLED');
+            expect(msg.payload.appToken).toBe(appToken);
+        },
+        getResponse: msg => ({
+            type: 'IS_APP_INSTALLED',
+            id: msg.id,
+            payload: {isInstalled: true},
+        }),
+    });
+
+    isAppInstalled(appToken).then(res => {
+        expect(res).toBe(true);
+        removeFakeAndroidPostMessage();
+        cb();
+    });
+});

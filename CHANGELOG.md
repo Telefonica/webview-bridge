@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.10.2 - 2020-02-27
+
+-   More flow types fixes for renewSession
+
 ## v.2.10.1 - 2020-02-19
 
 -   Fix flow types for renewSession

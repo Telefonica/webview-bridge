@@ -22,7 +22,7 @@ export {
     reportStatus,
     fetch,
     checkPermissionStatus,
-    isAppInstalled,
+    getAppMetadata,
 } from './src/utils';
 export {createCalendarEvent} from './src/calendar';
 export {requestContact, fetchContactsByPhone} from './src/contacts';

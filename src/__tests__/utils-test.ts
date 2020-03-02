@@ -390,25 +390,26 @@ test('app has not notifications permissions', async cb => {
     });
 });
 
-import {isAppInstalled} from '../utils';
+import {getAppMetadata} from '../utils';
 
-test('app has application installed', async cb => {
+test.only('get app metadata of installed application', async () => {
     const appToken = 'testToken';
+    const marketUrl = 'testMarketurl';
+    const appUrl = 'testAppUrl';
     createFakeAndroidPostMessage({
         checkMessage: msg => {
-            expect(msg.type).toBe('IS_APP_INSTALLED');
+            expect(msg.type).toBe('GET_APP_METADATA');
             expect(msg.payload.appToken).toBe(appToken);
         },
         getResponse: msg => ({
-            type: 'IS_APP_INSTALLED',
+            type: 'GET_APP_METADATA',
             id: msg.id,
-            payload: {isInstalled: true},
+            payload: {isInstalled: true, marketUrl, appUrl},
         }),
     });
 
-    isAppInstalled(appToken).then(res => {
-        expect(res).toBe(true);
+    await getAppMetadata(appToken).then(res => {
+        expect(res).toMatchObject({isInstalled: true, marketUrl, appUrl});
         removeFakeAndroidPostMessage();
-        cb();
     });
 });

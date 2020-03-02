@@ -170,10 +170,12 @@ export const checkPermissionStatus = (
         },
     }).then(({granted}) => granted);
 
-export const isAppInstalled = (appToken: string): Promise<boolean> =>
+export const getAppMetadata = (
+    appToken: string,
+): Promise<{isInstalled: boolean; marketUrl: string; appUrl: string}> =>
     postMessageToNativeApp({
-        type: 'IS_APP_INSTALLED',
+        type: 'GET_APP_METADATA',
         payload: {
             appToken,
         },
-    }).then(({isInstalled}) => isInstalled);
+    });

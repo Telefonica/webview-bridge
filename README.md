@@ -596,8 +596,7 @@ import {getAppMetadata} from '@tef-novum/webview-bridge';
 getAppMetadata('tokenAppToCheck').then(({isInstalled, marketUrl, appUrl}) => { ... });
 ```
 
--   `appToken`: string that comes from server and refers to a registered app in
-    our native application
+-   `appToken`: token that refers to a "friend" application
 -   `appUrl`: string url to launch an app installed on the phone
 -   `marketUrl`: string url to launch the store in a specific application
 

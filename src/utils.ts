@@ -169,3 +169,13 @@ export const checkPermissionStatus = (
             params: params,
         },
     }).then(({granted}) => granted);
+
+export const getAppMetadata = (
+    appToken: string,
+): Promise<{isInstalled: boolean; marketUrl: string; appUrl: string}> =>
+    postMessageToNativeApp({
+        type: 'GET_APP_METADATA',
+        payload: {
+            appToken,
+        },
+    });

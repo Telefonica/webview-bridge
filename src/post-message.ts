@@ -156,6 +156,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {accessToken: string};
     };
+    GET_APP_METADATA: {
+        type: 'GET_APP_METADATA';
+        id: string;
+        payload: {isInstalled: boolean; marketUrl: string; appUrl: string};
+    };
 };
 
 export type NativeAppResponsePayload<

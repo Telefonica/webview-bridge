@@ -77,6 +77,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [internalNavigation](#internalNavigation)
 -   [dismiss](#dismiss)
 -   [fetchContactsByPhone](#fetchContactsByPhone)
+-   [getAppMetadata](#getAppMetadata)
 
 ### isWebViewBridgeAvailable
 
@@ -576,6 +577,28 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
     encodedAvatar?: string;
 }>>;
 ```
+
+### getAppMetadata
+
+Check if an app is installed in the phone
+
+-   Available for app versions 11.8 and higher
+
+```typescript
+getAppMetadata: (appToken: string) => Promise<{isInstalled: boolean; marketUrl: string; appUrl: string}>;
+```
+
+#### Example
+
+```javascript
+import {getAppMetadata} from '@tef-novum/webview-bridge';
+
+getAppMetadata('tokenAppToCheck').then(({isInstalled, marketUrl, appUrl}) => { ... });
+```
+
+-   `appToken`: token that refers to a "friend" application
+-   `appUrl`: string url to launch an app installed on the phone
+-   `marketUrl`: string url to launch the store in a specific application
 
 ## Error handling
 

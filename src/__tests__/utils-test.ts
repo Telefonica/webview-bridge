@@ -389,3 +389,27 @@ test('app has not notifications permissions', async cb => {
         cb();
     });
 });
+
+import {getAppMetadata} from '../utils';
+
+test.only('get app metadata of installed application', async () => {
+    const appToken = 'testToken';
+    const marketUrl = 'testMarketurl';
+    const appUrl = 'testAppUrl';
+    createFakeAndroidPostMessage({
+        checkMessage: msg => {
+            expect(msg.type).toBe('GET_APP_METADATA');
+            expect(msg.payload.appToken).toBe(appToken);
+        },
+        getResponse: msg => ({
+            type: 'GET_APP_METADATA',
+            id: msg.id,
+            payload: {isInstalled: true, marketUrl, appUrl},
+        }),
+    });
+
+    await getAppMetadata(appToken).then(res => {
+        expect(res).toMatchObject({isInstalled: true, marketUrl, appUrl});
+        removeFakeAndroidPostMessage();
+    });
+});

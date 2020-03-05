@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.11.0 - 2019-03-02
+
+-   New function: `getAppMetadata`
+
 ## v.2.10.2 - 2020-02-27
 
 -   More flow types fixes for renewSession

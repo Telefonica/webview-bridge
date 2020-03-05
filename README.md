@@ -590,10 +590,16 @@ getAppMetadata: (appToken: string) => Promise<{isInstalled: boolean; marketUrl: 
 
 #### Example
 
-````javascript
+```javascript
 import {getAppMetadata} from '@tef-novum/webview-bridge';
 
 getAppMetadata('tokenAppToCheck').then(({isInstalled, marketUrl, appUrl}) => { ... });
+```
+
+-   `appToken`: string that comes from server and refers to a registered app in
+    our native application
+-   `appUrl`: string url to launch an app installed on the phone
+-   `marketUrl`: string url to launch the store in a specific application
 
 ## Error handling
 
@@ -601,7 +607,7 @@ If an error occurs, promise will be rejected with an error object:
 
 ```typescript
 {code: number, description: string}
-````
+```
 
 ## License
 

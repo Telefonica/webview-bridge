@@ -40,12 +40,16 @@ export const share = (options: ShareOptions): Promise<void> =>
 
 export const updateNavigationBar = ({
     title,
+    expandedTitle,
+    showExpandedTitle,
     showBackButton,
     showReloadButton,
     showProfileButton,
     backgroundColor,
 }: {
     title?: string;
+    expandedTitle?: string;
+    showExpandedTitle?: boolean;
     showBackButton?: boolean;
     showReloadButton?: boolean;
     showProfileButton?: boolean;
@@ -56,6 +60,8 @@ export const updateNavigationBar = ({
             type: 'NAVIGATION_BAR',
             payload: {
                 title,
+                expandedTitle,
+                showExpandedTitle,
                 showBackButton,
                 showReloadButton,
                 showProfileButton,

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.2.11.1 - 2019-03-02
+
+-   Add new flags `expandedTitle` and `showExpandedTitle` to
+    `updateNavigationBar()`.
+
 ## v.2.11.0 - 2019-03-02
 
 -   New function: `getAppMetadata`

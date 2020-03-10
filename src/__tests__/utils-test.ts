@@ -120,7 +120,7 @@ test('update navigation bar, without options', cb => {
 test('update navigation bar, with options', cb => {
     const options = {
         title: ANY_STRING,
-        expandedTitle: undefined,
+        expandedTitle: ANY_STRING,
         showExpandedTitle: false,
         showBackButton: true,
         showReloadButton: true,
@@ -160,6 +160,8 @@ test('update navigation bar, without bridge', cb => {
 
     const options = {
         title: ANY_STRING,
+        expandedTitle: ANY_STRING,
+        showExpandedTitle: false,
         showBackButton: true,
         showReloadButton: true,
         showProfileButton: false,

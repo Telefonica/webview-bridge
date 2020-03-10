@@ -269,7 +269,7 @@ updateNavigationBar({title: 'Hello, World!'});
 // full featured example
 updateNavigationBar({
     title: 'Hello',
-    expandedTitle: 'Hello!',
+    expandedTitle: 'Hello, World!',
     showExpandedTitle: true,
     showBackButton: true,
     showReloadButton: false,

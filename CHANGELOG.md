@@ -2,8 +2,7 @@
 
 ## v.2.11.1 - 2020-03-10
 
--   Add new flags `expandedTitle` and `showExpandedTitle` to
-    `updateNavigationBar()`.
+-   Add `expandedTitle` to `updateNavigationBar()`.
 
 ## v.2.11.0 - 2020-03-02
 

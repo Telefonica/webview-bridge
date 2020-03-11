@@ -240,7 +240,6 @@ Customize WebView NavigationBar properties
 updateNavigationBar = ({
     title?: string;
     expandedTitle?: string;
-    showExpandedTitle?: boolean;
     showBackButton?: boolean;
     showReloadButton?: boolean;
     showProfileButton?: boolean;
@@ -250,7 +249,6 @@ updateNavigationBar = ({
 
 -   `title`: updates NavigationBar title
 -   `expandedTitle`: updates NavigationBar expandedTitle
--   `showExpandedTitle`: shows or hides NavigationBar expandedTitle
 -   `showBackButton`: shows or hides NavigationBar Back button
 -   `showReloadButton`: shows or hides NavigationBar Reload button
 -   `showProfileButton`: shows or hides NavigationBar Profile button (which
@@ -270,7 +268,6 @@ updateNavigationBar({title: 'Hello, World!'});
 updateNavigationBar({
     title: 'Hello',
     expandedTitle: 'Hello, World!',
-    showExpandedTitle: true,
     showBackButton: true,
     showReloadButton: false,
     showProfileButton: false,

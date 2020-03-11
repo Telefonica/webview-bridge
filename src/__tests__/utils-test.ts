@@ -121,6 +121,7 @@ test('update navigation bar, with options', cb => {
         title: ANY_STRING,
         showBackButton: true,
         showReloadButton: true,
+        showProfileButton: false,
         backgroundColor: '#AABBCC',
     };
 
@@ -158,6 +159,7 @@ test('update navigation bar, without bridge', cb => {
         title: ANY_STRING,
         showBackButton: true,
         showReloadButton: true,
+        showProfileButton: false,
         backgroundColor: '#AABBCC',
     };
 
@@ -385,5 +387,29 @@ test('app has not notifications permissions', async cb => {
         expect(res).toBe(false);
         removeFakeAndroidPostMessage();
         cb();
+    });
+});
+
+import {getAppMetadata} from '../utils';
+
+test.only('get app metadata of installed application', async () => {
+    const appToken = 'testToken';
+    const marketUrl = 'testMarketurl';
+    const appUrl = 'testAppUrl';
+    createFakeAndroidPostMessage({
+        checkMessage: msg => {
+            expect(msg.type).toBe('GET_APP_METADATA');
+            expect(msg.payload.appToken).toBe(appToken);
+        },
+        getResponse: msg => ({
+            type: 'GET_APP_METADATA',
+            id: msg.id,
+            payload: {isInstalled: true, marketUrl, appUrl},
+        }),
+    });
+
+    await getAppMetadata(appToken).then(res => {
+        expect(res).toMatchObject({isInstalled: true, marketUrl, appUrl});
+        removeFakeAndroidPostMessage();
     });
 });

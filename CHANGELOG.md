@@ -1,5 +1,30 @@
 # CHANGELOG
 
+## v.2.11.0 - 2019-03-02
+
+-   New function: `getAppMetadata`
+
+## v.2.10.2 - 2020-02-27
+
+-   More flow types fixes for renewSession
+
+## v.2.10.1 - 2020-02-19
+
+-   Fix flow types for renewSession
+
+## v.2.10.0 - 2020-02-19
+
+-   Improve changes in 2.9.0. RENEW_SESSION request message now includes the old
+    `accessToken`
+
+## v.2.9.0 - 2020-02-17
+
+-   Messages to renew webview session.
+
+## v.2.8.0 - 2020-02-04
+
+-   Add new flag `showProfileButton` to `updateNavigationBar()`.
+
 ## v.2.7.1 - 2020-01-29
 
 -   Update nativeConfirm and nativeAlert arguments type.

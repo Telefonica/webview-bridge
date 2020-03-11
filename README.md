@@ -77,6 +77,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [internalNavigation](#internalNavigation)
 -   [dismiss](#dismiss)
 -   [fetchContactsByPhone](#fetchContactsByPhone)
+-   [getAppMetadata](#getAppMetadata)
 
 ### isWebViewBridgeAvailable
 
@@ -240,6 +241,7 @@ updateNavigationBar = ({
     title?: string;
     showBackButton?: boolean;
     showReloadButton?: boolean;
+    showProfileButton?: boolean;
     backgroundColor?: string;
 }) => Promise<void>
 ```
@@ -247,6 +249,8 @@ updateNavigationBar = ({
 -   `title`: updates NavigationBar title
 -   `showBackButton`: shows or hides NavigationBar Back button
 -   `showReloadButton`: shows or hides NavigationBar Reload button
+-   `showProfileButton`: shows or hides NavigationBar Profile button (which
+    navigates to user profile). Only available in native app versions >= 11.7
 -   `backgroundColor`: change NavigationBar background color, use a hex color
     string (for example: `'#FF128A'`)
 
@@ -263,6 +267,7 @@ updateNavigationBar({
     title: 'Hello',
     showBackButton: true,
     showReloadButton: false,
+    showProfileButton: false,
     backgroundColor: '#FF0000', // red
 });
 ```
@@ -572,6 +577,28 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
     encodedAvatar?: string;
 }>>;
 ```
+
+### getAppMetadata
+
+Check if an app is installed in the phone
+
+-   Available for app versions 11.8 and higher
+
+```typescript
+getAppMetadata: (appToken: string) => Promise<{isInstalled: boolean; marketUrl: string; appUrl: string}>;
+```
+
+#### Example
+
+```javascript
+import {getAppMetadata} from '@tef-novum/webview-bridge';
+
+getAppMetadata('tokenAppToCheck').then(({isInstalled, marketUrl, appUrl}) => { ... });
+```
+
+-   `appToken`: token that refers to a "friend" application
+-   `appUrl`: string url to launch an app installed on the phone
+-   `marketUrl`: string url to launch the store in a specific application
 
 ## Error handling
 

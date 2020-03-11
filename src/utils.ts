@@ -1,7 +1,7 @@
 import {
     postMessageToNativeApp,
     isWebViewBridgeAvailable,
-    IncomingMessageMap,
+    NativeAppResponsePayload,
 } from './post-message';
 
 export const attachToEmail = ({
@@ -42,11 +42,13 @@ export const updateNavigationBar = ({
     title,
     showBackButton,
     showReloadButton,
+    showProfileButton,
     backgroundColor,
 }: {
     title?: string;
     showBackButton?: boolean;
     showReloadButton?: boolean;
+    showProfileButton?: boolean;
     backgroundColor?: string;
 }): Promise<void> => {
     if (isWebViewBridgeAvailable()) {
@@ -56,6 +58,7 @@ export const updateNavigationBar = ({
                 title,
                 showBackButton,
                 showReloadButton,
+                showProfileButton,
                 backgroundColor,
             },
         });
@@ -135,7 +138,7 @@ export const fetch = ({
     method: 'GET' | 'POST';
     headers: {[key: string]: string};
     body: string;
-}): Promise<IncomingMessageMap['FETCH']['payload']> => {
+}): Promise<NativeAppResponsePayload<'FETCH'>> => {
     if (isWebViewBridgeAvailable()) {
         return postMessageToNativeApp({
             type: 'FETCH',
@@ -166,3 +169,13 @@ export const checkPermissionStatus = (
             params: params,
         },
     }).then(({granted}) => granted);
+
+export const getAppMetadata = (
+    appToken: string,
+): Promise<{isInstalled: boolean; marketUrl: string; appUrl: string}> =>
+    postMessageToNativeApp({
+        type: 'GET_APP_METADATA',
+        payload: {
+            appToken,
+        },
+    });

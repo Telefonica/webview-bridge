@@ -22,6 +22,7 @@ export {
     reportStatus,
     fetch,
     checkPermissionStatus,
+    getAppMetadata,
 } from './src/utils';
 export {createCalendarEvent} from './src/calendar';
 export {requestContact, fetchContactsByPhone} from './src/contacts';
@@ -34,3 +35,4 @@ export {
     CD_NOVUM_UID,
     CD_EVENT_VALUE,
 } from './src/analytics';
+export {renewSession, onSessionRenewed} from './src/sessions';

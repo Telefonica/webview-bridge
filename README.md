@@ -499,7 +499,7 @@ Avalaible features:
 -   `notifications`
 
 ```typescript
-checkPermissionStatus: (feature: string, params?: {[key: string]: string},) => Promise<boolean>;
+checkPermissionStatus: (feature: string, params?: {[key: string]: string, ...}) => Promise<boolean>;
 ```
 
 #### Example

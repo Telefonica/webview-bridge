@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.13.0 - 2019-03-11
+
+-   Removed non-explicit flow types
+
 ## v.2.11.0 - 2019-03-02
 
 -   New function: `getAppMetadata`

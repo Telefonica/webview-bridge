@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v.2.12.0 - 2020-03-10
+## v.2.13.0 - 2020-03-10
 
 -   Add `expandedTitle` to `updateNavigationBar()`.
 

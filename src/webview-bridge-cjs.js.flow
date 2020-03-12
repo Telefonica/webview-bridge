@@ -137,6 +137,7 @@ declare export function setWebViewTitle(title: string): Promise<void>;
 
 declare export function updateNavigationBar({|
     title?: string,
+    expandedTitle?: string,
     showBackButton?: boolean,
     showReloadButton?: boolean,
     showProfileButton?: boolean,

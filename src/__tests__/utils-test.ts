@@ -13,8 +13,10 @@ import {
     removeFakeAndroidPostMessage,
 } from './fake-post-message';
 import {isWebViewBridgeAvailable} from '../post-message';
+import {getAppMetadata} from '../utils';
 
 const ANY_STRING = 'any-string';
+const ANY_OTHER_STRING = 'any-other-string';
 
 afterEach(() => {
     removeFakeAndroidPostMessage();
@@ -119,6 +121,7 @@ test('update navigation bar, without options', cb => {
 test('update navigation bar, with options', cb => {
     const options = {
         title: ANY_STRING,
+        expandedTitle: ANY_OTHER_STRING,
         showBackButton: true,
         showReloadButton: true,
         showProfileButton: false,
@@ -157,6 +160,7 @@ test('update navigation bar, without bridge', cb => {
 
     const options = {
         title: ANY_STRING,
+        expandedTitle: ANY_OTHER_STRING,
         showBackButton: true,
         showReloadButton: true,
         showProfileButton: false,
@@ -390,9 +394,7 @@ test('app has not notifications permissions', async cb => {
     });
 });
 
-import {getAppMetadata} from '../utils';
-
-test.only('get app metadata of installed application', async () => {
+test('get app metadata of installed application', async () => {
     const appToken = 'testToken';
     const marketUrl = 'testMarketurl';
     const appUrl = 'testAppUrl';

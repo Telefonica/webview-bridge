@@ -239,6 +239,7 @@ Customize WebView NavigationBar properties
 ```typescript
 updateNavigationBar = ({
     title?: string;
+    expandedTitle?: string;
     showBackButton?: boolean;
     showReloadButton?: boolean;
     showProfileButton?: boolean;
@@ -247,6 +248,9 @@ updateNavigationBar = ({
 ```
 
 -   `title`: updates NavigationBar title
+-   `expandedTitle`: updates NavigationBar expandedTitle. If the value is an
+    empty string, the expanded navigation bar will not be shown. Only available
+    in native app versions >= 11.8
 -   `showBackButton`: shows or hides NavigationBar Back button
 -   `showReloadButton`: shows or hides NavigationBar Reload button
 -   `showProfileButton`: shows or hides NavigationBar Profile button (which
@@ -265,6 +269,7 @@ updateNavigationBar({title: 'Hello, World!'});
 // full featured example
 updateNavigationBar({
     title: 'Hello',
+    expandedTitle: 'Hello, World!',
     showBackButton: true,
     showReloadButton: false,
     showProfileButton: false,

@@ -1,10 +1,14 @@
 # CHANGELOG
 
-## v.2.13.0 - 2019-03-11
+## v.2.14.0 - 2019-03-12
 
 -   Removed non-explicit flow types
 
-## v.2.11.0 - 2019-03-02
+## v.2.13.0 - 2020-03-10
+
+-   Add `expandedTitle` to `updateNavigationBar()`.
+
+## v.2.11.0 - 2020-03-02
 
 -   New function: `getAppMetadata`
 

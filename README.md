@@ -248,7 +248,9 @@ updateNavigationBar = ({
 ```
 
 -   `title`: updates NavigationBar title
--   `expandedTitle`: updates NavigationBar expandedTitle
+-   `expandedTitle`: updates NavigationBar expandedTitle. If the value is an
+    empty string, the expanded navigation bar will not be shown. Only available
+    in native app versions >= 11.8
 -   `showBackButton`: shows or hides NavigationBar Back button
 -   `showReloadButton`: shows or hides NavigationBar Reload button
 -   `showProfileButton`: shows or hides NavigationBar Profile button (which

@@ -27,7 +27,7 @@ declare export function logTiming({|
 
 declare export function setScreenName(
     screenName: string,
-    fieldsObject?: {},
+    fieldsObject?: {...},
 ): Promise<void>;
 
 declare export function setUserProperty(
@@ -169,7 +169,7 @@ declare export function fetch({|
 
 declare export function checkPermissionStatus(
     feature: 'notifications',
-    params?: {[string]: string},
+    params?: {[string]: string, ...},
 ): Promise<boolean>;
 
 declare export function renewSession(

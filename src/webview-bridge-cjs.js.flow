@@ -49,12 +49,12 @@ declare export function requestContact(
     name?: string,
     email?: string,
     phoneNumber?: string,
-    address?: {
+    address?: {|
         street?: string,
         city?: string,
         country?: string,
         postalCode?: string,
-    },
+    |},
 |}>;
 
 declare export function fetchContactsByPhone(

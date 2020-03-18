@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v.2.14.1 - 2019-03-18
+## v.2.14.2 - 2019-03-18
 
 -   Removed non-explicit flow types
 

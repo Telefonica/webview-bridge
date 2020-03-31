@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.14.3 - 2019-03-31
+
+-   Remove accent marks from analytics event labels.
+
 ## v.2.14.2 - 2019-03-18
 
 -   Removed non-explicit flow types

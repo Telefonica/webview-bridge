@@ -54,6 +54,28 @@ test('log event with default values', async () => {
     );
 });
 
+test('log event with a label with accents', async () => {
+    const anyWebviewMock = givenAndroidWebview();
+    const DEFAULT_VALUE = 0;
+
+    await logEvent({
+        category: 'anyCategory',
+        action: 'anyAction',
+        label: 'aeiou áéíóú àèìòù ÁÉÍÓÚ ÀÈÌÒÙ abcdefghijklmnñopeqrstuvwxyz',
+    });
+
+    expect(anyWebviewMock.logEvent).toBeCalledWith(
+        'anyCategory',
+        JSON.stringify({
+            eventCategory: 'anyCategory',
+            eventAction: 'anyAction',
+            eventLabel:
+                'aeiou aeiou aeiou AEIOU AEIOU abcdefghijklmnnopeqrstuvwxyz',
+            eventValue: DEFAULT_VALUE,
+        }),
+    );
+});
+
 test('log event in Android', async () => {
     const androidFirebaseMock = givenAndroidWebview();
 

@@ -79,6 +79,11 @@ type TrackingEvent = {
     [key: string]: any;
 };
 
+const formatLabel = (label: string) =>
+    // Normalize to NFD (normal form decomposes and delete Combining Diacritical Marks Unicode
+    // https://stackoverflow.com/a/37511463/3874587
+    label.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
 export const logEvent = ({
     category,
     action,
@@ -107,7 +112,7 @@ export const logEvent = ({
     const params = {
         eventCategory: category,
         eventAction: action,
-        eventLabel: label,
+        eventLabel: formatLabel(label),
         eventValue: value,
         ...fieldsObject,
     };

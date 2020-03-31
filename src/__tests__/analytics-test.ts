@@ -54,7 +54,7 @@ test('log event with default values', async () => {
     );
 });
 
-test('log event with a label with accents', async () => {
+test('accent marks are removed from event labels', async () => {
     const anyWebviewMock = givenAndroidWebview();
     const DEFAULT_VALUE = 0;
 

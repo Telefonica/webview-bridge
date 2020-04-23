@@ -5,10 +5,13 @@
     "main": "./dist/webview-bridge-cjs.js",
     "module": "./dist/webview-bridge.mjs",
     "types": "./dist/index.d.ts",
+    "files": [
+        "dist"
+    ],
     "scripts": {
         "build": "rimraf dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && ncp ./src/webview-bridge-cjs.js.flow ./dist/webview-bridge-cjs.js.flow",
         "test": "jest --coverage",
-        "prettier": "prettier src/**/*.ts -l",
+        "prettier": "prettier src/**/*.ts **/*.js **/*.json **/*.md -l",
         "lint": "eslint src/**/*.ts",
         "check-code": "npm run prettier && npm run lint",
         "fix-code": "npm run lint -- --fix && npm run prettier -- --write",

@@ -10,7 +10,30 @@ export type TrackingEvent = {
     ...
 };
 
-export type CustomDimensionIdx = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
+type CustomDimensionIdx =
+    | 1
+    | 2
+    | 3
+    | 4
+    | 5
+    | 6
+    | 7
+    | 8
+    | 9
+    | 10
+    | 11
+    | 12
+    | 13
+    | 14
+    | 15
+    | 16
+    | 17
+    | 18
+    | 19
+    | 20
+    | 24
+    | 25
+    | 26;
 
 declare export var CD_WEBAPP_INSTALLED: CustomDimensionIdx;
 declare export var CD_NOVUM_UID: CustomDimensionIdx;
@@ -58,7 +81,7 @@ declare export function requestContact(
 |}>;
 
 declare export function fetchContactsByPhone(
-    phoneNumbers: Array<string>,
+    phoneNumbers: $ReadOnlyArray<string>,
 ): Promise<
     Array<{|
         phoneNumber: string,
@@ -79,7 +102,7 @@ declare export function requestDeviceImei(): Promise<string | null>;
 
 declare export function requestVibration(
     type: 'error' | 'success',
-): Promise<null>;
+): Promise<void>;
 
 declare export function internalNavigation(
     feature: 'notification-settings',

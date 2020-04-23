@@ -11,7 +11,7 @@
     "scripts": {
         "build": "rimraf dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && ncp ./src/webview-bridge-cjs.js.flow ./dist/webview-bridge-cjs.js.flow",
         "test": "jest --coverage",
-        "prettier": "prettier src/**/*.ts **/*.js **/*.json **/*.md -l",
+        "prettier": "prettier src/**/*.ts **/*.js **/*.json **/*.yml **/*.md -l",
         "lint": "eslint src/**/*.ts",
         "check-code": "npm run prettier && npm run lint",
         "fix-code": "npm run lint -- --fix && npm run prettier -- --write",
@@ -36,6 +36,7 @@
         "eslint": "^6.8.0",
         "husky": "^4.2.5",
         "jest": "^25.4.0",
+        "lint-staged": "^10.1.7",
         "ncp": "^2.0.0",
         "prettier": "^2.0.5",
         "rimraf": "^3.0.2",
@@ -44,10 +45,5 @@
         "ts-jest": "^25.4.0",
         "typescript": "^3.8.3",
         "uglify-es": "^3.3.9"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "npm run fix-code"
-        }
     }
 }

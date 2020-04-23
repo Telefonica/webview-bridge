@@ -40,55 +40,55 @@ test('webkit webview  bridge availability', () => {
     expect(isWebViewBridgeAvailable()).toBe(true);
 });
 
-test('post message to native app: no bridge', async cb => {
+test('post message to native app: no bridge', async (cb) => {
     expect(isWebViewBridgeAvailable()).toBe(false);
 
-    postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch(err => {
+    postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch((err) => {
         expect(err.code).toBe(500);
         cb();
     });
 });
 
-test('post message to native app: error received', async cb => {
+test('post message to native app: error received', async (cb) => {
     createFakeAndroidPostMessage({
-        getResponse: msg => ({
+        getResponse: (msg) => ({
             id: msg.id,
             type: 'ERROR',
             payload: {code: ANY_CODE, reason: ANY_STRING},
         }),
     });
 
-    postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch(err => {
+    postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch((err) => {
         expect(err.code).toBe(ANY_CODE);
         cb();
     });
 });
 
-test('post message to native app: bad response type', async cb => {
+test('post message to native app: bad response type', async (cb) => {
     createFakeAndroidPostMessage({
-        getResponse: msg => ({
+        getResponse: (msg) => ({
             id: msg.id,
             type: 'OTHER_TYPE',
             payload: {code: ANY_CODE, reason: ANY_STRING},
         }),
     });
 
-    postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch(err => {
+    postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch((err) => {
         expect(err.code).toBe(500);
         cb();
     });
 });
 
-test('post message to native app: bad response type', async cb => {
+test('post message to native app: bad response type', async (cb) => {
     createFakeWebKitPostMessage({
-        getResponse: msg => ({
+        getResponse: (msg) => ({
             id: msg.id,
             type: 'OTHER_TYPE',
             payload: {code: ANY_CODE, reason: ANY_STRING},
         }),
     });
 
-    postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch(err => {
+    postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch((err) => {
         expect(err.code).toBe(500);
         cb();
     });
@@ -117,7 +117,7 @@ test('onNativeEvent subscription', () => {
     };
 
     createFakeWebKitPostMessage({
-        checkMessage: msg => {
+        checkMessage: (msg) => {
             expect(msg).toMatchObject(expectedResponse);
         },
     });

@@ -8,7 +8,7 @@ export const createFakeAndroidPostMessage = ({
     getResponse?: (msg: Message) => Message | Promise<Message>;
 } = {}) => {
     window.tuentiWebView = {
-        postMessage: async jsonMessage => {
+        postMessage: async (jsonMessage) => {
             const message: Message = JSON.parse(jsonMessage);
 
             checkMessage(message);
@@ -32,7 +32,7 @@ export const createFakeWebKitPostMessage = ({
     window.webkit = {
         messageHandlers: {
             tuentiWebView: {
-                postMessage: jsonMessage => {
+                postMessage: (jsonMessage) => {
                     const message = JSON.parse(jsonMessage);
 
                     checkMessage(message);

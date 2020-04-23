@@ -12,11 +12,11 @@ test('webapp requests session renewal to native app', async () => {
     const oldAccessToken = 'old token';
     const newAccessToken = 'new token';
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('RENEW_SESSION');
             expect(message.payload.accessToken).toBe(oldAccessToken);
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
             payload: {accessToken: newAccessToken},
@@ -27,10 +27,10 @@ test('webapp requests session renewal to native app', async () => {
     expect(accessToken).toEqual(newAccessToken);
 });
 
-test('webapp listens to native app session renewal', done => {
+test('webapp listens to native app session renewal', (done) => {
     const newAccessToken = 'any token';
 
-    onSessionRenewed(accessToken => {
+    onSessionRenewed((accessToken) => {
         expect(accessToken).toBe(newAccessToken);
         done();
     });

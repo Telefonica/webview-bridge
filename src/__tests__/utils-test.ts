@@ -22,7 +22,7 @@ afterEach(() => {
     removeFakeAndroidPostMessage();
 });
 
-test('attach to email', cb => {
+test('attach to email', (cb) => {
     const PARAMS = {
         url: 'any-url',
         subject: 'any-subject',
@@ -32,23 +32,23 @@ test('attach to email', cb => {
     };
 
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('ATTACH_TO_EMAIL');
             expect(message.payload).toEqual(PARAMS);
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
         }),
     });
 
-    attachToEmail(PARAMS).then(res => {
+    attachToEmail(PARAMS).then((res) => {
         expect(res).toBeUndefined();
         cb();
     });
 });
 
-test('share', cb => {
+test('share', (cb) => {
     const PARAMS = {
         url: 'any-url',
         fileName: 'file-name',
@@ -56,69 +56,69 @@ test('share', cb => {
     };
 
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('SHARE');
             expect(message.payload).toEqual(PARAMS);
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
         }),
     });
 
-    share(PARAMS).then(res => {
+    share(PARAMS).then((res) => {
         expect(res).toBeUndefined();
         cb();
     });
 });
 
-test('set webview title', cb => {
+test('set webview title', (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('NAVIGATION_BAR');
             expect(message.payload).toEqual({title: ANY_STRING});
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
         }),
     });
 
-    setWebViewTitle(ANY_STRING).then(res => {
+    setWebViewTitle(ANY_STRING).then((res) => {
         expect(res).toBeUndefined();
         cb();
     });
 });
 
-test('set webview title fallbacks to document.title update', cb => {
+test('set webview title fallbacks to document.title update', (cb) => {
     document.title = '';
 
-    setWebViewTitle(ANY_STRING).then(res => {
+    setWebViewTitle(ANY_STRING).then((res) => {
         expect(res).toBeUndefined();
         expect(document.title).toBe(ANY_STRING);
         cb();
     });
 });
 
-test('update navigation bar, without options', cb => {
+test('update navigation bar, without options', (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('NAVIGATION_BAR');
             expect(message.payload).toEqual({});
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
         }),
     });
 
-    updateNavigationBar({}).then(res => {
+    updateNavigationBar({}).then((res) => {
         expect(res).toBeUndefined();
         cb();
     });
 });
 
-test('update navigation bar, with options', cb => {
+test('update navigation bar, with options', (cb) => {
     const options = {
         title: ANY_STRING,
         expandedTitle: ANY_OTHER_STRING,
@@ -129,33 +129,33 @@ test('update navigation bar, with options', cb => {
     };
 
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('NAVIGATION_BAR');
             expect(message.payload).toEqual(options);
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
         }),
     });
 
-    updateNavigationBar(options).then(res => {
+    updateNavigationBar(options).then((res) => {
         expect(res).toBeUndefined();
         cb();
     });
 });
 
-test('update navigation bar, without options and without bridge', cb => {
+test('update navigation bar, without options and without bridge', (cb) => {
     document.title = ANY_STRING;
 
-    updateNavigationBar({}).then(res => {
+    updateNavigationBar({}).then((res) => {
         expect(res).toBeUndefined();
         expect(document.title).toBe(ANY_STRING);
         cb();
     });
 });
 
-test('update navigation bar, without bridge', cb => {
+test('update navigation bar, without bridge', (cb) => {
     document.title = '';
 
     const options = {
@@ -167,26 +167,26 @@ test('update navigation bar, without bridge', cb => {
         backgroundColor: '#AABBCC',
     };
 
-    updateNavigationBar(options).then(res => {
+    updateNavigationBar(options).then((res) => {
         expect(res).toBeUndefined();
         expect(document.title).toBe(ANY_STRING);
         cb();
     });
 });
 
-test('notify page loaded', cb => {
+test('notify page loaded', (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('PAGE_LOADED');
             expect(message.payload).toBeUndefined();
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
         }),
     });
 
-    notifyPageLoaded().then(res => {
+    notifyPageLoaded().then((res) => {
         expect(res).toBeUndefined();
         cb();
     });
@@ -201,21 +201,21 @@ test('isABTestingAvailable happy case', async () => {
     };
 
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('GET_REMOTE_CONFIG');
             expect(message.payload).toBeUndefined();
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
             payload: REMOTE_CONFIGURATION,
         }),
     });
 
-    await isABTestingAvailable('key1').then(res => {
+    await isABTestingAvailable('key1').then((res) => {
         expect(res).toEqual(true);
     });
-    await isABTestingAvailable('key2').then(res => {
+    await isABTestingAvailable('key2').then((res) => {
         expect(res).toEqual(false);
     });
 });
@@ -223,18 +223,18 @@ test('isABTestingAvailable happy case', async () => {
 test('isABTestingAvailable without bridge', async () => {
     expect(isWebViewBridgeAvailable()).toBe(false);
 
-    await isABTestingAvailable('key3').then(res => {
+    await isABTestingAvailable('key3').then((res) => {
         expect(res).toEqual(false);
     });
-    await isABTestingAvailable('key4').then(res => {
+    await isABTestingAvailable('key4').then((res) => {
         expect(res).toEqual(false);
     });
 });
 
-test('get remote config timeouts to false in 5s', cb => {
+test('get remote config timeouts to false in 5s', (cb) => {
     jest.useFakeTimers();
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('GET_REMOTE_CONFIG');
             expect(message.payload).toBeUndefined();
         },
@@ -243,16 +243,16 @@ test('get remote config timeouts to false in 5s', cb => {
 
     const promise = isABTestingAvailable('any key');
     jest.advanceTimersByTime(5000);
-    promise.then(res => {
+    promise.then((res) => {
         expect(res).toEqual(false);
         cb();
     });
     jest.useRealTimers();
 });
 
-test('report account status', cb => {
+test('report account status', (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('STATUS_REPORT');
             expect(message.payload).toEqual({
                 feature: 'ACCOUNT',
@@ -260,7 +260,7 @@ test('report account status', cb => {
                 reason: 'whatever reason',
             });
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
         }),
@@ -270,7 +270,7 @@ test('report account status', cb => {
         feature: 'ACCOUNT',
         status: 'GOOD',
         reason: 'whatever reason',
-    }).then(res => {
+    }).then((res) => {
         expect(res).toBeUndefined();
         cb();
     });
@@ -291,18 +291,18 @@ test('fetch happy case', async () => {
     };
 
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('FETCH');
             expect(message.payload).toEqual(request);
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
             payload: response,
         }),
     });
 
-    await fetch(request).then(res => {
+    await fetch(request).then((res) => {
         expect(res).toEqual(response);
     });
 });
@@ -313,7 +313,7 @@ test('fetch without bridge', async () => {
         method: 'GET' as 'GET',
         headers: {key1: 'value1', key2: 'value2'},
         body: 'hello',
-    }).then(res => {
+    }).then((res) => {
         expect(res).toEqual({
             status: 500,
             headers: {},
@@ -331,18 +331,18 @@ test('fetch call failure', async () => {
     };
 
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('FETCH');
             expect(message.payload).toEqual(request);
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: 'ERROR',
             id: message.id,
             payload: {reason: 'Unknown'},
         }),
     });
 
-    await fetch(request).then(res => {
+    await fetch(request).then((res) => {
         expect(res).toEqual({
             status: 500,
             headers: {},
@@ -353,41 +353,43 @@ test('fetch call failure', async () => {
 
 import {checkPermissionStatus} from '../utils';
 
-test('app has notifications permissions', async cb => {
+test('app has notifications permissions', async (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: msg => {
+        checkMessage: (msg) => {
             expect(msg.type).toBe('OS_PERMISSION_STATUS');
             expect(msg.payload.feature).toBe('notifications');
             expect(msg.payload.params.channelId).toBe('default');
         },
-        getResponse: msg => ({
+        getResponse: (msg) => ({
             type: 'OS_PERMISSION_STATUS',
             id: msg.id,
             payload: {granted: true},
         }),
     });
 
-    checkPermissionStatus('notifications', {channelId: 'default'}).then(res => {
-        expect(res).toBe(true);
-        removeFakeAndroidPostMessage();
-        cb();
-    });
+    checkPermissionStatus('notifications', {channelId: 'default'}).then(
+        (res) => {
+            expect(res).toBe(true);
+            removeFakeAndroidPostMessage();
+            cb();
+        },
+    );
 });
 
-test('app has not notifications permissions', async cb => {
+test('app has not notifications permissions', async (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: msg => {
+        checkMessage: (msg) => {
             expect(msg.type).toBe('OS_PERMISSION_STATUS');
             expect(msg.payload.feature).toBe('notifications');
         },
-        getResponse: msg => ({
+        getResponse: (msg) => ({
             type: 'OS_PERMISSION_STATUS',
             id: msg.id,
             payload: {granted: false},
         }),
     });
 
-    checkPermissionStatus('notifications').then(res => {
+    checkPermissionStatus('notifications').then((res) => {
         expect(res).toBe(false);
         removeFakeAndroidPostMessage();
         cb();
@@ -399,18 +401,18 @@ test('get app metadata of installed application', async () => {
     const marketUrl = 'testMarketurl';
     const appUrl = 'testAppUrl';
     createFakeAndroidPostMessage({
-        checkMessage: msg => {
+        checkMessage: (msg) => {
             expect(msg.type).toBe('GET_APP_METADATA');
             expect(msg.payload.appToken).toBe(appToken);
         },
-        getResponse: msg => ({
+        getResponse: (msg) => ({
             type: 'GET_APP_METADATA',
             id: msg.id,
             payload: {isInstalled: true, marketUrl, appUrl},
         }),
     });
 
-    await getAppMetadata(appToken).then(res => {
+    await getAppMetadata(appToken).then((res) => {
         expect(res).toMatchObject({isInstalled: true, marketUrl, appUrl});
         removeFakeAndroidPostMessage();
     });

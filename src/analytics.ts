@@ -62,8 +62,12 @@ const withAnalytics = ({
     ) {
         // Call iOS interface
         return onIos(window.webkit.messageHandlers.firebase);
+    } else if (
+        window.ga &&
+        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
-    } else if (window.ga && window.ga.loaded) {
+        window.ga.loaded
+    ) {
         // Use Google Analytics when webapp is outside the native app webview
         return onWeb(window.ga);
     } else {
@@ -133,7 +137,7 @@ export const logEvent = ({
             return Promise.resolve();
         },
         onWeb(ga) {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
                 ga('NovumTracker.send', 'event', {
                     ...params,
                     hitCallback: resolve,
@@ -187,7 +191,7 @@ export const logTiming = ({
             return Promise.resolve();
         },
         onWeb(ga) {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
                 ga('NovumTracker.send', {
                     hitType: 'timing',
                     hitCallback: resolve,
@@ -222,7 +226,7 @@ export const setScreenName = (screenName: string, fieldsObject?: {}) => {
             return Promise.resolve();
         },
         onWeb(ga) {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
                 // Page name should start with '/'
                 const pageName = screenName.startsWith('/')
                     ? screenName
@@ -233,7 +237,7 @@ export const setScreenName = (screenName: string, fieldsObject?: {}) => {
                     ga(() => {
                         // we have two trackers in movistar ARG, we want to track the PV in both trackers
                         const trackers = ga.getAll().filter(isTrackerValid);
-                        trackers.forEach(tracker => {
+                        trackers.forEach((tracker) => {
                             tracker.set('page', pageName);
                             tracker.send('pageView', {
                                 ...fieldsObject,

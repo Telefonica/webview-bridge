@@ -4,7 +4,7 @@
 
 [![GitHub tag](https://img.shields.io/github/tag/tef-dig/webview-bridge.svg)](https://github.com/tef-dig/webview-bridge)
 [![License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](https://github.com/tef-dig/webview-bridge/blob/master/LICENSE)
-![Travis](https://travis-ci.org/tef-dig/webview-bridge.svg?branch=master)
+![CI status](https://github.com/tef-dig/webview-bridge/workflows/CI/badge.svg)
 
 JavaScript library to access to native functionality. Requires a webview with a
 postMessage bridge.
@@ -329,7 +329,7 @@ nativeConfirm({
     message: 'Send message?',
     acceptText: 'Yes',
     cancelText: 'No',
-}).then(res => {
+}).then((res) => {
     if (res) {
         console.log('message sent');
     }
@@ -361,7 +361,7 @@ import {nativeAlert} from '@tef-novum/webview-bridge';
 nativeAlert({
     message: 'Purchase completed!',
     title: 'Ok!',
-}).then(res => {
+}).then((res) => {
     console.log('alert closed');
 });
 ```
@@ -397,7 +397,7 @@ nativeMessage({
     message: 'Operation finished!',
     buttonText: 'Ok',
     duration: 5000, // 5 seconds
-}).then(res => {
+}).then((res) => {
     console.log('alert closed');
 });
 ```
@@ -513,7 +513,7 @@ checkPermissionStatus: (feature: string, params?: {[key: string]: string}) => Pr
 import {checkPermissionStatus} from '@tef-novum/webview-bridge';
 
 checkPermissionStatus('notifications', {channelId: 'default'}).then(
-    hasPermissions => {
+    (hasPermissions) => {
         console.log(hasPermissions);
     },
 );

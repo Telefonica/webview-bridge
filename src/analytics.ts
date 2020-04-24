@@ -64,7 +64,6 @@ const withAnalytics = ({
         return onIos(window.webkit.messageHandlers.firebase);
     } else if (
         window.ga &&
-        // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
         // @ts-ignore
         window.ga.loaded
     ) {

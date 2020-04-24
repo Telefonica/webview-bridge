@@ -6,7 +6,7 @@ export const requestContact = ({
     postMessageToNativeApp({type: 'GET_CONTACT_DATA', payload: {filter}});
 
 export const fetchContactsByPhone = (
-    phoneNumbers: Array<string>,
+    phoneNumbers: ReadonlyArray<string>,
 ): Promise<NativeAppResponsePayload<'FETCH_CONTACTS_DATA'>> =>
     postMessageToNativeApp({
         type: 'FETCH_CONTACTS_DATA',

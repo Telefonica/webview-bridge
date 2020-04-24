@@ -18,3 +18,4 @@ rules:
     '@typescript-eslint/ban-types': off
     '@typescript-eslint/no-explicit-any': off
     '@typescript-eslint/array-type': [error, {default: 'generic'}]
+    '@typescript-eslint/ban-ts-ignore': off

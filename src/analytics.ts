@@ -16,7 +16,14 @@ type CustomDimensionIdx =
     | 13
     | 14
     | 15
-    | 16;
+    | 16
+    | 17
+    | 18
+    | 19
+    | 20
+    | 24
+    | 25
+    | 26;
 
 const CD_OB_IDS: CustomDimensionIdx = 1; // from sessionInfo
 const CD_PAYMENT_MODELS: CustomDimensionIdx = 2; // from sessionInfo
@@ -34,6 +41,12 @@ const CD_CURRENT_SUBSCRIPTION_ID: CustomDimensionIdx = 13;
 const CD_CURRENT_SUBSCRIPTION_TYPE: CustomDimensionIdx = 14;
 const CD_CURRENT_PAYMENT_MODEL: CustomDimensionIdx = 15;
 const CD_WEBVIEW_BROWSER_VERSION: CustomDimensionIdx = 16;
+const CD_ACTIVATED_ROLES: CustomDimensionIdx = 17;
+const CD_APP_INSTANCE_ID: CustomDimensionIdx = 18;
+const CD_EXPERIMENT_FLAG: CustomDimensionIdx = 20;
+const CD_FRIENDS_APPS: CustomDimensionIdx = 24;
+const CD_ACOUNT_LINE_SELECTOR: CustomDimensionIdx = 25;
+const CD_ONE_CLICK_DISPLAYED: CustomDimensionIdx = 26;
 
 const DEFAULT_EVENT_LABEL = 'null_label';
 const DEFAULT_EVENT_VALUE = 0;
@@ -62,8 +75,11 @@ const withAnalytics = ({
     ) {
         // Call iOS interface
         return onIos(window.webkit.messageHandlers.firebase);
+    } else if (
+        window.ga &&
         // @ts-ignore
-    } else if (window.ga && window.ga.loaded) {
+        window.ga.loaded
+    ) {
         // Use Google Analytics when webapp is outside the native app webview
         return onWeb(window.ga);
     } else {
@@ -263,6 +279,12 @@ const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
     currentSubscriptionType: CD_CURRENT_SUBSCRIPTION_TYPE,
     currentPaymentModel: CD_CURRENT_PAYMENT_MODEL,
     webviewBrowserVersion: CD_WEBVIEW_BROWSER_VERSION,
+    activatedRoles: CD_ACTIVATED_ROLES,
+    appInstanceId: CD_APP_INSTANCE_ID,
+    experimentflag: CD_EXPERIMENT_FLAG,
+    friendsApps: CD_FRIENDS_APPS,
+    accountLineSelector: CD_ACOUNT_LINE_SELECTOR,
+    OneClickDisplayed: CD_ONE_CLICK_DISPLAYED,
 };
 
 type UserPropertyName = keyof typeof USER_PROPERTY_TO_CUSTOM_DIMENSION;

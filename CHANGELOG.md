@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.14.5 - 2020-04-28
+
+-   Fix missing export type CustomDimensionIdx in flow type definitions
+
 ## v.2.14.4 - 2020-04-28
 
 -   Add new analytics dimensions

@@ -98,7 +98,7 @@ const isRemoteConfigAvailable = (key: string) =>
 export const isABTestingAvailable = (key: string): Promise<boolean> => {
     if (!remoteConfig) {
         // If GET_REMOTE_CONFIG takes more than 5s to respond, resolve to false
-        const timeoutP = new Promise<boolean>(resolve => {
+        const timeoutP = new Promise<boolean>((resolve) => {
             setTimeout(() => {
                 resolve(false);
             }, 500);
@@ -106,7 +106,7 @@ export const isABTestingAvailable = (key: string): Promise<boolean> => {
 
         const configP = postMessageToNativeApp({
             type: 'GET_REMOTE_CONFIG',
-        }).then(res => {
+        }).then((res) => {
             remoteConfig = res;
             return isRemoteConfigAvailable(key);
         });

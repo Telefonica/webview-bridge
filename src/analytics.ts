@@ -149,7 +149,7 @@ export const logEvent = ({
             return Promise.resolve();
         },
         onWeb(ga) {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
                 ga('NovumTracker.send', 'event', {
                     ...params,
                     hitCallback: resolve,
@@ -203,7 +203,7 @@ export const logTiming = ({
             return Promise.resolve();
         },
         onWeb(ga) {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
                 ga('NovumTracker.send', {
                     hitType: 'timing',
                     hitCallback: resolve,
@@ -238,7 +238,7 @@ export const setScreenName = (screenName: string, fieldsObject?: {}) => {
             return Promise.resolve();
         },
         onWeb(ga) {
-            return new Promise(resolve => {
+            return new Promise((resolve) => {
                 // Page name should start with '/'
                 const pageName = screenName.startsWith('/')
                     ? screenName
@@ -249,7 +249,7 @@ export const setScreenName = (screenName: string, fieldsObject?: {}) => {
                     ga(() => {
                         // we have two trackers in movistar ARG, we want to track the PV in both trackers
                         const trackers = ga.getAll().filter(isTrackerValid);
-                        trackers.forEach(tracker => {
+                        trackers.forEach((tracker) => {
                             tracker.set('page', pageName);
                             tracker.send('pageView', {
                                 ...fieldsObject,

@@ -10,7 +10,7 @@ export type TrackingEvent = {
     ...
 };
 
-type CustomDimensionIdx =
+export type CustomDimensionIdx =
     | 1
     | 2
     | 3

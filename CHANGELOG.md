@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v.2.14.4 - 2020-04-28
+
+-   Add new analytics dimensions
+-   Update all the dependencies
+-   Use Github Actions instead of Travis
+
 ## v.2.14.3 - 2019-03-31
 
 -   Remove accent marks from analytics event labels.

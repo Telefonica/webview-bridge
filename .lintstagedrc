@@ -1,6 +1,5 @@
 {
     "*.{js,md,ts,yml,json}": [
-        "prettier --write",
-        "git add"
+        "prettier --write"
     ]
 }

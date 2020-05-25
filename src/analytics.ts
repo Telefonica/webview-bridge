@@ -178,6 +178,8 @@ export const logTiming = ({
         return Promise.resolve();
     }
 
+    value = Math.round(value);
+
     const params = {
         timingCategory: category,
         timingVar: variable,

@@ -1,4 +1,9 @@
-import {logEvent, setScreenName, setUserProperty} from '../analytics';
+import {
+    logEvent,
+    setScreenName,
+    setUserProperty,
+    logTiming,
+} from '../analytics';
 
 const givenAndroidWebview = () => {
     const mock = {
@@ -177,4 +182,25 @@ test('set user property in iOS', async () => {
         name: PROPERTY_NAME,
         value: PROPERTY_VALUE,
     });
+});
+
+test('log timing does not track float values', async () => {
+    const anyWebviewMock = givenAndroidWebview();
+
+    const someFloatValue = 12.1234;
+    const expectedValue = 12;
+
+    await logTiming({
+        variable: 'someVariable',
+        value: someFloatValue,
+    });
+
+    expect(anyWebviewMock.logEvent).toBeCalledWith(
+        'performance_timer',
+        JSON.stringify({
+            timingCategory: 'performance_timer',
+            timingVar: 'someVariable',
+            timingValue: expectedValue,
+        }),
+    );
 });

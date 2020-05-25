@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.2.14.6 - 2020-05-25
+
+-   Analytics: log timing value as integer. Google Analytics expects an integer,
+    not float
+
 ## v.2.14.5 - 2020-04-28
 
 -   Fix missing export type CustomDimensionIdx in flow type definitions

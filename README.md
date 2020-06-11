@@ -78,6 +78,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [dismiss](#dismiss)
 -   [fetchContactsByPhone](#fetchContactsByPhone)
 -   [getAppMetadata](#getAppMetadata)
+-   [setCustomerHash](#setCustomerHash)
 
 ### isWebViewBridgeAvailable
 
@@ -604,6 +605,19 @@ getAppMetadata('tokenAppToCheck').then(({isInstalled, marketUrl, appUrl}) => { .
 -   `appToken`: token that refers to a "friend" application
 -   `appUrl`: string url to launch an app installed on the phone
 -   `marketUrl`: string url to launch the store in a specific application
+
+### setCustomerHash
+
+Sets the hash of the current subscription for the customer, which is used for
+tracking purposes.
+
+```javascript
+import {setCustomerHash} from '@tef-novum/webview-bridge';
+
+setCustomerHash(
+    'e658ad63bef9b86863b487697dfb75d64bddb6191ec14099abe443655f6b7cc6',
+);
+```
 
 ## Error handling
 

@@ -3,7 +3,12 @@ import {
     setScreenName,
     setUserProperty,
     logTiming,
+    setCustomerHash,
 } from '../analytics';
+import {
+    createFakeAndroidPostMessage,
+    removeFakeAndroidPostMessage,
+} from './fake-post-message';
 
 const givenAndroidWebview = () => {
     const mock = {
@@ -203,4 +208,22 @@ test('log timing does not track float values', async () => {
             timingValue: expectedValue,
         }),
     );
+});
+
+test('set customer hash', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SET_CUSTOMER_HASH');
+            expect(msg.payload.hash).toBe('ANY_HASH');
+        },
+        getResponse: (msg) => ({
+            type: 'SET_CUSTOMER_HASH',
+            id: msg.id,
+        }),
+    });
+
+    const res = await setCustomerHash('ANY_HASH');
+
+    expect(res).toBeUndefined();
+    removeFakeAndroidPostMessage();
 });

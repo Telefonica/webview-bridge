@@ -34,5 +34,6 @@ export {
     CD_WEBAPP_INSTALLED,
     CD_NOVUM_UID,
     CD_EVENT_VALUE,
+    setCustomerHash,
 } from './src/analytics';
 export {renewSession, onSessionRenewed} from './src/sessions';

@@ -206,3 +206,7 @@ declare export function onSessionRenewed(
 declare export function getAppMetadata(
     appToken: string,
 ): Promise<{|isInstalled: boolean, marketUrl: string, appUrl: string|}>;
+
+declare export function setCustomerHash(
+    hash: string,
+): Promise<void>;

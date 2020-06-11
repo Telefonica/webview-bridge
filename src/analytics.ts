@@ -1,3 +1,5 @@
+import {postMessageToNativeApp} from './post-message';
+
 // Google Analytics custom dimension indices.
 // WARN: These numbers are defined in GA, don't change them
 type CustomDimensionIdx =
@@ -335,3 +337,11 @@ export const setUserProperty = (name: UserPropertyName, value: string) => {
         },
     });
 };
+
+export const setCustomerHash = (hash: string): Promise<void> =>
+    postMessageToNativeApp({
+        type: 'SET_CUSTOMER_HASH',
+        payload: {
+            hash,
+        },
+    });

@@ -161,6 +161,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {isInstalled: boolean; marketUrl: string; appUrl: string};
     };
+    SET_CUSTOMER_HASH: {
+        type: 'SET_CUSTOMER_HASH';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.2.16.0 - 2020-06-12
+
+-   New method `setCustomerHash`. Sets the hash of the current subscription for
+    the customer, which is used for tracking purposes.
+
 ## v.2.14.6 - 2020-05-25
 
 -   Analytics: log timing value as integer. Google Analytics expects an integer,

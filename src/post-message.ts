@@ -166,6 +166,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    GET_DISK_SPACE_INFO: {
+        type: 'GET_DISK_SPACE_INFO';
+        id: string;
+        payload: {availableBytes: number; totalBytes: number};
+    };
 };
 
 export type NativeAppResponsePayload<
@@ -202,14 +207,14 @@ const hasWebKitPostMessage = () =>
 const getWebViewPostMessage = (): NovumPostMessage | null => {
     // Android
     if (hasAndroidPostMessage()) {
-        return (jsonMessage) => {
+        return jsonMessage => {
             window!.tuentiWebView!.postMessage!(jsonMessage);
         };
     }
 
     // iOS
     if (hasWebKitPostMessage()) {
-        return (jsonMessage) => {
+        return jsonMessage => {
             window.webkit!.messageHandlers!.tuentiWebView!.postMessage!(
                 jsonMessage,
             );
@@ -226,7 +231,7 @@ const subscribe = (listener: MessageListener) => {
 };
 
 const unsubscribe = (listener: MessageListener) => {
-    messageListeners = messageListeners.filter((f) => f !== listener);
+    messageListeners = messageListeners.filter(f => f !== listener);
 };
 
 /**
@@ -260,7 +265,7 @@ export const postMessageToNativeApp = <T extends keyof ResponsesFromNativeApp>(
     return new Promise((resolve, reject) => {
         let timedOut = false;
 
-        const listener: ResponseListener = (response) => {
+        const listener: ResponseListener = response => {
             if (response.id === id && !timedOut) {
                 if (response.type === type) {
                     resolve(response.payload);
@@ -299,7 +304,7 @@ window[BRIDGE] = window[BRIDGE] || {
         } catch (e) {
             throw Error(`Problem parsing webview message: ${jsonMessage}`);
         }
-        messageListeners.forEach((f) => f(message));
+        messageListeners.forEach(f => f(message));
     },
 };
 
@@ -315,22 +320,20 @@ export const listenToNativeMessage = <T extends keyof RequestsFromNativeApp>(
         payload: NativeAppRequestPayload<T>,
     ) => Object | void | Promise<Object>,
 ) => {
-    const listener: RequestListener = (message) => {
+    const listener: RequestListener = message => {
         if (message.type === type) {
-            Promise.resolve(handler(message.payload)).then(
-                (responsePayload) => {
-                    const postMessage = getWebViewPostMessage();
-                    if (postMessage) {
-                        postMessage(
-                            JSON.stringify({
-                                type: message.type,
-                                id: message.id,
-                                payload: responsePayload,
-                            }),
-                        );
-                    }
-                },
-            );
+            Promise.resolve(handler(message.payload)).then(responsePayload => {
+                const postMessage = getWebViewPostMessage();
+                if (postMessage) {
+                    postMessage(
+                        JSON.stringify({
+                            type: message.type,
+                            id: message.id,
+                            payload: responsePayload,
+                        }),
+                    );
+                }
+            });
         }
     };
 

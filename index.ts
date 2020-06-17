@@ -11,6 +11,7 @@ export {
     internalNavigation,
     dismiss,
     requestVibration,
+    getDiskSpaceInfo,
 } from './src/device';
 export {
     attachToEmail,

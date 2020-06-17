@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.17.0 - 2020-06-17
+
+-   New function: `getDiskSpaceInfo`
+
 ## v.2.16.0 - 2020-06-12
 
 -   New method `setCustomerHash`. Sets the hash of the current subscription for

@@ -79,6 +79,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [fetchContactsByPhone](#fetchContactsByPhone)
 -   [getAppMetadata](#getAppMetadata)
 -   [setCustomerHash](#setCustomerHash)
+-   [getDiskSpaceInfo](#getDiskSpaceInfo)
 
 ### isWebViewBridgeAvailable
 
@@ -330,7 +331,7 @@ nativeConfirm({
     message: 'Send message?',
     acceptText: 'Yes',
     cancelText: 'No',
-}).then((res) => {
+}).then(res => {
     if (res) {
         console.log('message sent');
     }
@@ -362,7 +363,7 @@ import {nativeAlert} from '@tef-novum/webview-bridge';
 nativeAlert({
     message: 'Purchase completed!',
     title: 'Ok!',
-}).then((res) => {
+}).then(res => {
     console.log('alert closed');
 });
 ```
@@ -398,7 +399,7 @@ nativeMessage({
     message: 'Operation finished!',
     buttonText: 'Ok',
     duration: 5000, // 5 seconds
-}).then((res) => {
+}).then(res => {
     console.log('alert closed');
 });
 ```
@@ -514,7 +515,7 @@ checkPermissionStatus: (feature: string, params?: {[key: string]: string}) => Pr
 import {checkPermissionStatus} from '@tef-novum/webview-bridge';
 
 checkPermissionStatus('notifications', {channelId: 'default'}).then(
-    (hasPermissions) => {
+    hasPermissions => {
         console.log(hasPermissions);
     },
 );
@@ -618,6 +619,27 @@ setCustomerHash(
     'e658ad63bef9b86863b487697dfb75d64bddb6191ec14099abe443655f6b7cc6',
 );
 ```
+
+### getDiskSpaceInfo
+
+Return info about how much free disk space there is in the device
+
+-   Available for app versions 11.10 and higher
+
+```typescript
+getDiskSpaceInfo: () => Promise<{availableBytes: number, totalBytes: number}>;
+```
+
+#### Example
+
+```javascript
+import {getDiskSpaceInfo} from '@tef-novum/webview-bridge';
+
+getDiskSpaceInfo().then(({availableBytes, totalBytes}) => { ... });
+```
+
+-   `availableBytes`: number to see available bytes in the device
+-   `totalBytes`: number to see the total bytes available in the device
 
 ## Error handling
 

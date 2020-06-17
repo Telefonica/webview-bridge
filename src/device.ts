@@ -42,3 +42,11 @@ export const requestVibration = (type: 'error' | 'success'): Promise<void> =>
             type,
         },
     });
+
+export const getDiskSpaceInfo = (): Promise<{
+    availableBytes: number;
+    totalBytes: number;
+}> =>
+    postMessageToNativeApp({
+        type: 'GET_DISK_SPACE_INFO',
+    });

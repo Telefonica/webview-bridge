@@ -622,7 +622,7 @@ setCustomerHash(
 
 ### getDiskSpaceInfo
 
-Return info about how much free disk space there is in the device
+Return info about how much free disk space the device has
 
 -   Available for app versions 11.10 and higher
 
@@ -639,7 +639,7 @@ getDiskSpaceInfo().then(({availableBytes, totalBytes}) => { ... });
 ```
 
 -   `availableBytes`: number to see available bytes in the device
--   `totalBytes`: number to see the total bytes available in the device
+-   `totalBytes`: number to see the total bytes in the device
 
 ## Error handling
 

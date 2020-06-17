@@ -18,140 +18,140 @@ afterEach(() => {
     removeFakeAndroidPostMessage();
 });
 
-test('request sim icc', async cb => {
+test('request sim icc', async (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('SIM_ICC');
             expect(message.payload).toBeUndefined();
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
             payload: {icc: ANY_STRING},
         }),
     });
 
-    requestSimIcc().then(res => {
+    requestSimIcc().then((res) => {
         expect(res).toEqual(ANY_STRING);
         cb();
     });
 });
 
-test('request sim imsi', async cb => {
+test('request sim imsi', async (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('IMSI');
             expect(message.payload).toBeUndefined();
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
             payload: {imsi: ANY_STRING},
         }),
     });
 
-    requestSimImsi().then(res => {
+    requestSimImsi().then((res) => {
         expect(res).toEqual(ANY_STRING);
         cb();
     });
 });
 
-test('request device imei', async cb => {
+test('request device imei', async (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('IMEI');
             expect(message.payload).toBeUndefined();
         },
-        getResponse: message => ({
+        getResponse: (message) => ({
             type: message.type,
             id: message.id,
             payload: {imei: ANY_STRING},
         }),
     });
 
-    requestDeviceImei().then(res => {
+    requestDeviceImei().then((res) => {
         expect(res).toEqual(ANY_STRING);
         cb();
     });
 });
 
-test('request sim icc (failed)', async cb => {
+test('request sim icc (failed)', async (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('SIM_ICC');
             expect(message.payload).toBeUndefined();
         },
         getResponse: () => ({type: 'other', id: ''}),
     });
 
-    requestSimIcc().then(res => {
+    requestSimIcc().then((res) => {
         expect(res).toBeNull();
         cb();
     });
 });
 
-test('request sim imsi (failed)', async cb => {
+test('request sim imsi (failed)', async (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('IMSI');
             expect(message.payload).toBeUndefined();
         },
         getResponse: () => ({type: 'other', id: ''}),
     });
 
-    requestSimImsi().then(res => {
+    requestSimImsi().then((res) => {
         expect(res).toBeNull();
         cb();
     });
 });
 
-test('request device imei (failed)', async cb => {
+test('request device imei (failed)', async (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: message => {
+        checkMessage: (message) => {
             expect(message.type).toBe('IMEI');
             expect(message.payload).toBeUndefined();
         },
         getResponse: () => ({type: 'other', id: ''}),
     });
 
-    requestDeviceImei().then(res => {
+    requestDeviceImei().then((res) => {
         expect(res).toBeNull();
         cb();
     });
 });
 
-test('internal navigation', async cb => {
+test('internal navigation', async (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: msg => {
+        checkMessage: (msg) => {
             expect(msg.type).toBe('INTERNAL_NAVIGATION');
             expect(msg.payload.feature).toBe('notification-settings');
         },
-        getResponse: msg => ({
+        getResponse: (msg) => ({
             type: 'INTERNAL_NAVIGATION',
             id: msg.id,
         }),
     });
 
-    internalNavigation('notification-settings').then(res => {
+    internalNavigation('notification-settings').then((res) => {
         expect(res).toBeUndefined();
         removeFakeAndroidPostMessage();
         cb();
     });
 });
 
-test('dismiss', async cb => {
+test('dismiss', async (cb) => {
     createFakeAndroidPostMessage({
-        checkMessage: msg => {
+        checkMessage: (msg) => {
             expect(msg.type).toBe('DISMISS');
             expect(msg.payload.onCompletionUrl).toBe('http://example.com');
         },
-        getResponse: msg => ({
+        getResponse: (msg) => ({
             type: 'DISMISS',
             id: msg.id,
         }),
     });
 
-    dismiss('http://example.com').then(res => {
+    dismiss('http://example.com').then((res) => {
         expect(res).toBeUndefined();
         removeFakeAndroidPostMessage();
         cb();
@@ -160,11 +160,11 @@ test('dismiss', async cb => {
 
 test('requestVibration', async () => {
     createFakeAndroidPostMessage({
-        checkMessage: msg => {
+        checkMessage: (msg) => {
             expect(msg.type).toBe('VIBRATION');
             expect(msg.payload.type).toBe('success');
         },
-        getResponse: msg => ({
+        getResponse: (msg) => ({
             type: 'VIBRATION',
             id: msg.id,
         }),
@@ -181,10 +181,10 @@ test('getDiskSpaceInfo', async () => {
     const totalBytes = 50;
 
     createFakeAndroidPostMessage({
-        checkMessage: msg => {
+        checkMessage: (msg) => {
             expect(msg.type).toBe('GET_DISK_SPACE_INFO');
         },
-        getResponse: msg => ({
+        getResponse: (msg) => ({
             type: 'GET_DISK_SPACE_INFO',
             id: msg.id,
             payload: {

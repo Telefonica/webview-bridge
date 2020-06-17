@@ -331,7 +331,7 @@ nativeConfirm({
     message: 'Send message?',
     acceptText: 'Yes',
     cancelText: 'No',
-}).then(res => {
+}).then((res) => {
     if (res) {
         console.log('message sent');
     }
@@ -363,7 +363,7 @@ import {nativeAlert} from '@tef-novum/webview-bridge';
 nativeAlert({
     message: 'Purchase completed!',
     title: 'Ok!',
-}).then(res => {
+}).then((res) => {
     console.log('alert closed');
 });
 ```
@@ -399,7 +399,7 @@ nativeMessage({
     message: 'Operation finished!',
     buttonText: 'Ok',
     duration: 5000, // 5 seconds
-}).then(res => {
+}).then((res) => {
     console.log('alert closed');
 });
 ```
@@ -515,7 +515,7 @@ checkPermissionStatus: (feature: string, params?: {[key: string]: string}) => Pr
 import {checkPermissionStatus} from '@tef-novum/webview-bridge';
 
 checkPermissionStatus('notifications', {channelId: 'default'}).then(
-    hasPermissions => {
+    (hasPermissions) => {
         console.log(hasPermissions);
     },
 );

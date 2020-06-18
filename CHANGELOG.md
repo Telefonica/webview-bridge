@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v.2.17.0 - 2020-06-17
+## v.2.17.0 - 2020-06-18
 
 -   New function: `getDiskSpaceInfo`
 

@@ -5,6 +5,7 @@ import {
     internalNavigation,
     dismiss,
     requestVibration,
+    getDiskSpaceInfo,
 } from '../device';
 import {
     createFakeAndroidPostMessage,
@@ -172,5 +173,32 @@ test('requestVibration', async () => {
     const res = await requestVibration('success');
 
     expect(res).toBeUndefined();
+    removeFakeAndroidPostMessage();
+});
+
+test('getDiskSpaceInfo', async () => {
+    const availableBytes = 50;
+    const totalBytes = 50;
+
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_DISK_SPACE_INFO');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_DISK_SPACE_INFO',
+            id: msg.id,
+            payload: {
+                availableBytes,
+                totalBytes,
+            },
+        }),
+    });
+
+    const res = await getDiskSpaceInfo();
+
+    expect(res).toMatchObject({
+        availableBytes,
+        totalBytes,
+    });
     removeFakeAndroidPostMessage();
 });

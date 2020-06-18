@@ -166,6 +166,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    GET_DISK_SPACE_INFO: {
+        type: 'GET_DISK_SPACE_INFO';
+        id: string;
+        payload: {availableBytes: number; totalBytes: number};
+    };
 };
 
 export type NativeAppResponsePayload<

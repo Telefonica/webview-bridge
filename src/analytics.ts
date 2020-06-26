@@ -67,6 +67,9 @@ const withAnalytics = ({
     onIos: (fb: IosFirebase) => Promise<void>;
     onWeb: (ga: WebGoogleAnalytics) => Promise<void>;
 }) => {
+    if (typeof window === 'undefined') {
+        return Promise.resolve();
+    }
     if (window.AnalyticsWebInterface) {
         // Call Android interface
         return onAndroid(window.AnalyticsWebInterface);

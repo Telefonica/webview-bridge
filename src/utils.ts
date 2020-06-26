@@ -66,7 +66,7 @@ export const updateNavigationBar = ({
             },
         });
     } else {
-        if (typeof title !== 'undefined') {
+        if (typeof title !== 'undefined' && typeof document !== 'undefined') {
             document.title = title;
         }
         return Promise.resolve();
@@ -80,7 +80,9 @@ export const setWebViewTitle = (title: string): Promise<void> => {
     if (isWebViewBridgeAvailable()) {
         return updateNavigationBar({title});
     } else {
-        document.title = title;
+        if (typeof document !== 'undefined') {
+            document.title = title;
+        }
         return Promise.resolve();
     }
 };

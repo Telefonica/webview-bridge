@@ -191,10 +191,15 @@ type MessageListener = RequestListener | ResponseListener;
 const BRIDGE = '__tuenti_webview_bridge';
 
 const hasAndroidPostMessage = () =>
-    !!(window.tuentiWebView && window.tuentiWebView.postMessage);
+    !!(
+        typeof window !== 'undefined' &&
+        window.tuentiWebView &&
+        window.tuentiWebView.postMessage
+    );
 
 const hasWebKitPostMessage = () =>
     !!(
+        typeof window !== 'undefined' &&
         window.webkit &&
         window.webkit.messageHandlers &&
         window.webkit.messageHandlers.tuentiWebView &&
@@ -205,10 +210,14 @@ const hasWebKitPostMessage = () =>
  * Maybe returns postMessage function exposed by native apps
  */
 const getWebViewPostMessage = (): NovumPostMessage | null => {
+    if (typeof window === 'undefined') {
+        return null;
+    }
+
     // Android
     if (hasAndroidPostMessage()) {
         return (jsonMessage) => {
-            window!.tuentiWebView!.postMessage!(jsonMessage);
+            window.tuentiWebView!.postMessage!(jsonMessage);
         };
     }
 
@@ -296,17 +305,19 @@ export const postMessageToNativeApp = <T extends keyof ResponsesFromNativeApp>(
 /**
  * Initiates WebApp postMessage function, which will be called by native apps
  */
-window[BRIDGE] = window[BRIDGE] || {
-    postMessage: (jsonMessage: string) => {
-        let message: any;
-        try {
-            message = JSON.parse(jsonMessage);
-        } catch (e) {
-            throw Error(`Problem parsing webview message: ${jsonMessage}`);
-        }
-        messageListeners.forEach((f) => f(message));
-    },
-};
+if (typeof window !== 'undefined') {
+    window[BRIDGE] = window[BRIDGE] || {
+        postMessage: (jsonMessage: string) => {
+            let message: any;
+            try {
+                message = JSON.parse(jsonMessage);
+            } catch (e) {
+                throw Error(`Problem parsing webview message: ${jsonMessage}`);
+            }
+            messageListeners.forEach((f) => f(message));
+        },
+    };
+}
 
 export type NativeEventHandler = ({
     event,

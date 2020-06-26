@@ -17,7 +17,9 @@ export const nativeConfirm = ({
             payload: {message, title, acceptText, cancelText},
         }).then(({result}) => result);
     } else {
-        return Promise.resolve(window.confirm(message));
+        return Promise.resolve(
+            typeof window === 'undefined' ? false : window.confirm(message),
+        );
     }
 };
 
@@ -36,7 +38,9 @@ export const nativeAlert = ({
             payload: {title, message, buttonText},
         });
     } else {
-        window.alert(message);
+        if (typeof window !== 'undefined') {
+            window.alert(message);
+        }
         return Promise.resolve();
     }
 };
@@ -58,7 +62,9 @@ export const nativeMessage = ({
             payload: {message, duration, buttonText, type},
         });
     } else {
-        window.alert(message);
+        if (typeof window !== 'undefined') {
+            window.alert(message);
+        }
         return Promise.resolve();
     }
 };

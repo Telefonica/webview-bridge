@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.17.1 - 2020-06-26
+
+-   SSR friendly. Not using `window` or `document` when not available
+
 ## v.2.17.0 - 2020-06-18
 
 -   New function: `getDiskSpaceInfo`

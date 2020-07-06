@@ -620,6 +620,17 @@ setCustomerHash(
 );
 ```
 
+### getCustomerHash
+
+Gets the hash of the current subscription for the customer, which is used for
+tracking purposes.
+
+```javascript
+import {getCustomerHash} from '@tef-novum/webview-bridge';
+
+getCustomerHash().then(({hash}) => { ... });
+```
+
 ### getDiskSpaceInfo
 
 Return info about how much free disk space the device has

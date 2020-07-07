@@ -209,6 +209,8 @@ declare export function getAppMetadata(
 
 declare export function setCustomerHash(hash: string): Promise<void>;
 
+declare export function getCustomerHash(): Promise<string>;
+
 declare export function getDiskSpaceInfo(): Promise<{|
     availableBytes: number,
     totalBytes: number,

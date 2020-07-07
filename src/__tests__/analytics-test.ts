@@ -4,6 +4,7 @@ import {
     setUserProperty,
     logTiming,
     setCustomerHash,
+    getCustomerHash,
 } from '../analytics';
 import {
     createFakeAndroidPostMessage,
@@ -226,4 +227,22 @@ test('set customer hash', async () => {
 
     expect(res).toBeUndefined();
     removeFakeAndroidPostMessage();
+});
+
+test('get customer hash', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_CUSTOMER_HASH');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_CUSTOMER_HASH',
+            id: msg.id,
+            payload: {hash: 'ANY_HASH'},
+        }),
+    });
+
+    await getCustomerHash().then((res) => {
+        expect(res).toMatchObject({hash: 'ANY_HASH'});
+        removeFakeAndroidPostMessage();
+    });
 });

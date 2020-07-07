@@ -348,3 +348,8 @@ export const setCustomerHash = (hash: string): Promise<void> =>
             hash,
         },
     });
+
+export const getCustomerHash = (): Promise<{hash: string}> =>
+    postMessageToNativeApp({
+        type: 'GET_CUSTOMER_HASH',
+    });

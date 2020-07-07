@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v.2.18.0 - 2020-07-07
+
+-   New method `getCustomerHash`. Fetches the current customer subscription hash
+    from the native app (for tracking purposes). For this method to return a
+    valid hash, the `setCustomerHash` method has to have been called before
+    (typically done from account dashboard page)
+
 ## v.2.17.1 - 2020-06-26
 
 -   SSR friendly. Not using `window` or `document` when not available

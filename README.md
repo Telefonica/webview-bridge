@@ -253,7 +253,7 @@ updateNavigationBar = ({
 -   `expandedTitle`: updates NavigationBar expandedTitle. If the value is an
     empty string, the expanded navigation bar will not be shown. Only available
     in native app versions >= 11.8
--   `showBackButton`: shows or hides NavigationBar Back button
+-   `showBackButton`: shows or hides left icon in NavigationBar. Depending on the navigation mode, could be a close (X) or back (<) icon
 -   `showReloadButton`: shows or hides NavigationBar Reload button
 -   `showProfileButton`: shows or hides NavigationBar Profile button (which
     navigates to user profile). Only available in native app versions >= 11.7

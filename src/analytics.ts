@@ -92,13 +92,13 @@ const withAnalytics = ({
     }
 };
 
-type TrackingEvent = {
+type TrackingEvent = Readonly<{
     category: string; // Typically the object that was interacted with (e.g. 'Video')
     action: string; // The type of interaction (e.g. 'play')
     label?: string; // Useful for categorizing events (e.g. 'Fall Campaign')
     value?: number; // A numeric value associated with the event (e.g. 43)
     [key: string]: any;
-};
+}>;
 
 const formatLabel = (label: string) =>
     // Normalize to NFD (normal form decomposes and delete Combining Diacritical Marks Unicode
@@ -169,12 +169,12 @@ export const logTiming = ({
     variable,
     value,
     label,
-}: {
+}: Readonly<{
     category?: string; // For categorizing all user timing variables into logical groups (e.g. 'JS Dependencies').
     variable: string; // The variable being recorded (e.g. 'load').
     value: number; // The number of milliseconds in elapsed time to report (e.g. 20).
     label?: string; // Can be used to add flexibility in visualizing user timings in the reports (e.g. 'Google CDN').
-}) => {
+}>) => {
     if (!category || !variable || !value) {
         console.warn(
             'Analytics timing should have "category", "variable" and "value"',

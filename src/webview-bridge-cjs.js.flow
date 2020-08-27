@@ -2,13 +2,13 @@
 // hand written definitions based on auto-generated d.ts
 
 // analytics
-export type TrackingEvent = {
+export type TrackingEvent = $ReadOnly<{
     category: string, // Typically the object that was interacted with (e.g. 'Video')
     action: string, // The type of interaction (e.g. 'play')
     label?: string, // Useful for categorizing events (e.g. 'Fall Campaign')
     value?: number, // A numeric value associated with the event (e.g. 43)
     ...
-};
+}>;
 
 export type CustomDimensionIdx =
     | 1
@@ -41,12 +41,14 @@ declare export var CD_EVENT_VALUE: CustomDimensionIdx;
 
 declare export function logEvent(TrackingEvent): Promise<void>;
 
-declare export function logTiming({|
-    category?: string,
-    variable: string,
-    value: number,
-    label?: string,
-|}): Promise<void>;
+declare export function logTiming(
+    $ReadOnly<{|
+        category?: string,
+        variable: string,
+        value: number,
+        label?: string,
+    |}>,
+): Promise<void>;
 
 declare export function setScreenName(
     screenName: string,

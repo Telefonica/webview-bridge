@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.2.18.1 - 2020-08-27
+
+-   Fix `TrackingEvent` type to be `readonly`, so analytics functions can accept
+    immutable events too.
+
 ## v.2.18.0 - 2020-07-07
 
 -   New method `getCustomerHash`. Fetches the current customer subscription hash

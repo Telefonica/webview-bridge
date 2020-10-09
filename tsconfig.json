@@ -7,6 +7,7 @@
         "lib": ["es2018", "dom"],
         "declaration": true,
         "downlevelIteration": true,
-        "esModuleInterop": true
+        "esModuleInterop": true,
+        "skipLibCheck": true // Skip type checking of declaration files
     }
 }

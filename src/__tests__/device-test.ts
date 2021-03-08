@@ -214,7 +214,7 @@ test('getEsimInfo', async () => {
             type: 'GET_ESIM_INFO',
             id: msg.id,
             payload: {
-                supportsEsim
+                supportsEsim,
             },
         }),
     });
@@ -222,7 +222,7 @@ test('getEsimInfo', async () => {
     const res = await getEsimInfo();
 
     expect(res).toMatchObject({
-        supportsEsim
+        supportsEsim,
     });
     removeFakeAndroidPostMessage();
 });

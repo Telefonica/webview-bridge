@@ -642,6 +642,16 @@ Return info about how much free disk space the device has
 getDiskSpaceInfo: () => Promise<{availableBytes: number, totalBytes: number}>;
 ```
 
+### getEsimInfo
+
+Return info about the esim capabilities of the device
+
+-   Available for app versions 12.3 and higher
+
+```typescript
+getEsimInfo: () => Promise<{supportsEsim: boolean}>;
+```
+
 #### Example
 
 ```javascript

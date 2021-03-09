@@ -58,4 +58,4 @@ export const getEsimInfo = (): Promise<{
         type: 'GET_ESIM_INFO'
     }).catch(() => ({
         supportsEsim: false,
-    }))
+    }));

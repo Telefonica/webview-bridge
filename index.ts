@@ -12,6 +12,7 @@ export {
     dismiss,
     requestVibration,
     getDiskSpaceInfo,
+    getEsimInfo,
 } from './src/device';
 export {
     attachToEmail,

@@ -50,7 +50,7 @@ export const getDiskSpaceInfo = (): Promise<{
     postMessageToNativeApp({
         type: 'GET_DISK_SPACE_INFO',
     });
- 
+
 export const getEsimInfo = (): Promise<{
     supportsEsim: boolean;
 }> =>

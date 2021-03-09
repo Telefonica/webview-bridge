@@ -55,7 +55,7 @@ export const getEsimInfo = (): Promise<{
     supportsEsim: boolean;
 }> =>
     postMessageToNativeApp({
-        type: 'GET_ESIM_INFO'
+        type: 'GET_ESIM_INFO',
     }).catch(() => ({
         supportsEsim: false,
     }));

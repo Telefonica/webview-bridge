@@ -6,6 +6,7 @@ import {
     dismiss,
     requestVibration,
     getDiskSpaceInfo,
+    getEsimInfo,
 } from '../device';
 import {
     createFakeAndroidPostMessage,

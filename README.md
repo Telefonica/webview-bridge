@@ -80,6 +80,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [getAppMetadata](#getAppMetadata)
 -   [setCustomerHash](#setCustomerHash)
 -   [getDiskSpaceInfo](#getDiskSpaceInfo)
+-   [getEsimInfo](#getEsimInfo)
 
 ### isWebViewBridgeAvailable
 
@@ -652,6 +653,26 @@ getDiskSpaceInfo().then(({availableBytes, totalBytes}) => { ... });
 
 -   `availableBytes`: number to see available bytes in the device
 -   `totalBytes`: number to see the total bytes in the device
+
+### getEsimInfo
+
+Return info about the esim capabilities of the device
+
+-   Available for app versions 12.3 and higher
+
+```typescript
+getEsimInfo: () => Promise<{supportsEsim: boolean}>;
+```
+
+#### Example
+
+```javascript
+import {getEsimInfo} from '@tef-novum/webview-bridge';
+
+getEsimInfo().then(({supportsEsim}) => { ... });
+```
+
+-   `supportsEsim`: true if the device supports eSIM, false otherwise
 
 ## Error handling
 

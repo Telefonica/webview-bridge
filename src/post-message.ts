@@ -176,6 +176,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {availableBytes: number; totalBytes: number};
     };
+    GET_ESIM_INFO: {
+        type: 'GET_ESIM_INFO';
+        id: string;
+        payload: {supportsEsim: boolean};
+    };
 };
 
 export type NativeAppResponsePayload<

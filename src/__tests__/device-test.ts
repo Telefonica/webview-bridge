@@ -6,6 +6,7 @@ import {
     dismiss,
     requestVibration,
     getDiskSpaceInfo,
+    getEsimInfo,
 } from '../device';
 import {
     createFakeAndroidPostMessage,
@@ -199,6 +200,30 @@ test('getDiskSpaceInfo', async () => {
     expect(res).toMatchObject({
         availableBytes,
         totalBytes,
+    });
+    removeFakeAndroidPostMessage();
+});
+
+test('getEsimInfo', async () => {
+    const supportsEsim = true;
+
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_ESIM_INFO');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_ESIM_INFO',
+            id: msg.id,
+            payload: {
+                supportsEsim,
+            },
+        }),
+    });
+
+    const res = await getEsimInfo();
+
+    expect(res).toMatchObject({
+        supportsEsim,
     });
     removeFakeAndroidPostMessage();
 });

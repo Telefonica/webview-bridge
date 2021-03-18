@@ -217,3 +217,7 @@ declare export function getDiskSpaceInfo(): Promise<{|
     availableBytes: number,
     totalBytes: number,
 |}>;
+
+declare export function getEsimInfo(): Promise<{|
+    supportsEsim: boolean;
+|}>;

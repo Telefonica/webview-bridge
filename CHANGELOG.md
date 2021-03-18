@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.19 - 2021-03-19
+
+-   Add `getEsimInfo` method.
+
 ## v.2.18.1 - 2020-08-27
 
 -   Fix `TrackingEvent` type to be `readonly`, so analytics functions can accept

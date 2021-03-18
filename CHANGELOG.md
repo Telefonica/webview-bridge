@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v.2.19 - 2021-03-19
+## v.2.19.0 - 2021-03-19
 
 -   Add `getEsimInfo` method.
 

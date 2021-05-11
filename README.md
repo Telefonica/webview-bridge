@@ -674,6 +674,28 @@ getEsimInfo().then(({supportsEsim}) => { ... });
 
 -   `supportsEsim`: true if the device supports eSIM, false otherwise
 
+### setCustomerHash
+
+Sets a property related to some specific tracking system
+
+-   Available for app versions 12.4 and higher
+
+```typescript
+setTrackingProperty: (system: string, name: string, value?: string) => Promise<void>;
+```
+
+-   `system`: Tracking system that will handle the property
+-   `name`: name of the property
+-   `value`: value of the property (nullable)
+
+#### Example
+
+```javascript
+import {setTrackingProperty} from '@tef-novum/webview-bridge';
+
+setTrackingProperty('some_system', 'some_property_name', 'some_property_value');
+```
+
 ## Error handling
 
 If an error occurs, promise will be rejected with an error object:

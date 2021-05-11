@@ -262,7 +262,11 @@ test('set tracking property', async () => {
         }),
     });
 
-    const res = await setTrackingProperty('any_system', 'any_name', 'any_value');
+    const res = await setTrackingProperty(
+        'any_system',
+        'any_name',
+        'any_value',
+    );
 
     expect(res).toBeUndefined();
     removeFakeAndroidPostMessage();

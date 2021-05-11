@@ -184,7 +184,7 @@ export type ResponsesFromNativeApp = {
     SET_TRACKING_PROPERTY: {
         type: 'SET_TRACKING_PROPERTY';
         id: string;
-        payload: void
+        payload: void;
     };
 };
 

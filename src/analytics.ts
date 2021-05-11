@@ -354,12 +354,16 @@ export const getCustomerHash = (): Promise<{hash: string}> =>
         type: 'GET_CUSTOMER_HASH',
     });
 
-export const setTrackingProperty = (system: string, name: string, value?: string): Promise<void> =>
+export const setTrackingProperty = (
+    system: string,
+    name: string,
+    value?: string,
+): Promise<void> =>
     postMessageToNativeApp({
         type: 'SET_TRACKING_PROPERTY',
         payload: {
             system: system,
             name: name,
-            value: value
-        }
+            value: value,
+        },
     });

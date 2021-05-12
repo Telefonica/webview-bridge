@@ -249,12 +249,12 @@ test('get customer hash', async () => {
 });
 
 test('set tracking property for palitagem', async () => {
-    const any_system = 'palitagem';
+    const anySystem = 'palitagem';
 
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
             expect(msg.type).toBe('SET_TRACKING_PROPERTY');
-            expect(msg.payload.system).toBe(any_system);
+            expect(msg.payload.system).toBe(anySystem);
             expect(msg.payload.name).toBe('any_name');
             expect(msg.payload.value).toBe('any_value');
         },
@@ -264,7 +264,7 @@ test('set tracking property for palitagem', async () => {
         }),
     });
 
-    const res = await setTrackingProperty(any_system, 'any_name', 'any_value');
+    const res = await setTrackingProperty(anySystem, 'any_name', 'any_value');
 
     expect(res).toBeUndefined();
     removeFakeAndroidPostMessage();

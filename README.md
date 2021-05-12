@@ -674,7 +674,7 @@ getEsimInfo().then(({supportsEsim}) => { ... });
 
 -   `supportsEsim`: true if the device supports eSIM, false otherwise
 
-### setCustomerHash
+### setTrackingProperty
 
 Sets a property related to some specific tracking system
 

@@ -355,7 +355,7 @@ export const getCustomerHash = (): Promise<{hash: string}> =>
     });
 
 export const setTrackingProperty = (
-    system: string,
+    system: 'palitagem' | 'medalia',
     name: string,
     value?: string,
 ): Promise<void> =>

@@ -366,4 +366,6 @@ export const setTrackingProperty = (
             name: name,
             value: value,
         },
-    }).catch(() => {});
+    }).catch(() => {
+        // do nothing
+    });

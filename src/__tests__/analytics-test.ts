@@ -5,6 +5,7 @@ import {
     logTiming,
     setCustomerHash,
     getCustomerHash,
+    setTrackingProperty,
 } from '../analytics';
 import {
     createFakeAndroidPostMessage,
@@ -245,4 +246,26 @@ test('get customer hash', async () => {
         expect(res).toMatchObject({hash: 'ANY_HASH'});
         removeFakeAndroidPostMessage();
     });
+});
+
+test('set tracking property for palitagem', async () => {
+    const anySystem = 'palitagem';
+
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SET_TRACKING_PROPERTY');
+            expect(msg.payload.system).toBe(anySystem);
+            expect(msg.payload.name).toBe('any_name');
+            expect(msg.payload.value).toBe('any_value');
+        },
+        getResponse: (msg) => ({
+            type: 'SET_TRACKING_PROPERTY',
+            id: msg.id,
+        }),
+    });
+
+    const res = await setTrackingProperty(anySystem, 'any_name', 'any_value');
+
+    expect(res).toBeUndefined();
+    removeFakeAndroidPostMessage();
 });

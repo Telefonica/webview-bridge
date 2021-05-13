@@ -219,5 +219,11 @@ declare export function getDiskSpaceInfo(): Promise<{|
 |}>;
 
 declare export function getEsimInfo(): Promise<{|
-    supportsEsim: boolean;
+    supportsEsim: boolean,
 |}>;
+
+declare export function setTrackingProperty(
+    system: 'palitagem' | 'medalia',
+    name: string,
+    value?: string,
+): Promise<void>;

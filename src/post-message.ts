@@ -181,6 +181,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {supportsEsim: boolean};
     };
+    SET_TRACKING_PROPERTY: {
+        type: 'SET_TRACKING_PROPERTY';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

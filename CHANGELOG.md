@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.2.20.0 - 2021-05-13
+
+-   Add `setTrackingProperty` method.
+
 ## v.2.19.0 - 2021-03-19
 
 -   Add `getEsimInfo` method.

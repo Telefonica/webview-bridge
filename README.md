@@ -681,7 +681,7 @@ Sets a property related to some specific tracking system
 -   Available for app versions 12.4 and higher
 
 ```typescript
-setTrackingProperty: (system: 'palitagem' | 'medalia', name: string, value?: string) => Promise<void>;
+setTrackingProperty: (system: 'palitagem' | 'medallia', name: string, value?: string) => Promise<void>;
 ```
 
 -   `system`: Tracking system that will handle the property

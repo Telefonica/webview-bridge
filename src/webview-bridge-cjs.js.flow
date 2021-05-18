@@ -223,7 +223,7 @@ declare export function getEsimInfo(): Promise<{|
 |}>;
 
 declare export function setTrackingProperty(
-    system: 'palitagem' | 'medalia',
+    system: 'palitagem' | 'medallia',
     name: string,
     value?: string,
 ): Promise<void>;

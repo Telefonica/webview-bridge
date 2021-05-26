@@ -38,5 +38,6 @@ export {
     CD_EVENT_VALUE,
     setCustomerHash,
     getCustomerHash,
+    setTrackingProperty,
 } from './src/analytics';
 export {renewSession, onSessionRenewed} from './src/sessions';

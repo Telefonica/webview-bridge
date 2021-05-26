@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v.2.20.2 - 2021-05-25
+
+-   Expose `setTrackingProperty`.
+
+## v.2.20.1 - 2021-05-19
+
+-   `setTrackingProperty`: fix typo in medallia.
+
 ## v.2.20.0 - 2021-05-13
 
 -   Add `setTrackingProperty` method.

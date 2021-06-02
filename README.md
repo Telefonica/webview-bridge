@@ -81,6 +81,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [setCustomerHash](#setCustomerHash)
 -   [getDiskSpaceInfo](#getDiskSpaceInfo)
 -   [getEsimInfo](#getEsimInfo)
+-   [setTrackingProperty](#setTrackingProperty)
 
 ### isWebViewBridgeAvailable
 

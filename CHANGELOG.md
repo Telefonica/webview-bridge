@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v.3.0.0 - 2021-07-22
+
+-   **Breaking change**: WebView Bridge will be disabled inside iframes by
+    default. It can be enabled by setting a `data-enable-webview-bridge` to the
+    `iframe` element.
+
 ## v.2.20.2 - 2021-05-25
 
 -   Expose `setTrackingProperty`.

@@ -258,11 +258,24 @@ const unsubscribe = (listener: MessageListener) => {
     messageListeners = messageListeners.filter((f) => f !== listener);
 };
 
+const isDisabledFromIframe = () => {
+    if (typeof window === 'undefined') {
+        return false;
+    }
+
+    if (!window.frameElement) {
+        return false;
+    }
+
+    return !window.frameElement.hasAttribute('data-enable-webview-bridge');
+};
+
 /**
  * Returns true if there is a WebView Bridge installed
  */
 export const isWebViewBridgeAvailable = (): boolean =>
-    hasAndroidPostMessage() || hasWebKitPostMessage();
+    !isDisabledFromIframe() &&
+    (hasAndroidPostMessage() || hasWebKitPostMessage());
 
 /**
  * Send message to native app and waits for response

@@ -28,16 +28,46 @@ test('webview bridge unavailable', () => {
     expect(isWebViewBridgeAvailable()).toBe(false);
 });
 
-test('android webview  bridge availability', () => {
-    createFakeAndroidPostMessage();
+test.each`
+    host         | mockHost
+    ${'android'} | ${createFakeAndroidPostMessage}
+    ${'webkit'}  | ${createFakeWebKitPostMessage}
+`('$host webview bridge availability', ({mockHost}) => {
+    mockHost();
+
+    // Out of an iframe
+    Object.defineProperty(window, 'frameElement', {
+        get: () => null,
+        configurable: true,
+    });
+    expect(isWebViewBridgeAvailable()).toBe(true);
+
+    // Inside an iframe that has no flag to enable it
+    const hasNoDataEnableWebviewBridge = jest.fn(() => false);
+    Object.defineProperty(window, 'frameElement', {
+        get: () => ({
+            hasAttribute: hasNoDataEnableWebviewBridge,
+        }),
+        configurable: true,
+    });
+    expect(isWebViewBridgeAvailable()).toBe(false);
+    expect(hasNoDataEnableWebviewBridge).toHaveBeenCalledWith(
+        'data-enable-webview-bridge',
+    );
+
+    // Inside an iframe that has a flag to enable it
+    const hasDataEnableWebviewBridge = jest.fn(() => true);
+    Object.defineProperty(window, 'frameElement', {
+        get: () => ({
+            hasAttribute: hasDataEnableWebviewBridge,
+        }),
+        configurable: true,
+    });
 
     expect(isWebViewBridgeAvailable()).toBe(true);
-});
-
-test('webkit webview  bridge availability', () => {
-    createFakeWebKitPostMessage();
-
-    expect(isWebViewBridgeAvailable()).toBe(true);
+    expect(hasNoDataEnableWebviewBridge).toHaveBeenCalledWith(
+        'data-enable-webview-bridge',
+    );
 });
 
 test('post message to native app: no bridge', async (cb) => {

@@ -92,6 +92,11 @@ fallbacks in case the bridge is not available.
 isWebViewBridgeAvailable: () => boolean;
 ```
 
+#### Inside an `iframe`
+
+By default, the bridge will be disabled inside an iframe. If you want to enable
+it, add a `data-enable-webview-bridge` attribute to the host `iframe` element.
+
 #### Example
 
 ```javascript

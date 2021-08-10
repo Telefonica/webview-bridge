@@ -189,12 +189,11 @@ export type ResponsesFromNativeApp = {
 };
 
 export type NativeAppResponsePayload<
-    Type extends keyof ResponsesFromNativeApp
+    Type extends keyof ResponsesFromNativeApp,
 > = ResponsesFromNativeApp[Type]['payload'];
 
-type NativeAppRequestPayload<
-    Type extends keyof RequestsFromNativeApp
-> = RequestsFromNativeApp[Type]['payload'];
+type NativeAppRequestPayload<Type extends keyof RequestsFromNativeApp> =
+    RequestsFromNativeApp[Type]['payload'];
 
 type ResponseFromNative = ResponsesFromNativeApp[keyof ResponsesFromNativeApp];
 type RequestFromNative = RequestsFromNativeApp[keyof RequestsFromNativeApp];
@@ -347,11 +346,9 @@ if (typeof window !== 'undefined') {
     };
 }
 
-export type NativeEventHandler = ({
-    event,
-}: {
-    event: string;
-}) => {action: 'default'};
+export type NativeEventHandler = ({event}: {event: string}) => {
+    action: 'default';
+};
 
 export const listenToNativeMessage = <T extends keyof RequestsFromNativeApp>(
     type: T,

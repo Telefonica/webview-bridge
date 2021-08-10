@@ -127,7 +127,7 @@ export const reportStatus = ({
     feature: 'ACCOUNT';
     status: 'CRITICAL' | 'GOOD' | 'BAD';
     reason: string;
-}) =>
+}): Promise<NativeAppResponsePayload<'STATUS_REPORT'>> =>
     postMessageToNativeApp({
         type: 'STATUS_REPORT',
         payload: {feature, status, reason},

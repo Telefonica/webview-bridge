@@ -12,7 +12,7 @@
         "build": "rimraf dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && ncp ./src/webview-bridge-cjs.js.flow ./dist/webview-bridge-cjs.js.flow",
         "test": "jest --coverage",
         "prettier-check": "prettier --check src/**/*.ts **/*.js **/*.json **/*.yml **/*.md",
-        "lint": "eslint --report-unused-disable-directives src/**/*.ts",
+        "lint": "eslint --report-unused-disable-directives 'src/**/*.ts'",
         "ts-check": "tsc --project tsconfig.json --noEmit",
         "fix-code": "yarn lint -- --fix && yarn prettier -- --write",
         "ci": "yarn prettier-check && yarn lint && yarn ts-check && yarn test --ci && yarn build",

@@ -18,4 +18,5 @@ rules:
     '@typescript-eslint/ban-types': off
     '@typescript-eslint/no-explicit-any': off
     '@typescript-eslint/array-type': [error, {default: 'generic'}]
-    '@typescript-eslint/ban-ts-ignore': off
+    '@typescript-eslint/ban-ts-comment': off
+    '@typescript-eslint/explicit-module-boundary-types': error

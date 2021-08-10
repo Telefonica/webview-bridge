@@ -355,7 +355,7 @@ export const listenToNativeMessage = <T extends keyof RequestsFromNativeApp>(
     handler: (
         payload: NativeAppRequestPayload<T>,
     ) => Object | void | Promise<Object>,
-) => {
+): (() => void) => {
     const listener: RequestListener = (message) => {
         if (message.type === type) {
             Promise.resolve(handler(message.payload)).then(
@@ -382,7 +382,9 @@ export const listenToNativeMessage = <T extends keyof RequestsFromNativeApp>(
     };
 };
 
-export const onNativeEvent = (eventHandler: NativeEventHandler) => {
+export const onNativeEvent = (
+    eventHandler: NativeEventHandler,
+): (() => void) => {
     const handler = (payload: NativeAppRequestPayload<'NATIVE_EVENT'>) => {
         const response = eventHandler({
             event: payload.event,
@@ -398,4 +400,4 @@ export const onNativeEvent = (eventHandler: NativeEventHandler) => {
 
 export const onSessionRenewal = (
     handler: (payload: {accessToken: string}) => void,
-) => listenToNativeMessage('SESSION_RENEWED', handler);
+): (() => void) => listenToNativeMessage('SESSION_RENEWED', handler);

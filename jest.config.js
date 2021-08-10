@@ -17,4 +17,5 @@ module.exports = {
         '!**/__tests__/**',
         '!**/dist/**',
     ],
+    testEnvironment: 'jsdom',
 };

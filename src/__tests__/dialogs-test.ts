@@ -15,7 +15,7 @@ afterEach(() => {
     removeFakeAndroidPostMessage();
 });
 
-test('native alert', async (cb) => {
+test('native alert', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('ALERT');
@@ -37,11 +37,11 @@ test('native alert', async (cb) => {
         buttonText: ANY_BUTTON_TEXT,
     }).then((res) => {
         expect(res).toBeUndefined();
-        cb();
+        done();
     });
 });
 
-test('native confirm', async (cb) => {
+test('native confirm', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('CONFIRM');
@@ -66,11 +66,11 @@ test('native confirm', async (cb) => {
         cancelText: ANY_CANCEL_TEXT,
     }).then((res) => {
         expect(res).toBe(true);
-        cb();
+        done();
     });
 });
 
-test('native message', async (cb) => {
+test('native message', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('MESSAGE');
@@ -92,11 +92,11 @@ test('native message', async (cb) => {
         buttonText: ANY_BUTTON_TEXT,
     }).then((res) => {
         expect(res).toBeUndefined();
-        cb();
+        done();
     });
 });
 
-test('native alert fallbacks to browser alert', async (cb) => {
+test('native alert fallbacks to browser alert', (done) => {
     const alert = jest.fn();
     window.alert = alert;
 
@@ -107,13 +107,11 @@ test('native alert fallbacks to browser alert', async (cb) => {
         expect(res).toBeUndefined();
         expect(alert.mock.calls.length).toBe(1);
         expect(alert.mock.calls[0][0]).toBe(ANY_MESSAGE);
-        cb();
+        done();
     });
-
-    delete window.alert;
 });
 
-test('native confirm fallbacks to browser confirm', async (cb) => {
+test('native confirm fallbacks to browser confirm', (done) => {
     const confirm = jest.fn().mockReturnValue(true);
 
     window.confirm = confirm;
@@ -126,13 +124,11 @@ test('native confirm fallbacks to browser confirm', async (cb) => {
         expect(res).toBe(true);
         expect(confirm.mock.calls.length).toBe(1);
         expect(confirm.mock.calls[0][0]).toBe(ANY_MESSAGE);
-        cb();
+        done();
     });
-
-    delete window.confirm;
 });
 
-test('native message fallbacks to browser alert', async (cb) => {
+test('native message fallbacks to browser alert', (done) => {
     const alert = jest.fn();
     window.alert = alert;
 
@@ -142,8 +138,6 @@ test('native message fallbacks to browser alert', async (cb) => {
         expect(res).toBeUndefined();
         expect(alert.mock.calls.length).toBe(1);
         expect(alert.mock.calls[0][0]).toBe(ANY_MESSAGE);
-        cb();
+        done();
     });
-
-    delete window.alert;
 });

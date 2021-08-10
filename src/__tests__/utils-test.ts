@@ -22,7 +22,7 @@ afterEach(() => {
     removeFakeAndroidPostMessage();
 });
 
-test('attach to email', (cb) => {
+test('attach to email', (done) => {
     const PARAMS = {
         url: 'any-url',
         subject: 'any-subject',
@@ -44,11 +44,11 @@ test('attach to email', (cb) => {
 
     attachToEmail(PARAMS).then((res) => {
         expect(res).toBeUndefined();
-        cb();
+        done();
     });
 });
 
-test('share', (cb) => {
+test('share', (done) => {
     const PARAMS = {
         url: 'any-url',
         fileName: 'file-name',
@@ -68,11 +68,11 @@ test('share', (cb) => {
 
     share(PARAMS).then((res) => {
         expect(res).toBeUndefined();
-        cb();
+        done();
     });
 });
 
-test('set webview title', (cb) => {
+test('set webview title', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('NAVIGATION_BAR');
@@ -86,21 +86,21 @@ test('set webview title', (cb) => {
 
     setWebViewTitle(ANY_STRING).then((res) => {
         expect(res).toBeUndefined();
-        cb();
+        done();
     });
 });
 
-test('set webview title fallbacks to document.title update', (cb) => {
+test('set webview title fallbacks to document.title update', (done) => {
     document.title = '';
 
     setWebViewTitle(ANY_STRING).then((res) => {
         expect(res).toBeUndefined();
         expect(document.title).toBe(ANY_STRING);
-        cb();
+        done();
     });
 });
 
-test('update navigation bar, without options', (cb) => {
+test('update navigation bar, without options', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('NAVIGATION_BAR');
@@ -114,11 +114,11 @@ test('update navigation bar, without options', (cb) => {
 
     updateNavigationBar({}).then((res) => {
         expect(res).toBeUndefined();
-        cb();
+        done();
     });
 });
 
-test('update navigation bar, with options', (cb) => {
+test('update navigation bar, with options', (done) => {
     const options = {
         title: ANY_STRING,
         expandedTitle: ANY_OTHER_STRING,
@@ -141,21 +141,21 @@ test('update navigation bar, with options', (cb) => {
 
     updateNavigationBar(options).then((res) => {
         expect(res).toBeUndefined();
-        cb();
+        done();
     });
 });
 
-test('update navigation bar, without options and without bridge', (cb) => {
+test('update navigation bar, without options and without bridge', (done) => {
     document.title = ANY_STRING;
 
     updateNavigationBar({}).then((res) => {
         expect(res).toBeUndefined();
         expect(document.title).toBe(ANY_STRING);
-        cb();
+        done();
     });
 });
 
-test('update navigation bar, without bridge', (cb) => {
+test('update navigation bar, without bridge', (done) => {
     document.title = '';
 
     const options = {
@@ -170,11 +170,11 @@ test('update navigation bar, without bridge', (cb) => {
     updateNavigationBar(options).then((res) => {
         expect(res).toBeUndefined();
         expect(document.title).toBe(ANY_STRING);
-        cb();
+        done();
     });
 });
 
-test('notify page loaded', (cb) => {
+test('notify page loaded', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('PAGE_LOADED');
@@ -188,7 +188,7 @@ test('notify page loaded', (cb) => {
 
     notifyPageLoaded().then((res) => {
         expect(res).toBeUndefined();
-        cb();
+        done();
     });
 });
 
@@ -231,7 +231,7 @@ test('isABTestingAvailable without bridge', async () => {
     });
 });
 
-test('get remote config timeouts to false in 5s', (cb) => {
+test('get remote config timeouts to false in 5s', (done) => {
     jest.useFakeTimers();
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
@@ -245,12 +245,12 @@ test('get remote config timeouts to false in 5s', (cb) => {
     jest.advanceTimersByTime(5000);
     promise.then((res) => {
         expect(res).toEqual(false);
-        cb();
+        done();
     });
     jest.useRealTimers();
 });
 
-test('report account status', (cb) => {
+test('report account status', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('STATUS_REPORT');
@@ -272,17 +272,17 @@ test('report account status', (cb) => {
         reason: 'whatever reason',
     }).then((res) => {
         expect(res).toBeUndefined();
-        cb();
+        done();
     });
 });
 
 test('fetch happy case', async () => {
     const request = {
         url: 'https://example.com',
-        method: 'GET' as 'GET',
+        method: 'GET',
         headers: {key1: 'value1', key2: 'value2'},
         body: 'hello',
-    };
+    } as const;
 
     const response = {
         status: 200,
@@ -310,7 +310,7 @@ test('fetch happy case', async () => {
 test('fetch without bridge', async () => {
     await fetch({
         url: 'https://example.com',
-        method: 'GET' as 'GET',
+        method: 'GET',
         headers: {key1: 'value1', key2: 'value2'},
         body: 'hello',
     }).then((res) => {
@@ -325,10 +325,10 @@ test('fetch without bridge', async () => {
 test('fetch call failure', async () => {
     const request = {
         url: 'https://example.com',
-        method: 'GET' as 'GET',
+        method: 'GET',
         headers: {key1: 'value1', key2: 'value2'},
         body: 'hello',
-    };
+    } as const;
 
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
@@ -353,7 +353,7 @@ test('fetch call failure', async () => {
 
 import {checkPermissionStatus} from '../utils';
 
-test('app has notifications permissions', async (cb) => {
+test('app has notifications permissions', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
             expect(msg.type).toBe('OS_PERMISSION_STATUS');
@@ -371,12 +371,12 @@ test('app has notifications permissions', async (cb) => {
         (res) => {
             expect(res).toBe(true);
             removeFakeAndroidPostMessage();
-            cb();
+            done();
         },
     );
 });
 
-test('app has not notifications permissions', async (cb) => {
+test('app has not notifications permissions', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
             expect(msg.type).toBe('OS_PERMISSION_STATUS');
@@ -392,7 +392,7 @@ test('app has not notifications permissions', async (cb) => {
     checkPermissionStatus('notifications').then((res) => {
         expect(res).toBe(false);
         removeFakeAndroidPostMessage();
-        cb();
+        done();
     });
 });
 

@@ -16,7 +16,9 @@ export const renewSession = (oldAccessToken: string | null): Promise<string> =>
  * renews the session with the api, it should notify webpp with this message.
  * This message is initiated by native app.
  */
-export const onSessionRenewed = (handler: (newAccessToken: string) => void) =>
+export const onSessionRenewed = (
+    handler: (newAccessToken: string) => void,
+): (() => void) =>
     listenToNativeMessage('SESSION_RENEWED', ({accessToken}) =>
         handler(accessToken),
     );

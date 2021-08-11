@@ -6,7 +6,7 @@ export const createFakeAndroidPostMessage = ({
 }: {
     checkMessage?: (msg: Message) => void;
     getResponse?: (msg: Message) => Message | Promise<Message>;
-} = {}) => {
+} = {}): void => {
     window.tuentiWebView = {
         postMessage: async (jsonMessage) => {
             const message: Message = JSON.parse(jsonMessage);
@@ -28,7 +28,7 @@ export const createFakeWebKitPostMessage = ({
 }: {
     checkMessage?: (msg: Message) => void;
     getResponse?: (msg: Message) => Message;
-} = {}) => {
+} = {}): void => {
     window.webkit = {
         messageHandlers: {
             tuentiWebView: {
@@ -48,5 +48,10 @@ export const createFakeWebKitPostMessage = ({
     };
 };
 
-export const removeFakeAndroidPostMessage = () => delete window.tuentiWebView;
-export const removeFakeWebKitPostMessage = () => delete window.webkit;
+export const removeFakeAndroidPostMessage = (): void => {
+    delete window.tuentiWebView;
+};
+
+export const removeFakeWebKitPostMessage = (): void => {
+    delete window.webkit;
+};

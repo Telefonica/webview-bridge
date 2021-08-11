@@ -111,7 +111,7 @@ export const logEvent = ({
     label,
     value,
     ...fieldsObject
-}: TrackingEvent) => {
+}: TrackingEvent): Promise<void> => {
     if (!category || !action) {
         console.warn('Analytics event should have "category" and "action"', {
             category,
@@ -174,7 +174,7 @@ export const logTiming = ({
     variable: string; // The variable being recorded (e.g. 'load').
     value: number; // The number of milliseconds in elapsed time to report (e.g. 20).
     label?: string; // Can be used to add flexibility in visualizing user timings in the reports (e.g. 'Google CDN').
-}>) => {
+}>): Promise<void> => {
     if (!category || !variable || !value) {
         console.warn(
             'Analytics timing should have "category", "variable" and "value"',
@@ -224,7 +224,10 @@ export const logTiming = ({
 
 let currentPageName: string;
 
-export const setScreenName = (screenName: string, fieldsObject?: {}) => {
+export const setScreenName = (
+    screenName: string,
+    fieldsObject?: {},
+): Promise<void> => {
     if (!screenName) {
         console.warn('Missing analytics screenName');
         return Promise.resolve();
@@ -278,10 +281,10 @@ const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
     serviceWorkerStatus: CD_SERVICE_WORKER_STATUS,
     isAdmin: CD_SUBSCRIPTION_ADMIN,
     hasIpComms: CD_SUBSCRIPTION_WITH_IPCOMMS,
-    af_source: CD_AF_SOURCE, // eslint-disable-line @typescript-eslint/camelcase
-    af_campaign: CD_AF_CAMPAIGN, // eslint-disable-line @typescript-eslint/camelcase
-    novum_uid_session: CD_NOVUM_UID_SESSION, // eslint-disable-line @typescript-eslint/camelcase
-    user_logged: CD_USER_LOGGED, // eslint-disable-line @typescript-eslint/camelcase
+    af_source: CD_AF_SOURCE,
+    af_campaign: CD_AF_CAMPAIGN,
+    novum_uid_session: CD_NOVUM_UID_SESSION,
+    user_logged: CD_USER_LOGGED,
     currentSubscriptionId: CD_CURRENT_SUBSCRIPTION_ID,
     currentSubscriptionType: CD_CURRENT_SUBSCRIPTION_TYPE,
     currentPaymentModel: CD_CURRENT_PAYMENT_MODEL,
@@ -296,7 +299,10 @@ const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
 
 type UserPropertyName = keyof typeof USER_PROPERTY_TO_CUSTOM_DIMENSION;
 
-export const setUserProperty = (name: UserPropertyName, value: string) => {
+export const setUserProperty = (
+    name: UserPropertyName,
+    value: string,
+): Promise<void> => {
     if (!name || !value) {
         console.warn(
             'Trying to set analytics user property without name or value',

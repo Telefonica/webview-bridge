@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## Next
+
+-   Upgrade dev dependencies to fix automatically reported vulnerabilities
+
 ## v.3.0.0 - 2021-07-22
 
 -   **Breaking change**: `webview-bridge` will be disabled inside iframes by

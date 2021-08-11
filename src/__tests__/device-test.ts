@@ -19,7 +19,7 @@ afterEach(() => {
     removeFakeAndroidPostMessage();
 });
 
-test('request sim icc', async (cb) => {
+test('request sim icc', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('SIM_ICC');
@@ -34,11 +34,11 @@ test('request sim icc', async (cb) => {
 
     requestSimIcc().then((res) => {
         expect(res).toEqual(ANY_STRING);
-        cb();
+        done();
     });
 });
 
-test('request sim imsi', async (cb) => {
+test('request sim imsi', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('IMSI');
@@ -53,11 +53,11 @@ test('request sim imsi', async (cb) => {
 
     requestSimImsi().then((res) => {
         expect(res).toEqual(ANY_STRING);
-        cb();
+        done();
     });
 });
 
-test('request device imei', async (cb) => {
+test('request device imei', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('IMEI');
@@ -72,11 +72,11 @@ test('request device imei', async (cb) => {
 
     requestDeviceImei().then((res) => {
         expect(res).toEqual(ANY_STRING);
-        cb();
+        done();
     });
 });
 
-test('request sim icc (failed)', async (cb) => {
+test('request sim icc (failed)', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('SIM_ICC');
@@ -87,11 +87,11 @@ test('request sim icc (failed)', async (cb) => {
 
     requestSimIcc().then((res) => {
         expect(res).toBeNull();
-        cb();
+        done();
     });
 });
 
-test('request sim imsi (failed)', async (cb) => {
+test('request sim imsi (failed)', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('IMSI');
@@ -102,11 +102,11 @@ test('request sim imsi (failed)', async (cb) => {
 
     requestSimImsi().then((res) => {
         expect(res).toBeNull();
-        cb();
+        done();
     });
 });
 
-test('request device imei (failed)', async (cb) => {
+test('request device imei (failed)', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('IMEI');
@@ -117,11 +117,11 @@ test('request device imei (failed)', async (cb) => {
 
     requestDeviceImei().then((res) => {
         expect(res).toBeNull();
-        cb();
+        done();
     });
 });
 
-test('internal navigation', async (cb) => {
+test('internal navigation', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
             expect(msg.type).toBe('INTERNAL_NAVIGATION');
@@ -136,11 +136,11 @@ test('internal navigation', async (cb) => {
     internalNavigation('notification-settings').then((res) => {
         expect(res).toBeUndefined();
         removeFakeAndroidPostMessage();
-        cb();
+        done();
     });
 });
 
-test('dismiss', async (cb) => {
+test('dismiss', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
             expect(msg.type).toBe('DISMISS');
@@ -155,7 +155,7 @@ test('dismiss', async (cb) => {
     dismiss('http://example.com').then((res) => {
         expect(res).toBeUndefined();
         removeFakeAndroidPostMessage();
-        cb();
+        done();
     });
 });
 

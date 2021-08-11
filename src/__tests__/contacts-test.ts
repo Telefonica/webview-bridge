@@ -36,7 +36,7 @@ afterEach(() => {
     removeFakeAndroidPostMessage();
 });
 
-test('request contact', async (cb) => {
+test('request contact', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('GET_CONTACT_DATA');
@@ -50,11 +50,11 @@ test('request contact', async (cb) => {
 
     requestContact().then((res) => {
         expect(res).toEqual(ANY_CONTACT);
-        cb();
+        done();
     });
 });
 
-test('request contact filtered', async (cb) => {
+test('request contact filtered', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('GET_CONTACT_DATA');
@@ -73,11 +73,11 @@ test('request contact filtered', async (cb) => {
         filter: 'email',
     }).then((res) => {
         expect(res).toEqual(ANY_CONTACT);
-        cb();
+        done();
     });
 });
 
-test('fetch contacts by phone', (cb) => {
+test('fetch contacts by phone', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('FETCH_CONTACTS_DATA');
@@ -94,6 +94,6 @@ test('fetch contacts by phone', (cb) => {
 
     fetchContactsByPhone(['123456', '789012']).then((res) => {
         expect(res).toEqual([ANY_CONTACT_DATA_1, ANY_CONTACT_DATA_2]);
-        cb();
+        done();
     });
 });

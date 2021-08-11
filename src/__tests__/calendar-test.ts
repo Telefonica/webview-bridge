@@ -4,7 +4,7 @@ import {
     removeFakeAndroidPostMessage,
 } from './fake-post-message';
 
-test('set a calendar event', async (cb) => {
+test('set a calendar event', (done) => {
     expect.assertions(4);
 
     const t1 = 1000;
@@ -29,6 +29,6 @@ test('set a calendar event', async (cb) => {
     }).then((res) => {
         expect(res).toBeUndefined();
         removeFakeAndroidPostMessage();
-        cb();
+        done();
     });
 });

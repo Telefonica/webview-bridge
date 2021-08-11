@@ -70,16 +70,16 @@ test.each`
     );
 });
 
-test('post message to native app: no bridge', async (cb) => {
+test('post message to native app: no bridge', (done) => {
     expect(isWebViewBridgeAvailable()).toBe(false);
 
     postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch((err) => {
         expect(err.code).toBe(500);
-        cb();
+        done();
     });
 });
 
-test('post message to native app: error received', async (cb) => {
+test('post message to native app: error received', (done) => {
     createFakeAndroidPostMessage({
         getResponse: (msg) => ({
             id: msg.id,
@@ -90,11 +90,11 @@ test('post message to native app: error received', async (cb) => {
 
     postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch((err) => {
         expect(err.code).toBe(ANY_CODE);
-        cb();
+        done();
     });
 });
 
-test('post message to native app: bad response type', async (cb) => {
+test('post message to native app: bad response type', (done) => {
     createFakeAndroidPostMessage({
         getResponse: (msg) => ({
             id: msg.id,
@@ -105,11 +105,11 @@ test('post message to native app: bad response type', async (cb) => {
 
     postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch((err) => {
         expect(err.code).toBe(500);
-        cb();
+        done();
     });
 });
 
-test('post message to native app: bad response type', async (cb) => {
+test('post message to native app: bad response type', (done) => {
     createFakeWebKitPostMessage({
         getResponse: (msg) => ({
             id: msg.id,
@@ -120,7 +120,7 @@ test('post message to native app: bad response type', async (cb) => {
 
     postMessageToNativeApp({id: '1', type: 'PAGE_LOADED'}).catch((err) => {
         expect(err.code).toBe(500);
-        cb();
+        done();
     });
 });
 

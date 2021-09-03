@@ -186,6 +186,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    SET_ACTION_BEHAVIOR: {
+        type: 'SET_ACTION_BEHAVIOR';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

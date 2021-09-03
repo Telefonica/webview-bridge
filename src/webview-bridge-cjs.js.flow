@@ -227,3 +227,20 @@ declare export function setTrackingProperty(
     name: string,
     value?: string,
 ): Promise<void>;
+
+declare export function setActionBehavior(actions: {
+    close?: {
+        behavior: 'confirm' | 'default' | 'cancel',
+        title?: string,
+        message?: string,
+        acceptText?: string,
+        cancelText?: string,
+    },
+    back?: {
+        behavior: 'confirm' | 'default' | 'cancel',
+        title?: string,
+        message?: string,
+        acceptText?: string,
+        cancelText?: string,
+    },
+}): Promise<void>;

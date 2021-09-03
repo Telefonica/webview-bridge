@@ -184,3 +184,24 @@ export const getAppMetadata = (
             appToken,
         },
     });
+
+type ActionBehavior = {
+    behavior: 'confirm' | 'default' | 'cancel';
+    title?: string;
+    message?: string;
+    acceptText?: string;
+    cancelText?: string;
+};
+
+export const setActionBehavior = (actions: {
+    close?: ActionBehavior;
+    back?: ActionBehavior;
+}): Promise<void> =>
+    postMessageToNativeApp({
+        type: 'SET_ACTION_BEHAVIOR',
+        payload: {
+            actions: actions,
+        },
+    }).catch(() => {
+        // do nothing
+    });

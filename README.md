@@ -82,6 +82,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [getDiskSpaceInfo](#getDiskSpaceInfo)
 -   [getEsimInfo](#getEsimInfo)
 -   [setTrackingProperty](#setTrackingProperty)
+-   [setActionBehavior](#setActionBehavior)
 
 ### isWebViewBridgeAvailable
 
@@ -693,6 +694,46 @@ setTrackingProperty: (system: 'palitagem' | 'medallia', name: string, value?: st
 -   `system`: Tracking system that will handle the property
 -   `name`: name of the property
 -   `value`: value of the property (nullable)
+
+### setActionBehavior
+
+Method that allows defining an specific behavior (such as showing a
+confirmation) before the specific native actions are executed. This method also
+allows disabling any previous behaviors set.
+
+-   Available for app versions 12.7 and higher
+
+```typescript
+type ActionBehavior = {
+    behavior: 'confirm' | 'default' | 'cancel';
+    title?: string;
+    message?: string;
+    acceptText?: string;
+    cancelText?: string;
+};
+
+setActionBehavior: (actions: {close?: ActionBehavior, back?: ActionBehavior}) => Promise<void>;
+```
+
+`close` and `back` actions are currently available:
+
+-   `back`: Action bar back button pressed (Also for physical back button in
+    android)
+-   `close`: Action bar close button pressed. Includes both “X” and “Close”
+    buttons.
+
+Both have same allowed json parameters, and 3 allowed behaviors:
+
+-   `confirm` Show a confirmation dialog with the required title and message. If
+    no accept or cancel texts are specified, native default ones will be used.
+-   `cancel` Prevent action from being performed, just ignoring it.
+-   `default` Set default behavior for the action. (Usually to reset any
+    previously specified behavior)
+
+Actions can be optionally included in the payload. Any not included action won’t
+change its current behavior set.
+
+All actions behaviors will be automatically set to default on full page loads.
 
 #### Example
 

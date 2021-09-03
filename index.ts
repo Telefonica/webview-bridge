@@ -25,6 +25,7 @@ export {
     fetch,
     checkPermissionStatus,
     getAppMetadata,
+    setActionBehavior,
 } from './src/utils';
 export {createCalendarEvent} from './src/calendar';
 export {requestContact, fetchContactsByPhone} from './src/contacts';

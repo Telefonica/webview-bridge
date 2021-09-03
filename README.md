@@ -704,31 +704,39 @@ allows disabling any previous behaviors set.
 -   Available for app versions 12.7 and higher
 
 ```typescript
-type ActionBehavior = {
-    behavior: 'confirm' | 'default' | 'cancel';
-    title?: string;
-    message?: string;
-    acceptText?: string;
-    cancelText?: string;
-};
+type ActionBehavior =
+    | {
+        behavior: 'confirm';
+        title: string;
+        message: string;
+        acceptText: string;
+        cancelText: string;
+    }
+    | {
+        behavior: 'default';
+    }
+    | {
+        behavior: 'cancel';
+    };
 
-setActionBehavior: (actions: {close?: ActionBehavior, back?: ActionBehavior}) => Promise<void>;
+setActionBehavior: (actions: {webviewClose?: ActionBehavior, navigationBack?: ActionBehavior}) => Promise<void>;
 ```
 
-`close` and `back` actions are currently available:
+`navigationBack` and `webviewClose` actions are currently available:
 
--   `back`: Action bar back button pressed (Also for physical back button in
-    android)
--   `close`: Action bar close button pressed. Includes both “X” and “Close”
-    buttons.
+-   `navigationBack`: Action bar back button pressed (also for physical back
+    button in android but not swipe back gesture in iOS, which will be
+    disabled).
+-   `webviewClose`: Action bar close button pressed. Includes both "X" and
+    "Close" buttons (but not swipe down gesture in iOS, which will be disabled).
 
 Both have same allowed json parameters, and 3 allowed behaviors:
 
--   `confirm` Show a confirmation dialog with the required title and message. If
-    no accept or cancel texts are specified, native default ones will be used.
+-   `confirm` Show a confirmation dialog with the required title, message and
+    buttons.
 -   `cancel` Prevent action from being performed, just ignoring it.
 -   `default` Set default behavior for the action. (Usually to reset any
-    previously specified behavior)
+    previously specified behavior).
 
 Actions can be optionally included in the payload. Any not included action won’t
 change its current behavior set.

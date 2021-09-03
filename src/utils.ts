@@ -194,8 +194,8 @@ type ActionBehavior = {
 };
 
 export const setActionBehavior = (actions: {
-    close?: ActionBehavior;
-    back?: ActionBehavior;
+    webviewClose?: ActionBehavior;
+    navigationBack?: ActionBehavior;
 }): Promise<void> =>
     postMessageToNativeApp({
         type: 'SET_ACTION_BEHAVIOR',

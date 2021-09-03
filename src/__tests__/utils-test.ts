@@ -421,14 +421,14 @@ test('get app metadata of installed application', async () => {
 
 test('set confirm action behavior', (done) => {
     const actions = {
-        close: {
+        webviewClose: {
             behavior: 'confirm',
             title: 'title',
             message: 'message',
             acceptText: 'acceptText',
             cancelText: 'cancelText',
         },
-        back: {
+        navigationBack: {
             behavior: 'confirm',
             title: 'title',
             message: 'message',

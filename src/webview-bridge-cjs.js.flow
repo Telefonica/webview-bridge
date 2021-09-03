@@ -228,19 +228,22 @@ declare export function setTrackingProperty(
     value?: string,
 ): Promise<void>;
 
+type ActionBehavior =
+    | {
+          behavior: 'confirm',
+          title: string,
+          message: string,
+          acceptText: string,
+          cancelText: string,
+      }
+    | {
+          behavior: 'default',
+      }
+    | {
+          behavior: 'cancel',
+      };
+
 declare export function setActionBehavior(actions: {
-    close?: {
-        behavior: 'confirm' | 'default' | 'cancel',
-        title?: string,
-        message?: string,
-        acceptText?: string,
-        cancelText?: string,
-    },
-    back?: {
-        behavior: 'confirm' | 'default' | 'cancel',
-        title?: string,
-        message?: string,
-        acceptText?: string,
-        cancelText?: string,
-    },
+    webviewClose?: ActionBehavior,
+    navigationBack?: ActionBehavior,
 }): Promise<void>;

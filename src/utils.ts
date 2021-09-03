@@ -185,13 +185,20 @@ export const getAppMetadata = (
         },
     });
 
-type ActionBehavior = {
-    behavior: 'confirm' | 'default' | 'cancel';
-    title?: string;
-    message?: string;
-    acceptText?: string;
-    cancelText?: string;
-};
+type ActionBehavior =
+    | {
+          behavior: 'confirm';
+          title: string;
+          message: string;
+          acceptText: string;
+          cancelText: string;
+      }
+    | {
+          behavior: 'default';
+      }
+    | {
+          behavior: 'cancel';
+      };
 
 export const setActionBehavior = (actions: {
     webviewClose?: ActionBehavior;

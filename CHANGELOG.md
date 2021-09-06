@@ -1,7 +1,9 @@
 # CHANGELOG
 
-## Next
+## v.3.1.0 - 2021-09-06
 
+-   Add `setActionBehavior` method to allow defining the behavior of close and
+    back buttons in webviews
 -   Upgrade dev dependencies to fix automatically reported vulnerabilities
 
 ## v.3.0.0 - 2021-07-22

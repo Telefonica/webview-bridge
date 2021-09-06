@@ -7,6 +7,7 @@ import {
     isABTestingAvailable,
     reportStatus,
     fetch,
+    setActionBehavior,
 } from '../utils';
 import {
     createFakeAndroidPostMessage,
@@ -415,5 +416,38 @@ test('get app metadata of installed application', async () => {
     await getAppMetadata(appToken).then((res) => {
         expect(res).toMatchObject({isInstalled: true, marketUrl, appUrl});
         removeFakeAndroidPostMessage();
+    });
+});
+
+test('set confirm action behavior', (done) => {
+    const actions = {
+        webviewClose: {
+            behavior: 'confirm',
+            title: 'title',
+            message: 'message',
+            acceptText: 'acceptText',
+            cancelText: 'cancelText',
+        },
+        navigationBack: {
+            behavior: 'confirm',
+            title: 'title',
+            message: 'message',
+            acceptText: 'acceptText',
+            cancelText: 'cancelText',
+        },
+    } as const;
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SET_ACTION_BEHAVIOR');
+        },
+        getResponse: (msg) => ({
+            type: 'SET_ACTION_BEHAVIOR',
+            id: msg.id,
+        }),
+    });
+
+    setActionBehavior(actions).then((res) => {
+        expect(res).toBeUndefined();
+        done();
     });
 });

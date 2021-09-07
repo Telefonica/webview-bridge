@@ -72,6 +72,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [nativeMessage](#nativemessage)
 -   [logEvent](#logevent)
 -   [setScreenName](#setscreenname)
+-   [setUserProperty](#setUserProperty)
 -   [reportStatus](#reportStatus)
 -   [checkPermissionStatus](#checkPermissionStatus)
 -   [internalNavigation](#internalNavigation)

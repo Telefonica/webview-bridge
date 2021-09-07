@@ -72,6 +72,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [nativeMessage](#nativemessage)
 -   [logEvent](#logevent)
 -   [setScreenName](#setscreenname)
+-   [setUserProperty](#setUserProperty)
 -   [reportStatus](#reportStatus)
 -   [checkPermissionStatus](#checkPermissionStatus)
 -   [internalNavigation](#internalNavigation)
@@ -453,6 +454,30 @@ import {setScreenName} from '@tef-novum/webview-bridge';
 
 setScreenName('Topup Flow').then(() => {
     console.log('screen name logged');
+});
+```
+
+### setUserProperty
+
+Set a user property to firebase
+
+```typescript
+setUserProperty: ({
+    name: string;
+    value: string;
+}) => Promise<void>;
+```
+
+#### Example
+
+```javascript
+import {setUserProperty} from '@tef-novum/webview-bridge';
+
+setUserProperty({
+    name: 'obIds',
+    value: 'any-value',
+}).then(() => {
+    console.log('User property logged');
 });
 ```
 

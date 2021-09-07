@@ -456,6 +456,30 @@ setScreenName('Topup Flow').then(() => {
 });
 ```
 
+### setUserProperty
+
+Set a user property to firebase
+
+```typescript
+setUserProperty: ({
+    name: string;
+    value: string;
+}) => Promise<void>;
+```
+
+#### Example
+
+```javascript
+import {setUserProperty} from '@tef-novum/webview-bridge';
+
+setUserProperty({
+    name: 'obIds',
+    value: 'any-value',
+}).then(() => {
+    console.log('User property logged');
+});
+```
+
 ### reportStatus
 
 Report a given feature status

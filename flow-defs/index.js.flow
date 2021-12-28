@@ -1,50 +1,46 @@
 // @flow
 
 declare export {
-  isWebViewBridgeAvailable,
-  onNativeEvent,
-  NativeEventHandler,
-} from "./src/post-message";
+    isWebViewBridgeAvailable,
+    onNativeEvent,
+    NativeEventHandler,
+} from './src/post-message';
+declare export {nativeConfirm, nativeAlert, nativeMessage} from './src/dialogs';
 declare export {
-  nativeConfirm,
-  nativeAlert,
-  nativeMessage,
-} from "./src/dialogs";
+    requestSimIcc,
+    requestSimImsi,
+    requestDeviceImei,
+    internalNavigation,
+    dismiss,
+    requestVibration,
+    getDiskSpaceInfo,
+    getEsimInfo,
+} from './src/device';
 declare export {
-  requestSimIcc,
-  requestSimImsi,
-  requestDeviceImei,
-  internalNavigation,
-  dismiss,
-  requestVibration,
-  getDiskSpaceInfo,
-  getEsimInfo,
-} from "./src/device";
+    attachToEmail,
+    share,
+    setWebViewTitle,
+    updateNavigationBar,
+    notifyPageLoaded,
+    isABTestingAvailable,
+    reportStatus,
+    fetch,
+    checkPermissionStatus,
+    getAppMetadata,
+    setActionBehavior,
+} from './src/utils';
+declare export {createCalendarEvent} from './src/calendar';
+declare export {requestContact, fetchContactsByPhone} from './src/contacts';
 declare export {
-  attachToEmail,
-  share,
-  setWebViewTitle,
-  updateNavigationBar,
-  notifyPageLoaded,
-  isABTestingAvailable,
-  reportStatus,
-  fetch,
-  checkPermissionStatus,
-  getAppMetadata,
-  setActionBehavior,
-} from "./src/utils";
-declare export { createCalendarEvent } from "./src/calendar";
-declare export { requestContact, fetchContactsByPhone } from "./src/contacts";
-declare export {
-  logEvent,
-  logTiming,
-  setScreenName,
-  setUserProperty,
-  CD_WEBAPP_INSTALLED,
-  CD_NOVUM_UID,
-  CD_EVENT_VALUE,
-  setCustomerHash,
-  getCustomerHash,
-  setTrackingProperty,
-} from "./src/analytics";
-declare export { renewSession, onSessionRenewed } from "./src/sessions";
+    logEvent,
+    logTiming,
+    setScreenName,
+    setUserProperty,
+    CD_WEBAPP_INSTALLED,
+    CD_NOVUM_UID,
+    CD_EVENT_VALUE,
+    setCustomerHash,
+    getCustomerHash,
+    setTrackingProperty,
+} from './src/analytics';
+declare export {renewSession, onSessionRenewed} from './src/sessions';

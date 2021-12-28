@@ -1,19 +1,19 @@
 // @flow
 
 declare export var nativeConfirm: (x: {
-  message: string,
-  title?: string | void,
-  acceptText: string,
-  cancelText: string,
+    message: string,
+    title?: string | void,
+    acceptText: string,
+    cancelText: string,
 }) => Promise<boolean>;
 declare export var nativeAlert: (x: {
-  message: string,
-  title?: string | void,
-  buttonText: string,
+    message: string,
+    title?: string | void,
+    buttonText: string,
 }) => Promise<void>;
 declare export var nativeMessage: (x: {
-  message: string,
-  duration?: number | void,
-  buttonText?: string | void,
-  type?: "INFORMATIVE" | "CRITICAL" | "SUCCESS" | void,
+    message: string,
+    duration?: number | void,
+    buttonText?: string | void,
+    type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS' | void,
 }) => Promise<void>;

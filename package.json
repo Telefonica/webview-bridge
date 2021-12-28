@@ -10,7 +10,7 @@
     ],
     "scripts": {
         "build": "rimraf dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && yarn generate-flow-types",
-        "generate-flow-types": "ts-to-flow dist flow-defs && prettier ./flow-defs -w",
+        "generate-flow-types": "ts-to-flow dist flow-defs flow-defs && prettier ./flow-defs -w",
         "test": "jest --coverage",
         "prettier-check": "prettier --check .",
         "lint": "eslint --report-unused-disable-directives .",

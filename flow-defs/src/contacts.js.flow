@@ -1,9 +1,9 @@
 // @flow
 
-import {NativeAppResponsePayload} from './post-message';
+import { NativeAppResponsePayload } from "./post-message";
 declare export var requestContact: (x?: {
-    filter?: 'phone' | 'email' | void,
-}) => Promise<NativeAppResponsePayload<'GET_CONTACT_DATA'>>;
+  filter?: "phone" | "email" | void,
+}) => Promise<NativeAppResponsePayload<"GET_CONTACT_DATA">>;
 declare export var fetchContactsByPhone: (
-    phoneNumbers: ReadonlyArray<string>,
-) => Promise<NativeAppResponsePayload<'FETCH_CONTACTS_DATA'>>;
+  phoneNumbers: ReadonlyArray<string>
+) => Promise<NativeAppResponsePayload<"FETCH_CONTACTS_DATA">>;

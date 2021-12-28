@@ -1,85 +1,85 @@
 // @flow
 
 declare type CustomDimensionIdx =
-    | 1
-    | 2
-    | 3
-    | 4
-    | 5
-    | 6
-    | 7
-    | 8
-    | 9
-    | 10
-    | 11
-    | 12
-    | 13
-    | 14
-    | 15
-    | 16
-    | 17
-    | 18
-    | 19
-    | 20
-    | 24
-    | 25
-    | 26;
+  | 1
+  | 2
+  | 3
+  | 4
+  | 5
+  | 6
+  | 7
+  | 8
+  | 9
+  | 10
+  | 11
+  | 12
+  | 13
+  | 14
+  | 15
+  | 16
+  | 17
+  | 18
+  | 19
+  | 20
+  | 24
+  | 25
+  | 26;
 declare export var CD_WEBAPP_INSTALLED: CustomDimensionIdx;
 declare export var CD_NOVUM_UID: CustomDimensionIdx;
 declare export var CD_EVENT_VALUE: CustomDimensionIdx;
 declare type TrackingEvent = Readonly<{
-    category: string,
-    action: string,
-    label?: string,
-    value?: number,
-    [key: string]: any,
+  category: string,
+  action: string,
+  label?: string,
+  value?: number,
+  [key: string]: any,
 }>;
 declare export var logEvent: (x: TrackingEvent) => Promise<void>;
 declare export var logTiming: (
-    x: Readonly<{
-        category?: string | void,
-        variable: string,
-        value: number,
-        label?: string | void,
-    }>,
+  x: Readonly<{
+    category?: string | void,
+    variable: string,
+    value: number,
+    label?: string | void,
+  }>
 ) => Promise<void>;
 declare export var setScreenName: (
-    screenName: string,
-    fieldsObject?: {} | void,
+  screenName: string,
+  fieldsObject?: {} | void
 ) => Promise<void>;
 declare var USER_PROPERTY_TO_CUSTOM_DIMENSION: {
-    obIds: 1,
-    paymentModels: 2,
-    serviceWorkerStatus: 3,
-    isAdmin: 5,
-    hasIpComms: 6,
-    af_source: 9,
-    af_campaign: 10,
-    novum_uid_session: 11,
-    user_logged: 12,
-    currentSubscriptionId: 13,
-    currentSubscriptionType: 14,
-    currentPaymentModel: 15,
-    webviewBrowserVersion: 16,
-    activatedRoles: 17,
-    appInstanceId: 18,
-    experimentflag: 20,
-    friendsApps: 24,
-    accountLineSelector: 25,
-    OneClickDisplayed: 26,
+  obIds: 1,
+  paymentModels: 2,
+  serviceWorkerStatus: 3,
+  isAdmin: 5,
+  hasIpComms: 6,
+  af_source: 9,
+  af_campaign: 10,
+  novum_uid_session: 11,
+  user_logged: 12,
+  currentSubscriptionId: 13,
+  currentSubscriptionType: 14,
+  currentPaymentModel: 15,
+  webviewBrowserVersion: 16,
+  activatedRoles: 17,
+  appInstanceId: 18,
+  experimentflag: 20,
+  friendsApps: 24,
+  accountLineSelector: 25,
+  OneClickDisplayed: 26,
 };
 declare type UserPropertyName = $Keys<typeof USER_PROPERTY_TO_CUSTOM_DIMENSION>;
 declare export var setUserProperty: (
-    name: UserPropertyName,
-    value: string,
+  name: UserPropertyName,
+  value: string
 ) => Promise<void>;
 declare export var setCustomerHash: (hash: string) => Promise<void>;
 declare export var getCustomerHash: () => Promise<{
-    hash: string,
+  hash: string,
 }>;
 declare export var setTrackingProperty: (
-    system: 'palitagem' | 'medallia',
-    name: string,
-    value?: string | void,
+  system: "palitagem" | "medallia",
+  name: string,
+  value?: string | void
 ) => Promise<void>;
 declare export {};

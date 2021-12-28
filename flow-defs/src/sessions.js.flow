@@ -6,7 +6,7 @@
  * bridge method to renew the session.
  */
 declare export var renewSession: (
-    oldAccessToken: string | null,
+  oldAccessToken: string | null
 ) => Promise<string>;
 /**
  * This method is used to listen for session renewals made by native app. Whenever the native app
@@ -14,5 +14,5 @@ declare export var renewSession: (
  * This message is initiated by native app.
  */
 declare export var onSessionRenewed: (
-    handler: (newAccessToken: string) => void,
+  handler: (newAccessToken: string) => void
 ) => () => void;

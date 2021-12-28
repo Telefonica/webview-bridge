@@ -1,7 +1,7 @@
 // @flow
 
 declare export var createCalendarEvent: (x: {
-    beginTime: number,
-    endTime: number,
-    title: string,
+  beginTime: number,
+  endTime: number,
+  title: string,
 }) => Promise<void>;

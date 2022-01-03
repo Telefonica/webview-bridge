@@ -29,9 +29,7 @@
         "url": "https://github.com/tef-dig/webview-bridge/issues"
     },
     "homepage": "https://github.com/tef-dig/webview-bridge#readme",
-    "dependencies": {
-        "flowgen": "^1.16.0"
-    },
+    "dependencies": {},
     "devDependencies": {
         "@telefonica/ts-to-flow": "^1.1.2",
         "@types/google.analytics": "0.0.42",

@@ -9,7 +9,8 @@
         "dist"
     ],
     "scripts": {
-        "build": "rimraf dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && ncp ./src/webview-bridge-cjs.js.flow ./dist/webview-bridge-cjs.js.flow",
+        "build": "rimraf dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && yarn generate-flow-types",
+        "generate-flow-types": "ts-to-flow dist flow-defs",
         "test": "jest --coverage",
         "prettier-check": "prettier --check .",
         "lint": "eslint --report-unused-disable-directives .",
@@ -30,21 +31,24 @@
     "homepage": "https://github.com/tef-dig/webview-bridge#readme",
     "dependencies": {},
     "devDependencies": {
+        "@telefonica/ts-to-flow": "^1.1.2",
         "@types/google.analytics": "0.0.42",
-        "@types/jest": "^26.0.24",
-        "@typescript-eslint/eslint-plugin": "^4.29.1",
-        "@typescript-eslint/parser": "^4.29.1",
-        "eslint": "^7.32.0",
-        "husky": "^7.0.1",
-        "jest": "^27.0.6",
-        "lint-staged": "^11.1.2",
-        "ncp": "^2.0.0",
-        "prettier": "^2.3.2",
+        "@types/jest": "^27.0.3",
+        "@typescript-eslint/eslint-plugin": "^5.6.0",
+        "@typescript-eslint/parser": "^5.6.0",
+        "eslint": "^8.4.1",
+        "husky": "^7.0.4",
+        "jest": "^27.4.4",
+        "lint-staged": "^12.1.2",
+        "prettier": "^2.5.1",
         "rimraf": "^3.0.2",
-        "rollup": "^2.56.2",
-        "rollup-plugin-typescript2": "^0.30.0",
-        "ts-jest": "^27.0.4",
-        "typescript": "^4.3.5",
+        "rollup": "^2.61.0",
+        "rollup-plugin-typescript2": "^0.31.1",
+        "ts-jest": "^27.1.1",
+        "typescript": "^4.5.3",
         "uglify-es": "^3.3.9"
+    },
+    "resolutions": {
+        "flowgen": "1.16.0"
     }
 }

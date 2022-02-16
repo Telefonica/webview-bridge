@@ -92,11 +92,21 @@ const withAnalytics = ({
     }
 };
 
-type TrackingEvent = Readonly<{
-    category: string; // Typically the object that was interacted with (e.g. 'Video')
-    action: string; // The type of interaction (e.g. 'play')
-    label?: string; // Useful for categorizing events (e.g. 'Fall Campaign')
-    value?: number; // A numeric value associated with the event (e.g. 43)
+export type TrackingEvent = Readonly<{
+    /** Typically the object that was interacted with (e.g. 'Video') */
+    category: string;
+    /** The type of interaction (e.g. 'play') */
+    action: string;
+    /** Useful for categorizing events (e.g. 'Fall Campaign') */
+    label?: string;
+    /** A numeric value associated with the event (e.g. 43) */
+    value?: number;
+    /**
+     * Screen name where the event happened.
+     * If not specified, native app will use value from the latest setScreenName() call
+     */
+    screenName?: string;
+    /** Other properties are allowed */
     [key: string]: any;
 }>;
 

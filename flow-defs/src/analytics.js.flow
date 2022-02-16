@@ -27,11 +27,36 @@ declare type CustomDimensionIdx =
 declare export var CD_WEBAPP_INSTALLED: CustomDimensionIdx;
 declare export var CD_NOVUM_UID: CustomDimensionIdx;
 declare export var CD_EVENT_VALUE: CustomDimensionIdx;
-declare type TrackingEvent = Readonly<{
+export type TrackingEvent = Readonly<{
+  /**
+   * Typically the object that was interacted with (e.g. 'Video')
+   */
   category: string,
+
+  /**
+   * The type of interaction (e.g. 'play')
+   */
   action: string,
+
+  /**
+   * Useful for categorizing events (e.g. 'Fall Campaign')
+   */
   label?: string,
+
+  /**
+   * A numeric value associated with the event (e.g. 43)
+   */
   value?: number,
+
+  /**
+   * Screen name where the event happened.
+   * If not specified, native app will use value from the latest setScreenName() call
+   */
+  screenName?: string,
+
+  /**
+   * Other properties are allowed
+   */
   [key: string]: any,
 }>;
 declare export var logEvent: (x: TrackingEvent) => Promise<void>;

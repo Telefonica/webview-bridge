@@ -40,5 +40,6 @@ export {
     setCustomerHash,
     getCustomerHash,
     setTrackingProperty,
+    type TrackingEvent,
 } from './src/analytics';
 export {renewSession, onSessionRenewed} from './src/sessions';

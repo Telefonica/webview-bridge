@@ -2,7 +2,7 @@ import {postMessageToNativeApp} from './post-message';
 
 // Google Analytics custom dimension indices.
 // WARN: These numbers are defined in GA, don't change them
-type CustomDimensionIdx =
+export type CustomDimensionIdx =
     | 1
     | 2
     | 3
@@ -236,7 +236,7 @@ let currentPageName: string;
 
 export const setScreenName = (
     screenName: string,
-    fieldsObject?: {},
+    fieldsObject?: {[key: string]: any},
 ): Promise<void> => {
     if (!screenName) {
         console.warn('Missing analytics screenName');
@@ -305,12 +305,12 @@ const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
     friendsApps: CD_FRIENDS_APPS,
     accountLineSelector: CD_ACOUNT_LINE_SELECTOR,
     OneClickDisplayed: CD_ONE_CLICK_DISPLAYED,
-};
+} as const;
 
 type UserPropertyName = keyof typeof USER_PROPERTY_TO_CUSTOM_DIMENSION;
 
 export const setUserProperty = (
-    name: UserPropertyName,
+    name: UserPropertyName | string,
     value: string,
 ): Promise<void> => {
     if (!name || !value) {
@@ -340,7 +340,8 @@ export const setUserProperty = (
             return Promise.resolve();
         },
         onWeb(ga) {
-            const dimensionIdx = USER_PROPERTY_TO_CUSTOM_DIMENSION[name];
+            const dimensionIdx =
+                USER_PROPERTY_TO_CUSTOM_DIMENSION[name as UserPropertyName];
             if (!dimensionIdx) {
                 console.warn(
                     'No custom dimension defined for user property',

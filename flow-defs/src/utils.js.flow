@@ -8,7 +8,7 @@ declare export var attachToEmail: (x: {
   recipient?: string | void,
   body?: string | void,
 }) => Promise<void>;
-declare type ShareOptions =
+export type ShareOptions =
   | {
       text: string,
     }

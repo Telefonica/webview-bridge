@@ -708,10 +708,10 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@telefonica/ts-to-flow@1.1.6-beta1":
-  version "1.1.6-beta1"
-  resolved "https://registry.yarnpkg.com/@telefonica/ts-to-flow/-/ts-to-flow-1.1.6-beta1.tgz#f3fb3870996b3cb000ed997ab4f7a53db7cb2df0"
-  integrity sha512-FNshRegpDK8ZkL7TBKFiJYoaQTqEBkzIsBWdUkAZo26ay/sn0s1aDnJssVKd+XmV4qB1lYvgDX441exYXiu0LA==
+"@telefonica/ts-to-flow@1.1.6":
+  version "1.1.6"
+  resolved "https://registry.yarnpkg.com/@telefonica/ts-to-flow/-/ts-to-flow-1.1.6.tgz#b6993c380e9271f4898959c110d2ea0912762d80"
+  integrity sha512-zrohikXBwvE+sKFMDDKbSyd/gG+xfd7Srw1Nf19AfcmPCYdkUxiWWv6BFrcMxR5h7vChTLeyauGX/kK5N3Ys3A==
   dependencies:
     "@pladaria/flowgen" "1.16.1"
     cpx "^1.5.0"

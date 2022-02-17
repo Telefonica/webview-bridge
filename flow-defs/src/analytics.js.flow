@@ -74,7 +74,27 @@ declare export var setScreenName: (
     [key: string]: any,
   } | void
 ) => Promise<void>;
-declare var USER_PROPERTY_TO_CUSTOM_DIMENSION: Record<string, number>;
+declare var USER_PROPERTY_TO_CUSTOM_DIMENSION: {
+  +obIds: 1,
+  +paymentModels: 2,
+  +serviceWorkerStatus: 3,
+  +isAdmin: 5,
+  +hasIpComms: 6,
+  +af_source: 9,
+  +af_campaign: 10,
+  +novum_uid_session: 11,
+  +user_logged: 12,
+  +currentSubscriptionId: 13,
+  +currentSubscriptionType: 14,
+  +currentPaymentModel: 15,
+  +webviewBrowserVersion: 16,
+  +activatedRoles: 17,
+  +appInstanceId: 18,
+  +experimentflag: 20,
+  +friendsApps: 24,
+  +accountLineSelector: 25,
+  +OneClickDisplayed: 26,
+};
 declare type UserPropertyName = $Keys<typeof USER_PROPERTY_TO_CUSTOM_DIMENSION>;
 declare export var setUserProperty: (
   name: UserPropertyName | string,

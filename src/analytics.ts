@@ -285,7 +285,7 @@ export const setScreenName = (
     });
 };
 
-const USER_PROPERTY_TO_CUSTOM_DIMENSION: Record<string, number> = {
+const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
     obIds: CD_OB_IDS,
     paymentModels: CD_PAYMENT_MODELS,
     serviceWorkerStatus: CD_SERVICE_WORKER_STATUS,
@@ -305,7 +305,7 @@ const USER_PROPERTY_TO_CUSTOM_DIMENSION: Record<string, number> = {
     friendsApps: CD_FRIENDS_APPS,
     accountLineSelector: CD_ACOUNT_LINE_SELECTOR,
     OneClickDisplayed: CD_ONE_CLICK_DISPLAYED,
-};
+} as const;
 
 type UserPropertyName = keyof typeof USER_PROPERTY_TO_CUSTOM_DIMENSION;
 
@@ -340,6 +340,7 @@ export const setUserProperty = (
             return Promise.resolve();
         },
         onWeb(ga) {
+            // @ts-ignore
             const dimensionIdx = USER_PROPERTY_TO_CUSTOM_DIMENSION[name];
             if (!dimensionIdx) {
                 console.warn(

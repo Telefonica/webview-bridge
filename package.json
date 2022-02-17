@@ -10,7 +10,7 @@
     ],
     "scripts": {
         "build": "rimraf dist && rollup -c && uglifyjs --compress --mangle -o dist/webview-bridge-umd.min.js dist/webview-bridge-umd.js && uglifyjs --compress --mangle -o dist/webview-bridge-iife.min.js dist/webview-bridge-iife.js && yarn generate-flow-types",
-        "generate-flow-types": "ts-to-flow dist flow-defs",
+        "generate-flow-types": "ts-to-flow dist flow-defs && mv dist/index.js.flow dist/webview-bridge-cjs.js.flow",
         "test": "jest --coverage",
         "prettier-check": "prettier --check .",
         "lint": "eslint --report-unused-disable-directives .",
@@ -31,7 +31,7 @@
     "homepage": "https://github.com/tef-dig/webview-bridge#readme",
     "dependencies": {},
     "devDependencies": {
-        "@telefonica/ts-to-flow": "^1.1.2",
+        "@telefonica/ts-to-flow": "1.1.6-beta1",
         "@types/google.analytics": "0.0.42",
         "@types/jest": "^27.0.3",
         "@typescript-eslint/eslint-plugin": "^5.6.0",

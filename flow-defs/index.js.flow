@@ -33,6 +33,7 @@ declare export {
   getAppMetadata,
   setActionBehavior,
 } from "./src/utils";
+export type { ShareOptions } from "./src/utils";
 declare export { createCalendarEvent } from "./src/calendar";
 declare export { requestContact, fetchContactsByPhone } from "./src/contacts";
 declare export {
@@ -47,5 +48,5 @@ declare export {
   getCustomerHash,
   setTrackingProperty,
 } from "./src/analytics";
-export type { TrackingEvent } from "./src/analytics";
+export type { TrackingEvent, CustomDimensionIdx } from "./src/analytics";
 declare export { renewSession, onSessionRenewed } from "./src/sessions";

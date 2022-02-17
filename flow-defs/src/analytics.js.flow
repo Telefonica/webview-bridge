@@ -1,6 +1,6 @@
 // @flow
 
-declare type CustomDimensionIdx =
+export type CustomDimensionIdx =
   | 1
   | 2
   | 3
@@ -27,7 +27,7 @@ declare type CustomDimensionIdx =
 declare export var CD_WEBAPP_INSTALLED: CustomDimensionIdx;
 declare export var CD_NOVUM_UID: CustomDimensionIdx;
 declare export var CD_EVENT_VALUE: CustomDimensionIdx;
-export type TrackingEvent = Readonly<{
+export type TrackingEvent = $ReadOnly<{
   /**
    * Typically the object that was interacted with (e.g. 'Video')
    */
@@ -61,7 +61,7 @@ export type TrackingEvent = Readonly<{
 }>;
 declare export var logEvent: (x: TrackingEvent) => Promise<void>;
 declare export var logTiming: (
-  x: Readonly<{
+  x: $ReadOnly<{
     category?: string | void,
     variable: string,
     value: number,
@@ -70,32 +70,14 @@ declare export var logTiming: (
 ) => Promise<void>;
 declare export var setScreenName: (
   screenName: string,
-  fieldsObject?: {} | void
+  fieldsObject?: {
+    [key: string]: any,
+  } | void
 ) => Promise<void>;
-declare var USER_PROPERTY_TO_CUSTOM_DIMENSION: {
-  obIds: 1,
-  paymentModels: 2,
-  serviceWorkerStatus: 3,
-  isAdmin: 5,
-  hasIpComms: 6,
-  af_source: 9,
-  af_campaign: 10,
-  novum_uid_session: 11,
-  user_logged: 12,
-  currentSubscriptionId: 13,
-  currentSubscriptionType: 14,
-  currentPaymentModel: 15,
-  webviewBrowserVersion: 16,
-  activatedRoles: 17,
-  appInstanceId: 18,
-  experimentflag: 20,
-  friendsApps: 24,
-  accountLineSelector: 25,
-  OneClickDisplayed: 26,
-};
+declare var USER_PROPERTY_TO_CUSTOM_DIMENSION: Record<string, number>;
 declare type UserPropertyName = $Keys<typeof USER_PROPERTY_TO_CUSTOM_DIMENSION>;
 declare export var setUserProperty: (
-  name: UserPropertyName,
+  name: UserPropertyName | string,
   value: string
 ) => Promise<void>;
 declare export var setCustomerHash: (hash: string) => Promise<void>;

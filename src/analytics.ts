@@ -2,7 +2,7 @@ import {postMessageToNativeApp} from './post-message';
 
 // Google Analytics custom dimension indices.
 // WARN: These numbers are defined in GA, don't change them
-type CustomDimensionIdx =
+export type CustomDimensionIdx =
     | 1
     | 2
     | 3
@@ -236,7 +236,7 @@ let currentPageName: string;
 
 export const setScreenName = (
     screenName: string,
-    fieldsObject?: {},
+    fieldsObject?: {[key: string]: any},
 ): Promise<void> => {
     if (!screenName) {
         console.warn('Missing analytics screenName');
@@ -285,7 +285,7 @@ export const setScreenName = (
     });
 };
 
-const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
+const USER_PROPERTY_TO_CUSTOM_DIMENSION: Record<string, number> = {
     obIds: CD_OB_IDS,
     paymentModels: CD_PAYMENT_MODELS,
     serviceWorkerStatus: CD_SERVICE_WORKER_STATUS,
@@ -310,7 +310,7 @@ const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
 type UserPropertyName = keyof typeof USER_PROPERTY_TO_CUSTOM_DIMENSION;
 
 export const setUserProperty = (
-    name: UserPropertyName,
+    name: UserPropertyName | string,
     value: string,
 ): Promise<void> => {
     if (!name || !value) {

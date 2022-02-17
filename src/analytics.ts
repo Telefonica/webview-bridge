@@ -340,8 +340,8 @@ export const setUserProperty = (
             return Promise.resolve();
         },
         onWeb(ga) {
-            // @ts-ignore
-            const dimensionIdx = USER_PROPERTY_TO_CUSTOM_DIMENSION[name];
+            const dimensionIdx =
+                USER_PROPERTY_TO_CUSTOM_DIMENSION[name as UserPropertyName];
             if (!dimensionIdx) {
                 console.warn(
                     'No custom dimension defined for user property',

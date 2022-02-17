@@ -22,7 +22,7 @@ export const attachToEmail = ({
         payload: {url, subject, fileName, recipient, body},
     });
 
-type ShareOptions =
+export type ShareOptions =
     | {
           text: string;
       }

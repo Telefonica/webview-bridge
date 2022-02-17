@@ -3,7 +3,9 @@ export {
     onNativeEvent,
     NativeEventHandler,
 } from './src/post-message';
+
 export {nativeConfirm, nativeAlert, nativeMessage} from './src/dialogs';
+
 export {
     requestSimIcc,
     requestSimImsi,
@@ -14,6 +16,7 @@ export {
     getDiskSpaceInfo,
     getEsimInfo,
 } from './src/device';
+
 export {
     attachToEmail,
     share,
@@ -27,8 +30,12 @@ export {
     getAppMetadata,
     setActionBehavior,
 } from './src/utils';
+export type {ShareOptions} from './src/utils';
+
 export {createCalendarEvent} from './src/calendar';
+
 export {requestContact, fetchContactsByPhone} from './src/contacts';
+
 export {
     logEvent,
     logTiming,
@@ -41,5 +48,6 @@ export {
     getCustomerHash,
     setTrackingProperty,
 } from './src/analytics';
-export type {TrackingEvent} from './src/analytics';
+export type {TrackingEvent, CustomDimensionIdx} from './src/analytics';
+
 export {renewSession, onSessionRenewed} from './src/sessions';

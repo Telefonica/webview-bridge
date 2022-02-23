@@ -174,6 +174,32 @@ export const logEvent = ({
     });
 };
 
+export const logEcommerceEvent = (
+    name: string,
+    params: {[key: string]: any},
+): Promise<void> => {
+    return withAnalytics({
+        onAndroid(androidFirebase) {
+            if (androidFirebase.logEvent) {
+                androidFirebase.logEvent(name, JSON.stringify(params));
+            }
+            return Promise.resolve();
+        },
+        onIos(iosFirebase) {
+            iosFirebase.postMessage({
+                command: 'logEvent',
+                name,
+                parameters: params,
+            });
+            return Promise.resolve();
+        },
+        onWeb() {
+            // not implemented on web
+            return Promise.resolve();
+        },
+    });
+};
+
 export const logTiming = ({
     category = 'performance_timer',
     variable,

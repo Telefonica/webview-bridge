@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.3.1 - 2022-03-09
+
+-   Add missing export.
+
 ## v.3.3.0 - 2022-03-09
 
 -   Add `logEcommerceEvent` method.

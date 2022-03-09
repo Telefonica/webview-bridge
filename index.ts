@@ -38,6 +38,7 @@ export {requestContact, fetchContactsByPhone} from './src/contacts';
 
 export {
     logEvent,
+    logEcommerceEvent,
     logTiming,
     setScreenName,
     setUserProperty,

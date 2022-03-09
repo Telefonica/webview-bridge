@@ -38,6 +38,7 @@ declare export { createCalendarEvent } from "./src/calendar";
 declare export { requestContact, fetchContactsByPhone } from "./src/contacts";
 declare export {
   logEvent,
+  logEcommerceEvent,
   logTiming,
   setScreenName,
   setUserProperty,

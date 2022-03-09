@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.2.0 - 2022-03-09
+
+-   Add `logEcommerceEvent` method.
+
 ## v.3.1.0 - 2021-09-06
 
 -   Add `setActionBehavior` method to allow defining the behavior of close and

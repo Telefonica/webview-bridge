@@ -6,6 +6,7 @@ import {
     setCustomerHash,
     getCustomerHash,
     setTrackingProperty,
+    logEcommerceEvent,
 } from '../analytics';
 import {
     createFakeAndroidPostMessage,
@@ -135,6 +136,81 @@ test('log event in iOS', async () => {
             eventLabel: 'anyLabel',
             eventValue: ANY_VALUE,
             anyOtherParam: ANY_VALUE,
+        },
+    });
+});
+
+test('log ecommerce event in Android', async () => {
+    const androidFirebaseMock = givenAndroidWebview();
+
+    await logEcommerceEvent('select_item', {
+        item_list_id: 'L001',
+        item_list_name: 'Related products',
+        items: [
+            {
+                item_id: 'SKU_123',
+                item_name: 'jeggings',
+                item_category: 'pants',
+                item_variant: 'black',
+                item_brand: 'Google',
+                price: 9.99,
+            },
+        ],
+    });
+
+    expect(androidFirebaseMock.logEvent).toBeCalledWith(
+        'select_item',
+        JSON.stringify({
+            item_list_id: 'L001',
+            item_list_name: 'Related products',
+            items: [
+                {
+                    item_id: 'SKU_123',
+                    item_name: 'jeggings',
+                    item_category: 'pants',
+                    item_variant: 'black',
+                    item_brand: 'Google',
+                    price: 9.99,
+                },
+            ],
+        }),
+    );
+});
+
+test('log ecommerce event in iOS', async () => {
+    const iosFirebaseMock = givenIosWebview();
+
+    await logEcommerceEvent('select_item', {
+        item_list_id: 'L001',
+        item_list_name: 'Related products',
+        items: [
+            {
+                item_id: 'SKU_123',
+                item_name: 'jeggings',
+                item_category: 'pants',
+                item_variant: 'black',
+                item_brand: 'Google',
+                price: 9.99,
+            },
+        ],
+    });
+
+    expect(iosFirebaseMock.postMessage).toBeCalledWith({
+        command: 'logEvent',
+        name: 'select_item',
+        parameters: {
+            item_list_id: 'L001',
+            item_list_name: 'Related products',
+            items: [
+                {
+                    item_id: 'SKU_123',
+                    item_name: 'jeggings',
+                    item_category: 'pants',
+                    item_variant: 'black',
+                    item_brand: 'Google',
+                    price: 9.99,
+                },
+            ],
         },
     });
 });

@@ -60,6 +60,12 @@ export type TrackingEvent = $ReadOnly<{
   [key: string]: any,
 }>;
 declare export var logEvent: (x: TrackingEvent) => Promise<void>;
+declare export var logEcommerceEvent: (
+  name: string,
+  params: {
+    [key: string]: any,
+  }
+) => Promise<void>;
 declare export var logTiming: (
   x: $ReadOnly<{
     category?: string | void,

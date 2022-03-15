@@ -191,6 +191,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    HIGHLIGHT_TAB: {
+        type: 'HIGHLIGHT_TAB';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

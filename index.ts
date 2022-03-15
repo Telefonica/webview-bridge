@@ -36,6 +36,8 @@ export {createCalendarEvent} from './src/calendar';
 
 export {requestContact, fetchContactsByPhone} from './src/contacts';
 
+export {highlightNavigationTab} from './src/navigation-tabs';
+
 export {
     logEvent,
     logEcommerceEvent,

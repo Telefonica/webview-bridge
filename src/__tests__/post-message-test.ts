@@ -40,6 +40,10 @@ test.each`
         get: () => null,
         configurable: true,
     });
+
+    Object.defineProperty(window, 'top', {
+        get: () => window,
+    });
     expect(isWebViewBridgeAvailable()).toBe(true);
 
     // Inside an iframe that has no flag to enable it
@@ -49,6 +53,9 @@ test.each`
             hasAttribute: hasNoDataEnableWebviewBridge,
         }),
         configurable: true,
+    });
+    Object.defineProperty(window, 'top', {
+        get: () => ({}),
     });
     expect(isWebViewBridgeAvailable()).toBe(false);
     expect(hasNoDataEnableWebviewBridge).toHaveBeenCalledWith(

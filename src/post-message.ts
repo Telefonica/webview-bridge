@@ -273,8 +273,7 @@ const isInIframe = () => {
     } catch (e) {
         return true;
     }
-}
-
+};
 
 const isDisabledFromIframe = () => {
     if (typeof window === 'undefined') {

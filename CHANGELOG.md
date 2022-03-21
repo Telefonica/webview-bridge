@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.4.0 - 2022-03-21
+
+-   HIGHLIGHT_TAB message
+-   fix how we detect the lib is running inside an iframe.
+
 ## v.3.3.1 - 2022-03-09
 
 -   Add missing export.

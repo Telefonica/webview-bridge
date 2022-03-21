@@ -267,16 +267,24 @@ const unsubscribe = (listener: MessageListener) => {
     messageListeners = messageListeners.filter((f) => f !== listener);
 };
 
+const isInIframe = () => {
+    try {
+        return window.self !== window.top;
+    } catch (e) {
+        return true;
+    }
+};
+
 const isDisabledFromIframe = () => {
     if (typeof window === 'undefined') {
         return false;
     }
 
-    if (!window.frameElement) {
+    if (!isInIframe()) {
         return false;
     }
 
-    return !window.frameElement.hasAttribute('data-enable-webview-bridge');
+    return !window?.frameElement?.hasAttribute('data-enable-webview-bridge');
 };
 
 /**

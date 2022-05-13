@@ -61,6 +61,8 @@ declare type LegacyAnalyticsEvent = {
 };
 declare type FirebaseEvent = {
   name: string,
+  component_type?: string,
+  component_copy?: string,
   [key: string]: any,
 };
 export type TrackingEvent = $ReadOnly<LegacyAnalyticsEvent | FirebaseEvent>;

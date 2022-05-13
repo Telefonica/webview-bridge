@@ -119,10 +119,10 @@ type FirebaseEvent = {
 
 export type TrackingEvent = Readonly<LegacyAnalyticsEvent | FirebaseEvent>;
 
-const formatLabel = (label: string) =>
+const sanitize = (str: string) =>
     // Normalize to NFD (normal form decomposes and delete Combining Diacritical Marks Unicode
     // https://stackoverflow.com/a/37511463/3874587
-    label.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
 const getLegacyAnalyticsEventParams = ({
     category,
@@ -142,7 +142,7 @@ const getLegacyAnalyticsEventParams = ({
     return {
         eventCategory: category,
         eventAction: action,
-        eventLabel: formatLabel(label),
+        eventLabel: sanitize(label),
         eventValue: value,
         ...fieldsObject,
     };
@@ -164,11 +164,14 @@ export const logEvent = (event: TrackingEvent): Promise<void> => {
         }
         params = getLegacyAnalyticsEventParams(event as LegacyAnalyticsEvent);
         name = event.category;
-    }
-
-    if (params.component_copy) {
-        // @ts-ignore - params is a new object created from event destructuring, so TS shouldn't complain about it being readonly.
-        params.component_copy = formatLabel(params.component_copy);
+    } else {
+        // Some params may contain strings with accents (some of them may be copies/translations), so we need to sanitize them
+        Object.entries(params).forEach(([key, value]) => {
+            if (typeof value === 'string') {
+                // @ts-ignore - params is a new object created from event destructuring, so TS shouldn't complain about it being readonly
+                params[key] = sanitize(value);
+            }
+        });
     }
 
     return withAnalytics({

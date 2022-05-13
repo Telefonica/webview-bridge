@@ -112,6 +112,8 @@ type LegacyAnalyticsEvent = {
 
 type FirebaseEvent = {
     name: string;
+    component_type?: string;
+    component_copy?: string;
     [key: string]: any;
 };
 
@@ -162,6 +164,11 @@ export const logEvent = (event: TrackingEvent): Promise<void> => {
         }
         params = getLegacyAnalyticsEventParams(event as LegacyAnalyticsEvent);
         name = event.category;
+    }
+
+    if (params.component_copy) {
+        // @ts-ignore - params is a new object created from event destructuring, so TS shouldn't complain about it being readonly.
+        params.component_copy = formatLabel(params.component_copy);
     }
 
     return withAnalytics({

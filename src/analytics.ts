@@ -120,7 +120,7 @@ type FirebaseEvent = {
 export type TrackingEvent = Readonly<LegacyAnalyticsEvent | FirebaseEvent>;
 
 const sanitize = (str: string) =>
-    // Normalize to NFD (normal form decomposes and delete Combining Diacritical Marks Unicode
+    // Normalize to NFD (normal form decomposition) and delete Combining Diacritical Marks Unicode
     // https://stackoverflow.com/a/37511463/3874587
     str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 

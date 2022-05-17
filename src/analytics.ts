@@ -92,7 +92,7 @@ const withAnalytics = ({
     }
 };
 
-export type TrackingEvent = Readonly<{
+type LegacyAnalyticsEvent = {
     /** Typically the object that was interacted with (e.g. 'Video') */
     category: string;
     /** The type of interaction (e.g. 'play') */
@@ -108,30 +108,29 @@ export type TrackingEvent = Readonly<{
     screenName?: string;
     /** Other properties are allowed */
     [key: string]: any;
-}>;
+};
 
-const formatLabel = (label: string) =>
-    // Normalize to NFD (normal form decomposes and delete Combining Diacritical Marks Unicode
+type FirebaseEvent = {
+    name: string;
+    component_type?: string;
+    component_copy?: string;
+    [key: string]: any;
+};
+
+export type TrackingEvent = Readonly<LegacyAnalyticsEvent | FirebaseEvent>;
+
+const sanitize = (str: string) =>
+    // Normalize to NFD (normal form decomposition) and delete Combining Diacritical Marks Unicode
     // https://stackoverflow.com/a/37511463/3874587
-    label.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-export const logEvent = ({
+const getLegacyAnalyticsEventParams = ({
     category,
     action,
     label,
     value,
     ...fieldsObject
-}: TrackingEvent): Promise<void> => {
-    if (!category || !action) {
-        console.warn('Analytics event should have "category" and "action"', {
-            category,
-            action,
-        });
-        return Promise.resolve();
-    }
-
-    const name = category;
-
+}: LegacyAnalyticsEvent) => {
     if (!label) {
         label = DEFAULT_EVENT_LABEL;
     }
@@ -140,13 +139,40 @@ export const logEvent = ({
         value = DEFAULT_EVENT_VALUE;
     }
 
-    const params = {
+    return {
         eventCategory: category,
         eventAction: action,
-        eventLabel: formatLabel(label),
+        eventLabel: sanitize(label),
         eventValue: value,
         ...fieldsObject,
     };
+};
+
+export const logEvent = (event: TrackingEvent): Promise<void> => {
+    let {name, ...params} = event;
+    if (!name) {
+        // If the event doesn't have a name, it's a legacy analytics event
+        if (!event.category || !event.action) {
+            console.warn(
+                'LegacyAnalyticsEvent should have "category" and "action"',
+                {
+                    category: event.category,
+                    action: event.action,
+                },
+            );
+            return Promise.resolve();
+        }
+        params = getLegacyAnalyticsEventParams(event as LegacyAnalyticsEvent);
+        name = event.category;
+    } else {
+        // Some params may contain strings with accents (some of them may be copies/translations), so we need to sanitize them
+        Object.entries(params).forEach(([key, value]) => {
+            if (typeof value === 'string') {
+                // @ts-ignore - params is a new object created from event destructuring, so TS shouldn't complain about it being readonly
+                params[key] = sanitize(value);
+            }
+        });
+    }
 
     return withAnalytics({
         onAndroid(androidFirebase) {

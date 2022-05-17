@@ -27,7 +27,7 @@ export type CustomDimensionIdx =
 declare export var CD_WEBAPP_INSTALLED: CustomDimensionIdx;
 declare export var CD_NOVUM_UID: CustomDimensionIdx;
 declare export var CD_EVENT_VALUE: CustomDimensionIdx;
-export type TrackingEvent = $ReadOnly<{
+declare type LegacyAnalyticsEvent = {
   /**
    * Typically the object that was interacted with (e.g. 'Video')
    */
@@ -58,8 +58,15 @@ export type TrackingEvent = $ReadOnly<{
    * Other properties are allowed
    */
   [key: string]: any,
-}>;
-declare export var logEvent: (x: TrackingEvent) => Promise<void>;
+};
+declare type FirebaseEvent = {
+  name: string,
+  component_type?: string,
+  component_copy?: string,
+  [key: string]: any,
+};
+export type TrackingEvent = $ReadOnly<LegacyAnalyticsEvent | FirebaseEvent>;
+declare export var logEvent: (event: TrackingEvent) => Promise<void>;
 declare export var logEcommerceEvent: (
   name: string,
   params: {

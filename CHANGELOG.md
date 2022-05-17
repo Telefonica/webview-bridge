@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.5.0 - 2022-05-17
+
+-   Analytics: support GA4/Firebase event format
+
 ## v.3.4.0 - 2022-03-21
 
 -   HIGHLIGHT_TAB message

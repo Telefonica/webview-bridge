@@ -23,6 +23,7 @@ export {
     setWebViewTitle,
     updateNavigationBar,
     notifyPageLoaded,
+    notifyBridgeReady,
     isABTestingAvailable,
     reportStatus,
     fetch,

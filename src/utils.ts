@@ -90,6 +90,9 @@ export const setWebViewTitle = (title: string): Promise<void> => {
 export const notifyPageLoaded = (): Promise<void> =>
     postMessageToNativeApp({type: 'PAGE_LOADED'});
 
+export const notifyBridgeReady = (): Promise<void> =>
+    postMessageToNativeApp({type: 'BRIDGE_READY'});
+
 type RemoteConfig = {result: {[s: string]: string}};
 
 let remoteConfig: null | RemoteConfig = null;

@@ -58,6 +58,11 @@ export type ResponsesFromNativeApp = {
     type: "PAGE_LOADED",
     payload: void,
   },
+  BRIDGE_READY: {
+    id: string,
+    type: "BRIDGE_READY",
+    payload: void,
+  },
   ALERT: {
     id: string,
     type: "ALERT",

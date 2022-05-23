@@ -31,6 +31,7 @@ declare export var updateNavigationBar: (x: {
  */
 declare export var setWebViewTitle: (title: string) => Promise<void>;
 declare export var notifyPageLoaded: () => Promise<void>;
+declare export var notifyBridgeReady: () => Promise<void>;
 declare export var isABTestingAvailable: (key: string) => Promise<boolean>;
 declare export var reportStatus: (x: {
   feature: "ACCOUNT",

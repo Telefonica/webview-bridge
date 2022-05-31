@@ -2,6 +2,7 @@ export {
     isWebViewBridgeAvailable,
     onNativeEvent,
     NativeEventHandler,
+    setDebugMode,
 } from './src/post-message';
 
 export {nativeConfirm, nativeAlert, nativeMessage} from './src/dialogs';
@@ -30,6 +31,7 @@ export {
     checkPermissionStatus,
     getAppMetadata,
     setActionBehavior,
+    getTopazToken,
 } from './src/utils';
 export type {ShareOptions} from './src/utils';
 

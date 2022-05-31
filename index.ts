@@ -2,7 +2,7 @@ export {
     isWebViewBridgeAvailable,
     onNativeEvent,
     NativeEventHandler,
-    setDebugMode,
+    setLogger,
 } from './src/post-message';
 
 export {nativeConfirm, nativeAlert, nativeMessage} from './src/dialogs';

@@ -4,6 +4,7 @@ declare export {
   isWebViewBridgeAvailable,
   onNativeEvent,
   NativeEventHandler,
+  setLogger,
 } from "./src/post-message";
 declare export {
   nativeConfirm,
@@ -33,6 +34,7 @@ declare export {
   checkPermissionStatus,
   getAppMetadata,
   setActionBehavior,
+  getTopazToken,
 } from "./src/utils";
 export type { ShareOptions } from "./src/utils";
 declare export { createCalendarEvent } from "./src/calendar";

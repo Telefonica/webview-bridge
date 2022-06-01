@@ -125,7 +125,12 @@ const removeAccents = (str: string) =>
     str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
 const sanitize = (str: string) =>
-    removeAccents(str).toLocaleLowerCase().replace(/\s/g, '_');
+    removeAccents(str)
+        .toLocaleLowerCase()
+        .replace(/[^a-z0-9\s]/g, '') // Remove all non-alphanumeric characters
+        .replace(/\s+/g, ' ') // Replace repeated whitespaces with a single space
+        .trim()
+        .replace(/\s/g, '_'); // Replace spaces with underscores
 
 const getLegacyAnalyticsEventParams = ({
     category,

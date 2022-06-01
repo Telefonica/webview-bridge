@@ -145,13 +145,13 @@ test('log GA4 event in Android', async () => {
 
     await logEvent({
         name: 'some name',
-        component_copy: 'Haz click en este botón',
+        component_copy: 'Haz click en este botón ñ ß ü % €',
     });
 
     expect(androidFirebaseMock.logEvent).toBeCalledWith(
         'some_name',
         JSON.stringify({
-            component_copy: 'haz_click_en_este_boton',
+            component_copy: 'haz_click_en_este_boton_n_u',
         }),
     );
 });
@@ -161,14 +161,14 @@ test('log GA4 event in iOS', async () => {
 
     await logEvent({
         name: 'some name',
-        component_copy: 'Haz click en este botón',
+        component_copy: 'Haz click en este botón ñ ß ü % €',
     });
 
     expect(iosFirebaseMock.postMessage).toBeCalledWith({
         command: 'logEvent',
         name: 'some_name',
         parameters: {
-            component_copy: 'haz_click_en_este_boton',
+            component_copy: 'haz_click_en_este_boton_n_u',
         },
     });
 });

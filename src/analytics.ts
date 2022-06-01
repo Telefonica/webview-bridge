@@ -124,7 +124,8 @@ const removeAccents = (str: string) =>
     // https://stackoverflow.com/a/37511463/3874587
     str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-const sanitize = (str: string) => removeAccents(str).replace(/\s/g, '_');
+const sanitize = (str: string) =>
+    removeAccents(str).toLocaleLowerCase().replace(/\s/g, '_');
 
 const getLegacyAnalyticsEventParams = ({
     category,

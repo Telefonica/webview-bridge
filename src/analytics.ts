@@ -119,10 +119,12 @@ type FirebaseEvent = {
 
 export type TrackingEvent = Readonly<LegacyAnalyticsEvent | FirebaseEvent>;
 
-const sanitize = (str: string) =>
+const removeAccents = (str: string) =>
     // Normalize to NFD (normal form decomposition) and delete Combining Diacritical Marks Unicode
     // https://stackoverflow.com/a/37511463/3874587
     str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
+const sanitize = (str: string) => removeAccents(str).replace(/\s/g, '_');
 
 const getLegacyAnalyticsEventParams = ({
     category,
@@ -142,7 +144,7 @@ const getLegacyAnalyticsEventParams = ({
     return {
         eventCategory: category,
         eventAction: action,
-        eventLabel: sanitize(label),
+        eventLabel: removeAccents(label),
         eventValue: value,
         ...fieldsObject,
     };
@@ -172,6 +174,7 @@ export const logEvent = (event: TrackingEvent): Promise<void> => {
                 params[key] = sanitize(value);
             }
         });
+        name = sanitize(name);
     }
 
     return withAnalytics({

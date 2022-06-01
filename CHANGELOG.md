@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.6.0 - 2022-05-23
+
+-   BRIDGE_READY message
+
 ## v.3.5.0 - 2022-05-17
 
 -   Analytics: support GA4/Firebase event format

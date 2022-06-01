@@ -84,6 +84,9 @@ Alternatively, you can import the library directly from a CDN:
 -   [getEsimInfo](#getEsimInfo)
 -   [setTrackingProperty](#setTrackingProperty)
 -   [setActionBehavior](#setActionBehavior)
+-   [renewSession](#renewSession)
+-   [onSessionRenewed](#onSessionRenewed)
+-   [getTopazToken](#getTopazToken)
 
 ### isWebViewBridgeAvailable
 
@@ -773,6 +776,36 @@ All actions behaviors will be automatically set to default on full page loads.
 import {setTrackingProperty} from '@tef-novum/webview-bridge';
 
 setTrackingProperty('some_system', 'some_property_name', 'some_property_value');
+```
+
+### renewSession
+
+Tell the app to renew the session.
+
+```ts
+renewSession = (
+    oldAccessToken: string | null,
+    options: {timeout?: number} = {},
+) => Promise<string>
+```
+
+### onSessionRenewed
+
+Defines a callback that will be executed when the native app renews the session.
+Returns the unsubscribe function.
+
+```ts
+onSessionRenewed = (
+    handler: (newAccessToken: string) => void,
+) => (() => void)
+```
+
+### getTopazToken
+
+Returns the [Topaz](https://www.topaz.com.br/ofd/index.php) token.
+
+```ts
+getTopazToken = (options: {timeout?: number} = {}) => Promise<{token: string}>
 ```
 
 ## Error handling

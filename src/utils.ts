@@ -215,3 +215,18 @@ export const setActionBehavior = (actions: {
     }).catch(() => {
         // do nothing
     });
+
+/**
+ * Returns the Topaz SDK Token
+ * https://www.topaz.com.br/ofd/index.php
+ */
+export const getTopazToken = (
+    options: {timeout?: number} = {},
+): Promise<{token: string}> =>
+    postMessageToNativeApp(
+        {
+            type: 'GET_TOPAZ_TOKEN',
+            payload: {},
+        },
+        options.timeout,
+    );

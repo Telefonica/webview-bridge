@@ -201,6 +201,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    GET_TOPAZ_TOKEN: {
+        type: 'GET_TOPAZ_TOKEN';
+        id: string;
+        payload: {token: string};
+    };
 };
 
 export type NativeAppResponsePayload<
@@ -292,6 +297,12 @@ const isDisabledFromIframe = () => {
     return !window?.frameElement?.hasAttribute('data-enable-webview-bridge');
 };
 
+let log: undefined | ((...args: Array<any>) => void) = undefined;
+
+export const setLogger = (logger: typeof log): void => {
+    log = logger;
+};
+
 /**
  * Returns true if there is a WebView Bridge installed
  */
@@ -308,6 +319,7 @@ export const postMessageToNativeApp = <T extends keyof ResponsesFromNativeApp>(
 ): Promise<NativeAppResponsePayload<T>> => {
     const postMessage = getWebViewPostMessage();
     const message = JSON.stringify({type, id, payload});
+    log?.('[WebView Bridge] SEND:', message);
 
     if (!postMessage) {
         return Promise.reject({
@@ -358,6 +370,7 @@ export const postMessageToNativeApp = <T extends keyof ResponsesFromNativeApp>(
 if (typeof window !== 'undefined') {
     window[BRIDGE] = window[BRIDGE] || {
         postMessage: (jsonMessage: string) => {
+            log?.('[WebView Bridge] RCVD:', jsonMessage);
             let message: any;
             try {
                 message = JSON.parse(jsonMessage);

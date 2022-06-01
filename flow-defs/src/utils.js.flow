@@ -76,4 +76,13 @@ declare export var setActionBehavior: (actions: {
   webviewClose?: ActionBehavior,
   navigationBack?: ActionBehavior,
 }) => Promise<void>;
+/**
+ * Returns the Topaz SDK Token
+ * https://www.topaz.com.br/ofd/index.php
+ */
+declare export var getTopazToken: (options?: {
+  timeout?: number,
+}) => Promise<{
+  token: string,
+}>;
 declare export {};

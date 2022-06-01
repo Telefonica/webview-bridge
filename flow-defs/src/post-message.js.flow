@@ -234,11 +234,20 @@ export type ResponsesFromNativeApp = {
     id: string,
     payload: void,
   },
+  GET_TOPAZ_TOKEN: {
+    type: "GET_TOPAZ_TOKEN",
+    id: string,
+    payload: {
+      token: string,
+    },
+  },
 };
 export type NativeAppResponsePayload<Type: $Keys<ResponsesFromNativeApp>> =
   $PropertyType<$ElementType<ResponsesFromNativeApp, Type>, "payload">;
 declare type NativeAppRequestPayload<Type: $Keys<RequestsFromNativeApp>> =
   $PropertyType<$ElementType<RequestsFromNativeApp, Type>, "payload">;
+declare var log: void | ((...args: Array<any>) => void);
+declare export var setLogger: (logger: typeof log) => void;
 /**
  * Returns true if there is a WebView Bridge installed
  */

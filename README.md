@@ -792,6 +792,7 @@ renewSession = (
 ### onSessionRenewed
 
 Defines a callback that will be executed when the native app renews the session.
+Returns the unsubscribe function.
 
 ```ts
 onSessionRenewed = (

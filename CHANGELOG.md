@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v.3.6.6 - 2022-05-17
+
+-   New method: `getTopazToken`.
+-   Add timeout option to `renewSession`.
+-   `setLogger` method to log bridge traffic for debugging.
+
 ## v.3.5.0 - 2022-05-17
 
 -   Analytics: support GA4/Firebase event format

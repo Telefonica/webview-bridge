@@ -1,10 +1,14 @@
 # CHANGELOG
 
-## v.3.6.6 - 2022-05-17
+## v.3.7.6 - 2022-05-17
 
 -   New method: `getTopazToken`.
 -   Add timeout option to `renewSession`.
 -   `setLogger` method to log bridge traffic for debugging.
+
+## v.3.6.0 - 2022-05-23
+
+-   `BRIDGE_READY` message
 
 ## v.3.5.0 - 2022-05-17
 

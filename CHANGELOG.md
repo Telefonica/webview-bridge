@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## v.3.7.0 - 2022-05-17
+## v.3.8.0 - 2022-06-08
+
+-   Analytics: automatically sanitize GA4 event attribute values.
+
+## v.3.7.0 - 2022-06-01
 
 -   New method: `getTopazToken`.
 -   Add timeout option to `renewSession`.

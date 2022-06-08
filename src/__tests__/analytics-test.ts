@@ -140,6 +140,39 @@ test('log event in iOS', async () => {
     });
 });
 
+test('log GA4 event in Android', async () => {
+    const androidFirebaseMock = givenAndroidWebview();
+
+    await logEvent({
+        name: 'some name',
+        component_copy: 'Haz click en este botón ñ ß ü % €, - are allowed',
+    });
+
+    expect(androidFirebaseMock.logEvent).toBeCalledWith(
+        'some_name',
+        JSON.stringify({
+            component_copy: 'haz_click_en_este_boton_n_u_-_are_allowed',
+        }),
+    );
+});
+
+test('log GA4 event in iOS', async () => {
+    const iosFirebaseMock = givenIosWebview();
+
+    await logEvent({
+        name: 'some name',
+        component_copy: 'Haz click en este botón ñ ß ü % €, - are allowed',
+    });
+
+    expect(iosFirebaseMock.postMessage).toBeCalledWith({
+        command: 'logEvent',
+        name: 'some_name',
+        parameters: {
+            component_copy: 'haz_click_en_este_boton_n_u_-_are_allowed',
+        },
+    });
+});
+
 test('log ecommerce event in Android', async () => {
     const androidFirebaseMock = givenAndroidWebview();
 

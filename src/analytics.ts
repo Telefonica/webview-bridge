@@ -1,6 +1,32 @@
 import {postMessageToNativeApp} from './post-message';
 
 /** @deprecated */
+export type CustomDimensionIdx =
+    | 1
+    | 2
+    | 3
+    | 4
+    | 5
+    | 6
+    | 7
+    | 8
+    | 9
+    | 10
+    | 11
+    | 12
+    | 13
+    | 14
+    | 15
+    | 16
+    | 17
+    | 18
+    | 19
+    | 20
+    | 24
+    | 25
+    | 26;
+
+/** @deprecated */
 export const CD_WEBAPP_INSTALLED = 4;
 /** @deprecated */
 export const CD_NOVUM_UID = 7;

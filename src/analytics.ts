@@ -1,62 +1,14 @@
 import {postMessageToNativeApp} from './post-message';
 
-// Google Analytics custom dimension indices.
-// WARN: These numbers are defined in GA, don't change them
-export type CustomDimensionIdx =
-    | 1
-    | 2
-    | 3
-    | 4
-    | 5
-    | 6
-    | 7
-    | 8
-    | 9
-    | 10
-    | 11
-    | 12
-    | 13
-    | 14
-    | 15
-    | 16
-    | 17
-    | 18
-    | 19
-    | 20
-    | 24
-    | 25
-    | 26;
-
-const CD_OB_IDS: CustomDimensionIdx = 1; // from sessionInfo
-const CD_PAYMENT_MODELS: CustomDimensionIdx = 2; // from sessionInfo
-const CD_SERVICE_WORKER_STATUS: CustomDimensionIdx = 3;
-export const CD_WEBAPP_INSTALLED: CustomDimensionIdx = 4;
-const CD_SUBSCRIPTION_ADMIN: CustomDimensionIdx = 5; // from sessionInfo
-const CD_SUBSCRIPTION_WITH_IPCOMMS: CustomDimensionIdx = 6; // from sessionInfo
-export const CD_NOVUM_UID: CustomDimensionIdx = 7;
-export const CD_EVENT_VALUE: CustomDimensionIdx = 8;
-const CD_AF_SOURCE: CustomDimensionIdx = 9;
-const CD_AF_CAMPAIGN: CustomDimensionIdx = 10;
-const CD_NOVUM_UID_SESSION: CustomDimensionIdx = 11;
-const CD_USER_LOGGED: CustomDimensionIdx = 12;
-const CD_CURRENT_SUBSCRIPTION_ID: CustomDimensionIdx = 13;
-const CD_CURRENT_SUBSCRIPTION_TYPE: CustomDimensionIdx = 14;
-const CD_CURRENT_PAYMENT_MODEL: CustomDimensionIdx = 15;
-const CD_WEBVIEW_BROWSER_VERSION: CustomDimensionIdx = 16;
-const CD_ACTIVATED_ROLES: CustomDimensionIdx = 17;
-const CD_APP_INSTANCE_ID: CustomDimensionIdx = 18;
-const CD_EXPERIMENT_FLAG: CustomDimensionIdx = 20;
-const CD_FRIENDS_APPS: CustomDimensionIdx = 24;
-const CD_ACOUNT_LINE_SELECTOR: CustomDimensionIdx = 25;
-const CD_ONE_CLICK_DISPLAYED: CustomDimensionIdx = 26;
+/** @deprecated */
+export const CD_WEBAPP_INSTALLED = 4;
+/** @deprecated */
+export const CD_NOVUM_UID = 7;
+/** @deprecated */
+export const CD_EVENT_VALUE = 8;
 
 const DEFAULT_EVENT_LABEL = 'null_label';
 const DEFAULT_EVENT_VALUE = 0;
-
-const VALID_TRACKERS = ['NovumTracker', 'OBARGTracker'];
-
-const isTrackerValid = (tracker: UniversalAnalytics.Tracker) =>
-    VALID_TRACKERS.indexOf(tracker.get('name')) >= 0;
 
 const withAnalytics = ({
     onAndroid,
@@ -65,7 +17,7 @@ const withAnalytics = ({
 }: {
     onAndroid: (fb: AndroidFirebase) => Promise<void>;
     onIos: (fb: IosFirebase) => Promise<void>;
-    onWeb: (ga: WebGoogleAnalytics) => Promise<void>;
+    onWeb: (gtag: Gtag.Gtag) => Promise<void>;
 }) => {
     if (typeof window === 'undefined') {
         return Promise.resolve();
@@ -81,12 +33,11 @@ const withAnalytics = ({
         // Call iOS interface
         return onIos(window.webkit.messageHandlers.firebase);
     } else if (
-        window.ga &&
-        // @ts-ignore
-        window.ga.loaded
+        // @ts-ignore TS thinks gtag is always available, but it may not be the case if the page has not loaded the gtag script
+        window.gtag
     ) {
         // Use Google Analytics when webapp is outside the native app webview
-        return onWeb(window.ga);
+        return onWeb(window.gtag);
     } else {
         return Promise.resolve();
     }
@@ -132,6 +83,17 @@ const sanitize = (str: string) =>
         .trim()
         .replace(/\s/g, '_'); // Replace spaces with underscores
 
+const sanitizeParams = (params: {[key: string]: any}) => {
+    // Some params may contain strings with accents (some of them may be copies/translations), so we need to sanitize them
+    Object.entries(params).forEach(([key, value]) => {
+        if (typeof value === 'string') {
+            // @ts-ignore - params is a new object created from event destructuring, so TS shouldn't complain about it being readonly
+            params[key] = sanitize(value);
+        }
+    });
+    return params;
+};
+
 const getLegacyAnalyticsEventParams = ({
     category,
     action,
@@ -156,8 +118,14 @@ const getLegacyAnalyticsEventParams = ({
     };
 };
 
+let currentScreenName = '';
+
 export const logEvent = (event: TrackingEvent): Promise<void> => {
     let {name, ...params} = event;
+
+    // set screen name if not set
+    params = {...params, screenName: params.screenName || currentScreenName};
+
     if (!name) {
         // If the event doesn't have a name, it's a legacy analytics event
         if (!event.category || !event.action) {
@@ -173,13 +141,7 @@ export const logEvent = (event: TrackingEvent): Promise<void> => {
         params = getLegacyAnalyticsEventParams(event as LegacyAnalyticsEvent);
         name = event.category;
     } else {
-        // Some params may contain strings with accents (some of them may be copies/translations), so we need to sanitize them
-        Object.entries(params).forEach(([key, value]) => {
-            if (typeof value === 'string') {
-                // @ts-ignore - params is a new object created from event destructuring, so TS shouldn't complain about it being readonly
-                params[key] = sanitize(value);
-            }
-        });
+        params = sanitizeParams(params);
         name = sanitize(name);
     }
 
@@ -198,11 +160,11 @@ export const logEvent = (event: TrackingEvent): Promise<void> => {
             });
             return Promise.resolve();
         },
-        onWeb(ga) {
+        onWeb(gtag) {
             return new Promise((resolve) => {
-                ga('NovumTracker.send', 'event', {
+                gtag('event', name, {
                     ...params,
-                    hitCallback: resolve,
+                    event_callback: resolve,
                 });
             });
         },
@@ -213,6 +175,9 @@ export const logEcommerceEvent = (
     name: string,
     params: {[key: string]: any},
 ): Promise<void> => {
+    // set screen name if not set
+    params = {...params, screenName: params.screenName || currentScreenName};
+
     return withAnalytics({
         onAndroid(androidFirebase) {
             if (androidFirebase.logEvent) {
@@ -280,24 +245,16 @@ export const logTiming = ({
             });
             return Promise.resolve();
         },
-        onWeb(ga) {
-            return new Promise((resolve) => {
-                ga('NovumTracker.send', {
-                    hitType: 'timing',
-                    hitCallback: resolve,
-                    [`dimension${CD_EVENT_VALUE}`]: String(value),
-                    ...params,
-                });
-            });
+        onWeb() {
+            // not implemented on web
+            return Promise.resolve();
         },
     });
 };
 
-let currentPageName: string;
-
 export const setScreenName = (
     screenName: string,
-    fieldsObject?: {[key: string]: any},
+    params?: {[key: string]: any},
 ): Promise<void> => {
     if (!screenName) {
         console.warn('Missing analytics screenName');
@@ -318,60 +275,43 @@ export const setScreenName = (
             });
             return Promise.resolve();
         },
-        onWeb(ga) {
+        onWeb(gtag) {
             return new Promise((resolve) => {
-                // Page name should start with '/'
-                const pageName = screenName.startsWith('/')
-                    ? screenName
-                    : `/${screenName}`;
-
-                if (pageName !== currentPageName) {
-                    currentPageName = pageName;
-                    ga(() => {
-                        // we have two trackers in movistar ARG, we want to track the PV in both trackers
-                        const trackers = ga.getAll().filter(isTrackerValid);
-                        trackers.forEach((tracker) => {
-                            tracker.set('page', pageName);
-                            tracker.send('pageView', {
-                                ...fieldsObject,
-                                hitCallback: resolve,
-                            });
-                        });
-                    });
-                } else {
-                    resolve();
-                }
+                gtag('event', 'screen_view', {
+                    screenName,
+                    previousScreenName: currentScreenName,
+                    ...sanitizeParams(params ?? {}),
+                    event_callback: resolve,
+                });
+                currentScreenName = screenName;
             });
         },
     });
 };
 
-const USER_PROPERTY_TO_CUSTOM_DIMENSION = {
-    obIds: CD_OB_IDS,
-    paymentModels: CD_PAYMENT_MODELS,
-    serviceWorkerStatus: CD_SERVICE_WORKER_STATUS,
-    isAdmin: CD_SUBSCRIPTION_ADMIN,
-    hasIpComms: CD_SUBSCRIPTION_WITH_IPCOMMS,
-    af_source: CD_AF_SOURCE,
-    af_campaign: CD_AF_CAMPAIGN,
-    novum_uid_session: CD_NOVUM_UID_SESSION,
-    user_logged: CD_USER_LOGGED,
-    currentSubscriptionId: CD_CURRENT_SUBSCRIPTION_ID,
-    currentSubscriptionType: CD_CURRENT_SUBSCRIPTION_TYPE,
-    currentPaymentModel: CD_CURRENT_PAYMENT_MODEL,
-    webviewBrowserVersion: CD_WEBVIEW_BROWSER_VERSION,
-    activatedRoles: CD_ACTIVATED_ROLES,
-    appInstanceId: CD_APP_INSTANCE_ID,
-    experimentflag: CD_EXPERIMENT_FLAG,
-    friendsApps: CD_FRIENDS_APPS,
-    accountLineSelector: CD_ACOUNT_LINE_SELECTOR,
-    OneClickDisplayed: CD_ONE_CLICK_DISPLAYED,
-} as const;
-
-type UserPropertyName = keyof typeof USER_PROPERTY_TO_CUSTOM_DIMENSION;
+type KnownUserPropertyName =
+    | 'obIds'
+    | 'paymentModels'
+    | 'serviceWorkerStatus'
+    | 'isAdmin'
+    | 'hasIpComms'
+    | 'af_source'
+    | 'af_campaign'
+    | 'novum_uid_session'
+    | 'user_logged'
+    | 'currentSubscriptionId'
+    | 'currentSubscriptionType'
+    | 'currentPaymentModel'
+    | 'webviewBrowserVersion'
+    | 'activatedRoles'
+    | 'appInstanceId'
+    | 'experimentflag'
+    | 'friendsApps'
+    | 'accountLineSelector'
+    | 'OneClickDisplayed';
 
 export const setUserProperty = (
-    name: UserPropertyName | string,
+    name: KnownUserPropertyName | string,
     value: string,
 ): Promise<void> => {
     if (!name || !value) {
@@ -400,20 +340,8 @@ export const setUserProperty = (
             });
             return Promise.resolve();
         },
-        onWeb(ga) {
-            const dimensionIdx =
-                USER_PROPERTY_TO_CUSTOM_DIMENSION[name as UserPropertyName];
-            if (!dimensionIdx) {
-                console.warn(
-                    'No custom dimension defined for user property',
-                    name,
-                );
-                return Promise.resolve();
-            }
-
-            ga('NovumTracker.set', {
-                [`dimension${dimensionIdx}`]: String(value),
-            });
+        onWeb(gtag) {
+            gtag('set', 'user_properties', {[name]: sanitize(value)});
             return Promise.resolve();
         },
     });

@@ -63,6 +63,7 @@ test('log event with default values', async () => {
             eventAction: 'anyAction',
             eventLabel: DEFAULT_LABEL,
             eventValue: DEFAULT_VALUE,
+            screenName: '',
         }),
     );
 });
@@ -85,6 +86,7 @@ test('accent marks are removed from event labels', async () => {
             eventLabel:
                 'aeiou aeiou aeiou AEIOU AEIOU abcdefghijklmnnopeqrstuvwxyz',
             eventValue: DEFAULT_VALUE,
+            screenName: '',
         }),
     );
 });
@@ -110,6 +112,7 @@ test('log event in Android', async () => {
             eventLabel: 'anyLabel',
             eventValue: ANY_VALUE,
             anyOtherParam: ANY_VALUE,
+            screenName: '',
         }),
     );
 });
@@ -136,6 +139,7 @@ test('log event in iOS', async () => {
             eventLabel: 'anyLabel',
             eventValue: ANY_VALUE,
             anyOtherParam: ANY_VALUE,
+            screenName: '',
         },
     });
 });
@@ -152,6 +156,7 @@ test('log GA4 event in Android', async () => {
         'some_name',
         JSON.stringify({
             component_copy: 'haz_click_en_este_boton_n_u_-_are_allowed',
+            screenName: '',
         }),
     );
 });
@@ -169,6 +174,7 @@ test('log GA4 event in iOS', async () => {
         name: 'some_name',
         parameters: {
             component_copy: 'haz_click_en_este_boton_n_u_-_are_allowed',
+            screenName: '',
         },
     });
 });
@@ -206,6 +212,7 @@ test('log ecommerce event in Android', async () => {
                     price: 9.99,
                 },
             ],
+            screenName: '',
         }),
     );
 });
@@ -244,6 +251,7 @@ test('log ecommerce event in iOS', async () => {
                     price: 9.99,
                 },
             ],
+            screenName: '',
         },
     });
 });

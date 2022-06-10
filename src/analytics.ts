@@ -123,9 +123,6 @@ let currentScreenName = '';
 export const logEvent = (event: TrackingEvent): Promise<void> => {
     let {name, ...params} = event;
 
-    // set screen name if not set
-    params = {...params, screenName: params.screenName || currentScreenName};
-
     if (!name) {
         // If the event doesn't have a name, it's a legacy analytics event
         if (!event.category || !event.action) {
@@ -144,6 +141,9 @@ export const logEvent = (event: TrackingEvent): Promise<void> => {
         params = sanitizeParams(params);
         name = sanitize(name);
     }
+
+    // set screen name if not set
+    params = {...params, screenName: params.screenName || currentScreenName};
 
     return withAnalytics({
         onAndroid(androidFirebase) {

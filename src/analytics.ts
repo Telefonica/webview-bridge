@@ -272,8 +272,12 @@ export const logTiming = ({
             return Promise.resolve();
         },
         onWeb() {
-            // not implemented on web
-            return Promise.resolve();
+            return new Promise((resolve) => {
+                gtag('event', name, {
+                    ...params,
+                    event_callback: resolve,
+                });
+            });
         },
     });
 };

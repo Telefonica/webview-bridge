@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.9.0 - 2022-06-16
+
+-   Analytics: added support for GA4 with gtag script in web. Removed old web UA
+    support with google analytics.js script
+
 ## v.3.8.0 - 2022-06-08
 
 -   Analytics: automatically sanitize GA4 event attribute values.

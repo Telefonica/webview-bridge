@@ -10,8 +10,6 @@ type AndroidFirebase = {
     setUserProperty: (name: string, value: string) => void;
 };
 
-type WebGoogleAnalytics = UniversalAnalytics.ga;
-
 interface Window {
     // iOS
     webkit?: {
@@ -35,5 +33,5 @@ interface Window {
         postMessage: NovumPostMessage;
     };
 
-    ga?: WebGoogleAnalytics;
+    gtag?: Gtag.Gtag;
 }

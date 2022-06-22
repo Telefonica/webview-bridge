@@ -806,9 +806,7 @@ onSessionRenewed = (
 Method that requests a user logout.
 
 ```ts
-logout = (
-    handler: () => void,
-) => (() => void)
+logout = () => Promise<void>
 ```
 
 ### getTopazToken

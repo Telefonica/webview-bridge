@@ -54,4 +54,4 @@ declare export {
   setTrackingProperty,
 } from "./src/analytics";
 export type { TrackingEvent, CustomDimensionIdx } from "./src/analytics";
-declare export { renewSession, onSessionRenewed } from "./src/sessions";
+declare export { renewSession, onSessionRenewed, logout } from "./src/sessions";

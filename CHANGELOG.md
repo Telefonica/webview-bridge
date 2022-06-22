@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.10.1 - 2022-06-22
+
+-   fixed: added missing logout export
+
 ## v.3.10.0 - 2022-06-22
 
 -   Logout: added new method to end session in native app

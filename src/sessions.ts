@@ -29,7 +29,6 @@ export const onSessionRenewed = (
         handler(accessToken),
     );
 
-
 /**
  * This method is used by webapp to request the native app to end the current session
  */

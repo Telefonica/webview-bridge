@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.10.0 - 2022-06-22
+
+-   Logout: added new method to end session in native app
+
 ## v.3.9.0 - 2022-06-16
 
 -   Analytics: added support for GA4 with gtag script in web. Removed old web UA

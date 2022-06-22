@@ -19,3 +19,7 @@ declare export var renewSession: (
 declare export var onSessionRenewed: (
   handler: (newAccessToken: string) => void
 ) => () => void;
+/**
+ * This method is used by webapp to request the native app to end the current session
+ */
+declare export var logout: () => Promise<void>;

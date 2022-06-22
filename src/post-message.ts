@@ -206,6 +206,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {token: string};
     };
+    LOG_OUT: {
+        type: 'LOG_OUT';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

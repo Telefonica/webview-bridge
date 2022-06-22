@@ -28,3 +28,9 @@ export const onSessionRenewed = (
     listenToNativeMessage('SESSION_RENEWED', ({accessToken}) =>
         handler(accessToken),
     );
+
+/**
+ * This method is used by webapp to request the native app to end the current session
+ */
+export const logout = (): Promise<void> =>
+    postMessageToNativeApp({type: 'LOG_OUT'});

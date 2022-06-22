@@ -241,6 +241,11 @@ export type ResponsesFromNativeApp = {
       token: string,
     },
   },
+  LOG_OUT: {
+    type: "LOG_OUT",
+    id: string,
+    payload: void,
+  },
 };
 export type NativeAppResponsePayload<Type: $Keys<ResponsesFromNativeApp>> =
   $PropertyType<$ElementType<ResponsesFromNativeApp, Type>, "payload">;

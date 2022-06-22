@@ -1,4 +1,4 @@
-import {onSessionRenewed, renewSession} from '../sessions';
+import {onSessionRenewed, renewSession, logout} from '../sessions';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -42,4 +42,21 @@ test('webapp listens to native app session renewal', (done) => {
             payload: {accessToken: newAccessToken},
         }),
     );
+});
+
+test('webapp requests user log out', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (message) => {
+            expect(message.type).toBe('LOG_OUT');
+        },
+        getResponse: (message) => ({
+            type: message.type,
+            id: message.id,
+        }),
+    });
+
+    logout().then((res) => {
+        expect(res).toBeUndefined();
+        done();
+    });
 });

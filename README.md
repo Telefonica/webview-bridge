@@ -86,6 +86,7 @@ Alternatively, you can import the library directly from a CDN:
 -   [setActionBehavior](#setActionBehavior)
 -   [renewSession](#renewSession)
 -   [onSessionRenewed](#onSessionRenewed)
+-   [logout](#logout)
 -   [getTopazToken](#getTopazToken)
 
 ### isWebViewBridgeAvailable
@@ -798,6 +799,14 @@ Returns the unsubscribe function.
 onSessionRenewed = (
     handler: (newAccessToken: string) => void,
 ) => (() => void)
+```
+
+### logout
+
+Method that requests a user logout.
+
+```ts
+logout = () => Promise<void>
 ```
 
 ### getTopazToken

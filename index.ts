@@ -56,4 +56,4 @@ export {
 } from './src/analytics';
 export type {TrackingEvent, CustomDimensionIdx} from './src/analytics';
 
-export {renewSession, onSessionRenewed} from './src/sessions';
+export {renewSession, onSessionRenewed, logout} from './src/sessions';

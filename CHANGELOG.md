@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.11.0 - 2022-06-29
+
+-   Message ids are now unique across different webviews
+
 ## v.3.10.1 - 2022-06-22
 
 -   fixed: added missing logout export

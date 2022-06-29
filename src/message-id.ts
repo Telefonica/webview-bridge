@@ -1,5 +1,5 @@
 let messageId = 1;
-const webviewId = Date.now();
+const webviewId = `${Date.now()}-${String(Math.random()).slice(-8)}`;
 
 /**
  * Message ID generator. Ids should be unique.
@@ -9,5 +9,4 @@ const webviewId = Date.now();
  * Using a timestamp as webviewId (assuming two webviews are not opened in the same millisecond),
  * but if that ever happens, the last part is a random number to avoid collisions.
  */
-export const getId = (): string =>
-    `web-${messageId++}-${webviewId}-${String(Math.random()).slice(-8)}`;
+export const getId = (): string => `web-${messageId++}-${webviewId}`;

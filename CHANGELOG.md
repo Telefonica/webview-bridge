@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.11.1 - 2022-07-01
+
+-   Send page_view instead of screen_view in web
+
 ## v.3.11.0 - 2022-06-29
 
 -   Message ids are now unique across different webviews

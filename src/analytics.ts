@@ -291,6 +291,9 @@ export const setScreenName = (
         return Promise.resolve();
     }
 
+    const previousScreenName = currentScreenName;
+    currentScreenName = screenName;
+
     return withAnalytics({
         onAndroid(androidFirebase) {
             if (androidFirebase.setScreenName) {
@@ -307,13 +310,12 @@ export const setScreenName = (
         },
         onWeb(gtag) {
             return new Promise((resolve) => {
-                gtag('event', 'screen_view', {
+                gtag('event', 'page_view', {
                     screenName,
-                    previousScreenName: currentScreenName,
+                    previousScreenName,
                     ...sanitizeParams(params ?? {}),
                     event_callback: resolve,
                 });
-                currentScreenName = screenName;
             });
         },
     });

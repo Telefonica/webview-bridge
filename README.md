@@ -430,6 +430,16 @@ logEvent: ({
 }) => Promise<void>;
 ```
 
+If you want to use new Google Analytics 4 event format you can use this method
+too:
+
+```typescript
+logEvent: ({
+    name: string; // The event name is mandatory
+    [key: string]: any; // You can set any other event parameters
+}) => Promise<void>;
+```
+
 #### Example
 
 ```javascript
@@ -438,6 +448,15 @@ import {logEvent} from '@tef-novum/webview-bridge';
 logEvent({
     category: 'topup-flow',
     action: 'topup',
+}).then(() => {
+    console.log('event logged');
+});
+
+// Or with GA4 format
+logEvent({
+    name: 'user_interaction',
+    component_type: 'primary_button',
+    component_copy: 'topup',
 }).then(() => {
     console.log('event logged');
 });

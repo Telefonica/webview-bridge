@@ -211,6 +211,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    SHOW_APP_RATING: {
+        type: 'SHOW_APP_RATING';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

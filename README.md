@@ -817,6 +817,16 @@ Returns the [Topaz](https://www.topaz.com.br/ofd/index.php) token.
 getTopazToken = (options: {timeout?: number} = {}) => Promise<{token: string}>
 ```
 
+### showAppRating
+
+Show native app rating dialog
+
+<img height="550" src="doc/webview-bridge-app-rating-ios.png"><img height="550" src="doc/webview-bridge-alert-android.png">
+
+```ts
+showAppRating = () => Promise<void>
+```
+
 ## Error handling
 
 If an error occurs, promise will be rejected with an error object:

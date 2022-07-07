@@ -1,0 +1,6 @@
+// @flow
+
+/**
+ * This method is used by webapp to request the native app to launch the app rating dialog
+ */
+declare export var showAppRating: () => Promise<void>;

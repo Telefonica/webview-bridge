@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.12.0 - 2022-07-08
+
+-   new `showAppRating()` function
+
 ## v.3.11.1 - 2022-07-01
 
 -   Send page_view instead of screen_view in web

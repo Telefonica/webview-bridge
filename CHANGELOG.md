@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.12.1 - 2022-07-08
+
+-   fix Analytics to allow `_` chars
+
 ## v.3.12.0 - 2022-07-08
 
 -   new `showAppRating()` function

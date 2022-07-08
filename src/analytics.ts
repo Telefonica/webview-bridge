@@ -104,7 +104,7 @@ const removeAccents = (str: string) =>
 const sanitize = (str: string) =>
     removeAccents(str)
         .toLocaleLowerCase()
-        .replace(/[^a-z0-9\s\-]/g, '') // Remove all non-alphanumeric characters
+        .replace(/[^a-z0-9\s\-\_]/g, '') // Remove all non-alphanumeric characters
         .replace(/\s+/g, ' ') // Replace repeated whitespaces with a single space
         .trim()
         .replace(/\s/g, '_'); // Replace spaces with underscores

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.12.2 - 2022-07-12
+
+-   make analytics function resilient to gtag script being blocked by adblocker
+
 ## v.3.12.1 - 2022-07-08
 
 -   fix Analytics to allow `_` chars

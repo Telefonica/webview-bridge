@@ -388,3 +388,20 @@ test('set tracking property for palitagem', async () => {
     expect(res).toBeUndefined();
     removeFakeAndroidPostMessage();
 });
+
+test('logEvent in web is resilient to gtag script not working', async () => {
+    let analyticsIsBroken = false;
+    (window as any).gtag = (action: any, eventName: any, eventParams: any) => {
+        if (analyticsIsBroken) {
+            return;
+        } else {
+            eventParams.event_callback?.();
+        }
+    };
+
+    await expect(logEvent({name: 'any_event'})).resolves.toBeUndefined();
+    analyticsIsBroken = true;
+    await expect(logEvent({name: 'any_event'})).resolves.toBeUndefined();
+    delete (window as any).gtag;
+    await expect(logEvent({name: 'any_event'})).resolves.toBeUndefined();
+});

@@ -36,6 +36,26 @@ export const CD_EVENT_VALUE = 8;
 const DEFAULT_EVENT_LABEL = 'null_label';
 const DEFAULT_EVENT_VALUE = 0;
 
+const CALLBACK_TIMEOUT = 500;
+const MAX_TIMEOUT_TIMES = 3;
+let timeoutCounter = 0;
+const createCallback = (resolve: () => void) => {
+    // Analytics may fail to load (for example, if blocked by an adblocker). If that happens, we still need to resolve
+    // the logEvent promises, so we stablish a timeout for those cases.
+    // If the log times out more than MAX_TIMEOUT_TIMES times consecutively, we don't try to send more events and inmediately resolve
+    // all the promises.
+    const tid = setTimeout(() => {
+        resolve();
+        timeoutCounter++;
+    }, CALLBACK_TIMEOUT);
+
+    return () => {
+        clearTimeout(tid);
+        timeoutCounter = 0;
+        resolve();
+    };
+};
+
 const withAnalytics = ({
     onAndroid,
     onIos,
@@ -60,7 +80,8 @@ const withAnalytics = ({
         return onIos(window.webkit.messageHandlers.firebase);
     } else if (
         // @ts-ignore TS thinks gtag is always available, but it may not be the case if the page has not loaded the gtag script
-        window.gtag
+        window.gtag &&
+        timeoutCounter < MAX_TIMEOUT_TIMES
     ) {
         // Use Google Analytics when webapp is outside the native app webview
         return onWeb(window.gtag);
@@ -190,7 +211,7 @@ export const logEvent = (event: TrackingEvent): Promise<void> => {
             return new Promise((resolve) => {
                 gtag('event', name, {
                     ...params,
-                    event_callback: resolve,
+                    event_callback: createCallback(resolve),
                 });
             });
         },
@@ -275,7 +296,7 @@ export const logTiming = ({
             return new Promise((resolve) => {
                 gtag('event', name, {
                     ...params,
-                    event_callback: resolve,
+                    event_callback: createCallback(resolve),
                 });
             });
         },
@@ -314,7 +335,7 @@ export const setScreenName = (
                     screenName,
                     previousScreenName,
                     ...sanitizeParams(params ?? {}),
-                    event_callback: resolve,
+                    event_callback: createCallback(resolve),
                 });
             });
         },

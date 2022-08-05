@@ -333,6 +333,7 @@ export const setScreenName = (
             return new Promise((resolve) => {
                 gtag('event', 'page_view', {
                     screenName,
+                    page_title: screenName,
                     previousScreenName,
                     ...sanitizeParams(params ?? {}),
                     event_callback: createCallback(resolve),

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.12.3 - 2022-08-05
+
+-   fix setScreenName in web (gtag) to log screen name as page_title
+
 ## v.3.12.2 - 2022-07-12
 
 -   make analytics function resilient to gtag script being blocked by adblocker

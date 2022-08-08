@@ -437,6 +437,8 @@ too:
 logEvent: ({
     name: string; // The event name is mandatory
     [key: string]: any; // You can set any other event parameters
+}, {
+    sanitize?: boolean; // Whether to sanitize the event params, this only affects to FirebaseEvents. true by default.
 }) => Promise<void>;
 ```
 
@@ -460,6 +462,19 @@ logEvent({
 }).then(() => {
     console.log('event logged');
 });
+```
+
+#### About event params sanitization
+
+By default, GA4 event params are sanitized. The sanitization consists of
+removing whitespaces and some special characters, lowercasing and trimming. This
+allows us having a consistent event format accross events.
+
+In some cases you may want to disable this behavior. To do so, you can set the
+`sanitize` option to `false`:
+
+```javascript
+logEvent(yourEvent, {sanitize: false});
 ```
 
 ### setScreenName

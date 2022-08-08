@@ -78,7 +78,22 @@ declare type FirebaseEvent = {
   [key: string]: any,
 };
 export type TrackingEvent = $ReadOnly<LegacyAnalyticsEvent | FirebaseEvent>;
-declare export var logEvent: (event: TrackingEvent) => Promise<void>;
+declare export var sanitizeAnalyticsParam: (str: string) => string;
+declare export var sanitizeAnalyticsParams: (params: {
+  [key: string]: mixed,
+}) => {
+  [key: string]: mixed,
+};
+declare type LogEventOptions = {
+  /**
+   * Whether to sanitize the event params, this only affects to FirebaseEvents. true by default.
+   */
+  sanitize?: boolean,
+};
+declare export var logEvent: (
+  event: TrackingEvent,
+  options?: LogEventOptions | void
+) => Promise<void>;
 declare export var logEcommerceEvent: (
   name: string,
   params: {

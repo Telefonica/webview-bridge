@@ -7,6 +7,8 @@ import {
     getCustomerHash,
     setTrackingProperty,
     logEcommerceEvent,
+    sanitizeAnalyticsParam,
+    sanitizeAnalyticsParams,
 } from '../analytics';
 import {
     createFakeAndroidPostMessage,
@@ -404,4 +406,84 @@ test('logEvent in web is resilient to gtag script not working', async () => {
     await expect(logEvent({name: 'any_event'})).resolves.toBeUndefined();
     delete (window as any).gtag;
     await expect(logEvent({name: 'any_event'})).resolves.toBeUndefined();
+});
+
+test('logEvent does not sanitize legacy events', async () => {
+    const androidFirebaseMock = givenAndroidWebview();
+
+    await logEvent({
+        category: 'any category with weird characters ;!@+*',
+        action: '/.()-*!',
+        label: '*&^%$#@!',
+    });
+
+    expect(androidFirebaseMock.logEvent).toBeCalledWith(
+        'any category with weird characters ;!@+*',
+        JSON.stringify({
+            eventCategory: 'any category with weird characters ;!@+*',
+            eventAction: '/.()-*!',
+            eventLabel: '*&^%$#@!',
+            eventValue: 0,
+            screenName: 'any-screen-name',
+        }),
+    );
+});
+
+test('logEvent allows to turn off params sanitization of GA4 events', async () => {
+    const androidFirebaseMock = givenAndroidWebview();
+
+    await logEvent(
+        {
+            name: 'some name',
+            component_copy:
+                'Haz click en este botón ñ ß ü % €, - and _ are allowed',
+        },
+        {
+            sanitize: false,
+        },
+    );
+
+    expect(androidFirebaseMock.logEvent).toBeCalledWith(
+        'some name',
+        JSON.stringify({
+            component_copy:
+                'Haz click en este botón ñ ß ü % €, - and _ are allowed',
+            screenName: 'any-screen-name',
+        }),
+    );
+});
+
+test('sanitizeAnalyticsParam', () => {
+    expect(sanitizeAnalyticsParam('something with spaces')).toBe(
+        'something_with_spaces',
+    );
+    expect(
+        sanitizeAnalyticsParam('some special chars ñ ß ü % € and more text'),
+    ).toBe('some_special_chars_n_u_and_more_text');
+    expect(sanitizeAnalyticsParam('some_allowed-special/chars|')).toBe(
+        'some_allowed-special/chars|',
+    );
+    expect(sanitizeAnalyticsParam('CONVERTS TO LOWERCASE')).toBe(
+        'converts_to_lowercase',
+    );
+    expect(
+        sanitizeAnalyticsParam(
+            'this is a very very long long value with more than 100 characters that should be truncated because it is too long',
+        ),
+    ).toBe(
+        'this_is_a_very_very_long_long_value_with_more_than_100_characters_that_should_be_truncated_because_i',
+    );
+});
+
+test('sanitizeAnalyticsParams', () => {
+    expect(sanitizeAnalyticsParams({})).toEqual({});
+    expect(sanitizeAnalyticsParams({a: 'b', b: 1})).toEqual({a: 'b', b: 1});
+    expect(
+        sanitizeAnalyticsParams({
+            this_is_a_very_long_param_name_with_more_than_40_characters:
+                'value',
+        }),
+    ).toEqual({
+        this_is_a_very_long_param_name_with_more: 'value',
+    });
 });

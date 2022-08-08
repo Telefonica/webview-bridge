@@ -435,8 +435,7 @@ test('logEvent allows to turn off params sanitization of GA4 events', async () =
     await logEvent(
         {
             name: 'some name',
-            component_copy:
-                'Haz click en este botón ñ ß ü % €, - and _ are allowed',
+            component_copy: '*&^%$#@!',
         },
         {
             sanitize: false,
@@ -446,8 +445,7 @@ test('logEvent allows to turn off params sanitization of GA4 events', async () =
     expect(androidFirebaseMock.logEvent).toBeCalledWith(
         'some name',
         JSON.stringify({
-            component_copy:
-                'Haz click en este botón ñ ß ü % €, - and _ are allowed',
+            component_copy: '*&^%$#@!',
             screenName: 'any-screen-name',
         }),
     );

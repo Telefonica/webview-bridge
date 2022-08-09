@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.13.1 - 2022-08-09
+
+-   Analytics: allow `:` in event params
+
 ## v.3.13.0 - 2022-08-09
 
 -   Analytics: fixes in sanitization and allow / and | chars

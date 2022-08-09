@@ -458,8 +458,8 @@ test('sanitizeAnalyticsParam', () => {
     expect(
         sanitizeAnalyticsParam('some special chars ñ ß ü % € and more text'),
     ).toBe('some_special_chars_n_u_and_more_text');
-    expect(sanitizeAnalyticsParam('some_allowed-special/chars|')).toBe(
-        'some_allowed-special/chars|',
+    expect(sanitizeAnalyticsParam('some_all:owed-special/chars|')).toBe(
+        'some_all:owed-special/chars|',
     );
     expect(sanitizeAnalyticsParam('CONVERTS TO LOWERCASE')).toBe(
         'converts_to_lowercase',

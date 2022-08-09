@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v.3.13.0 - 2022-08-09
+
+-   Analytics: fixes in sanitization and allow / and | chars
+-   Analytics: truncate long event param values that exceed Firebase limits
+-   Analytics: expose `sanitizeAnalyticsParam` and `sanitizeAnalyticsParams`
+    methods
+
 ## v.3.12.3 - 2022-08-05
 
 -   fix setScreenName in web (gtag) to log screen name as page_title

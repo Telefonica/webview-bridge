@@ -122,23 +122,33 @@ const removeAccents = (str: string) =>
     // https://stackoverflow.com/a/37511463/3874587
     str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
-const sanitize = (str: string) =>
+const EVENT_PARAM_NAME_CHARS_LIMIT = 40;
+const EVENT_PARAM_VALUE_CHARS_LIMIT = 100;
+const EVENT_PARAMS_LIMIT = 25;
+
+export const sanitizeAnalyticsParam = (str: string): string =>
     removeAccents(str)
         .toLocaleLowerCase()
-        .replace(/[^a-z0-9\s\-\_]/g, '') // Remove all non-alphanumeric characters
+        .replace(/[^a-z0-9\s\-\_\/\|]/g, '') // Remove all non allowed characters
         .replace(/\s+/g, ' ') // Replace repeated whitespaces with a single space
         .trim()
-        .replace(/\s/g, '_'); // Replace spaces with underscores
+        .replace(/\s/g, '_') // Replace spaces with underscores
+        .slice(0, EVENT_PARAM_VALUE_CHARS_LIMIT);
 
-const sanitizeParams = (params: {[key: string]: any}) => {
-    // Some params may contain strings with accents (some of them may be copies/translations), so we need to sanitize them
+export const sanitizeAnalyticsParams = (params: {
+    [key: string]: unknown;
+}): {[key: string]: unknown} => {
+    const sanitizedParams: {[key: string]: unknown} = {};
     Object.entries(params).forEach(([key, value]) => {
+        let sanitizedValue = value;
+        const sanitizedKey = key.slice(0, EVENT_PARAM_NAME_CHARS_LIMIT);
         if (typeof value === 'string') {
-            // @ts-ignore - params is a new object created from event destructuring, so TS shouldn't complain about it being readonly
-            params[key] = sanitize(value);
+            // Some string params may contain strings with accents (some of them may be copies/translations), so we need to sanitize them
+            sanitizedValue = sanitizeAnalyticsParam(value);
         }
+        sanitizedParams[sanitizedKey] = sanitizedValue;
     });
-    return params;
+    return sanitizedParams;
 };
 
 const getLegacyAnalyticsEventParams = ({
@@ -165,13 +175,23 @@ const getLegacyAnalyticsEventParams = ({
     };
 };
 
+type LogEventOptions = {
+    /** Whether to sanitize the event params, this only affects to FirebaseEvents. true by default. */
+    sanitize?: boolean;
+};
+const defaultEventOptions = {sanitize: true};
+
 let currentScreenName = '';
 
-export const logEvent = (event: TrackingEvent): Promise<void> => {
+export const logEvent = (
+    event: TrackingEvent,
+    options?: LogEventOptions,
+): Promise<void> => {
+    const {sanitize} = {...defaultEventOptions, ...options};
     let {name, ...params} = event;
 
+    // If the event doesn't have a name, it's a legacy analytics event
     if (!name) {
-        // If the event doesn't have a name, it's a legacy analytics event
         if (!event.category || !event.action) {
             console.warn(
                 'LegacyAnalyticsEvent should have "category" and "action"',
@@ -185,8 +205,15 @@ export const logEvent = (event: TrackingEvent): Promise<void> => {
         params = getLegacyAnalyticsEventParams(event as LegacyAnalyticsEvent);
         name = event.category;
     } else {
-        params = sanitizeParams(params);
-        name = sanitize(name);
+        if (Object.keys(params).length > EVENT_PARAMS_LIMIT) {
+            console.warn(
+                `Trying to log FirebaseEvent with name ${name} exceeding the limit of ${EVENT_PARAMS_LIMIT} params`,
+            );
+        }
+        if (sanitize) {
+            params = sanitizeAnalyticsParams(params);
+            name = sanitizeAnalyticsParam(name);
+        }
     }
 
     // set screen name if not set
@@ -335,7 +362,7 @@ export const setScreenName = (
                     screenName,
                     page_title: screenName,
                     previousScreenName,
-                    ...sanitizeParams(params ?? {}),
+                    ...sanitizeAnalyticsParams(params ?? {}),
                     event_callback: createCallback(resolve),
                 });
             });
@@ -395,7 +422,9 @@ export const setUserProperty = (
             return Promise.resolve();
         },
         onWeb(gtag) {
-            gtag('set', 'user_properties', {[name]: sanitize(value)});
+            gtag('set', 'user_properties', {
+                [name]: sanitizeAnalyticsParam(value),
+            });
             return Promise.resolve();
         },
     });

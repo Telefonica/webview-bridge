@@ -53,6 +53,8 @@ export {
     setCustomerHash,
     getCustomerHash,
     setTrackingProperty,
+    sanitizeAnalyticsParam,
+    sanitizeAnalyticsParams,
 } from './src/analytics';
 export type {TrackingEvent, CustomDimensionIdx} from './src/analytics';
 

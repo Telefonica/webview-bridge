@@ -58,3 +58,7 @@ declare export {
 export type { TrackingEvent, CustomDimensionIdx } from "./src/analytics";
 declare export { renewSession, onSessionRenewed, logout } from "./src/sessions";
 declare export { showAppRating } from "./src/app-rating";
+declare export {
+  bottomSheet,
+  bottomSheetSingleSelector,
+} from "./src/bottom-sheet";

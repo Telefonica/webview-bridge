@@ -18,6 +18,14 @@ type RequestsFromNativeApp = {
     };
 };
 
+export type SheetResponse = {
+    action: 'SUBMIT' | 'DISMISS';
+    result: Array<{
+        id: string;
+        selected: Array<string>;
+    }>;
+};
+
 export type ResponsesFromNativeApp = {
     SIM_ICC: {
         id: string;
@@ -215,6 +223,11 @@ export type ResponsesFromNativeApp = {
         type: 'SHOW_APP_RATING';
         id: string;
         payload: void;
+    };
+    SHEET: {
+        type: 'SHEET';
+        id: string;
+        payload: SheetResponse;
     };
 };
 

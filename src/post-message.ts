@@ -22,7 +22,7 @@ export type SheetResponse = {
     action: 'SUBMIT' | 'DISMISS';
     result: Array<{
         id: string;
-        selected: Array<string>;
+        selectedIds: Array<string>;
     }>;
 };
 

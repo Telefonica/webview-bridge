@@ -39,7 +39,7 @@ export const bottomSheetSingleSelector = ({
     description?: string;
     selectedId?: string;
     items: Array<SheetListItem>;
-}): Promise<{action: 'SUBMIT' | 'DISMISS'; selected: string}> =>
+}): Promise<{action: 'SUBMIT' | 'DISMISS'; selectedId: string}> =>
     bottomSheet({
         title,
         subtitle,
@@ -54,4 +54,7 @@ export const bottomSheetSingleSelector = ({
                 items,
             },
         ],
-    }).then(({action, result}) => ({action, selected: result[0].selected[0]}));
+    }).then(({action, result}) => ({
+        action,
+        selectedId: result[0].selectedIds[0],
+    }));

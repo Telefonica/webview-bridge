@@ -51,7 +51,7 @@ test('single selection', (done) => {
                 result: [
                     {
                         id: 'list-0',
-                        selected: ['item-2'],
+                        selectedIds: ['item-2'],
                     },
                 ],
             },
@@ -65,7 +65,7 @@ test('single selection', (done) => {
         selectedId,
         items,
     }).then((res) => {
-        expect(res).toEqual({action: 'SUBMIT', selected: 'item-2'});
+        expect(res).toEqual({action: 'SUBMIT', selectedId: 'item-2'});
         done();
     });
 });

@@ -30,6 +30,6 @@ declare export var bottomSheetSingleSelector: (x: {
   items: Array<SheetListItem>,
 }) => Promise<{
   action: "SUBMIT" | "DISMISS",
-  selected: string,
+  selectedId: string,
 }>;
 declare export {};

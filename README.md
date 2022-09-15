@@ -861,6 +861,60 @@ Show native app rating dialog
 showAppRating = () => Promise<void>
 ```
 
+### bottomSheet
+
+Show native bottom sheet ui
+
+<img height="460" src="doc/webview-bridge-bottom-sheet.png">
+
+```ts
+bottomSheet = (payload: SheetUI) => Promise<SheetResponse>
+// see SheetUI and SheetResponse types
+```
+
+For the specific case of single selection, you can use the
+`bottomSheetSingleSelector` method:
+
+```ts
+bottomSheetSingleSelector = ({
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    selectedId?: string;
+    items: Array<SheetListItem>;
+}) => Promise<{action: 'SUBMIT' | 'DISMISS'; selected: string}>
+```
+
+#### Example:
+
+```ts
+import {bottomSheetSingleSelector} from '@tef-novum/webview-bridge';
+
+const {action, selected} = await bottomSheetSingleSelector({
+    title: 'Some title',
+    subtitle: 'Some subtitle',
+    description: 'Some description',
+    selectedId: 'item-1',
+    items: [
+        {
+            id: 'item-0',
+            title: 'item 0 title',
+            description: 'item 0 description',
+        },
+        {
+            id: 'item-1',
+            title: 'item 1 title',
+            description: 'item 1 description',
+        },
+        {
+            id: 'item-2',
+            title: 'item 2 title',
+            description: 'item 2 description',
+        },
+    ],
+});
+```
+
 ## Error handling
 
 If an error occurs, promise will be rejected with an error object:

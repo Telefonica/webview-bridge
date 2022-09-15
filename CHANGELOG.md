@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.14.0 - 2022-09-15
+
+-   New `bottomSheet` and `bottomSheetSingleSelector` functions
+
 ## v.3.13.1 - 2022-08-09
 
 -   Analytics: allow `:` in event params

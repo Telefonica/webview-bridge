@@ -7,6 +7,7 @@ type IosFirebase = {
 type AndroidFirebase = {
     logEvent: (name: string, eventJson: string) => void;
     setScreenName: (name: string) => void;
+    setScreenNameWithParams?: (name: string, paramsJson: string) => void;
     setUserProperty: (name: string, value: string) => void;
 };
 

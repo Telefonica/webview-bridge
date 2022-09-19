@@ -482,7 +482,7 @@ logEvent(yourEvent, {sanitize: false});
 Log the current screen name (or page name) to firebase
 
 ```typescript
-setScreenName: (screenName: string) => Promise<void>;
+setScreenName: (screenName: string, params?: {[key: string]: any}) => Promise<void>;
 ```
 
 #### Example
@@ -493,6 +493,12 @@ import {setScreenName} from '@tef-novum/webview-bridge';
 setScreenName('Topup Flow').then(() => {
     console.log('screen name logged');
 });
+```
+
+You can also send additional params with the screen name:
+
+```javascript
+setScreenName('Topup Flow', {someParam: 'some value'});
 ```
 
 ### setUserProperty

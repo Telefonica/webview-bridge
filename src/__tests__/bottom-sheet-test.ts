@@ -14,9 +14,8 @@ test('single selection', (done) => {
             title: 'item 0 title',
             description: 'item 0 description',
             icon: {
-                iconType: 'url',
-                urlValueLight: 'https://example.com/icon.png',
-                urlValueDark: 'https://example.com/dark-icon.png',
+                url: 'https://example.com/icon.png',
+                urlDark: 'https://example.com/dark-icon.png',
             },
         },
         {

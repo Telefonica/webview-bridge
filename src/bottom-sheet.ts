@@ -2,28 +2,14 @@ import {postMessageToNativeApp, type SheetResponse} from './post-message';
 
 type SheetListType = 'SINGLE_SELECTION';
 
-type ListItemIcon =
-    | {
-          iconType: 'native_key';
-          nativeKeyValue:
-              | 'mart_wifi_regular'
-              | 'mobile_device_regular'
-              | 'home_wifi_regular'
-              | 'wifi_regular'
-              | 'tv_content_regular'
-              | 'call_landline_regular';
-      }
-    | {
-          iconType: 'url';
-          urlValueLight: string;
-          urlValueDark?: string;
-      };
-
 export type SheetListItem = {
     id: string;
     title?: string;
     description?: string;
-    icon?: ListItemIcon;
+    icon?: {
+        url: string;
+        urlDark?: string;
+    };
 };
 
 type SheetUIElement = {

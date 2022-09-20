@@ -1,16 +1,23 @@
 import {bottomSheetSingleSelector} from '../bottom-sheet';
 import {createFakeAndroidPostMessage} from './fake-post-message';
 
+import type {SheetListItem} from '../bottom-sheet';
+
 test('single selection', (done) => {
     const title = 'any title';
     const subtitle = 'any subtitle';
     const description = 'any description';
     const selectedId = 'item-0';
-    const items = [
+    const items: Array<SheetListItem> = [
         {
             id: 'item-0',
             title: 'item 0 title',
             description: 'item 0 description',
+            icon: {
+                iconType: 'url',
+                urlValueLight: 'https://example.com/icon.png',
+                urlValueDark: 'https://example.com/dark-icon.png',
+            },
         },
         {
             id: 'item-1',

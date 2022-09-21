@@ -2,31 +2,31 @@ import {postMessageToNativeApp, type SheetResponse} from './post-message';
 
 type SheetListType = 'SINGLE_SELECTION';
 
-export type SheetListItem = {
+export type SheetListItem = Readonly<{
     id: string;
     title?: string;
     description?: string;
-    icon?: {
+    icon?: Readonly<{
         url: string;
         urlDark?: string;
-    };
-};
+    }>;
+}>;
 
-type SheetUIElement = {
+type SheetUIElement = Readonly<{
     id: string;
     type: 'LIST';
     listType: SheetListType;
     autoSubmit?: boolean;
     selectedIds: Array<string>;
     items: Array<SheetListItem>;
-};
+}>;
 
-type SheetUI = {
+type SheetUI = Readonly<{
     title?: string;
     subtitle?: string;
     description?: string;
     content: Array<SheetUIElement>;
-};
+}>;
 
 export const bottomSheet = (payload: SheetUI): Promise<SheetResponse> =>
     postMessageToNativeApp({type: 'SHEET', payload});

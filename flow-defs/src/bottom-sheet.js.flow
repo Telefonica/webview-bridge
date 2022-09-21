@@ -2,29 +2,29 @@
 
 import { SheetResponse } from "./post-message";
 declare type SheetListType = "SINGLE_SELECTION";
-export type SheetListItem = {
+export type SheetListItem = $ReadOnly<{
   id: string,
   title?: string,
   description?: string,
-  icon?: {
+  icon?: $ReadOnly<{
     url: string,
     urlDark?: string,
-  },
-};
-declare type SheetUIElement = {
+  }>,
+}>;
+declare type SheetUIElement = $ReadOnly<{
   id: string,
   type: "LIST",
   listType: SheetListType,
   autoSubmit?: boolean,
   selectedIds: Array<string>,
   items: Array<SheetListItem>,
-};
-declare type SheetUI = {
+}>;
+declare type SheetUI = $ReadOnly<{
   title?: string,
   subtitle?: string,
   description?: string,
   content: Array<SheetUIElement>,
-};
+}>;
 declare export var bottomSheet: (payload: SheetUI) => Promise<SheetResponse>;
 declare export var bottomSheetSingleSelector: (x: {
   title?: string | void,

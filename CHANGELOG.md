@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.15.0 - 2022-09-21
+
+-   Allow icons in `bottomSheet` rows
+
 ## v.3.14.0 - 2022-09-15
 
 -   New `bottomSheet` and `bottomSheetSingleSelector` functions

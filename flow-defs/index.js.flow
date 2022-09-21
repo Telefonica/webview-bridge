@@ -62,3 +62,4 @@ declare export {
   bottomSheet,
   bottomSheetSingleSelector,
 } from "./src/bottom-sheet";
+export type { SheetListItem } from "./src/bottom-sheet";

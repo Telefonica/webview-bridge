@@ -344,7 +344,13 @@ export const setScreenName = (
 
     return withAnalytics({
         onAndroid(androidFirebase) {
-            if (androidFirebase.setScreenName) {
+            // The method to send params with the screen name is only implemented in new app versions.
+            if (androidFirebase.setScreenNameWithParams) {
+                androidFirebase.setScreenNameWithParams(
+                    screenName,
+                    JSON.stringify(params),
+                );
+            } else if (androidFirebase.setScreenName) {
                 androidFirebase.setScreenName(screenName);
             }
             return Promise.resolve();
@@ -353,6 +359,7 @@ export const setScreenName = (
             iosFirebase.postMessage({
                 command: 'setScreenName',
                 name: screenName,
+                parameters: params,
             });
             return Promise.resolve();
         },

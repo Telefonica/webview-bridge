@@ -28,8 +28,33 @@ type SheetUI = Readonly<{
     content: Array<SheetUIElement>;
 }>;
 
-export const bottomSheet = (payload: SheetUI): Promise<SheetResponse> =>
-    postMessageToNativeApp({type: 'SHEET', payload});
+let sheetLock = false;
+
+type SheetLockedResponse = {action: 'LOCKED'; result: Array<any>};
+
+export const bottomSheet = async (
+    payload: SheetUI,
+): Promise<SheetResponse | SheetLockedResponse> => {
+    if (sheetLock) {
+        return Promise.resolve({action: 'LOCKED', result: []});
+    }
+
+    sheetLock = true;
+    const tid = setTimeout(() => {
+        sheetLock = false;
+    }, 1000);
+
+    try {
+        const response = await postMessageToNativeApp({type: 'SHEET', payload});
+        sheetLock = false;
+        clearTimeout(tid);
+        return response;
+    } catch (e) {
+        sheetLock = false;
+        clearTimeout(tid);
+        throw e;
+    }
+};
 
 export const bottomSheetSingleSelector = ({
     title,
@@ -43,7 +68,16 @@ export const bottomSheetSingleSelector = ({
     description?: string;
     selectedId?: string;
     items: Array<SheetListItem>;
-}): Promise<{action: 'SUBMIT' | 'DISMISS'; selectedId: string}> =>
+}): Promise<
+    | {
+          action: 'SUBMIT';
+          selectedId: string;
+      }
+    | {
+          action: 'DISMISS' | 'LOCKED';
+          selectedId: null;
+      }
+> =>
     bottomSheet({
         title,
         subtitle,
@@ -60,5 +94,5 @@ export const bottomSheetSingleSelector = ({
         ],
     }).then(({action, result}) => ({
         action,
-        selectedId: result[0].selectedIds[0],
+        selectedId: result.length ? result[0].selectedIds[0] : null,
     }));

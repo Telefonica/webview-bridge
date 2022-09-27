@@ -871,6 +871,8 @@ showAppRating = () => Promise<void>
 
 Show native bottom sheet ui
 
+-   Available in Novum app since 13.8 version
+
 <img height="460" src="doc/webview-bridge-bottom-sheet.png">
 
 ```ts
@@ -890,6 +892,10 @@ bottomSheetSingleSelector = ({
     items: Array<SheetListItem>;
 }) => Promise<{action: 'SUBMIT' | 'DISMISS'; selected: string}>
 ```
+
+:warning: If you try to call this method repeatedly while a sheet is already
+being opened (for example, user accidental double tap), it will throw an Error
+with code `423` (Locked)
 
 #### Example:
 

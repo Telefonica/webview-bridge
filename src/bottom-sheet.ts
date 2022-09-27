@@ -30,13 +30,12 @@ type SheetUI = Readonly<{
 
 let sheetLock = false;
 
-type SheetLockedResponse = {action: 'LOCKED'; result: Array<any>};
-
-export const bottomSheet = async (
-    payload: SheetUI,
-): Promise<SheetResponse | SheetLockedResponse> => {
+export const bottomSheet = async (payload: SheetUI): Promise<SheetResponse> => {
     if (sheetLock) {
-        return Promise.resolve({action: 'LOCKED', result: []});
+        throw {
+            code: '423',
+            reason: 'BottomSheet is locked. You can only have one bottom sheet in the screen',
+        };
     }
 
     sheetLock = true;
@@ -74,7 +73,7 @@ export const bottomSheetSingleSelector = ({
           selectedId: string;
       }
     | {
-          action: 'DISMISS' | 'LOCKED';
+          action: 'DISMISS';
           selectedId: null;
       }
 > =>
@@ -92,7 +91,16 @@ export const bottomSheetSingleSelector = ({
                 items,
             },
         ],
-    }).then(({action, result}) => ({
-        action,
-        selectedId: result.length ? result[0].selectedIds[0] : null,
-    }));
+    }).then(({action, result}) => {
+        if (action === 'SUBMIT') {
+            return {
+                action,
+                selectedId: result[0].selectedIds[0],
+            };
+        } else {
+            return {
+                action,
+                selectedId: null,
+            };
+        }
+    });

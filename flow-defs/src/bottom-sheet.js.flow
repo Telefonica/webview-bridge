@@ -25,13 +25,7 @@ declare type SheetUI = $ReadOnly<{
   description?: string,
   content: Array<SheetUIElement>,
 }>;
-declare type SheetLockedResponse = {
-  action: "LOCKED",
-  result: Array<any>,
-};
-declare export var bottomSheet: (
-  payload: SheetUI
-) => Promise<SheetResponse | SheetLockedResponse>;
+declare export var bottomSheet: (payload: SheetUI) => Promise<SheetResponse>;
 declare export var bottomSheetSingleSelector: (x: {
   title?: string | void,
   subtitle?: string | void,
@@ -44,7 +38,7 @@ declare export var bottomSheetSingleSelector: (x: {
       selectedId: string,
     }
   | {
-      action: "DISMISS" | "LOCKED",
+      action: "DISMISS",
       selectedId: null,
     }
 >;

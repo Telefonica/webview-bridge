@@ -33,7 +33,7 @@ let sheetLock = false;
 export const bottomSheet = async (payload: SheetUI): Promise<SheetResponse> => {
     if (sheetLock) {
         throw {
-            code: '423',
+            code: 423,
             reason: 'BottomSheet is locked. You can only have one bottom sheet in the screen',
         };
     }

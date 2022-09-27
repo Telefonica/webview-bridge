@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v.3.16.0 - 2022-09-27
+
+-   Allow params in setScreenName
+-   Throw 423 error (locked) when trying to open a bottom sheet when a previous
+    one is already being opened. This will prevent accidentally opening multiple
+    sheets when the user does repeated taps
+
 ## v.3.15.0 - 2022-09-21
 
 -   Allow icons in `bottomSheet` rows

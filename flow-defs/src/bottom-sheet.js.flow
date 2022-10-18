@@ -1,24 +1,59 @@
 // @flow
 
 import { SheetResponse } from "./post-message";
-declare type SheetListType = "SINGLE_SELECTION";
-export type SheetListItem = $ReadOnly<{
+declare type SheetIcon = $ReadOnly<{
+  url: string,
+  urlDark?: string,
+  type?: "regular" | "small",
+}>;
+declare type InfoIcon =
+  | SheetIcon
+  | $ReadOnly<{
+      type: "bullet",
+    }>;
+export type SheetRowItem = $ReadOnly<{
   id: string,
   title?: string,
   description?: string,
-  icon?: $ReadOnly<{
-    url: string,
-    urlDark?: string,
-  }>,
+  icon?: SheetIcon,
 }>;
-declare type SheetUIElement = $ReadOnly<{
+export type SheetActionItem = $ReadOnly<{
   id: string,
-  type: "LIST",
-  listType: SheetListType,
-  autoSubmit?: boolean,
-  selectedIds: Array<string>,
-  items: Array<SheetListItem>,
+  title: string,
+  style?: "normal" | "destructive",
+  icon?: SheetIcon,
 }>;
+export type SheetInfoItem = $ReadOnly<{
+  id: string,
+  title: string,
+  description?: string,
+  icon?: InfoIcon,
+}>;
+declare type SheetUIElement =
+  | $ReadOnly<{
+      id: string,
+      type: "LIST",
+      listType: "SINGLE_SELECTION",
+      autoSubmit?: boolean,
+      selectedIds: Array<string>,
+      items: Array<SheetRowItem>,
+    }>
+  | $ReadOnly<{
+      id: string,
+      type: "LIST",
+      listType: "ACTIONS",
+      autoSubmit?: boolean,
+      selectedIds: Array<string>,
+      items: Array<SheetActionItem>,
+    }>
+  | $ReadOnly<{
+      id: string,
+      type: "LIST",
+      listType: "INFORMATIVE",
+      autoSubmit?: boolean,
+      selectedIds: Array<string>,
+      items: Array<SheetInfoItem>,
+    }>;
 declare type SheetUI = $ReadOnly<{
   title?: string,
   subtitle?: string,
@@ -31,7 +66,7 @@ declare export var bottomSheetSingleSelector: (x: {
   subtitle?: string | void,
   description?: string | void,
   selectedId?: string | void,
-  items: Array<SheetListItem>,
+  items: Array<SheetRowItem>,
 }) => Promise<
   | {
       action: "SUBMIT",
@@ -42,4 +77,25 @@ declare export var bottomSheetSingleSelector: (x: {
       selectedId: null,
     }
 >;
+declare export var bottomSheetActionSelector: (x: {
+  title?: string | void,
+  subtitle?: string | void,
+  description?: string | void,
+  items: Array<SheetActionItem>,
+}) => Promise<
+  | {
+      action: "SUBMIT",
+      selectedId: string,
+    }
+  | {
+      action: "DISMISS",
+      selectedId: null,
+    }
+>;
+declare export var bottomSheetInfo: (x: {
+  title?: string | void,
+  subtitle?: string | void,
+  description?: string | void,
+  items: Array<SheetInfoItem>,
+}) => Promise<void>;
 declare export {};

@@ -62,5 +62,14 @@ export {renewSession, onSessionRenewed, logout} from './src/sessions';
 
 export {showAppRating} from './src/app-rating';
 
-export {bottomSheet, bottomSheetSingleSelector} from './src/bottom-sheet';
-export type {SheetListItem} from './src/bottom-sheet';
+export {
+    bottomSheet,
+    bottomSheetSingleSelector,
+    bottomSheetActionSelector,
+    bottomSheetInfo,
+} from './src/bottom-sheet';
+export type {
+    SheetRowItem,
+    SheetActionItem,
+    SheetInfoItem,
+} from './src/bottom-sheet';

@@ -27,7 +27,7 @@ export type SheetInfoItem = $ReadOnly<{
   id: string,
   title: string,
   description?: string,
-  icon?: InfoIcon,
+  icon: InfoIcon,
 }>;
 declare type SheetUIElement =
   | $ReadOnly<{

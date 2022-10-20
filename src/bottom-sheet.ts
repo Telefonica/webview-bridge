@@ -26,7 +26,7 @@ export type SheetInfoItem = Readonly<{
     id: string;
     title: string;
     description?: string;
-    icon?: InfoIcon;
+    icon: InfoIcon;
 }>;
 
 type SheetUIElement =

@@ -6,7 +6,13 @@ type SheetIcon = Readonly<{
     type?: 'regular' | 'small';
 }>;
 
-type InfoIcon = SheetIcon | Readonly<{type: 'bullet'}>;
+type InfoIcon =
+    | Readonly<{
+          url: string;
+          urlDark?: string;
+          type: 'regular' | 'small';
+      }>
+    | Readonly<{type: 'bullet'}>;
 
 export type SheetRowItem = Readonly<{
     id: string;

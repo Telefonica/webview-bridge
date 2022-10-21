@@ -7,7 +7,11 @@ declare type SheetIcon = $ReadOnly<{
   type?: "regular" | "small",
 }>;
 declare type InfoIcon =
-  | SheetIcon
+  | $ReadOnly<{
+      url: string,
+      urlDark?: string,
+      type: "regular" | "small",
+    }>
   | $ReadOnly<{
       type: "bullet",
     }>;

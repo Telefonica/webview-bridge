@@ -38,7 +38,12 @@ declare export {
 } from "./src/utils";
 export type { ShareOptions } from "./src/utils";
 declare export { createCalendarEvent } from "./src/calendar";
-declare export { requestContact, fetchContactsByPhone } from "./src/contacts";
+declare export {
+  requestContact,
+  fetchContactsByPhone,
+  fetchPhoneNumbers,
+  updatePhoneNumbers,
+} from "./src/contacts";
 declare export { highlightNavigationTab } from "./src/navigation-tabs";
 declare export {
   logEvent,

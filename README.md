@@ -88,6 +88,10 @@ Alternatively, you can import the library directly from a CDN:
 -   [onSessionRenewed](#onSessionRenewed)
 -   [logout](#logout)
 -   [getTopazToken](#getTopazToken)
+-   [showAppRating](#showAppRating)
+-   [bottomSheet](#bottomSheet)
+-   [fetchPhoneNumbes](#fetchPhoneNumbes)
+-   [updatePhoneNumbers](#updatePhoneNumbers)
 
 ### isWebViewBridgeAvailable
 
@@ -581,6 +585,8 @@ pass feature and required params for this request.
 Avalaible features:
 
 -   `notifications`
+-   `read-contact` (Available for app versions 13.10 and higher)
+-   `write-contact` (Available for app versions 13.10 and higher)
 
 ```typescript
 checkPermissionStatus: (feature: string, params?: {[key: string]: string}) => Promise<boolean>;
@@ -607,6 +613,7 @@ Init an internal and native navigation to a device specific feature
 Avalaible features:
 
 -   `notification-settings`
+-   `contact-settings` (Available for app versions 13.10 and higher)
 
 ```typescript
 internalNavigation: (feature: string) => Promise<void>;
@@ -925,6 +932,32 @@ const {action, selected} = await bottomSheetSingleSelector({
         },
     ],
 });
+```
+
+### fetchPhoneNumber
+
+Fetch all the phone numbers of the native phonebook
+
+-   Available in Novum app since 13.10 version
+
+```ts
+fetchPhoneNumber:() => Promise<Array<{
+    id: string;
+    value: string;
+}>>;
+```
+
+### updatePhoneNumber
+
+Updates the given phone numbers in the native phonebook
+
+-   Available in Novum app since 13.10 version
+
+```ts
+updatePhoneNumber:(Array<{
+    id: string;
+    value: string;
+}>) => Promise<Void>;
 ```
 
 ## Error handling

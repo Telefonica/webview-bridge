@@ -397,6 +397,86 @@ test('app has not notifications permissions', (done) => {
     });
 });
 
+test('app has write-contact permissions', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('OS_PERMISSION_STATUS');
+            expect(msg.payload.feature).toBe('write-contacts');
+        },
+        getResponse: (msg) => ({
+            type: 'OS_PERMISSION_STATUS',
+            id: msg.id,
+            payload: {granted: true},
+        }),
+    });
+
+    checkPermissionStatus('write-contacts').then((res) => {
+        expect(res).toBe(true);
+        removeFakeAndroidPostMessage();
+        done();
+    });
+});
+
+test('app has not write-contact permissions', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('OS_PERMISSION_STATUS');
+            expect(msg.payload.feature).toBe('write-contacts');
+        },
+        getResponse: (msg) => ({
+            type: 'OS_PERMISSION_STATUS',
+            id: msg.id,
+            payload: {granted: false},
+        }),
+    });
+
+    checkPermissionStatus('write-contacts').then((res) => {
+        expect(res).toBe(false);
+        removeFakeAndroidPostMessage();
+        done();
+    });
+});
+
+test('app has read-contact permissions', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('OS_PERMISSION_STATUS');
+            expect(msg.payload.feature).toBe('read-contacts');
+        },
+        getResponse: (msg) => ({
+            type: 'OS_PERMISSION_STATUS',
+            id: msg.id,
+            payload: {granted: true},
+        }),
+    });
+
+    checkPermissionStatus('read-contacts').then((res) => {
+        expect(res).toBe(true);
+        removeFakeAndroidPostMessage();
+        done();
+    });
+});
+
+test('app has not read-contact permissions', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('OS_PERMISSION_STATUS');
+            expect(msg.payload.feature).toBe('read-contacts');
+        },
+        getResponse: (msg) => ({
+            type: 'OS_PERMISSION_STATUS',
+            id: msg.id,
+            payload: {granted: false},
+        }),
+    });
+
+    checkPermissionStatus('read-contacts').then((res) => {
+        expect(res).toBe(false);
+        removeFakeAndroidPostMessage();
+        done();
+    });
+});
+
 test('get app metadata of installed application', async () => {
     const appToken = 'testToken';
     const marketUrl = 'testMarketurl';

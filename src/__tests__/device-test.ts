@@ -140,6 +140,25 @@ test('internal navigation', (done) => {
     });
 });
 
+test('internal navigation to contact settings', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('INTERNAL_NAVIGATION');
+            expect(msg.payload.feature).toBe('contact-settings');
+        },
+        getResponse: (msg) => ({
+            type: 'INTERNAL_NAVIGATION',
+            id: msg.id,
+        }),
+    });
+
+    internalNavigation('contact-settings').then((res) => {
+        expect(res).toBeUndefined();
+        removeFakeAndroidPostMessage();
+        done();
+    });
+});
+
 test('dismiss', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {

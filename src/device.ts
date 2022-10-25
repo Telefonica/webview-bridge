@@ -17,7 +17,7 @@ export const requestDeviceImei = (): Promise<string | null> =>
         .then(({imei}) => imei)
         .catch(() => null);
 
-type RoutesAvalaible = 'notification-settings';
+type RoutesAvalaible = 'notification-settings' | 'contact-settings';
 
 export const internalNavigation = (feature: RoutesAvalaible): Promise<void> =>
     postMessageToNativeApp({

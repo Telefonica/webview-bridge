@@ -506,10 +506,7 @@ setScreenName('Topup Flow', {someParam: 'some value'});
 Set a user property to firebase
 
 ```typescript
-setUserProperty: ({
-    name: string;
-    value: string;
-}) => Promise<void>;
+setUserProperty: (name: string, value: string) => Promise<void>;
 ```
 
 #### Example
@@ -517,10 +514,7 @@ setUserProperty: ({
 ```javascript
 import {setUserProperty} from '@tef-novum/webview-bridge';
 
-setUserProperty({
-    name: 'obIds',
-    value: 'any-value',
-}).then(() => {
+setUserProperty('obIds', 'any-value').then(() => {
     console.log('User property logged');
 });
 ```

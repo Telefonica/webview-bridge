@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.17.0 - 2022-10-26
+
+-   New `bottomSheetActionSelector` and `bottomSheetInfo` methods
+
 ## v.3.16.0 - 2022-09-27
 
 -   Allow params in setScreenName

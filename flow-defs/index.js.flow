@@ -61,5 +61,11 @@ declare export { showAppRating } from "./src/app-rating";
 declare export {
   bottomSheet,
   bottomSheetSingleSelector,
+  bottomSheetActionSelector,
+  bottomSheetInfo,
 } from "./src/bottom-sheet";
-export type { SheetListItem } from "./src/bottom-sheet";
+export type {
+  SheetRowItem,
+  SheetActionItem,
+  SheetInfoItem,
+} from "./src/bottom-sheet";

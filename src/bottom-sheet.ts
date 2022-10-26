@@ -1,25 +1,65 @@
 import {postMessageToNativeApp, type SheetResponse} from './post-message';
 
-type SheetListType = 'SINGLE_SELECTION';
+type SheetIcon = Readonly<{
+    url: string;
+    urlDark?: string;
+    type?: 'regular' | 'small';
+}>;
 
-export type SheetListItem = Readonly<{
+type InfoIcon =
+    | Readonly<{
+          url: string;
+          urlDark?: string;
+          type: 'regular' | 'small';
+      }>
+    | Readonly<{type: 'bullet'}>;
+
+export type SheetRowItem = Readonly<{
     id: string;
     title?: string;
     description?: string;
-    icon?: Readonly<{
-        url: string;
-        urlDark?: string;
-    }>;
+    icon?: SheetIcon;
 }>;
 
-type SheetUIElement = Readonly<{
+export type SheetActionItem = Readonly<{
     id: string;
-    type: 'LIST';
-    listType: SheetListType;
-    autoSubmit?: boolean;
-    selectedIds: Array<string>;
-    items: Array<SheetListItem>;
+    title: string;
+    style?: 'normal' | 'destructive'; // "normal" by default
+    icon?: SheetIcon;
 }>;
+
+export type SheetInfoItem = Readonly<{
+    id: string;
+    title: string;
+    description?: string;
+    icon: InfoIcon;
+}>;
+
+type SheetUIElement =
+    | Readonly<{
+          id: string;
+          type: 'LIST';
+          listType: 'SINGLE_SELECTION';
+          autoSubmit?: boolean;
+          selectedIds: Array<string>;
+          items: Array<SheetRowItem>;
+      }>
+    | Readonly<{
+          id: string;
+          type: 'LIST';
+          listType: 'ACTIONS';
+          autoSubmit?: boolean;
+          selectedIds: Array<string>;
+          items: Array<SheetActionItem>;
+      }>
+    | Readonly<{
+          id: string;
+          type: 'LIST';
+          listType: 'INFORMATIVE';
+          autoSubmit?: boolean;
+          selectedIds: Array<string>;
+          items: Array<SheetInfoItem>;
+      }>;
 
 type SheetUI = Readonly<{
     title?: string;
@@ -66,7 +106,7 @@ export const bottomSheetSingleSelector = ({
     subtitle?: string;
     description?: string;
     selectedId?: string;
-    items: Array<SheetListItem>;
+    items: Array<SheetRowItem>;
 }): Promise<
     | {
           action: 'SUBMIT';
@@ -104,3 +144,79 @@ export const bottomSheetSingleSelector = ({
             };
         }
     });
+
+export const bottomSheetActionSelector = ({
+    title,
+    subtitle,
+    description,
+    items,
+}: {
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    items: Array<SheetActionItem>;
+}): Promise<
+    | {
+          action: 'SUBMIT';
+          selectedId: string;
+      }
+    | {
+          action: 'DISMISS';
+          selectedId: null;
+      }
+> =>
+    bottomSheet({
+        title,
+        subtitle,
+        description,
+        content: [
+            {
+                type: 'LIST',
+                id: 'list-0',
+                listType: 'ACTIONS',
+                autoSubmit: true,
+                selectedIds: [],
+                items,
+            },
+        ],
+    }).then(({action, result}) => {
+        if (action === 'SUBMIT') {
+            return {
+                action,
+                selectedId: result[0].selectedIds[0],
+            };
+        } else {
+            return {
+                action,
+                selectedId: null,
+            };
+        }
+    });
+
+export const bottomSheetInfo = async ({
+    title,
+    subtitle,
+    description,
+    items,
+}: {
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    items: Array<SheetInfoItem>;
+}): Promise<void> => {
+    await bottomSheet({
+        title,
+        subtitle,
+        description,
+        content: [
+            {
+                type: 'LIST',
+                id: 'list-0',
+                listType: 'INFORMATIVE',
+                autoSubmit: false,
+                selectedIds: [],
+                items,
+            },
+        ],
+    });
+};

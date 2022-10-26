@@ -880,8 +880,14 @@ bottomSheet = (payload: SheetUI) => Promise<SheetResponse>
 // see SheetUI and SheetResponse types
 ```
 
-For the specific case of single selection, you can use the
-`bottomSheetSingleSelector` method:
+:warning: If you try to call this method repeatedly while a sheet is already
+being opened (for example, user accidental double tap), it will throw an Error
+with code `423` (Locked)
+
+There are some specific cases of bottom sheet, and we have some utility methods
+to make them simpler to use:
+
+For single selection use `bottomSheetSingleSelector`:
 
 ```ts
 bottomSheetSingleSelector = ({
@@ -889,13 +895,31 @@ bottomSheetSingleSelector = ({
     subtitle?: string;
     description?: string;
     selectedId?: string;
-    items: Array<SheetListItem>;
-}) => Promise<{action: 'SUBMIT' | 'DISMISS'; selected: string}>
+    items: Array<SheetRowItem>;
+}) => Promise<{action: 'SUBMIT' | 'DISMISS'; selectedId: string}>
 ```
 
-:warning: If you try to call this method repeatedly while a sheet is already
-being opened (for example, user accidental double tap), it will throw an Error
-with code `423` (Locked)
+For a bottom sheet with a list of actions use `bottomSheetActionSelector`:
+
+```ts
+bottomSheetActionSelector = ({
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    items: Array<SheetActionItem>;
+}) => Promise<{action: 'SUBMIT' | 'DISMISS'; selectedId: string}>
+```
+
+For an informative bottom sheet use `bottomSheetInfo`:
+
+```ts
+bottomSheetInfo = ({
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    items: Array<SheetInfoItem>;
+}) => Promise<void>
+```
 
 #### Example:
 

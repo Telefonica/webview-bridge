@@ -585,8 +585,8 @@ pass feature and required params for this request.
 Avalaible features:
 
 -   `notifications`
--   `read-contact` (Available for app versions 13.10 and higher)
--   `write-contact` (Available for app versions 13.10 and higher)
+-   `read-contacts` (Available for app versions 13.10 and higher)
+-   `write-contacts` (Available for app versions 13.10 and higher)
 
 ```typescript
 checkPermissionStatus: (feature: string, params?: {[key: string]: string}) => Promise<boolean>;

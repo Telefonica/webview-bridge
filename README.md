@@ -62,37 +62,6 @@ Alternatively, you can import the library directly from a CDN:
 
 ## API
 
--   [isWebViewBridgeAvailable](#isWebViewBridgeAvailable)
--   [requestContact](#requestcontact)
--   [createCalendarEvent](#createcalendarevent)
--   [share](#share)
--   [updateNavigationBar](#updateNavigationBar)
--   [nativeConfirm](#nativeconfirm)
--   [nativeAlert](#nativealert)
--   [nativeMessage](#nativemessage)
--   [logEvent](#logevent)
--   [setScreenName](#setscreenname)
--   [setUserProperty](#setUserProperty)
--   [reportStatus](#reportStatus)
--   [checkPermissionStatus](#checkPermissionStatus)
--   [internalNavigation](#internalNavigation)
--   [dismiss](#dismiss)
--   [fetchContactsByPhone](#fetchContactsByPhone)
--   [getAppMetadata](#getAppMetadata)
--   [setCustomerHash](#setCustomerHash)
--   [getDiskSpaceInfo](#getDiskSpaceInfo)
--   [getEsimInfo](#getEsimInfo)
--   [setTrackingProperty](#setTrackingProperty)
--   [setActionBehavior](#setActionBehavior)
--   [renewSession](#renewSession)
--   [onSessionRenewed](#onSessionRenewed)
--   [logout](#logout)
--   [getTopazToken](#getTopazToken)
--   [showAppRating](#showAppRating)
--   [bottomSheet](#bottomSheet)
--   [fetchPhoneNumbes](#fetchPhoneNumbes)
--   [updatePhoneNumbers](#updatePhoneNumbers)
-
 ### isWebViewBridgeAvailable
 
 Returns true if WebView Bridge is available. Use this function to implement
@@ -934,27 +903,27 @@ const {action, selected} = await bottomSheetSingleSelector({
 });
 ```
 
-### fetchPhoneNumber
+### fetchPhoneNumbers
 
 Fetch all the phone numbers of the native phonebook
 
 -   Available in Novum app since 13.10 version
 
 ```ts
-fetchPhoneNumber:() => Promise<Array<{
+fetchPhoneNumbers:() => Promise<Array<{
     id: string;
     value: string;
 }>>;
 ```
 
-### updatePhoneNumber
+### updatePhoneNumbers
 
 Updates the given phone numbers in the native phonebook
 
 -   Available in Novum app since 13.10 version
 
 ```ts
-updatePhoneNumber:(Array<{
+updatePhoneNumbers:(Array<{
     id: string;
     value: string;
 }>) => Promise<Void>;

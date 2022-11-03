@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.18.0 - 2022-11-03
+
+-   New `fetchPhoneNumbers` and `updatePhoneNumbers` methods.
+
 ## v.3.17.0 - 2022-10-26
 
 -   New `bottomSheetActionSelector` and `bottomSheetInfo` methods

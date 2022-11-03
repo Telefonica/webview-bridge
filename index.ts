@@ -37,7 +37,12 @@ export type {ShareOptions} from './src/utils';
 
 export {createCalendarEvent} from './src/calendar';
 
-export {requestContact, fetchContactsByPhone} from './src/contacts';
+export {
+    requestContact,
+    fetchContactsByPhone,
+    fetchPhoneNumbers,
+    updatePhoneNumbers,
+} from './src/contacts';
 
 export {highlightNavigationTab} from './src/navigation-tabs';
 

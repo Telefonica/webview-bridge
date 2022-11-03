@@ -62,33 +62,6 @@ Alternatively, you can import the library directly from a CDN:
 
 ## API
 
--   [isWebViewBridgeAvailable](#isWebViewBridgeAvailable)
--   [requestContact](#requestcontact)
--   [createCalendarEvent](#createcalendarevent)
--   [share](#share)
--   [updateNavigationBar](#updateNavigationBar)
--   [nativeConfirm](#nativeconfirm)
--   [nativeAlert](#nativealert)
--   [nativeMessage](#nativemessage)
--   [logEvent](#logevent)
--   [setScreenName](#setscreenname)
--   [setUserProperty](#setUserProperty)
--   [reportStatus](#reportStatus)
--   [checkPermissionStatus](#checkPermissionStatus)
--   [internalNavigation](#internalNavigation)
--   [dismiss](#dismiss)
--   [fetchContactsByPhone](#fetchContactsByPhone)
--   [getAppMetadata](#getAppMetadata)
--   [setCustomerHash](#setCustomerHash)
--   [getDiskSpaceInfo](#getDiskSpaceInfo)
--   [getEsimInfo](#getEsimInfo)
--   [setTrackingProperty](#setTrackingProperty)
--   [setActionBehavior](#setActionBehavior)
--   [renewSession](#renewSession)
--   [onSessionRenewed](#onSessionRenewed)
--   [logout](#logout)
--   [getTopazToken](#getTopazToken)
-
 ### isWebViewBridgeAvailable
 
 Returns true if WebView Bridge is available. Use this function to implement
@@ -575,6 +548,8 @@ pass feature and required params for this request.
 Avalaible features:
 
 -   `notifications`
+-   `read-contacts` (Available for app versions 13.10 and higher)
+-   `write-contacts` (Available for app versions 13.10 and higher)
 
 ```typescript
 checkPermissionStatus: (feature: string, params?: {[key: string]: string}) => Promise<boolean>;
@@ -601,6 +576,7 @@ Init an internal and native navigation to a device specific feature
 Avalaible features:
 
 -   `notification-settings`
+-   `contact-settings` (Available for app versions 13.10 and higher)
 
 ```typescript
 internalNavigation: (feature: string) => Promise<void>;
@@ -943,6 +919,32 @@ const {action, selected} = await bottomSheetSingleSelector({
         },
     ],
 });
+```
+
+### fetchPhoneNumbers
+
+Fetch all the phone numbers of the native phonebook
+
+-   Available in Novum app since 13.10 version
+
+```ts
+fetchPhoneNumbers:() => Promise<Array<{
+    id: string;
+    value: string;
+}>>;
+```
+
+### updatePhoneNumbers
+
+Updates the given phone numbers in the native phonebook
+
+-   Available in Novum app since 13.10 version
+
+```ts
+updatePhoneNumbers:(Array<{
+    id: string;
+    value: string;
+}>) => Promise<Void>;
 ```
 
 ## Error handling

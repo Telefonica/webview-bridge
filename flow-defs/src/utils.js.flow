@@ -46,7 +46,10 @@ declare export var fetch: (x: {
   },
   body: string,
 }) => Promise<NativeAppResponsePayload<"FETCH">>;
-declare type PermissionsStatus = "notifications";
+declare type PermissionsStatus =
+  | "notifications"
+  | "read-contacts"
+  | "write-contacts";
 declare export var checkPermissionStatus: (
   feature: PermissionsStatus,
   params?: {

@@ -164,7 +164,7 @@ export const fetch = ({
     });
 };
 
-type PermissionsStatus = 'notifications';
+type PermissionsStatus = 'notifications' | 'read-contacts' | 'write-contacts';
 
 export const checkPermissionStatus = (
     feature: PermissionsStatus,

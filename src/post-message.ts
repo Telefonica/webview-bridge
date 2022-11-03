@@ -229,6 +229,19 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: SheetResponse;
     };
+    FETCH_PHONE_NUMBERS: {
+        type: 'FETCH_PHONE_NUMBERS';
+        id: string;
+        payload: Array<{
+            id: string;
+            value: string;
+        }>;
+    };
+    UPDATE_PHONE_NUMBERS: {
+        type: 'UPDATE_PHONE_NUMBERS';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

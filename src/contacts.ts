@@ -13,3 +13,18 @@ export const fetchContactsByPhone = (
         type: 'FETCH_CONTACTS_DATA',
         payload: {phoneNumbers},
     });
+
+export const fetchPhoneNumbers = (): Promise<
+    NativeAppResponsePayload<'FETCH_PHONE_NUMBERS'>
+> =>
+    postMessageToNativeApp({
+        type: 'FETCH_PHONE_NUMBERS',
+    });
+
+export const updatePhoneNumbers = (
+    phoneNumbers: ReadonlyArray<{id: string; value: string}>,
+): Promise<NativeAppResponsePayload<'UPDATE_PHONE_NUMBERS'>> =>
+    postMessageToNativeApp({
+        type: 'UPDATE_PHONE_NUMBERS',
+        payload: {phoneNumbers},
+    });

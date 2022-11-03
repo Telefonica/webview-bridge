@@ -7,3 +7,12 @@ declare export var requestContact: (x?: {
 declare export var fetchContactsByPhone: (
   phoneNumbers: ReadonlyArray<string>
 ) => Promise<NativeAppResponsePayload<"FETCH_CONTACTS_DATA">>;
+declare export var fetchPhoneNumbers: () => Promise<
+  NativeAppResponsePayload<"FETCH_PHONE_NUMBERS">
+>;
+declare export var updatePhoneNumbers: (
+  phoneNumbers: ReadonlyArray<{
+    id: string,
+    value: string,
+  }>
+) => Promise<NativeAppResponsePayload<"UPDATE_PHONE_NUMBERS">>;

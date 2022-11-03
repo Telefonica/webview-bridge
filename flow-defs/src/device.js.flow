@@ -3,7 +3,7 @@
 declare export var requestSimIcc: () => Promise<string | null>;
 declare export var requestSimImsi: () => Promise<string | null>;
 declare export var requestDeviceImei: () => Promise<string | null>;
-declare type RoutesAvalaible = "notification-settings";
+declare type RoutesAvalaible = "notification-settings" | "contact-settings";
 declare export var internalNavigation: (
   feature: RoutesAvalaible
 ) => Promise<void>;

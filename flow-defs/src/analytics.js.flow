@@ -112,7 +112,7 @@ declare export var setScreenName: (
   screenName: string,
   params?: {
     [key: string]: any,
-  } | void
+  }
 ) => Promise<void>;
 declare type KnownUserPropertyName =
   | "obIds"

@@ -332,7 +332,7 @@ export const logTiming = ({
 
 export const setScreenName = (
     screenName: string,
-    params?: {[key: string]: any},
+    params: {[key: string]: any} = {},
 ): Promise<void> => {
     if (!screenName) {
         console.warn('Missing analytics screenName');
@@ -369,7 +369,7 @@ export const setScreenName = (
                     screenName,
                     page_title: screenName,
                     previousScreenName,
-                    ...sanitizeAnalyticsParams(params ?? {}),
+                    ...sanitizeAnalyticsParams(params),
                     event_callback: createCallback(resolve),
                 });
             });

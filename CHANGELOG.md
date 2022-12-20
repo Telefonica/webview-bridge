@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.18.1 - 2022-12-20
+
+-   Fix `setScreenName` in Android when not passing params.
+
 ## v.3.18.0 - 2022-11-03
 
 -   New `fetchPhoneNumbers` and `updatePhoneNumbers` methods.

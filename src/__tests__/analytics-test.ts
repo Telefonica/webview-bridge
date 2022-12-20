@@ -19,6 +19,7 @@ const givenAndroidWebview = () => {
     const mock = {
         logEvent: jest.fn(),
         setScreenName: jest.fn(),
+        setScreenNameWithParams: jest.fn(),
         setUserProperty: jest.fn(),
     };
     window.AnalyticsWebInterface = mock;
@@ -267,7 +268,10 @@ test('set screen name in android', async () => {
 
     await setScreenName(SCREEN_NAME);
 
-    expect(androidFirebaseMock.setScreenName).toBeCalledWith(SCREEN_NAME);
+    expect(androidFirebaseMock.setScreenNameWithParams).toBeCalledWith(
+        SCREEN_NAME,
+        '{}',
+    );
 });
 
 test('set screen name in iOS', async () => {
@@ -280,6 +284,7 @@ test('set screen name in iOS', async () => {
     expect(iosFirebaseMock.postMessage).toBeCalledWith({
         command: 'setScreenName',
         name: SCREEN_NAME,
+        parameters: {},
     });
 });
 

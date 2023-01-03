@@ -32,5 +32,5 @@ export const onSessionRenewed = (
 /**
  * This method is used by webapp to request the native app to end the current session
  */
-export const logout = (): Promise<void> =>
+export const logout = (): Promise<{success: boolean}> =>
     postMessageToNativeApp({type: 'LOG_OUT'});

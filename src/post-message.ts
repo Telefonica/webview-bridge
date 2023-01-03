@@ -217,7 +217,7 @@ export type ResponsesFromNativeApp = {
     LOG_OUT: {
         type: 'LOG_OUT';
         id: string;
-        payload: void;
+        payload: {success: boolean};
     };
     SHOW_APP_RATING: {
         type: 'SHOW_APP_RATING';

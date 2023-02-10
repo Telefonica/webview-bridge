@@ -100,12 +100,12 @@ let remoteConfig: null | RemoteConfig = null;
 const isRemoteConfigAvailable = (key: string) =>
     (remoteConfig as RemoteConfig).result[key] === 'true';
 
-export const isABTestingAvailable = (key: string): Promise<boolean> => {
+export const getRemoteConfig = (): Promise<RemoteConfig> => {
     if (!remoteConfig) {
-        // If GET_REMOTE_CONFIG takes more than 5s to respond, resolve to false
-        const timeoutP = new Promise<boolean>((resolve) => {
+        // If GET_REMOTE_CONFIG takes more than 5s to respond resolve with empty result
+        const timeoutP = new Promise<RemoteConfig>((resolve) => {
             setTimeout(() => {
-                resolve(false);
+                resolve({result: {}});
             }, 500);
         });
 
@@ -113,14 +113,19 @@ export const isABTestingAvailable = (key: string): Promise<boolean> => {
             type: 'GET_REMOTE_CONFIG',
         }).then((res) => {
             remoteConfig = res;
-            return isRemoteConfigAvailable(key);
+            return {...remoteConfig};
         });
 
         return Promise.race([timeoutP, configP]);
     } else {
-        return Promise.resolve(isRemoteConfigAvailable(key));
+        return Promise.resolve({...remoteConfig});
     }
 };
+
+export const isABTestingAvailable = (key: string): Promise<boolean> =>
+    getRemoteConfig()
+        .then(() => isRemoteConfigAvailable(key))
+        .catch(() => false);
 
 export const reportStatus = ({
     feature,

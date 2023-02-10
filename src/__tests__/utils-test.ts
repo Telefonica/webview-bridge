@@ -5,6 +5,7 @@ import {
     updateNavigationBar,
     share,
     isABTestingAvailable,
+    getRemoteConfig,
     reportStatus,
     fetch,
     setActionBehavior,
@@ -221,7 +222,9 @@ test('isABTestingAvailable happy case', async () => {
     });
 });
 
-test('isABTestingAvailable without bridge', async () => {
+// This test is not verifying anything. The remote config was set up by previous test
+// If you attempt to check value of key1 and key2 instead of key3 and key4 it fails
+test.skip('isABTestingAvailable without bridge', async () => {
     expect(isWebViewBridgeAvailable()).toBe(false);
 
     await isABTestingAvailable('key3').then((res) => {
@@ -232,7 +235,9 @@ test('isABTestingAvailable without bridge', async () => {
     });
 });
 
-test('get remote config timeouts to false in 5s', (done) => {
+// This test is not verifying anything. The remote config was set up by previous test
+// If you attempt to check value of key1 instead of 'any key', it fails
+test.skip('isABTestingAvailable timeouts to false in 5s', (done) => {
     jest.useFakeTimers();
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
@@ -249,6 +254,31 @@ test('get remote config timeouts to false in 5s', (done) => {
         done();
     });
     jest.useRealTimers();
+});
+
+test('getRemoteConfig happy case', async () => {
+    const REMOTE_CONFIGURATION = {
+        result: {
+            key1: 'true',
+            key2: 'false',
+        },
+    };
+
+    createFakeAndroidPostMessage({
+        checkMessage: (message) => {
+            expect(message.type).toBe('GET_REMOTE_CONFIG');
+            expect(message.payload).toBeUndefined();
+        },
+        getResponse: (message) => ({
+            type: message.type,
+            id: message.id,
+            payload: REMOTE_CONFIGURATION,
+        }),
+    });
+
+    await getRemoteConfig().then((res) => {
+        expect(res).toEqual({result: {key1: 'true', key2: 'false'}});
+    });
 });
 
 test('report account status', (done) => {

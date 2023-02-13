@@ -14,7 +14,6 @@ import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
 } from './fake-post-message';
-import {isWebViewBridgeAvailable} from '../post-message';
 import {getAppMetadata} from '../utils';
 
 const ANY_STRING = 'any-string';

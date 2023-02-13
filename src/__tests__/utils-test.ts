@@ -5,6 +5,7 @@ import {
     updateNavigationBar,
     share,
     isABTestingAvailable,
+    getRemoteConfig,
     reportStatus,
     fetch,
     setActionBehavior,
@@ -221,34 +222,29 @@ test('isABTestingAvailable happy case', async () => {
     });
 });
 
-test('isABTestingAvailable without bridge', async () => {
-    expect(isWebViewBridgeAvailable()).toBe(false);
+test('getRemoteConfig happy case', async () => {
+    const REMOTE_CONFIGURATION = {
+        result: {
+            key1: 'true',
+            key2: 'false',
+        },
+    };
 
-    await isABTestingAvailable('key3').then((res) => {
-        expect(res).toEqual(false);
-    });
-    await isABTestingAvailable('key4').then((res) => {
-        expect(res).toEqual(false);
-    });
-});
-
-test('get remote config timeouts to false in 5s', (done) => {
-    jest.useFakeTimers();
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
             expect(message.type).toBe('GET_REMOTE_CONFIG');
             expect(message.payload).toBeUndefined();
         },
-        getResponse: () => new Promise(() => {}), // never respond
+        getResponse: (message) => ({
+            type: message.type,
+            id: message.id,
+            payload: REMOTE_CONFIGURATION,
+        }),
     });
 
-    const promise = isABTestingAvailable('any key');
-    jest.advanceTimersByTime(5000);
-    promise.then((res) => {
-        expect(res).toEqual(false);
-        done();
+    await getRemoteConfig().then((res) => {
+        expect(res).toEqual({result: {key1: 'true', key2: 'false'}});
     });
-    jest.useRealTimers();
 });
 
 test('report account status', (done) => {

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.20.0 - 2023-02-13
+
+-   New `getRemoteConfig` function exposing firebase remote config
+
 ## v.3.18.1 - 2022-12-20
 
 -   Fix `setScreenName` in Android when not passing params.

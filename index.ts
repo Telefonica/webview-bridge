@@ -25,6 +25,7 @@ export {
     updateNavigationBar,
     notifyPageLoaded,
     notifyBridgeReady,
+    getRemoteConfig,
     isABTestingAvailable,
     reportStatus,
     fetch,

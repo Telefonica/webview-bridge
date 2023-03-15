@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.21.0 - 2023-03-
+
+-   sanitize tracking params in setScreenName in Android/iOS too
+
 ## v.3.20.1 - 2023-02-13
 
 -   added missing `getRemoteConfig` export

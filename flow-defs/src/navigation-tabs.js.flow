@@ -1,7 +1,0 @@
-// @flow
-
-declare export var highlightNavigationTab: (x: {
-  tab: string,
-  highlight: boolean,
-  count?: number | void,
-}) => Promise<void>;

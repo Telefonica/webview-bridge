@@ -159,7 +159,7 @@ test('log GA4 event in Android', async () => {
     expect(androidFirebaseMock.logEvent).toBeCalledWith(
         'some_name',
         JSON.stringify({
-            component_copy: 'haz_click_en_este_boton_n_u_-_and___are_allowed',
+            component_copy: 'haz_click_en_este_boton_n_ß_u_-_and___are_allowed',
             screenName: '',
         }),
     );
@@ -178,7 +178,7 @@ test('log GA4 event in iOS', async () => {
         command: 'logEvent',
         name: 'some_name',
         parameters: {
-            component_copy: 'haz_click_en_este_boton_n_u_-_and___are_allowed',
+            component_copy: 'haz_click_en_este_boton_n_ß_u_-_and___are_allowed',
             screenName: '',
         },
     });
@@ -462,7 +462,7 @@ test('sanitizeAnalyticsParam', () => {
     );
     expect(
         sanitizeAnalyticsParam('some special chars ñ ß ü % € and more text'),
-    ).toBe('some_special_chars_n_u_and_more_text');
+    ).toBe('some_special_chars_n_ß_u_and_more_text');
     expect(sanitizeAnalyticsParam('some_all:owed-special/chars|')).toBe(
         'some_all:owed-special/chars|',
     );

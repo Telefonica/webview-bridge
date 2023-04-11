@@ -129,7 +129,7 @@ const EVENT_PARAMS_LIMIT = 25;
 export const sanitizeAnalyticsParam = (str: string): string =>
     removeAccents(str)
         .toLocaleLowerCase()
-        .replace(/[^a-z0-9\s\-\_\/\|\:]/g, '') // Remove all non allowed characters
+        .replace(/[^a-zß0-9\s\-\_\/\|\:]/g, '') // Remove all non allowed characters
         .replace(/\s+/g, ' ') // Replace repeated whitespaces with a single space
         .trim()
         .replace(/\s/g, '_') // Replace spaces with underscores

@@ -126,20 +126,14 @@ const EVENT_PARAM_NAME_CHARS_LIMIT = 40;
 const EVENT_PARAM_VALUE_CHARS_LIMIT = 100;
 const EVENT_PARAMS_LIMIT = 25;
 
-export const sanitizeAnalyticsParam = (
-    str: string,
-    options?: {keepBlanks?: boolean},
-): string => {
-    let sanitized = removeAccents(str)
+export const sanitizeAnalyticsParam = (str: string): string =>
+    removeAccents(str)
         .toLocaleLowerCase()
         .replace(/[^a-zß0-9\s\-\_\/\|\:]/g, '') // Remove all non allowed characters
         .replace(/\s+/g, ' ') // Replace repeated whitespaces with a single space
-        .trim();
-    if (!options?.keepBlanks) {
-        sanitized = sanitized.replace(/\s/g, '_'); // Replace spaces with underscores
-    }
-    return sanitized.slice(0, EVENT_PARAM_VALUE_CHARS_LIMIT);
-};
+        .trim()
+        .replace(/\s/g, '_') // Replace spaces with underscores
+        .slice(0, EVENT_PARAM_VALUE_CHARS_LIMIT);
 
 export const sanitizeAnalyticsParams = (params: {
     [key: string]: unknown;

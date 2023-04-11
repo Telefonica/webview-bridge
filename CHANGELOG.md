@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## v.3.21.0 - 2023-03-
+## v.3.22.0 - 2023-04-11
+
+-   allow ß char in analytics events
+
+## v.3.21.0 - 2023-03-15
 
 -   sanitize tracking params in setScreenName in Android/iOS too
 

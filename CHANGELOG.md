@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.23.0 - 2023-04-14
+
+-   improve TrackingEvent types
+
 ## v.3.22.0 - 2023-04-11
 
 -   allow ß char in analytics events

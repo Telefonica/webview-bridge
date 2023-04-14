@@ -108,11 +108,18 @@ type LegacyAnalyticsEvent = {
     [key: string]: any;
 };
 
+type FirebaseValue =
+    | string
+    | number
+    | undefined
+    | {[key: string]: FirebaseValue}
+    | Array<FirebaseValue>;
+
 type FirebaseEvent = {
     name: string;
     component_type?: string;
     component_copy?: string;
-    [key: string]: any;
+    [key: string]: FirebaseValue;
 };
 
 export type TrackingEvent = Readonly<LegacyAnalyticsEvent | FirebaseEvent>;
@@ -136,9 +143,9 @@ export const sanitizeAnalyticsParam = (str: string): string =>
         .slice(0, EVENT_PARAM_VALUE_CHARS_LIMIT);
 
 export const sanitizeAnalyticsParams = (params: {
-    [key: string]: unknown;
-}): {[key: string]: unknown} => {
-    const sanitizedParams: {[key: string]: unknown} = {};
+    [key: string]: FirebaseValue;
+}): {[key: string]: FirebaseValue} => {
+    const sanitizedParams: {[key: string]: FirebaseValue} = {};
     Object.entries(params).forEach(([key, value]) => {
         let sanitizedValue = value;
         const sanitizedKey = key.slice(0, EVENT_PARAM_NAME_CHARS_LIMIT);

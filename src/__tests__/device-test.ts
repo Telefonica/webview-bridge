@@ -7,6 +7,7 @@ import {
     requestVibration,
     getDiskSpaceInfo,
     getEsimInfo,
+    getAttStatus,
 } from '../device';
 import {
     createFakeAndroidPostMessage,
@@ -244,5 +245,48 @@ test('getEsimInfo', async () => {
     expect(res).toMatchObject({
         supportsEsim,
     });
+    removeFakeAndroidPostMessage();
+});
+
+test('getAttStatus Success', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_ATT_STATUS');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_ATT_STATUS',
+            id: msg.id,
+            payload: {
+                status: 'unknown',
+            },
+        }),
+    });
+
+    const res = await getAttStatus();
+
+    expect(res).toMatchObject({
+        status: 'unknown',
+    });
+    removeFakeAndroidPostMessage();
+});
+
+test('getAttStatus failure', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_ATT_STATUS');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: {
+                code: 'foo',
+                description: 'bar',
+            },
+        }),
+    });
+
+    const res = await getAttStatus();
+
+    expect(res).toBeNull();
     removeFakeAndroidPostMessage();
 });

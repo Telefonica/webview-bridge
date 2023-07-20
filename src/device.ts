@@ -59,3 +59,10 @@ export const getEsimInfo = (): Promise<{
     }).catch(() => ({
         supportsEsim: false,
     }));
+
+export const getAttStatus = (): Promise<{
+    status: 'granted' | 'denied' | 'unknown';
+} | null> =>
+    postMessageToNativeApp({
+        type: 'GET_ATT_STATUS',
+    }).catch(() => null);

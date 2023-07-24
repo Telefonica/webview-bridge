@@ -12,6 +12,8 @@ import {
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
+    createFakeWebKitPostMessage,
+    removeFakeWebKitPostMessage,
 } from './fake-post-message';
 
 const ANY_STRING = 'any-string';
@@ -249,7 +251,7 @@ test('getEsimInfo', async () => {
 });
 
 test('getAttStatus Success', async () => {
-    createFakeAndroidPostMessage({
+    createFakeWebKitPostMessage({
         checkMessage: (msg) => {
             expect(msg.type).toBe('GET_ATT_STATUS');
         },
@@ -267,11 +269,11 @@ test('getAttStatus Success', async () => {
     expect(res).toMatchObject({
         status: 'unknown',
     });
-    removeFakeAndroidPostMessage();
+    removeFakeWebKitPostMessage();
 });
 
 test('getAttStatus failure', async () => {
-    createFakeAndroidPostMessage({
+    createFakeWebKitPostMessage({
         checkMessage: (msg) => {
             expect(msg.type).toBe('GET_ATT_STATUS');
         },
@@ -288,5 +290,5 @@ test('getAttStatus failure', async () => {
     const res = await getAttStatus();
 
     expect(res).toBeNull();
-    removeFakeAndroidPostMessage();
+    removeFakeWebKitPostMessage();
 });

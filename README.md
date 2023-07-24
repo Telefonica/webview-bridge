@@ -949,7 +949,7 @@ updatePhoneNumbers:(Array<{
 
 ## getAttStatus
 
-Method that allows a WebView to to ask an iOS app user about the authorization
+Method that allows a WebView to ask an iOS app user about the authorization
 status of his ATT
 ([App Tracking Transparency](https://developer.apple.com/documentation/apptrackingtransparency))
 permission.

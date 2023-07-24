@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.24.0 - 2023-07-20
+
+-   Add `getAttStatus` method
+
 ## v.3.23.0 - 2023-04-14
 
 -   improve TrackingEvent types

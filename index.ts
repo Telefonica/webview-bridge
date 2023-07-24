@@ -16,6 +16,7 @@ export {
     requestVibration,
     getDiskSpaceInfo,
     getEsimInfo,
+    getAttStatus,
 } from './src/device';
 
 export {

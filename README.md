@@ -947,6 +947,22 @@ updatePhoneNumbers:(Array<{
 }>) => Promise<Void>;
 ```
 
+## getAttStatus
+
+Method that allows a WebView to ask an iOS app user about the authorization
+status of his ATT
+([App Tracking Transparency](https://developer.apple.com/documentation/apptrackingtransparency))
+permission.
+
+Resolves to `null` if the app is not running on iOS or if the method is not
+available
+
+-   Available in Novum app for iOS since 14.7 version
+
+```ts
+getAttStatus: () => Promise<{status:'granted' | 'denied' | 'unknown'} | null>;
+```
+
 ## Error handling
 
 If an error occurs, promise will be rejected with an error object:

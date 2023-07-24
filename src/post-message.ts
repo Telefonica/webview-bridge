@@ -242,6 +242,13 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    GET_ATT_STATUS: {
+        type: 'GET_ATT_STATUS';
+        id: string;
+        payload: {
+            status: 'granted' | 'denied' | 'unknown';
+        };
+    };
 };
 
 export type NativeAppResponsePayload<

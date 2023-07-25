@@ -38,6 +38,35 @@ export const share = (options: ShareOptions): Promise<void> =>
         payload: options,
     });
 
+export type NavigationBarIcon = {
+    /** Content description of the image used for accessibility */
+    name: string;
+    /** This is a string whose value will be mapped to a local resource that the app already knows. */
+    iconEnum?: string;
+    /**
+     * Set of urls that the app will use to render the icon.
+     * If both iconEnum and icon are received, the iconEnum should be used as a fallback in case there's some issue with the urls.
+     */
+    icon?: {
+        /**
+         * - Those urls should be icons in PNG format.
+         * - The icons will not be rendered until the image has been downloaded by the app.
+         * - The URLs should be inmutable to allow the app to cache those icons for an arbitrary amount of time.
+         */
+        url: string;
+        /** To be used if present when dark mode is activated. */
+        urlDark?: string;
+    };
+    badge?: {
+        /** Boolean to determine if the badge should be shown. Apps will use true as its default value. */
+        show?: boolean;
+        /** Same logic and current same supported values as in nativeLogic field from API */
+        nativeLogic?: 'INBOX' | 'PROFILE';
+        /** Hardcoded value to set as the badge count. It will have more priority than nativeLogic. */
+        number?: number;
+    };
+};
+
 export const updateNavigationBar = ({
     title,
     expandedTitle,
@@ -50,8 +79,16 @@ export const updateNavigationBar = ({
     expandedTitle?: string;
     showBackButton?: boolean;
     showReloadButton?: boolean;
+    /** @deprecated New apps will ignore this field */
     showProfileButton?: boolean;
     backgroundColor?: string;
+    leftNavigationIcons?: Array<NavigationBarIcon>;
+    rightNavigationIcons?: Array<NavigationBarIcon>;
+    /**
+     * This is a flag used to indicate that the appearance of the top bar should be restored to its original state.
+     * The other fields that may come in the same bridge call will be applied after the reset
+     */
+    resetToDefaultState?: boolean;
 }): Promise<void> => {
     if (isWebViewBridgeAvailable()) {
         return postMessageToNativeApp({

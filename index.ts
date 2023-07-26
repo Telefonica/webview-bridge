@@ -34,6 +34,7 @@ export {
     getAppMetadata,
     setActionBehavior,
     getTopazToken,
+    onNavigationBarIconClicked,
 } from './src/utils';
 export type {ShareOptions} from './src/utils';
 

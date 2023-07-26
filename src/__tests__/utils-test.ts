@@ -10,7 +10,7 @@ import {
     fetch,
     setActionBehavior,
     onNavigationBarIconClicked,
-} from '../utils';
+} from '../../index';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,

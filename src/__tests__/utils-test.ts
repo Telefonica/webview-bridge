@@ -9,6 +9,7 @@ import {
     reportStatus,
     fetch,
     setActionBehavior,
+    onNavigationBarIconClicked,
 } from '../utils';
 import {
     createFakeAndroidPostMessage,
@@ -131,6 +132,8 @@ test('update navigation bar, with options', (done) => {
         backgroundColor: '#AABBCC',
         leftNavigationIcons: [
             {
+                id: 'icon1',
+                url: 'https://example.com/action1',
                 icon: {
                     url: 'https://example.com/icon.png',
                     urlDark: 'https://example.com/icon-dark.png',
@@ -144,6 +147,8 @@ test('update navigation bar, with options', (done) => {
         ],
         rightNavigationIcons: [
             {
+                id: 'icon2',
+                url: 'https://example.com/action2',
                 iconEnum: 'SOME_ICON',
                 name: 'right',
                 badge: {
@@ -152,6 +157,7 @@ test('update navigation bar, with options', (done) => {
                 },
             },
             {
+                id: 'icon3',
                 iconEnum: 'OTHER_ICON',
                 name: 'right',
             },
@@ -174,6 +180,33 @@ test('update navigation bar, with options', (done) => {
         expect(res).toBeUndefined();
         done();
     });
+});
+
+test('onNavigationBarIconClicked', (done) => {
+    const ICON_ID = 'icon-1';
+    const MESSAGE_ID = 'message-1';
+
+    createFakeAndroidPostMessage({
+        checkMessage: (message) => {
+            expect(message.type).toBe('NAVIGATION_BAR_ICON_CLICKED');
+            expect(message.id).toBe(MESSAGE_ID);
+        },
+    });
+
+    onNavigationBarIconClicked(({iconId}) => {
+        expect(iconId).toBe(ICON_ID);
+        done();
+    });
+
+    window.__tuenti_webview_bridge?.postMessage(
+        JSON.stringify({
+            type: 'NAVIGATION_BAR_ICON_CLICKED',
+            id: MESSAGE_ID,
+            payload: {
+                iconId: ICON_ID,
+            },
+        }),
+    );
 });
 
 test('update navigation bar, without options and without bridge', (done) => {

@@ -53,9 +53,9 @@ export type NavigationBarIcon = {
      */
     icon?: {
         /**
-         * - Those urls should be icons in PNG format.
-         * - The icons will not be rendered until the image has been downloaded by the app.
-         * - The URLs should be inmutable to allow the app to cache those icons for an arbitrary amount of time.
+         * Those urls should be icons in PNG format.
+         * The icons will not be rendered until the image has been downloaded by the app.
+         * The URLs should be inmutable to allow the app to cache those icons for an arbitrary amount of time.
          */
         url: string;
         /** To be used if present when dark mode is activated. */

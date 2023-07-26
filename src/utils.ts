@@ -105,6 +105,9 @@ export const updateNavigationBar = (options: {
     }
 };
 
+/**
+ * Returns the unsubscribe function. Should be called when the component is unmounted.
+ */
 export const onNavigationBarIconClicked = (
     handler: (payload: {iconId: string}) => void,
 ): (() => void) =>

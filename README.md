@@ -301,9 +301,54 @@ updateNavigationBar({
     expandedTitle: 'Hello, World!',
     showBackButton: true,
     showReloadButton: false,
-    showProfileButton: false,
-    backgroundColor: '#FF0000', // red
+    backgroundColor: '#FF0000',
+    leftNavigationIcons: [
+        {
+            name: 'icon name',
+            iconEnum: 'SOME_ICON',
+            badge: {
+                show: true,
+                nativeLogic: 'INBOX',
+            },
+        },
+    ],
+    rightNavigationIcons: [
+        {
+            name: 'icon name',
+            iconEnum: 'icon enum value',
+            icon: {
+                url: 'https://path/to/icon',
+                urlDark: 'https://path/to/icon/dark',
+            },
+            badge: {
+                show: true,
+                number: 1,
+            },
+        },
+    ],
+    resetToDefaultState: true,
 });
+```
+
+### onNavigationBarIconClicked
+
+Listen to navigation bar icon clicks and execute a callback function
+
+Supported by App versions 14.8 and higher
+
+### Example in React
+
+```tsx
+React.useEffect(() => {
+    const unsubscribe = onNavigationBarIconClicked(({iconId}) => {
+        console.log(`Icon with id ${iconId} clicked`);
+    });
+
+    // Unsubscribe when the component is unmounted
+    return () => {
+        unsubscribe();
+    };
+}, []);
 ```
 
 ### isABTestingAvailable

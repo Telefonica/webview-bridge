@@ -220,18 +220,55 @@ share({url: 'https://path/to/file', fileName: 'lolcats.png'});
 Customize WebView NavigationBar properties
 
 -   You can set one or more properties in a single call
--   Available for app versions 10.7 and higher
+-   Partial support for app versions 10.7 and higher
 -   Returning promise will be rejected if not supported (app versions lower than
     10.7)
+-   Full support for app versions 14.8 and higher
 
 ```typescript
+type NavigationBarIcon = {
+    /** Content description of the image used for accessibility */
+    name: string;
+    /**
+     * This is a string whose value will be mapped to a local resource that the app already knows.
+     * See https://void.tuenti.io/idl-server/files/TopNavbarIcon/1.1 for available values.
+     * A fallback icon will be used if the app doesn't recognize the value.
+     */
+    iconEnum?: string;
+    /**
+     * Set of urls that the app will use to render the icon.
+     * If both iconEnum and icon are received, the iconEnum should be used as a fallback in case there's some issue with the urls.
+     */
+    icon?: {
+        /**
+         * - Those urls should be icons in PNG format.
+         * - The icons will not be rendered until the image has been downloaded by the app.
+         * - The URLs should be inmutable to allow the app to cache those icons for an arbitrary amount of time.
+         */
+        url: string;
+        /** To be used if present when dark mode is activated. */
+        urlDark?: string;
+    };
+    badge?: {
+        /** Boolean to determine if the badge should be shown. Apps will use true as its default value. */
+        show?: boolean;
+        /** Same logic and current same supported values as in nativeLogic field from API */
+        nativeLogic?: 'INBOX' | 'PROFILE';
+        /** Hardcoded value to set as the badge count. It will have more priority than nativeLogic. */
+        number?: number;
+    };
+}
+
 updateNavigationBar = ({
     title?: string;
     expandedTitle?: string;
     showBackButton?: boolean;
     showReloadButton?: boolean;
-    showProfileButton?: boolean;
+    showProfileButton?: boolean; // deprecated in app version >= 14.8
     backgroundColor?: string;
+    leftNavigationIcons?: Array<NavigationBarIcon>; // requires app version >= 14.8
+    rightNavigationIcons?: Array<NavigationBarIcon>; // requires app version >= 14.8
+    resetToDefaultState?: boolean; // requires app version >= 14.8
 }) => Promise<void>
 ```
 
@@ -241,10 +278,14 @@ updateNavigationBar = ({
     in native app versions >= 11.8
 -   `showBackButton`: shows or hides back icon in NavigationBar
 -   `showReloadButton`: shows or hides NavigationBar Reload button
--   `showProfileButton`: shows or hides NavigationBar Profile button (which
-    navigates to user profile). Only available in native app versions >= 11.7
+-   `showProfileButton`: **DEPRECATED**. New apps will ignore this field
 -   `backgroundColor`: change NavigationBar background color, use a hex color
     string (for example: `'#FF128A'`)
+-   `leftNavigationIcons`: array of icons to show in the left side
+-   `rightNavigationIcons`: array of icons to show in the right side
+-   `resetToDefaultState`: This is a flag used to indicate that the appearance
+    of the top bar should be restored to its original state. The other fields
+    that may come in the same bridge call will be applied after the reset
 
 #### Examples
 

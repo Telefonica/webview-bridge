@@ -41,7 +41,11 @@ export const share = (options: ShareOptions): Promise<void> =>
 export type NavigationBarIcon = {
     /** Content description of the image used for accessibility */
     name: string;
-    /** This is a string whose value will be mapped to a local resource that the app already knows. */
+    /**
+     * This is a string whose value will be mapped to a local resource that the app already knows.
+     * See https://void.tuenti.io/idl-server/files/TopNavbarIcon/1.1 for available values.
+     * A fallback icon will be used if the app doesn't recognize the value.
+     */
     iconEnum?: string;
     /**
      * Set of urls that the app will use to render the icon.
@@ -67,14 +71,7 @@ export type NavigationBarIcon = {
     };
 };
 
-export const updateNavigationBar = ({
-    title,
-    expandedTitle,
-    showBackButton,
-    showReloadButton,
-    showProfileButton,
-    backgroundColor,
-}: {
+export const updateNavigationBar = (options: {
     title?: string;
     expandedTitle?: string;
     showBackButton?: boolean;
@@ -93,18 +90,11 @@ export const updateNavigationBar = ({
     if (isWebViewBridgeAvailable()) {
         return postMessageToNativeApp({
             type: 'NAVIGATION_BAR',
-            payload: {
-                title,
-                expandedTitle,
-                showBackButton,
-                showReloadButton,
-                showProfileButton,
-                backgroundColor,
-            },
+            payload: options,
         });
     } else {
-        if (typeof title !== 'undefined' && typeof document !== 'undefined') {
-            document.title = title;
+        if (options.title !== undefined && typeof document !== 'undefined') {
+            document.title = options.title;
         }
         return Promise.resolve();
     }

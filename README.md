@@ -334,9 +334,9 @@ updateNavigationBar({
 
 Listen to navigation bar icon clicks and execute a callback function
 
-Supported by App versions 14.8 and higher
+Requires App versions 14.8 or higher
 
-### Example in React
+#### React example
 
 ```tsx
 React.useEffect(() => {

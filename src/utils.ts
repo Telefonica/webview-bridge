@@ -62,8 +62,8 @@ export type NavigationBarIcon = {
         urlDark?: string;
     };
     badge?: {
-        /** Boolean to determine if the badge should be shown. Apps will use true as its default value. */
-        show?: boolean;
+        /** Boolean to determine if the badge should be shown */
+        show: boolean;
         /** Same logic and current same supported values as in nativeLogic field from API */
         nativeLogic?: 'INBOX' | 'PROFILE';
         /** Hardcoded value to set as the badge count. It will have more priority than nativeLogic. */

@@ -193,8 +193,9 @@ test('onNavigationBarIconClicked', (done) => {
         },
     });
 
-    onNavigationBarIconClicked(({iconId}) => {
+    const unsubscribe = onNavigationBarIconClicked(({iconId}) => {
         expect(iconId).toBe(ICON_ID);
+        unsubscribe();
         done();
     });
 

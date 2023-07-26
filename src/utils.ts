@@ -2,6 +2,7 @@ import {
     postMessageToNativeApp,
     isWebViewBridgeAvailable,
     NativeAppResponsePayload,
+    listenToNativeMessage,
 } from './post-message';
 
 export const attachToEmail = ({
@@ -39,6 +40,10 @@ export const share = (options: ShareOptions): Promise<void> =>
     });
 
 export type NavigationBarIcon = {
+    /** Identifier. The native side will notify the WebView when the icon is clicked using this id*/
+    id: string;
+    /** URL to be opened by the app as a deep-link if present */
+    url?: string;
     /** Content description of the image used for accessibility */
     name: string;
     /**
@@ -99,6 +104,11 @@ export const updateNavigationBar = (options: {
         return Promise.resolve();
     }
 };
+
+export const onNavigationBarIconClicked = (
+    handler: (payload: {iconId: string}) => void,
+): (() => void) =>
+    listenToNativeMessage('NAVIGATION_BAR_ICON_CLICKED', handler);
 
 /**
  * @deprecated

@@ -250,7 +250,7 @@ type NavigationBarIcon = {
         urlDark?: string;
     };
     badge?: {
-        /** Boolean to determine if the badge should be shown. Apps will use true as its default value. */
+        /** Boolean to determine if the badge should be shown */
         show: boolean;
         /** Same logic and current same supported values as in nativeLogic field from API */
         nativeLogic?: 'INBOX' | 'PROFILE';

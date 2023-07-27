@@ -74,6 +74,8 @@ export type NavigationBarIcon = {
         /** Hardcoded value to set as the badge count. It will have more priority than nativeLogic. */
         number?: number;
     };
+    /** Tracking properties to be sent to analytics when the icon is clicked */
+    trackingProperties?: Record<string, string>;
 };
 
 export const updateNavigationBar = (options: {

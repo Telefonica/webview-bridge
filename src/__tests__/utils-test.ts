@@ -143,6 +143,7 @@ test('update navigation bar, with options', (done) => {
                     show: true,
                     nativeLogic: 'INBOX',
                 },
+                trackingProperties: {},
             },
         ],
         rightNavigationIcons: [
@@ -155,6 +156,7 @@ test('update navigation bar, with options', (done) => {
                     show: true,
                     number: 1,
                 },
+                trackingProperties: {foo: 'bar'},
             },
             {
                 id: 'icon3',

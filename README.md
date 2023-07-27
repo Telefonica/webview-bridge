@@ -250,7 +250,10 @@ type NavigationBarIcon = {
         urlDark?: string;
     };
     badge?: {
-        /** Boolean to determine if the badge should be shown */
+        /**
+         * Boolean to determine if the badge should be shown
+         * If `show` is `true` and number and nativeLogic are not present, the badge will be shown as a dot
+         */
         show: boolean;
         /** Same logic and current same supported values as in nativeLogic field from API */
         nativeLogic?: 'INBOX' | 'PROFILE';

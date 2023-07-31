@@ -77,10 +77,16 @@ export type NavigationBarIcon = {
         /** Hardcoded value to set as the badge count. It will have more priority than nativeLogic. */
         number?: number;
     };
-    /** Tracking properties to be sent to analytics when the icon is clicked */
+    /**
+     * Tracking properties to be sent to analytics when the icon is clicked.
+     * These properties will be merged to the tracking event produced by the native side
+     */
     trackingProperties?: Record<string, string>;
 };
 
+/**
+ * Related doc: https://confluence.tid.es/pages/viewpage.action?spaceKey=CTO&title=%5BAPPS%5D+Shared+Spec%3A+Top+Bar+customization#id-[APPS]SharedSpec:TopBarcustomization-Tracking
+ */
 export const updateNavigationBar = (options: {
     title?: string;
     expandedTitle?: string;
@@ -114,7 +120,7 @@ export const updateNavigationBar = (options: {
  * Returns the unsubscribe function. Should be called when the component is unmounted.
  */
 export const onNavigationBarIconClicked = (
-    handler: (payload: {iconId: string}) => void,
+    handler: (payload: {id: string}) => void,
 ): (() => void) =>
     listenToNativeMessage('NAVIGATION_BAR_ICON_CLICKED', handler);
 

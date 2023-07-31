@@ -260,7 +260,10 @@ type NavigationBarIcon = {
         /** Hardcoded value to set as the badge count. It will have more priority than nativeLogic. */
         number?: number;
     };
-    /** Tracking properties to be sent to analytics when the icon is clicked */
+    /**
+     * Tracking properties to be sent to analytics when the icon is clicked.
+     * These properties will be merged to the tracking event produced by the native side
+     */
     trackingProperties?: Record<string, string>;
 }
 
@@ -346,8 +349,8 @@ Requires App versions 14.8 or higher
 
 ```tsx
 React.useEffect(() => {
-    const unsubscribe = onNavigationBarIconClicked(({iconId}) => {
-        console.log(`Icon with id ${iconId} clicked`);
+    const unsubscribe = onNavigationBarIconClicked(({id}) => {
+        console.log(`Icon with id ${id} clicked`);
     });
 
     // Unsubscribe when the component is unmounted

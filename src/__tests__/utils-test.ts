@@ -195,8 +195,8 @@ test('onNavigationBarIconClicked', (done) => {
         },
     });
 
-    const unsubscribe = onNavigationBarIconClicked(({iconId}) => {
-        expect(iconId).toBe(ICON_ID);
+    const unsubscribe = onNavigationBarIconClicked(({id}) => {
+        expect(id).toBe(ICON_ID);
         unsubscribe();
         done();
     });
@@ -206,7 +206,7 @@ test('onNavigationBarIconClicked', (done) => {
             type: 'NAVIGATION_BAR_ICON_CLICKED',
             id: MESSAGE_ID,
             payload: {
-                iconId: ICON_ID,
+                id: ICON_ID,
             },
         }),
     );

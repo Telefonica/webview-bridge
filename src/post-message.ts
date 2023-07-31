@@ -20,7 +20,7 @@ type RequestsFromNativeApp = {
     NAVIGATION_BAR_ICON_CLICKED: {
         type: 'NAVIGATION_BAR_ICON_CLICKED';
         id: string;
-        payload: {iconId: string};
+        payload: {id: string};
     };
 };
 

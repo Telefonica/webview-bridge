@@ -959,6 +959,11 @@ highlightTab: ({
 }) => Promise<void>;
 ```
 
+If `highlight` is `true`:
+
+-   If `count` is not null, it will show a numberic badge with `count`value
+-   If `count` is null, it will show a non-numeric badge
+
 #### Example
 
 ```javascript

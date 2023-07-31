@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.25.0 - 2023-07-31
+
+-   Update `updateNavigationBar` with new properties
+
 ## v.3.24.0 - 2023-07-20
 
 -   Add `getAttStatus` method

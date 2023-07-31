@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.26.0 - 2023-07-31
+
+-   New method `onNavigationBarIconClicked` to execute a callback when a
+    NavigationBar icon is clicked
+
 ## v.3.25.0 - 2023-07-31
 
 -   Update `updateNavigationBar` with new properties

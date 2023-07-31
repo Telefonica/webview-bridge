@@ -949,7 +949,8 @@ updatePhoneNumbers:(Array<{
 
 ### highlightTab
 
-Method that allows WebView to highlight a home tab bar setting a badge (numeric or not)
+Method that allows WebView to highlight a home tab bar setting a badge (numeric
+or not)
 
 ```typescript
 highlightTab: ({

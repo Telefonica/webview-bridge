@@ -119,14 +119,44 @@ test('update navigation bar, without options', (done) => {
     });
 });
 
+type NavigationBarOptions = Parameters<typeof updateNavigationBar>[0];
+
 test('update navigation bar, with options', (done) => {
-    const options = {
+    const options: NavigationBarOptions = {
         title: ANY_STRING,
         expandedTitle: ANY_OTHER_STRING,
         showBackButton: true,
         showReloadButton: true,
         showProfileButton: false,
         backgroundColor: '#AABBCC',
+        leftNavigationIcons: [
+            {
+                icon: {
+                    url: 'https://example.com/icon.png',
+                    urlDark: 'https://example.com/icon-dark.png',
+                },
+                name: 'left',
+                badge: {
+                    show: true,
+                    nativeLogic: 'INBOX',
+                },
+            },
+        ],
+        rightNavigationIcons: [
+            {
+                iconEnum: 'SOME_ICON',
+                name: 'right',
+                badge: {
+                    show: true,
+                    number: 1,
+                },
+            },
+            {
+                iconEnum: 'OTHER_ICON',
+                name: 'right',
+            },
+        ],
+        resetToDefaultState: true,
     };
 
     createFakeAndroidPostMessage({
@@ -159,7 +189,7 @@ test('update navigation bar, without options and without bridge', (done) => {
 test('update navigation bar, without bridge', (done) => {
     document.title = '';
 
-    const options = {
+    const options: NavigationBarOptions = {
         title: ANY_STRING,
         expandedTitle: ANY_OTHER_STRING,
         showBackButton: true,

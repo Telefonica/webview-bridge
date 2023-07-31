@@ -2,6 +2,7 @@ import {
     postMessageToNativeApp,
     isWebViewBridgeAvailable,
     NativeAppResponsePayload,
+    listenToNativeMessage,
 } from './post-message';
 
 export const attachToEmail = ({
@@ -39,6 +40,10 @@ export const share = (options: ShareOptions): Promise<void> =>
     });
 
 export type NavigationBarIcon = {
+    /** Identifier. The native side will notify the WebView when the icon is clicked using this id*/
+    id: string;
+    /** URL to be opened by the app as a deep-link if present */
+    url?: string;
     /** Content description of the image used for accessibility */
     name: string;
     /**
@@ -62,15 +67,26 @@ export type NavigationBarIcon = {
         urlDark?: string;
     };
     badge?: {
-        /** Boolean to determine if the badge should be shown */
+        /**
+         * Boolean to determine if the badge should be shown
+         * If `show` is `true` and number and nativeLogic are not present, the badge will be shown as a dot
+         */
         show: boolean;
         /** Same logic and current same supported values as in nativeLogic field from API */
         nativeLogic?: 'INBOX' | 'PROFILE';
         /** Hardcoded value to set as the badge count. It will have more priority than nativeLogic. */
         number?: number;
     };
+    /**
+     * Tracking properties to be sent to analytics when the icon is clicked.
+     * These properties will be merged to the tracking event produced by the native side
+     */
+    trackingProperties?: Record<string, string>;
 };
 
+/**
+ * Related doc: https://confluence.tid.es/pages/viewpage.action?spaceKey=CTO&title=%5BAPPS%5D+Shared+Spec%3A+Top+Bar+customization#id-[APPS]SharedSpec:TopBarcustomization-Tracking
+ */
 export const updateNavigationBar = (options: {
     title?: string;
     expandedTitle?: string;
@@ -99,6 +115,14 @@ export const updateNavigationBar = (options: {
         return Promise.resolve();
     }
 };
+
+/**
+ * Returns the unsubscribe function. Should be called when the component is unmounted.
+ */
+export const onNavigationBarIconClicked = (
+    handler: (payload: {id: string}) => void,
+): (() => void) =>
+    listenToNativeMessage('NAVIGATION_BAR_ICON_CLICKED', handler);
 
 /**
  * @deprecated

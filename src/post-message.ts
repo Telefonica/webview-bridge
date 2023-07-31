@@ -16,6 +16,12 @@ type RequestsFromNativeApp = {
         id: string;
         payload: {accessToken: string};
     };
+    /**  https://confluence.tid.es/display/CTO/%5BAPPS%5D+Shared+Spec%3A+Top+Bar+customization#id-[APPS]SharedSpec:TopBarcustomization-Iconclickedcallbackbridgemethod */
+    NAVIGATION_BAR_ICON_CLICKED: {
+        type: 'NAVIGATION_BAR_ICON_CLICKED';
+        id: string;
+        payload: {id: string};
+    };
 };
 
 export type SheetResponse = {

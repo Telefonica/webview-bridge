@@ -250,13 +250,21 @@ type NavigationBarIcon = {
         urlDark?: string;
     };
     badge?: {
-        /** Boolean to determine if the badge should be shown */
+        /**
+         * Boolean to determine if the badge should be shown
+         * If `show` is `true` and number and nativeLogic are not present, the badge will be shown as a dot
+         */
         show: boolean;
         /** Same logic and current same supported values as in nativeLogic field from API */
         nativeLogic?: 'INBOX' | 'PROFILE';
         /** Hardcoded value to set as the badge count. It will have more priority than nativeLogic. */
         number?: number;
     };
+    /**
+     * Tracking properties to be sent to analytics when the icon is clicked.
+     * These properties will be merged to the tracking event produced by the native side
+     */
+    trackingProperties?: Record<string, string>;
 }
 
 updateNavigationBar = ({
@@ -301,9 +309,55 @@ updateNavigationBar({
     expandedTitle: 'Hello, World!',
     showBackButton: true,
     showReloadButton: false,
-    showProfileButton: false,
-    backgroundColor: '#FF0000', // red
+    backgroundColor: '#FF0000',
+    leftNavigationIcons: [
+        {
+            name: 'icon name',
+            iconEnum: 'SOME_ICON',
+            badge: {
+                show: true,
+                nativeLogic: 'INBOX',
+            },
+        },
+    ],
+    rightNavigationIcons: [
+        {
+            name: 'icon name',
+            iconEnum: 'icon enum value',
+            icon: {
+                url: 'https://path/to/icon',
+                urlDark: 'https://path/to/icon/dark',
+            },
+            badge: {
+                show: true,
+                number: 1,
+            },
+        },
+    ],
+    resetToDefaultState: true,
+    trackingProperties?: {'name': 'some icon clicked'},
 });
+```
+
+### onNavigationBarIconClicked
+
+Listen to navigation bar icon clicks and execute a callback function
+
+Requires App versions 14.8 or higher
+
+#### React example
+
+```tsx
+React.useEffect(() => {
+    const unsubscribe = onNavigationBarIconClicked(({id}) => {
+        console.log(`Icon with id ${id} clicked`);
+    });
+
+    // Unsubscribe when the component is unmounted
+    return () => {
+        unsubscribe();
+    };
+}, []);
 ```
 
 ### isABTestingAvailable

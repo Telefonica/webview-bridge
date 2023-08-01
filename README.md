@@ -947,13 +947,13 @@ updatePhoneNumbers:(Array<{
 }>) => Promise<Void>;
 ```
 
-### highlightTab
+### highlightNavigationTab
 
 Method that allows WebView to highlight a home tab bar setting a badge (numeric
 or not)
 
 ```typescript
-highlightTab: ({
+highlightNavigationTab: ({
     tab: string,
     highlight: boolean,
     count?: number
@@ -970,9 +970,9 @@ If `highlight` is `true`:
 #### Example
 
 ```javascript
-import {highlightTab} from '@tef-novum/webview-bridge';
+import {highlightNavigationTab} from '@tef-novum/webview-bridge';
 
-highlightTab({tab: 'explore', highlight: true, count: 4});
+highlightNavigationTab({tab: 'explore', highlight: true, count: 4});
 ```
 
 ## getAttStatus

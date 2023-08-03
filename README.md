@@ -986,6 +986,27 @@ bottomSheetInfo = ({
 }) => Promise<void>
 ```
 
+For a bottom sheet with ButtonPrimary/ButtonSecondary/ButtonLink use
+`bottomSheetActions`:
+
+```ts
+bottomSheetActions = ({
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    button: {
+        text: string;
+    };
+    secondaryButton?: {
+        text: string;
+    };
+    link?: {
+        text: string;
+        chevron?: boolean;
+    };
+}) => Promise<{action: 'PRIMARY' | 'SECONDARY' | 'LINK' | 'DISMISS'}>
+```
+
 #### Example:
 
 ```ts

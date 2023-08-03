@@ -249,7 +249,7 @@ export const bottomSheetActions = async ({
     button: {
         text: string;
     };
-    secondaryButton: {
+    secondaryButton?: {
         text: string;
     };
     link?: {

@@ -59,6 +59,20 @@ type SheetUIElement =
           autoSubmit?: boolean;
           selectedIds: Array<string>;
           items: Array<SheetInfoItem>;
+      }>
+    | Readonly<{
+          id: string;
+          type: 'BOTTOM_ACTIONS';
+          button: {
+              text: string;
+          };
+          secondaryButton?: {
+              text: string;
+          };
+          link?: {
+              text: string;
+              withChevron?: boolean;
+          };
       }>;
 
 type SheetUI = Readonly<{
@@ -218,5 +232,64 @@ export const bottomSheetInfo = async ({
                 items,
             },
         ],
+    });
+};
+
+export const bottomSheetActions = async ({
+    title,
+    subtitle,
+    description,
+    button,
+    secondaryButton,
+    link,
+}: {
+    title?: string;
+    subtitle?: string;
+    description?: string;
+    button: {
+        text: string;
+    };
+    secondaryButton: {
+        text: string;
+    };
+    link?: {
+        text: string;
+        chevron?: boolean;
+    };
+}): Promise<{
+    action: 'PRIMARY' | 'SECONDARY' | 'LINK' | 'DISMISS';
+}> => {
+    return bottomSheet({
+        title,
+        subtitle,
+        description,
+        content: [
+            {
+                type: 'BOTTOM_ACTIONS',
+                id: 'bottom-actions-0',
+                button,
+                secondaryButton,
+                link,
+            },
+        ],
+    }).then(({action, result}) => {
+        if (action === 'SUBMIT') {
+            const bottomActionsResult = result.find(
+                ({id}) => id === 'bottom-actions-0',
+            );
+            const pressedAction = bottomActionsResult?.selectedIds[0];
+            if (
+                pressedAction === 'PRIMARY' ||
+                pressedAction === 'SECONDARY' ||
+                pressedAction === 'LINK'
+            ) {
+                return {
+                    action: pressedAction,
+                };
+            }
+        }
+        return {
+            action: 'DISMISS',
+        };
     });
 };

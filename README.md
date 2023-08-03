@@ -1042,6 +1042,34 @@ updatePhoneNumbers:(Array<{
 }>) => Promise<Void>;
 ```
 
+### highlightNavigationTab
+
+Method that allows WebView to highlight a home tab bar setting a badge (numeric
+or not)
+
+```typescript
+highlightNavigationTab: ({
+    tab: string,
+    highlight: boolean,
+    count?: number
+}) => Promise<void>;
+```
+
+If `highlight` is `false` no badge is shown
+
+If `highlight` is `true`:
+
+-   If `count` is not null, it will show a numberic badge with `count`value
+-   If `count` is null, it will show a non-numeric badge
+
+#### Example
+
+```javascript
+import {highlightNavigationTab} from '@tef-novum/webview-bridge';
+
+highlightNavigationTab({tab: 'explore', highlight: true, count: 4});
+```
+
 ## getAttStatus
 
 Method that allows a WebView to ask an iOS app user about the authorization

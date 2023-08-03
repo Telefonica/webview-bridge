@@ -987,7 +987,7 @@ bottomSheetInfo = ({
 ```
 
 For a bottom sheet with ButtonPrimary/ButtonSecondary/ButtonLink use
-`bottomSheetActions`:
+`bottomSheetActions` (in Novum app since 14.8 version):
 
 ```ts
 bottomSheetActions = ({

@@ -254,7 +254,7 @@ export const bottomSheetActions = async ({
     };
     link?: {
         text: string;
-        chevron?: boolean;
+        withChevron?: boolean;
     };
 }): Promise<{
     action: 'PRIMARY' | 'SECONDARY' | 'LINK' | 'DISMISS';

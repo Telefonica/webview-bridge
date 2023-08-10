@@ -1,9 +1,24 @@
 import {postMessageToNativeApp, type SheetResponse} from './post-message';
 
-type SheetIcon = Readonly<{
-    url: string;
-    urlDark?: string;
-    type?: 'regular' | 'small';
+export type SheetRowItem = Readonly<{
+    id: string;
+    title?: string;
+    description?: string;
+    icon?: Readonly<{
+        url: string;
+        urlDark?: string;
+        size?: 'large' | 'small'; // large=40px (default), small=24px
+    }>;
+}>;
+
+export type SheetActionItem = Readonly<{
+    id: string;
+    title: string;
+    style?: 'normal' | 'destructive'; // "normal" by default
+    icon?: Readonly<{
+        url: string;
+        urlDark?: string;
+    }>;
 }>;
 
 type InfoIcon =
@@ -13,20 +28,6 @@ type InfoIcon =
           type: 'regular' | 'small';
       }>
     | Readonly<{type: 'bullet'}>;
-
-export type SheetRowItem = Readonly<{
-    id: string;
-    title?: string;
-    description?: string;
-    icon?: SheetIcon;
-}>;
-
-export type SheetActionItem = Readonly<{
-    id: string;
-    title: string;
-    style?: 'normal' | 'destructive'; // "normal" by default
-    icon?: SheetIcon;
-}>;
 
 export type SheetInfoItem = Readonly<{
     id: string;

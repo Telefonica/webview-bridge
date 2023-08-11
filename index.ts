@@ -36,7 +36,7 @@ export {
     getTopazToken,
     onNavigationBarIconClicked,
 } from './src/utils';
-export type {ShareOptions} from './src/utils';
+export type {ShareOptions, NavigationBarIcon} from './src/utils';
 
 export {createCalendarEvent} from './src/calendar';
 

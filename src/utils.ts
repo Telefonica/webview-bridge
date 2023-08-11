@@ -39,7 +39,7 @@ export const share = (options: ShareOptions): Promise<void> =>
         payload: options,
     });
 
-export type NavigationBarIcon = {
+export type NavigationBarIcon = Readonly<{
     /** Identifier. The native side will notify the WebView when the icon is clicked using this id*/
     id: string;
     /** URL to be opened by the app as a deep-link if present */
@@ -82,27 +82,29 @@ export type NavigationBarIcon = {
      * These properties will be merged to the tracking event produced by the native side
      */
     trackingProperties?: Record<string, string>;
-};
+}>;
 
 /**
  * Related doc: https://confluence.tid.es/pages/viewpage.action?spaceKey=CTO&title=%5BAPPS%5D+Shared+Spec%3A+Top+Bar+customization#id-[APPS]SharedSpec:TopBarcustomization-Tracking
  */
-export const updateNavigationBar = (options: {
-    title?: string;
-    expandedTitle?: string;
-    showBackButton?: boolean;
-    showReloadButton?: boolean;
-    /** @deprecated New apps will ignore this field */
-    showProfileButton?: boolean;
-    backgroundColor?: string;
-    leftNavigationIcons?: Array<NavigationBarIcon>;
-    rightNavigationIcons?: Array<NavigationBarIcon>;
-    /**
-     * This is a flag used to indicate that the appearance of the top bar should be restored to its original state.
-     * The other fields that may come in the same bridge call will be applied after the reset
-     */
-    resetToDefaultState?: boolean;
-}): Promise<void> => {
+export const updateNavigationBar = (
+    options: Readonly<{
+        title?: string;
+        expandedTitle?: string;
+        showBackButton?: boolean;
+        showReloadButton?: boolean;
+        /** @deprecated New apps will ignore this field */
+        showProfileButton?: boolean;
+        backgroundColor?: string;
+        leftNavigationIcons?: ReadonlyArray<NavigationBarIcon>;
+        rightNavigationIcons?: ReadonlyArray<NavigationBarIcon>;
+        /**
+         * This is a flag used to indicate that the appearance of the top bar should be restored to its original state.
+         * The other fields that may come in the same bridge call will be applied after the reset
+         */
+        resetToDefaultState?: boolean;
+    }>,
+): Promise<void> => {
     if (isWebViewBridgeAvailable()) {
         return postMessageToNativeApp({
             type: 'NAVIGATION_BAR',

@@ -130,7 +130,7 @@ test('update navigation bar, with options', (done) => {
         showReloadButton: true,
         showProfileButton: false,
         backgroundColor: '#AABBCC',
-        leftNavigationIcons: [
+        leftActions: [
             {
                 id: 'icon1',
                 url: 'https://example.com/action1',
@@ -146,7 +146,7 @@ test('update navigation bar, with options', (done) => {
                 trackingProperties: {},
             },
         ],
-        rightNavigationIcons: [
+        rightActions: [
             {
                 id: 'icon2',
                 url: 'https://example.com/action2',

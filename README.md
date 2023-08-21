@@ -274,8 +274,8 @@ updateNavigationBar = ({
     showReloadButton?: boolean;
     showProfileButton?: boolean; // deprecated in app version >= 14.8
     backgroundColor?: string;
-    leftNavigationIcons?: Array<NavigationBarIcon>; // requires app version >= 14.8
-    rightNavigationIcons?: Array<NavigationBarIcon>; // requires app version >= 14.8
+    leftActions?: ReadonlyArray<NavigationBarIcon>; // requires app version >= 14.8
+    rightActions?: ReadonlyArray<NavigationBarIcon>; // requires app version >= 14.8
     resetToDefaultState?: boolean; // requires app version >= 14.8
 }) => Promise<void>
 ```
@@ -289,8 +289,8 @@ updateNavigationBar = ({
 -   `showProfileButton`: **DEPRECATED**. New apps will ignore this field
 -   `backgroundColor`: change NavigationBar background color, use a hex color
     string (for example: `'#FF128A'`)
--   `leftNavigationIcons`: array of icons to show in the left side
--   `rightNavigationIcons`: array of icons to show in the right side
+-   `leftActions`: array of icons to show in the left side
+-   `rightActions`: array of icons to show in the right side
 -   `resetToDefaultState`: This is a flag used to indicate that the appearance
     of the top bar should be restored to its original state. The other fields
     that may come in the same bridge call will be applied after the reset
@@ -1061,6 +1061,34 @@ updatePhoneNumbers:(Array<{
     id: string;
     value: string;
 }>) => Promise<Void>;
+```
+
+### highlightNavigationTab
+
+Method that allows WebView to highlight a home tab bar setting a badge (numeric
+or not)
+
+```typescript
+highlightNavigationTab: ({
+    tab: string,
+    highlight: boolean,
+    count?: number
+}) => Promise<void>;
+```
+
+If `highlight` is `false` no badge is shown
+
+If `highlight` is `true`:
+
+-   If `count` is not null, it will show a numberic badge with `count`value
+-   If `count` is null, it will show a non-numeric badge
+
+#### Example
+
+```javascript
+import {highlightNavigationTab} from '@tef-novum/webview-bridge';
+
+highlightNavigationTab({tab: 'explore', highlight: true, count: 4});
 ```
 
 ## getAttStatus

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.26.1 - 2023-08-17
+
+-   Fix left/right action options in updateNavigationBar
+
 ## v.3.26.0 - 2023-07-31
 
 -   New method `onNavigationBarIconClicked` to execute a callback when a

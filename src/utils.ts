@@ -96,8 +96,8 @@ export const updateNavigationBar = (
         /** @deprecated New apps will ignore this field */
         showProfileButton?: boolean;
         backgroundColor?: string;
-        leftNavigationIcons?: ReadonlyArray<NavigationBarIcon>;
-        rightNavigationIcons?: ReadonlyArray<NavigationBarIcon>;
+        leftActions?: ReadonlyArray<NavigationBarIcon>;
+        rightActions?: ReadonlyArray<NavigationBarIcon>;
         /**
          * This is a flag used to indicate that the appearance of the top bar should be restored to its original state.
          * The other fields that may come in the same bridge call will be applied after the reset

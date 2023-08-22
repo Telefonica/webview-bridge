@@ -70,12 +70,7 @@ export {renewSession, onSessionRenewed, logout} from './src/sessions';
 
 export {showAppRating} from './src/app-rating';
 
-export {
-    bottomSheet,
-    bottomSheetSingleSelector,
-    bottomSheetActionSelector,
-    bottomSheetInfo,
-} from './src/bottom-sheet';
+export {bottomSheet} from './src/bottom-sheet';
 export type {
     SheetRowItem,
     SheetActionItem,

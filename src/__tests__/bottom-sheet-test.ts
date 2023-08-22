@@ -1,4 +1,5 @@
 import {
+    bottomSheetActions,
     bottomSheetActionSelector,
     bottomSheetInfo,
     bottomSheetSingleSelector,
@@ -224,6 +225,67 @@ test('informative', (done) => {
         items,
     }).then((res) => {
         expect(res).toBe(undefined);
+        done();
+    });
+});
+
+test('actions', (done) => {
+    const title = 'any title';
+    const subtitle = 'any subtitle';
+    const description = 'any description';
+    const button = {
+        text: 'button text',
+    };
+    const link = {
+        text: 'link text',
+        chevron: true,
+    };
+    const secondaryButton = {
+        text: 'secondary button text',
+    };
+
+    createFakeAndroidPostMessage({
+        checkMessage: (message) => {
+            expect(message.type).toBe('SHEET');
+            expect(message.payload).toEqual({
+                title,
+                subtitle,
+                description,
+                content: [
+                    {
+                        id: 'bottom-actions-0',
+                        type: 'BOTTOM_ACTIONS',
+                        button,
+                        link,
+                        secondaryButton,
+                    },
+                ],
+            });
+        },
+        getResponse: (message) => ({
+            type: message.type,
+            id: message.id,
+            payload: {
+                action: 'SUBMIT',
+                result: [
+                    {
+                        id: 'bottom-actions-0',
+                        selectedIds: ['PRIMARY'],
+                    },
+                ],
+            },
+        }),
+    });
+
+    bottomSheetActions({
+        title,
+        subtitle,
+        description,
+        button,
+        secondaryButton,
+        link,
+    }).then((res) => {
+        expect(res).toEqual({action: 'PRIMARY'});
         done();
     });
 });

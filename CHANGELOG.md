@@ -2,7 +2,7 @@
 
 ## v.3.27.0 - 2023-08-22
 
--   Fix left/right action options in updateNavigationBar
+-   Add `bottomSheetActions`
 
 ## v.3.26.1 - 2023-08-17
 

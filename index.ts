@@ -8,7 +8,9 @@ export {
 export {nativeConfirm, nativeAlert, nativeMessage} from './src/dialogs';
 
 export {
+    /** @deprecated */
     requestSimIcc,
+    /** @deprecated */
     requestSimImsi,
     requestDeviceImei,
     internalNavigation,
@@ -17,6 +19,7 @@ export {
     getDiskSpaceInfo,
     getEsimInfo,
     getAttStatus,
+    getDeviceModel,
 } from './src/device';
 
 export {

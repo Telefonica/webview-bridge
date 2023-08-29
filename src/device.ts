@@ -2,11 +2,13 @@ import {postMessageToNativeApp} from './post-message';
 
 const TIMEOUT = 200;
 
+/** @deprecated */
 export const requestSimIcc = (): Promise<string | null> =>
     postMessageToNativeApp({type: 'SIM_ICC'}, TIMEOUT)
         .then(({icc}) => icc)
         .catch(() => null);
 
+/** @deprecated */
 export const requestSimImsi = (): Promise<string | null> =>
     postMessageToNativeApp({type: 'IMSI'}, TIMEOUT)
         .then(({imsi}) => imsi)
@@ -53,11 +55,13 @@ export const getDiskSpaceInfo = (): Promise<{
 
 export const getEsimInfo = (): Promise<{
     supportsEsim: boolean;
+    eid?: string | null;
 }> =>
     postMessageToNativeApp({
         type: 'GET_ESIM_INFO',
     }).catch(() => ({
         supportsEsim: false,
+        eid: null,
     }));
 
 export const getAttStatus = (): Promise<{
@@ -65,4 +69,9 @@ export const getAttStatus = (): Promise<{
 } | null> =>
     postMessageToNativeApp({
         type: 'GET_ATT_STATUS',
+    }).catch(() => null);
+
+export const getDeviceModel = (): Promise<{model: string} | null> =>
+    postMessageToNativeApp({
+        type: 'MODEL',
     }).catch(() => null);

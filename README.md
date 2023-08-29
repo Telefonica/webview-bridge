@@ -79,8 +79,6 @@ it, add a `data-enable-webview-bridge` attribute to the host `iframe` element.
 #### Example
 
 ```javascript
-import {isWebViewBridgeAvailable, nativeAlert} from '@tef-novum/webview-bridge';
-
 if (isWebViewBridgeAvailable()) {
     nativeAlert('Hello'); // use bridge
 } else {
@@ -92,8 +90,6 @@ You may want to detect if the page is displayed inside a regular browser or an
 Android or iOS WebView.
 
 ```javascript
-import {isWebViewBridgeAvailable} from '@tef-novum/webview-bridge';
-
 /** Returns true if application is running inside a Novum App WebView */
 const isWebView = () => isWebViewBridgeAvailable();
 
@@ -134,8 +130,6 @@ All fields in response object are optional
 #### Example
 
 ```javascript
-import {requestContact} from '@tef-novum/webview-bridge';
-
 requestContact({filter: 'phone'}).then((contact) => {
     console.log(contact);
 }).catch(err => {
@@ -162,8 +156,6 @@ createCalendarEvent: ({
 #### Example
 
 ```javascript
-import {createCalendarEvent} from '@tef-novum/webview-bridge';
-
 createCalendarEvent({
     beginTime: new Date(2019, 10, 06).getTime(),
     endTime: new Date(2019, 10, 07).getTime(),
@@ -177,11 +169,9 @@ createCalendarEvent({
 
 ### share
 
-Invokes the native sharing mechanism of the device.
+<kbd>App version >=10.7</kbd>
 
--   Available for app versions 10.7 and higher
--   Returning promise will be rejected if not supported (app versions lower than
-    10.7)
+Invokes the native sharing mechanism of the device.
 
 ```typescript
 type ShareOptions =
@@ -206,8 +196,6 @@ share: (options: ShareOptions) => Promise<void>;
 #### Example
 
 ```javascript
-import {share} from '@tef-novum/webview-bridge';
-
 // sharing a text string
 share({text: 'Hello, world!'});
 
@@ -298,8 +286,6 @@ updateNavigationBar = ({
 #### Examples
 
 ```javascript
-import {updateNavigationBar} from '@tef-novum/webview-bridge';
-
 // updates WebView NavigationBar title
 updateNavigationBar({title: 'Hello, World!'});
 
@@ -341,9 +327,9 @@ updateNavigationBar({
 
 ### onNavigationBarIconClicked
 
-Listen to navigation bar icon clicks and execute a callback function
+<kbd>App version >=14.8</kbd>
 
-Requires App versions 14.8 or higher
+Listen to navigation bar icon clicks and execute a callback function
 
 #### React example
 
@@ -362,11 +348,9 @@ React.useEffect(() => {
 
 ### isABTestingAvailable
 
-Returns true if A/B testing named with the key is available.
+<kbd>App version >=10.8</kbd>
 
--   Available for app versions 10.8 and higher
--   Returning promise will be rejected if not supported (app versions lower than
-    10.8)
+Returns true if A/B testing named with the key is available.
 
 ```typescript
 isABTestingAvailable: (key: string) => Promise<boolean>;
@@ -375,8 +359,6 @@ isABTestingAvailable: (key: string) => Promise<boolean>;
 #### Example
 
 ```javascript
-import {isABTestingAvailable} from '@tef-novum/webview-bridge';
-
 isABTestingAvailable('key').then((isAvailable) => {
     console.log(isAvailable);
 }).catch(err => {
@@ -405,8 +387,6 @@ nativeConfirm: ({
 #### Example
 
 ```javascript
-import {nativeConfirm} from '@tef-novum/webview-bridge';
-
 nativeConfirm({
     title: 'Confirm',
     message: 'Send message?',
@@ -439,8 +419,6 @@ nativeAlert: ({
 #### Example
 
 ```javascript
-import {nativeAlert} from '@tef-novum/webview-bridge';
-
 nativeAlert({
     message: 'Purchase completed!',
     title: 'Ok!',
@@ -474,8 +452,6 @@ nativeMessage: ({
 Show a native "snackbar" with a configurable duration and optional close button
 
 ```javascript
-import {nativeMessage} from '@tef-novum/webview-bridge';
-
 nativeMessage({
     message: 'Operation finished!',
     buttonText: 'Ok',
@@ -513,8 +489,6 @@ logEvent: ({
 #### Example
 
 ```javascript
-import {logEvent} from '@tef-novum/webview-bridge';
-
 logEvent({
     category: 'topup-flow',
     action: 'topup',
@@ -556,8 +530,6 @@ setScreenName: (screenName: string, params?: {[key: string]: any}) => Promise<vo
 #### Example
 
 ```javascript
-import {setScreenName} from '@tef-novum/webview-bridge';
-
 setScreenName('Topup Flow').then(() => {
     console.log('screen name logged');
 });
@@ -580,8 +552,6 @@ setUserProperty: (name: string, value: string) => Promise<void>;
 #### Example
 
 ```javascript
-import {setUserProperty} from '@tef-novum/webview-bridge';
-
 setUserProperty('obIds', 'any-value').then(() => {
     console.log('User property logged');
 });
@@ -589,9 +559,9 @@ setUserProperty('obIds', 'any-value').then(() => {
 
 ### reportStatus
 
-Report a given feature status
+<kbd>App version >=11.2</kbd>
 
--   Available for app versions 11.2 and higher
+Report a given feature status
 
 ```typescript
 reportStatus: ({feature: 'ACCOUNT', status: 'CRITICAL' | 'GOOD' | 'BAD', reason: string}) => Promise<void>;
@@ -600,16 +570,14 @@ reportStatus: ({feature: 'ACCOUNT', status: 'CRITICAL' | 'GOOD' | 'BAD', reason:
 #### Example
 
 ```javascript
-import {reportStatus} from '@tef-novum/webview-bridge';
-
 reportStatus({feature: 'ACCOUNT', status: 'GOOD', reason: 'whatever'});
 ```
 
 ### onNativeEvent
 
-Listens to native app events
+<kbd>App version >=11.3</kbd>
 
--   Available for app versions 11.3 and higher
+Listens to native app events
 
 ```typescript
 type NativeEventHandler = ({ event }: {event: string}) => {action: 'default'};
@@ -635,10 +603,10 @@ onNativeEvent(({event}) => {
 
 ### checkPermissionStatus
 
+<kbd>App version >=11.4</kbd>
+
 Returns true if the app has the specific notifications permissions. You have to
 pass feature and required params for this request.
-
--   Available for app versions 11.4 and higher
 
 Avalaible features:
 
@@ -653,8 +621,6 @@ checkPermissionStatus: (feature: string, params?: {[key: string]: string}) => Pr
 #### Example
 
 ```javascript
-import {checkPermissionStatus} from '@tef-novum/webview-bridge';
-
 checkPermissionStatus('notifications', {channelId: 'default'}).then(
     (hasPermissions) => {
         console.log(hasPermissions);
@@ -664,43 +630,27 @@ checkPermissionStatus('notifications', {channelId: 'default'}).then(
 
 ### internalNavigation
 
-Init an internal and native navigation to a device specific feature
+<kbd>App version >=11.4</kbd><br/>
 
--   Available for app versions 11.4 and higher
+Init an internal and native navigation to a device specific feature
 
 Avalaible features:
 
 -   `notification-settings`
--   `contact-settings` (Available for app versions 13.10 and higher)
+-   `contact-settings` <kbd>App version >=13.10 </kbd>
 
 ```typescript
 internalNavigation: (feature: string) => Promise<void>;
 ```
 
-#### Example
-
-```javascript
-import {internalNavigation} from '@tef-novum/webview-bridge';
-
-internalNavigation('notification-settings');
-```
-
 ### dismiss
+
+<kbd>App version >=11.5</kbd>
 
 Dismiss the current webview and optionally navigate to another url
 
--   Available for app versions 11.5 and higher
-
 ```typescript
 dismiss: (onCompletionUrl?: string) => Promise<void>;
-```
-
-#### Example
-
-```javascript
-import {dismiss} from '@tef-novum/webview-bridge';
-
-dismiss('http://example.com');
 ```
 
 ### requestVibration
@@ -708,8 +658,6 @@ dismiss('http://example.com');
 Requests the phone to vibrate. Options are 'error' or 'success'.
 
 ```javascript
-import {requestVibration} from '@tef-novum/webview-bridge';
-
 requestVibration('error');
 ```
 
@@ -729,23 +677,20 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
 
 ### getAppMetadata
 
+<kbd>App version >=11.8</kbd>
+
 Check if an app is installed in the phone
 
--   Available for app versions 11.8 and higher
-
 ```typescript
-getAppMetadata: (appToken: string) => Promise<{isInstalled: boolean; marketUrl: string; appUrl: string}>;
-```
-
-#### Example
-
-```javascript
-import {getAppMetadata} from '@tef-novum/webview-bridge';
-
-getAppMetadata('tokenAppToCheck').then(({isInstalled, marketUrl, appUrl}) => { ... });
+getAppMetadata: (appToken: string) => Promise<{
+    isInstalled: boolean;
+    marketUrl: string;
+    appUrl: string
+}>;
 ```
 
 -   `appToken`: token that refers to a "friend" application
+-   `isInstalled`: boolean to see if the app is installed
 -   `appUrl`: string url to launch an app installed on the phone
 -   `marketUrl`: string url to launch the store in a specific application
 
@@ -755,8 +700,6 @@ Sets the hash of the current subscription for the customer, which is used for
 tracking purposes.
 
 ```javascript
-import {setCustomerHash} from '@tef-novum/webview-bridge';
-
 setCustomerHash(
     'e658ad63bef9b86863b487697dfb75d64bddb6191ec14099abe443655f6b7cc6',
 );
@@ -768,27 +711,17 @@ Gets the hash of the current subscription for the customer, which is used for
 tracking purposes.
 
 ```javascript
-import {getCustomerHash} from '@tef-novum/webview-bridge';
-
 getCustomerHash().then(({hash}) => { ... });
 ```
 
 ### getDiskSpaceInfo
 
-Return info about how much free disk space the device has
+<kbd>App version >=11.10</kbd>
 
--   Available for app versions 11.10 and higher
+Return info about how much free disk space the device has
 
 ```typescript
 getDiskSpaceInfo: () => Promise<{availableBytes: number, totalBytes: number}>;
-```
-
-#### Example
-
-```javascript
-import {getDiskSpaceInfo} from '@tef-novum/webview-bridge';
-
-getDiskSpaceInfo().then(({availableBytes, totalBytes}) => { ... });
 ```
 
 -   `availableBytes`: number to see available bytes in the device
@@ -796,29 +729,34 @@ getDiskSpaceInfo().then(({availableBytes, totalBytes}) => { ... });
 
 ### getEsimInfo
 
+<kbd>App version >=12.3 `supportsEsim`</kbd><br/> <kbd>App version >=14.8
+`eid`</kbd>
+
 Return info about the esim capabilities of the device
 
--   Available for app versions 12.3 and higher
-
 ```typescript
-getEsimInfo: () => Promise<{supportsEsim: boolean}>;
+getEsimInfo: () => Promise<{supportsEsim: boolean, eid?: string | null}>;
 ```
 
-#### Example
+-   `supportsEsim`: tells if the device supports esim
+-   `eid`: "Embedded Identity Document". The serial number corresponding to the
+    eSIM installed in a device.
 
-```javascript
-import {getEsimInfo} from '@tef-novum/webview-bridge';
+### getDeviceModel
 
-getEsimInfo().then(({supportsEsim}) => { ... });
+<kbd>App version >=14.8</kbd>
+
+Returns the device model, like `"SAMSUNG-SM-G930A"`, `"iPhone9"`, ...
+
+```ts
+getDeviceModel: () => Promise<{model: string} | null>;
 ```
-
--   `supportsEsim`: true if the device supports eSIM, false otherwise
 
 ### setTrackingProperty
 
-Sets a property related to some specific tracking system
+<kbd>App version >=12.4</kbd>
 
--   Available for app versions 12.4 and higher
+Sets a property related to some specific tracking system
 
 ```typescript
 setTrackingProperty: (system: 'palitagem' | 'medallia', name: string, value?: string) => Promise<void>;
@@ -830,11 +768,11 @@ setTrackingProperty: (system: 'palitagem' | 'medallia', name: string, value?: st
 
 ### setActionBehavior
 
+<kbd>App version >=12.7</kbd>
+
 Method that allows defining an specific behavior (such as showing a
 confirmation) before the specific native actions are executed. This method also
 allows disabling any previous behaviors set.
-
--   Available for app versions 12.7 and higher
 
 ```typescript
 type ActionBehavior =
@@ -879,8 +817,6 @@ All actions behaviors will be automatically set to default on full page loads.
 #### Example
 
 ```javascript
-import {setTrackingProperty} from '@tef-novum/webview-bridge';
-
 setTrackingProperty('some_system', 'some_property_name', 'some_property_value');
 ```
 
@@ -934,9 +870,9 @@ showAppRating = () => Promise<void>
 
 ### bottomSheet
 
-Show native bottom sheet ui
+<kbd>App version >=13.8</kbd>
 
--   Available in Novum app since 13.8 version
+Show native bottom sheet UI
 
 <img height="460" src="doc/webview-bridge-bottom-sheet.png">
 
@@ -987,7 +923,7 @@ bottomSheetInfo = ({
 ```
 
 For a bottom sheet with ButtonPrimary/ButtonSecondary/ButtonLink use
-`bottomSheetActions` (in Novum app since 14.8 version):
+`bottomSheetActions` <kbd>App version >=14.8</kbd>:
 
 ```ts
 bottomSheetActions = ({
@@ -1010,8 +946,6 @@ bottomSheetActions = ({
 #### Example:
 
 ```ts
-import {bottomSheetSingleSelector} from '@tef-novum/webview-bridge';
-
 const {action, selected} = await bottomSheetSingleSelector({
     title: 'Some title',
     subtitle: 'Some subtitle',
@@ -1039,9 +973,9 @@ const {action, selected} = await bottomSheetSingleSelector({
 
 ### fetchPhoneNumbers
 
-Fetch all the phone numbers of the native phonebook
+<kbd>App version >=13.10</kbd>
 
--   Available in Novum app since 13.10 version
+Fetch all the phone numbers of the native phonebook
 
 ```ts
 fetchPhoneNumbers:() => Promise<Array<{
@@ -1052,9 +986,9 @@ fetchPhoneNumbers:() => Promise<Array<{
 
 ### updatePhoneNumbers
 
-Updates the given phone numbers in the native phonebook
+<kbd>App version >=13.10</kbd>
 
--   Available in Novum app since 13.10 version
+Updates the given phone numbers in the native phonebook
 
 ```ts
 updatePhoneNumbers:(Array<{
@@ -1076,22 +1010,14 @@ highlightNavigationTab: ({
 }) => Promise<void>;
 ```
 
-If `highlight` is `false` no badge is shown
+-   If `highlight` is `false`: no badge is shown
+-   If `highlight` is `true`:
+    -   If `count` is not `null`, it will show a numeric badge with `count`value
+    -   If `count` is `null`, it will show a non-numeric badge
 
-If `highlight` is `true`:
+### getAttStatus
 
--   If `count` is not null, it will show a numberic badge with `count`value
--   If `count` is null, it will show a non-numeric badge
-
-#### Example
-
-```javascript
-import {highlightNavigationTab} from '@tef-novum/webview-bridge';
-
-highlightNavigationTab({tab: 'explore', highlight: true, count: 4});
-```
-
-## getAttStatus
+<kbd>App version >=14.7 (iOS)</kbd>
 
 Method that allows a WebView to ask an iOS app user about the authorization
 status of his ATT
@@ -1101,18 +1027,24 @@ permission.
 Resolves to `null` if the app is not running on iOS or if the method is not
 available
 
--   Available in Novum app for iOS since 14.7 version
-
 ```ts
 getAttStatus: () => Promise<{status:'granted' | 'denied' | 'unknown'} | null>;
 ```
 
 ## Error handling
 
-If an error occurs, promise will be rejected with an error object:
+If an uncontrolled error occurs, promise will be rejected with an error object:
 
 ```typescript
 {code: number, description: string}
+```
+
+## Debugging
+
+To inspect the bridge traffic, you can use the `setLogger` method:
+
+```ts
+setLogger((...args) => console.log(...args));
 ```
 
 ## License

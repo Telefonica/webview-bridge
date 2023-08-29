@@ -198,7 +198,7 @@ export type ResponsesFromNativeApp = {
     GET_ESIM_INFO: {
         type: 'GET_ESIM_INFO';
         id: string;
-        payload: {supportsEsim: boolean};
+        payload: {supportsEsim: boolean; eid?: string | null};
     };
     SET_TRACKING_PROPERTY: {
         type: 'SET_TRACKING_PROPERTY';
@@ -254,6 +254,11 @@ export type ResponsesFromNativeApp = {
         payload: {
             status: 'granted' | 'denied' | 'unknown';
         };
+    };
+    MODEL: {
+        type: 'MODEL';
+        id: string;
+        payload: {model: string};
     };
 };
 

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v.3.28.0 - TBD
+
+-   new `getDeviceModel` function
+-   update `getEsimInfo` to return `eid` if possible
+-   README cleanup
+-   deprecate `requestSimIcc` and `requestSimIcc`
+
 ## v.3.27.0 - 2023-08-22
 
 -   Add `bottomSheetActions`

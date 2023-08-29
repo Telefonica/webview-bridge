@@ -205,13 +205,12 @@ share({url: 'https://path/to/file', fileName: 'lolcats.png'});
 
 ### updateNavigationBar
 
-Customize WebView NavigationBar properties
+<kbd>App version >= 10.7: Partial support</kbd><br/> <kbd>App version >= 11.8:
+expandedTitle</kbd><br/> <kbd>App version >= 14.8: Additional properties and
+deprecations</kbd>
 
--   You can set one or more properties in a single call
--   Partial support for app versions 10.7 and higher
--   Returning promise will be rejected if not supported (app versions lower than
-    10.7)
--   Full support for app versions 14.8 and higher
+Customize WebView NavigationBar properties. You can set one or more properties
+in a single call
 
 ```typescript
 type NavigationBarIcon = {
@@ -264,6 +263,7 @@ updateNavigationBar = ({
     backgroundColor?: string;
     leftActions?: ReadonlyArray<NavigationBarIcon>; // requires app version >= 14.8
     rightActions?: ReadonlyArray<NavigationBarIcon>; // requires app version >= 14.8
+    colorVariant?: 'INVERSE' | 'REGULAR' | null; // requires app version >= 14.8
     resetToDefaultState?: boolean; // requires app version >= 14.8
 }) => Promise<void>
 ```
@@ -279,6 +279,9 @@ updateNavigationBar = ({
     string (for example: `'#FF128A'`)
 -   `leftActions`: array of icons to show in the left side
 -   `rightActions`: array of icons to show in the right side
+-   `colorVariant`: defines how the icons and the text of the top bar should be
+    tinted. If null or unknown value is received, the initial colors set by the
+    app or the last colorVariant set will be used
 -   `resetToDefaultState`: This is a flag used to indicate that the appearance
     of the top bar should be restored to its original state. The other fields
     that may come in the same bridge call will be applied after the reset

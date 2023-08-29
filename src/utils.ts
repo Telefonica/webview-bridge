@@ -99,6 +99,11 @@ export const updateNavigationBar = (
         leftActions?: ReadonlyArray<NavigationBarIcon>;
         rightActions?: ReadonlyArray<NavigationBarIcon>;
         /**
+         * It defines how the icons and the text of the top bar should be tinted.
+         * If null or unknown value is received, the initial colors set by the app or the last colorVariant set will be used
+         */
+        colorVariant?: 'INVERSE' | 'REGULAR' | null;
+        /**
          * This is a flag used to indicate that the appearance of the top bar should be restored to its original state.
          * The other fields that may come in the same bridge call will be applied after the reset
          */

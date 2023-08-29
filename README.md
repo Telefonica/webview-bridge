@@ -67,7 +67,7 @@ Alternatively, you can import the library directly from a CDN:
 Returns true if WebView Bridge is available. Use this function to implement
 fallbacks in case the bridge is not available.
 
-```typescript
+```ts
 isWebViewBridgeAvailable: () => boolean;
 ```
 
@@ -111,7 +111,7 @@ Show native picker UI in order to let the user select a contact.
 
 <img height="550" src="doc/webview-bridge-contact-ios.png"><img height="550" src="doc/webview-bridge-contact-android.png">
 
-```typescript
+```ts
 requestContact: ({filter?: 'phone' | 'email'}) => Promise<{
     name?: string;
     email?: string;
@@ -143,7 +143,7 @@ Inserts an event in calendar
 
 <img height="550" src="doc/webview-bridge-calendar-ios.png"><img height="550" src="doc/webview-bridge-calendar-android.png">
 
-```typescript
+```ts
 createCalendarEvent: ({
     beginTime: number,
     endTime: number,
@@ -173,7 +173,7 @@ createCalendarEvent({
 
 Invokes the native sharing mechanism of the device.
 
-```typescript
+```ts
 type ShareOptions =
     | {
           text: string;
@@ -212,7 +212,7 @@ deprecations</kbd>
 Customize WebView NavigationBar properties. You can set one or more properties
 in a single call
 
-```typescript
+```ts
 type NavigationBarIcon = {
     /** Content description of the image used for accessibility */
     name: string;
@@ -355,18 +355,8 @@ React.useEffect(() => {
 
 Returns true if A/B testing named with the key is available.
 
-```typescript
+```ts
 isABTestingAvailable: (key: string) => Promise<boolean>;
-```
-
-#### Example
-
-```javascript
-isABTestingAvailable('key').then((isAvailable) => {
-    console.log(isAvailable);
-}).catch(err => {
-    console.error(err);
-};
 ```
 
 ### nativeConfirm
@@ -378,7 +368,7 @@ browser confirm.
 
 <img height="550" src="doc/webview-bridge-confirm-ios.png"><img height="550" src="doc/webview-bridge-confirm-android.png">
 
-```typescript
+```ts
 nativeConfirm: ({
     message: string;
     title?: string;
@@ -411,23 +401,12 @@ browser alert.
 
 <img height="550" src="doc/webview-bridge-alert-ios.png"><img height="550" src="doc/webview-bridge-alert-android.png">
 
-```typescript
+```ts
 nativeAlert: ({
     message: string;
     title?: string;
     buttonText: string;
 }) => Promise<void>;
-```
-
-#### Example
-
-```javascript
-nativeAlert({
-    message: 'Purchase completed!',
-    title: 'Ok!',
-}).then((res) => {
-    console.log('alert closed');
-});
 ```
 
 ### nativeMessage
@@ -441,7 +420,7 @@ browser alert.
 
 <img height="550" src="doc/webview-bridge-message-ios.png"><img height="550" src="doc/webview-bridge-message-android.png">
 
-```typescript
+```ts
 nativeMessage: ({
         message: string;
         duration?: number; // milliseconds
@@ -468,7 +447,7 @@ nativeMessage({
 
 Log an event to firebase
 
-```typescript
+```ts
 logEvent: ({
     category: string; // Typically the object that was interacted with (e.g. 'Video')
     action: string; // The type of interaction (e.g. 'play')
@@ -480,7 +459,7 @@ logEvent: ({
 If you want to use new Google Analytics 4 event format you can use this method
 too:
 
-```typescript
+```ts
 logEvent: ({
     name: string; // The event name is mandatory
     [key: string]: any; // You can set any other event parameters
@@ -526,38 +505,16 @@ logEvent(yourEvent, {sanitize: false});
 
 Log the current screen name (or page name) to firebase
 
-```typescript
+```ts
 setScreenName: (screenName: string, params?: {[key: string]: any}) => Promise<void>;
-```
-
-#### Example
-
-```javascript
-setScreenName('Topup Flow').then(() => {
-    console.log('screen name logged');
-});
-```
-
-You can also send additional params with the screen name:
-
-```javascript
-setScreenName('Topup Flow', {someParam: 'some value'});
 ```
 
 ### setUserProperty
 
 Set a user property to firebase
 
-```typescript
+```ts
 setUserProperty: (name: string, value: string) => Promise<void>;
-```
-
-#### Example
-
-```javascript
-setUserProperty('obIds', 'any-value').then(() => {
-    console.log('User property logged');
-});
 ```
 
 ### reportStatus
@@ -566,14 +523,8 @@ setUserProperty('obIds', 'any-value').then(() => {
 
 Report a given feature status
 
-```typescript
+```ts
 reportStatus: ({feature: 'ACCOUNT', status: 'CRITICAL' | 'GOOD' | 'BAD', reason: string}) => Promise<void>;
-```
-
-#### Example
-
-```javascript
-reportStatus({feature: 'ACCOUNT', status: 'GOOD', reason: 'whatever'});
 ```
 
 ### onNativeEvent
@@ -582,7 +533,7 @@ reportStatus({feature: 'ACCOUNT', status: 'GOOD', reason: 'whatever'});
 
 Listens to native app events
 
-```typescript
+```ts
 type NativeEventHandler = ({ event }: {event: string}) => {action: 'default'};
 
 onNativeEvent: (handler: NativeEventHandler) => () => void;
@@ -590,7 +541,7 @@ onNativeEvent: (handler: NativeEventHandler) => () => void;
 
 #### Example
 
-```typescript
+```ts
 onNativeEvent(({event}) => {
     if (event === 'tappedNavigationBarBackButton') {
         // do something
@@ -617,7 +568,7 @@ Avalaible features:
 -   `read-contacts` (Available for app versions 13.10 and higher)
 -   `write-contacts` (Available for app versions 13.10 and higher)
 
-```typescript
+```ts
 checkPermissionStatus: (feature: string, params?: {[key: string]: string}) => Promise<boolean>;
 ```
 
@@ -642,7 +593,7 @@ Avalaible features:
 -   `notification-settings`
 -   `contact-settings` <kbd>App version >=13.10 </kbd>
 
-```typescript
+```ts
 internalNavigation: (feature: string) => Promise<void>;
 ```
 
@@ -652,7 +603,7 @@ internalNavigation: (feature: string) => Promise<void>;
 
 Dismiss the current webview and optionally navigate to another url
 
-```typescript
+```ts
 dismiss: (onCompletionUrl?: string) => Promise<void>;
 ```
 
@@ -684,7 +635,7 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
 
 Check if an app is installed in the phone
 
-```typescript
+```ts
 getAppMetadata: (appToken: string) => Promise<{
     isInstalled: boolean;
     marketUrl: string;
@@ -723,7 +674,7 @@ getCustomerHash().then(({hash}) => { ... });
 
 Return info about how much free disk space the device has
 
-```typescript
+```ts
 getDiskSpaceInfo: () => Promise<{availableBytes: number, totalBytes: number}>;
 ```
 
@@ -737,7 +688,7 @@ getDiskSpaceInfo: () => Promise<{availableBytes: number, totalBytes: number}>;
 
 Return info about the esim capabilities of the device
 
-```typescript
+```ts
 getEsimInfo: () => Promise<{supportsEsim: boolean, eid?: string | null}>;
 ```
 
@@ -761,7 +712,7 @@ getDeviceModel: () => Promise<{model: string} | null>;
 
 Sets a property related to some specific tracking system
 
-```typescript
+```ts
 setTrackingProperty: (system: 'palitagem' | 'medallia', name: string, value?: string) => Promise<void>;
 ```
 
@@ -777,7 +728,7 @@ Method that allows defining an specific behavior (such as showing a
 confirmation) before the specific native actions are executed. This method also
 allows disabling any previous behaviors set.
 
-```typescript
+```ts
 type ActionBehavior =
     | {
         behavior: 'confirm';
@@ -816,12 +767,6 @@ Actions can be optionally included in the payload. Any not included action wonâ€
 change its current behavior set.
 
 All actions behaviors will be automatically set to default on full page loads.
-
-#### Example
-
-```javascript
-setTrackingProperty('some_system', 'some_property_name', 'some_property_value');
-```
 
 ### renewSession
 
@@ -1005,7 +950,7 @@ updatePhoneNumbers:(Array<{
 Method that allows WebView to highlight a home tab bar setting a badge (numeric
 or not)
 
-```typescript
+```ts
 highlightNavigationTab: ({
     tab: string,
     highlight: boolean,
@@ -1038,7 +983,7 @@ getAttStatus: () => Promise<{status:'granted' | 'denied' | 'unknown'} | null>;
 
 If an uncontrolled error occurs, promise will be rejected with an error object:
 
-```typescript
+```ts
 {code: number, description: string}
 ```
 

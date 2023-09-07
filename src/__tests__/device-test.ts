@@ -8,6 +8,7 @@ import {
     getDiskSpaceInfo,
     getEsimInfo,
     getAttStatus,
+    getDeviceModel,
 } from '../device';
 import {
     createFakeAndroidPostMessage,
@@ -228,6 +229,7 @@ test('getDiskSpaceInfo', async () => {
 
 test('getEsimInfo', async () => {
     const supportsEsim = true;
+    const eid = '123';
 
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
@@ -238,6 +240,7 @@ test('getEsimInfo', async () => {
             id: msg.id,
             payload: {
                 supportsEsim,
+                eid,
             },
         }),
     });
@@ -288,6 +291,49 @@ test('getAttStatus failure', async () => {
     });
 
     const res = await getAttStatus();
+
+    expect(res).toBeNull();
+    removeFakeWebKitPostMessage();
+});
+
+test('getDeviceModel Success', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('MODEL');
+        },
+        getResponse: (msg) => ({
+            type: 'MODEL',
+            id: msg.id,
+            payload: {
+                model: 'Nokia 3310',
+            },
+        }),
+    });
+
+    const res = await getDeviceModel();
+
+    expect(res).toMatchObject({
+        model: 'Nokia 3310',
+    });
+    removeFakeWebKitPostMessage();
+});
+
+test('getDeviceModel failure', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('MODEL');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: {
+                code: 'foo',
+                description: 'bar',
+            },
+        }),
+    });
+
+    const res = await getDeviceModel();
 
     expect(res).toBeNull();
     removeFakeWebKitPostMessage();

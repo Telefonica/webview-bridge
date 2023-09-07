@@ -164,6 +164,7 @@ test('update navigation bar, with options', (done) => {
                 name: 'right',
             },
         ],
+        colorVariant: 'INVERSE',
         resetToDefaultState: true,
     };
 

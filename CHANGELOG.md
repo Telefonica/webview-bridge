@@ -1,5 +1,13 @@
 # CHANGELOG
 
+## v.3.28.0 - 2023-09-07
+
+-   New `getDeviceModel` function
+-   Update `getEsimInfo` to return `eid` if possible
+-   Deprecate `requestSimIcc` and `requestSimImsi`
+-   New `colorVariant` option in `updateNavigationBar`
+-   README cleanup
+
 ## v.3.27.0 - 2023-08-22
 
 -   Add `bottomSheetActions`

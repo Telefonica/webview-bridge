@@ -1,10 +1,10 @@
 # CHANGELOG
 
-## v.3.28.0 - TBD
+## v.3.28.0 - 2023-09-07
 
 -   New `getDeviceModel` function
 -   Update `getEsimInfo` to return `eid` if possible
--   Deprecate `requestSimIcc` and `requestSimIcc`
+-   Deprecate `requestSimIcc` and `requestSimImsi`
 -   New `colorVariant` option in `updateNavigationBar`
 -   README cleanup
 

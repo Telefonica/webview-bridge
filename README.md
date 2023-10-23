@@ -411,22 +411,26 @@ nativeAlert: ({
 
 ### nativeMessage
 
-Show a native message dialog. Use it to display feedback messages.
+<kbd>App version >=14.10 `withDismiss`, `duration` and `action` in
+response</kbd>.
+
+Show a native snackbar message. Use it to display feedback messages.
 
 If the bridge is not present (eg. showing the page in browser), fallbacks to a
 browser alert.
-
--   `buttonText` property is ignored in iOS.
 
 <img height="550" src="doc/webview-bridge-message-ios.png"><img height="550" src="doc/webview-bridge-message-android.png">
 
 ```ts
 nativeMessage: ({
         message: string;
-        duration?: number; // milliseconds
-        buttonText?: string; // Android only
+        duration?: 'PERSISTENT' | 'FIVE_SECONDS' | 'TEN_SECONDS';
+        buttonText?: string;
         type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS';
-}) => Promise<void>;
+        withDismiss?: boolean;
+}) => Promise<{
+    action: 'DISMISS' | 'BUTTON' | 'TIMEOUT';
+}>;
 ```
 
 #### Example

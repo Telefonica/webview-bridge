@@ -83,6 +83,9 @@ test('native message', (done) => {
         getResponse: (message) => ({
             type: message.type,
             id: message.id,
+            payload: {
+                action: 'DISMISS',
+            },
         }),
     });
 
@@ -91,7 +94,9 @@ test('native message', (done) => {
         duration: ANY_DURATION,
         buttonText: ANY_BUTTON_TEXT,
     }).then((res) => {
-        expect(res).toBeUndefined();
+        expect(res).toEqual({
+            action: 'DISMISS',
+        });
         done();
     });
 });
@@ -135,7 +140,7 @@ test('native message fallbacks to browser alert', (done) => {
     nativeMessage({
         message: ANY_MESSAGE,
     }).then((res) => {
-        expect(res).toBeUndefined();
+        expect(res).toEqual({action: 'DISMISS'});
         expect(alert.mock.calls.length).toBe(1);
         expect(alert.mock.calls[0][0]).toBe(ANY_MESSAGE);
         done();

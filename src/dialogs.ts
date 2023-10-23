@@ -1,4 +1,8 @@
-import {postMessageToNativeApp, isWebViewBridgeAvailable} from './post-message';
+import {
+    postMessageToNativeApp,
+    isWebViewBridgeAvailable,
+    type SnackbarResponse,
+} from './post-message';
 
 export const nativeConfirm = ({
     message,
@@ -50,21 +54,44 @@ export const nativeMessage = ({
     duration,
     buttonText,
     type,
+    withDismiss,
 }: {
     message: string;
-    duration?: number; // milliseconds
+    /**
+     * By default, the snackbar auto dismisses after 5s or 10s (if it has buttonText)
+     * PERSISTENT: the snackbar won't dismiss without user interaction
+     * FIVE_SECONDS: the snackbar will dismiss after 5 seconds
+     * TEN_SECONDS: the snackbar will dismiss after 10 seconds
+     * number: deprecated, this is ignored by native app
+     */
+    duration?: 'PERSISTENT' | 'FIVE_SECONDS' | 'TEN_SECONDS' | number;
     buttonText?: string;
     type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS';
-}): Promise<void> => {
+    /**
+     * When true, the snackbar will have a dismiss button. By default is false.
+     * If the snackbar has duration: "PERSISTENT" and doesn't have buttonText, the
+     * dismiss button is always shown, regardless of this attribute value.
+     */
+    withDismiss?: boolean;
+}): Promise<SnackbarResponse> => {
     if (isWebViewBridgeAvailable()) {
         return postMessageToNativeApp({
             type: 'MESSAGE',
-            payload: {message, duration, buttonText, type},
+            payload: {message, duration, buttonText, type, withDismiss},
+        }).then((response) => {
+            // old app versions didn't return a response or returned a response without action
+            if (!response || !response.action) {
+                return {
+                    action: 'DISMISS',
+                };
+            }
+
+            return response;
         });
     } else {
         if (typeof window !== 'undefined') {
             window.alert(message);
         }
-        return Promise.resolve();
+        return Promise.resolve({action: 'DISMISS'});
     }
 };

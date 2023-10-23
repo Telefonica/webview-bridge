@@ -435,13 +435,12 @@ nativeMessage: ({
 
 #### Example
 
-Show a native "snackbar" with a configurable duration and optional close button
+Show a native Snackbar with button
 
 ```javascript
 nativeMessage({
     message: 'Operation finished!',
     buttonText: 'Ok',
-    duration: 5000, // 5 seconds
 }).then((res) => {
     console.log('alert closed');
 });

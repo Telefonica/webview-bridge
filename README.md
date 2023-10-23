@@ -442,7 +442,10 @@ nativeMessage({
     message: 'Operation finished!',
     buttonText: 'Ok',
 }).then((res) => {
-    console.log('alert closed');
+    if (res.action === 'BUTTON') {
+        console.log('Button clicked');
+    }
+    console.log('Snackbar closed');
 });
 ```
 

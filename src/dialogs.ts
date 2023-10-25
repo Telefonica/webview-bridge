@@ -60,11 +60,9 @@ export const nativeMessage = ({
     /**
      * By default, the snackbar auto dismisses after 5s or 10s (if it has buttonText)
      * PERSISTENT: the snackbar won't dismiss without user interaction
-     * FIVE_SECONDS: the snackbar will dismiss after 5 seconds
-     * TEN_SECONDS: the snackbar will dismiss after 10 seconds
-     * number: deprecated, this is ignored by native app
+     * number: deprecated, this is ignored by native app and default values are used instead
      */
-    duration?: 'PERSISTENT' | 'FIVE_SECONDS' | 'TEN_SECONDS' | number;
+    duration?: 'PERSISTENT' | number;
     buttonText?: string;
     type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS';
     /**

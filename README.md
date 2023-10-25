@@ -424,7 +424,7 @@ browser alert.
 ```ts
 nativeMessage: ({
         message: string;
-        duration?: 'PERSISTENT' | 'FIVE_SECONDS' | 'TEN_SECONDS';
+        duration?: 'PERSISTENT';
         buttonText?: string;
         type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS';
         withDismiss?: boolean;

@@ -1,4 +1,4 @@
-import {openOnboading} from '../open-onboarding';
+import {openOnboarding} from '../open-onboarding';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -19,7 +19,7 @@ test('webapp requests to show the onboarding', (done) => {
         }),
     });
 
-    openOnboading().then((res) => {
+    openOnboarding().then((res) => {
         expect(res).toBeUndefined();
         done();
     });

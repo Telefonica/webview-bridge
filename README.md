@@ -429,7 +429,7 @@ nativeMessage: ({
         type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS';
         withDismiss?: boolean;
 }) => Promise<{
-    action: 'DISMISS' | 'BUTTON' | 'TIMEOUT';
+    action: 'DISMISS' | 'BUTTON' | 'TIMEOUT' | 'CONSECUTIVE';
 }>;
 ```
 

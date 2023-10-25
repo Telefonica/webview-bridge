@@ -33,7 +33,7 @@ export type SheetResponse = {
 };
 
 export type SnackbarResponse = {
-    action: 'DISMISS' | 'BUTTON' | 'TIMEOUT';
+    action: 'DISMISS' | 'BUTTON' | 'TIMEOUT' | 'CONSECUTIVE';
 };
 
 export type ResponsesFromNativeApp = {

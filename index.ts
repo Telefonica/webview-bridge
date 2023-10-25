@@ -84,3 +84,5 @@ export type {
     SheetActionItem,
     SheetInfoItem,
 } from './src/bottom-sheet';
+
+export {openOnboarding} from './src/open-onboarding';

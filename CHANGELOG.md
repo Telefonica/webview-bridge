@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v.3.29.0 - 2023-10-26
+
+-   New `openOnboarding` function
+-   `nativeMessage`: support for `withDismiss`, `duration: "PERSISTENT"`, and
+    `action` in response
+
 ## v.3.28.0 - 2023-09-07
 
 -   New `getDeviceModel` function

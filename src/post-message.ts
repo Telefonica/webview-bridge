@@ -32,6 +32,10 @@ export type SheetResponse = {
     }>;
 };
 
+export type SnackbarResponse = {
+    action: 'DISMISS' | 'BUTTON' | 'TIMEOUT' | 'CONSECUTIVE';
+};
+
 export type ResponsesFromNativeApp = {
     SIM_ICC: {
         id: string;
@@ -76,7 +80,7 @@ export type ResponsesFromNativeApp = {
     MESSAGE: {
         id: string;
         type: 'MESSAGE';
-        payload: void;
+        payload: SnackbarResponse;
     };
     CONFIRM: {
         id: string;

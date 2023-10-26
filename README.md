@@ -995,6 +995,14 @@ To inspect the bridge traffic, you can use the `setLogger` method:
 setLogger((...args) => console.log(...args));
 ```
 
+### openOnboarding
+
+Opens the app Onboarding (as if it where the first time the user logs in)
+
+```ts
+openOnboarding = () => Promise<void>
+```
+
 ## License
 
 This project is licensed under the terms of the MIT license. See the

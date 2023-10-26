@@ -1,4 +1,4 @@
-import {showAppRating} from '../app-rating';
+import {openOnboarding} from '../open-onboarding';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -8,10 +8,10 @@ afterEach(() => {
     removeFakeAndroidPostMessage();
 });
 
-test('webapp requests to show the app rating', (done) => {
+test('webapp requests to show the onboarding', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (message) => {
-            expect(message.type).toBe('SHOW_APP_RATING');
+            expect(message.type).toBe('OPEN_ONBOARDING');
         },
         getResponse: (message) => ({
             type: message.type,
@@ -19,7 +19,7 @@ test('webapp requests to show the app rating', (done) => {
         }),
     });
 
-    showAppRating().then((res) => {
+    openOnboarding().then((res) => {
         expect(res).toBeUndefined();
         done();
     });

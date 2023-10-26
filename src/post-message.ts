@@ -260,6 +260,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {model: string};
     };
+    OPEN_ONBOARDING: {
+        type: 'OPEN_ONBOARDING';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

@@ -251,6 +251,14 @@ export const getAppMetadata = (
         },
     });
 
+export const getDataConnectionInfo = (): Promise<
+    NativeAppResponsePayload<'DATA_CONNECTION_INFO'>
+> =>
+    postMessageToNativeApp({
+        type: 'DATA_CONNECTION_INFO',
+        payload: {},
+    });
+
 type ActionBehavior =
     | {
           behavior: 'confirm';

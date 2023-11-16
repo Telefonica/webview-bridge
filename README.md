@@ -985,6 +985,28 @@ available
 getAttStatus: () => Promise<{status:'granted' | 'denied' | 'unknown'} | null>;
 ```
 
+### getDataConnectionInfo
+
+<kbd>App version >=14.11</kbd>
+
+Obtain metainformation about the current device data network connectivity
+
+```ts
+getDataConnectionInfo: () => Promise<{
+    connectionType: 'MOBILE' | 'WIFI ' | 'OTHER' | 'NONE';
+    mobileConnectionType?: '2G' | '3G' | '4G' | '5G' | 'OTHER' | null;
+    mobileCarrier?: string | null;
+    mobileSignalStrength?: number | null;
+}>;
+```
+
+-   `connectionType`: describes the network technology used currently for data
+-   `mobileConnectionType`: in case connectionType is 'MOBILE' gives further
+    details about the network technology used.
+-   `mobileCarrier`: identifies the carrier used for 'MOBILE' connectionType
+-   `mobileSignalStrength`: gives a measure of the current signal strength for
+    'MOBILE' connectionType
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

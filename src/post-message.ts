@@ -36,6 +36,13 @@ export type SnackbarResponse = {
     action: 'DISMISS' | 'BUTTON' | 'TIMEOUT' | 'CONSECUTIVE';
 };
 
+type DataConnectionResponse = {
+    connectionType: 'MOBILE' | 'WIFI ' | 'OTHER' | 'NONE';
+    mobileConnectionType?: '2G' | '3G' | '4G' | '5G' | 'OTHER' | null;
+    mobileCarrier?: string | null;
+    mobileSignalStrength?: number | null;
+};
+
 export type ResponsesFromNativeApp = {
     SIM_ICC: {
         id: string;
@@ -268,6 +275,11 @@ export type ResponsesFromNativeApp = {
         type: 'OPEN_ONBOARDING';
         id: string;
         payload: void;
+    };
+    DATA_CONNECTION_INFO: {
+        type: 'DATA_CONNECTION_INFO';
+        id: string;
+        payload: DataConnectionResponse;
     };
 };
 

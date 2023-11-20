@@ -35,7 +35,7 @@ export {
     fetch,
     checkPermissionStatus,
     getAppMetadata,
-    getDataConnectionInfo,
+    getNetworkConnectionInfo,
     setActionBehavior,
     getTopazToken,
     onNavigationBarIconClicked,

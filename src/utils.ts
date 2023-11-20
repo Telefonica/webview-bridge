@@ -251,7 +251,7 @@ export const getAppMetadata = (
         },
     });
 
-export const getDataConnectionInfo = (): Promise<
+export const getNetworkConnectionInfo = (): Promise<
     NativeAppResponsePayload<'DATA_CONNECTION_INFO'>
 > =>
     postMessageToNativeApp({

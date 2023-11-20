@@ -985,18 +985,18 @@ available
 getAttStatus: () => Promise<{status:'granted' | 'denied' | 'unknown'} | null>;
 ```
 
-### getDataConnectionInfo
+### getNetworkConnectionInfo
 
 <kbd>App version >=14.11</kbd>
 
 Obtain metainformation about the current device data network connectivity
 
 ```ts
-getDataConnectionInfo: () => Promise<{
+getNetworkConnectionInfo: () => Promise<{
     connectionType: 'MOBILE' | 'WIFI ' | 'OTHER' | 'NONE';
     mobileConnectionType?: '2G' | '3G' | '4G' | '5G' | 'OTHER' | null;
     mobileCarrier?: string | null;
-    mobileSignalStrength?: number | null;
+    mobileSignalStrength?: 'NONE' | 'POOR' | 'MODERATE' | 'GOOD' | 'GREAT' | null;
 }>;
 ```
 
@@ -1005,7 +1005,7 @@ getDataConnectionInfo: () => Promise<{
     details about the network technology used.
 -   `mobileCarrier`: identifies the carrier used for 'MOBILE' connectionType
 -   `mobileSignalStrength`: gives a measure of the current signal strength for
-    'MOBILE' connectionType
+    'MOBILE' connectionType.
 
 ## Error handling
 

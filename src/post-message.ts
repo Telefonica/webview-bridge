@@ -40,7 +40,13 @@ type DataConnectionResponse = {
     connectionType: 'MOBILE' | 'WIFI ' | 'OTHER' | 'NONE';
     mobileConnectionType?: '2G' | '3G' | '4G' | '5G' | 'OTHER' | null;
     mobileCarrier?: string | null;
-    mobileSignalStrength?: number | null;
+    mobileSignalStrength?:
+        | 'NONE'
+        | 'POOR'
+        | 'MODERATE'
+        | 'GOOD'
+        | 'GREAT'
+        | null;
 };
 
 export type ResponsesFromNativeApp = {

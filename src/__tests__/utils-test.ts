@@ -15,7 +15,7 @@ import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
 } from './fake-post-message';
-import {getAppMetadata, getDataConnectionInfo} from '../utils';
+import {getAppMetadata, getNetworkConnectionInfo} from '../utils';
 
 const ANY_STRING = 'any-string';
 const ANY_OTHER_STRING = 'any-other-string';
@@ -565,7 +565,7 @@ test('get data connection info', async () => {
     const connectionType = 'MOBILE';
     const mobileConnectionType = '4G';
     const mobileCarrier = 'Telefonica';
-    const mobileSignalStrength = 50;
+    const mobileSignalStrength = 'POOR';
 
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
@@ -584,7 +584,7 @@ test('get data connection info', async () => {
         }),
     });
 
-    await getDataConnectionInfo().then((res) => {
+    await getNetworkConnectionInfo().then((res) => {
         expect(res).toMatchObject({
             connectionType,
             mobileConnectionType,

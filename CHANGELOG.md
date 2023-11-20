@@ -2,7 +2,7 @@
 
 ## v.3.30.0 - 2023-12-16
 
--   New `getDataConnectionInfo` function
+-   New `getNetworkConnectionInfo` function
 
 ## v.3.29.0 - 2023-10-26
 

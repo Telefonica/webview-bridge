@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.30.0 - 2023-12-16
+
+-   New `getNetworkConnectionInfo` function
+
 ## v.3.29.0 - 2023-10-26
 
 -   New `openOnboarding` function

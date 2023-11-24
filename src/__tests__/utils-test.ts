@@ -15,7 +15,7 @@ import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
 } from './fake-post-message';
-import {getAppMetadata} from '../utils';
+import {getAppMetadata, getNetworkConnectionInfo} from '../utils';
 
 const ANY_STRING = 'any-string';
 const ANY_OTHER_STRING = 'any-other-string';
@@ -557,6 +557,40 @@ test('get app metadata of installed application', async () => {
 
     await getAppMetadata(appToken).then((res) => {
         expect(res).toMatchObject({isInstalled: true, marketUrl, appUrl});
+        removeFakeAndroidPostMessage();
+    });
+});
+
+test('get data connection info', async () => {
+    const connectionType = 'MOBILE';
+    const mobileConnectionType = '4G';
+    const mobileCarrier = 'Telefonica';
+    const mobileSignalStrength = 'POOR';
+
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('DATA_CONNECTION_INFO');
+            expect(msg.payload).toMatchObject({});
+        },
+        getResponse: (msg) => ({
+            type: 'DATA_CONNECTION_INFO',
+            id: msg.id,
+            payload: {
+                connectionType,
+                mobileConnectionType,
+                mobileCarrier,
+                mobileSignalStrength,
+            },
+        }),
+    });
+
+    await getNetworkConnectionInfo().then((res) => {
+        expect(res).toMatchObject({
+            connectionType,
+            mobileConnectionType,
+            mobileCarrier,
+            mobileSignalStrength,
+        });
         removeFakeAndroidPostMessage();
     });
 });

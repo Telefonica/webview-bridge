@@ -994,9 +994,22 @@ Obtain metainformation about the current device data network connectivity
 ```ts
 getNetworkConnectionInfo: () => Promise<{
     connectionType: 'MOBILE' | 'WIFI ' | 'OTHER' | 'NONE';
-    mobileConnectionType?: '2G' | '3G' | '4G' | '5G' | 'OTHER' | 'PERMISSION_REQUIRED' | null;
+    mobileConnectionType?: 
+        | '2G'
+        | '3G'
+        | '4G'
+        | '5G'
+        | 'OTHER'
+        | 'PERMISSION_REQUIRED'
+        | null;
     mobileCarrier?: string | null;
-    mobileSignalStrength?: 'NONE' | 'POOR' | 'MODERATE' | 'GOOD' | 'GREAT' | null;
+    mobileSignalStrength?: 
+        | 'NONE'
+        | 'POOR'
+        | 'MODERATE'
+        | 'GOOD'
+        | 'GREAT' 
+        | null;
 }>;
 ```
 

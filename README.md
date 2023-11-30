@@ -994,7 +994,7 @@ Obtain metainformation about the current device data network connectivity
 ```ts
 getNetworkConnectionInfo: () => Promise<{
     connectionType: 'MOBILE' | 'WIFI ' | 'OTHER' | 'NONE';
-    mobileConnectionType?: 
+    mobileConnectionType?:
         | '2G'
         | '3G'
         | '4G'
@@ -1003,19 +1003,22 @@ getNetworkConnectionInfo: () => Promise<{
         | 'PERMISSION_REQUIRED'
         | null;
     mobileCarrier?: string | null;
-    mobileSignalStrength?: 
+    mobileSignalStrength?:
         | 'NONE'
         | 'POOR'
         | 'MODERATE'
         | 'GOOD'
-        | 'GREAT' 
+        | 'GREAT'
         | null;
 }>;
 ```
 
 -   `connectionType`: describes the network technology used currently for data
 -   `mobileConnectionType`: in case connectionType is 'MOBILE' gives further
-    details about the network technology used. PERMISSION_REQUIRED value will be returned only in Android when READ_PHONE_STATE permission has not been granted by the user. The permission request is already managed by the Android implementation itself.
+    details about the network technology used. PERMISSION_REQUIRED value will be
+    returned only in Android when READ_PHONE_STATE permission has not been
+    granted by the user. The permission request is already managed by the
+    Android implementation itself.
 -   `mobileCarrier`: identifies the carrier used for 'MOBILE' connectionType
 -   `mobileSignalStrength`: gives a measure of the current signal strength for
     'MOBILE' connectionType.

@@ -1,6 +1,10 @@
 # CHANGELOG
 
-## v.3.30.0 - 2023-12-16
+## v.3.31.0 - 2023-12-05
+
+-   `DATA_CONNECTION_INFO`: Add `PERMISSION_REQUIRED` mobileConnectionType
+
+## v.3.30.0 - 2023-11-16
 
 -   New `getNetworkConnectionInfo` function
 

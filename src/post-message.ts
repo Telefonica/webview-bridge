@@ -38,7 +38,14 @@ export type SnackbarResponse = {
 
 type DataConnectionResponse = {
     connectionType: 'MOBILE' | 'WIFI ' | 'OTHER' | 'NONE';
-    mobileConnectionType?: '2G' | '3G' | '4G' | '5G' | 'OTHER' | null;
+    mobileConnectionType?:
+        | '2G'
+        | '3G'
+        | '4G'
+        | '5G'
+        | 'OTHER'
+        | 'PERMISSION_REQUIRED'
+        | null;
     mobileCarrier?: string | null;
     mobileSignalStrength?:
         | 'NONE'

@@ -1023,6 +1023,49 @@ getNetworkConnectionInfo: () => Promise<{
 -   `mobileSignalStrength`: gives a measure of the current signal strength for
     'MOBILE' connectionType.
 
+### getPincodeInfo
+
+<kbd>App version >=24.2</kbd>
+
+Check if the pincode is enabled or not
+
+```ts
+getPincodeInfo: () => Promise<{
+    status: 'enabled' | 'disabled'
+}>;
+```
+
+### getProfileImage
+
+<kbd>App version >=14.9</kbd>
+
+Read current profile picture
+
+```ts
+getProfileImage: () => Promise<{
+    image: 'string' | null
+}>;
+```
+
+-   `image`: base64 encoded image or null if there is no image
+
+### startProfileImageFlow
+
+<kbd>App version >=14.9</kbd>
+
+Starts the native flow to change the profile picture
+
+```ts
+startProfileImageFlow: () => Promise<{
+    image: string | null;
+    isCancelled: boolean;
+}>;
+```
+
+-   `image`: base64 encoded image or null if the image was removed or the flow
+    cancelled
+-   `isCancelled`: true if the user cancelled the flow
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

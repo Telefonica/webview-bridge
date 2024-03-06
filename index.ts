@@ -88,3 +88,5 @@ export type {
 } from './src/bottom-sheet';
 
 export {openOnboarding} from './src/open-onboarding';
+
+export {getProfileImage, startProfileImageFlow} from './src/profile';

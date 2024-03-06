@@ -301,6 +301,21 @@ export type ResponsesFromNativeApp = {
             status: 'enabled' | 'disabled';
         };
     };
+    GET_PROFILE_IMAGE: {
+        type: 'GET_PROFILE_IMAGE';
+        id: string;
+        payload: {
+            image: string | null;
+        };
+    };
+    START_PROFILE_IMAGE_FLOW: {
+        type: 'START_PROFILE_IMAGE_FLOW';
+        id: string;
+        payload: {
+            image: string | null;
+            isCancelled: boolean;
+        };
+    };
 };
 
 export type NativeAppResponsePayload<

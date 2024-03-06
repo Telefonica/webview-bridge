@@ -301,3 +301,6 @@ export const getTopazToken = (
         },
         options.timeout,
     );
+
+export const getPincodeInfo = (): Promise<{status: 'enabled' | 'disabled'}> =>
+    postMessageToNativeApp({type: 'GET_PINCODE_INFO'});

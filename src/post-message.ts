@@ -294,6 +294,13 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: DataConnectionResponse;
     };
+    GET_PINCODE_INFO: {
+        type: 'GET_PINCODE_INFO';
+        id: string;
+        payload: {
+            status: 'enabled' | 'disabled';
+        };
+    };
 };
 
 export type NativeAppResponsePayload<

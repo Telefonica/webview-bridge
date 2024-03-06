@@ -38,6 +38,7 @@ export {
     getNetworkConnectionInfo,
     setActionBehavior,
     getTopazToken,
+    getPincodeInfo,
     onNavigationBarIconClicked,
 } from './src/utils';
 export type {ShareOptions, NavigationBarIcon} from './src/utils';

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.32.0 - 2024-03-06
+
+-   getProfileImage/startProfileImageFlow to read/change the profile image
+-   getPincodeInfo to get the pincode status
+
 ## v.3.31.0 - 2023-12-05
 
 -   `DATA_CONNECTION_INFO`: Add `PERMISSION_REQUIRED` mobileConnectionType

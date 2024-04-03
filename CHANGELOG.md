@@ -1,9 +1,13 @@
 # CHANGELOG
 
+## v.3.33.0 - 2024-04-03
+
+-   `getDeviceTac` method
+
 ## v.3.32.0 - 2024-03-06
 
--   getProfileImage/startProfileImageFlow to read/change the profile image
--   getPincodeInfo to get the pincode status
+-   `getProfileImage`/`startProfileImageFlow` to read/change the profile image
+-   `getPincodeInfo` to get the pincode status
 
 ## v.3.31.0 - 2023-12-05
 

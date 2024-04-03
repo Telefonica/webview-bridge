@@ -67,6 +67,11 @@ export type ResponsesFromNativeApp = {
         type: 'IMEI';
         payload: {imei: string};
     };
+    TAC: {
+        id: string;
+        type: 'TAC';
+        payload: {tac: string | null};
+    };
     IMSI: {
         id: string;
         type: 'IMSI';

@@ -20,6 +20,7 @@ export {
     getEsimInfo,
     getAttStatus,
     getDeviceModel,
+    getDeviceTac,
 } from './src/device';
 
 export {

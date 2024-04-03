@@ -75,3 +75,8 @@ export const getDeviceModel = (): Promise<{model: string} | null> =>
     postMessageToNativeApp({
         type: 'MODEL',
     }).catch(() => null);
+
+export const getDeviceTac = (): Promise<{tac: string | null}> =>
+    postMessageToNativeApp({
+        type: 'TAC',
+    }).catch(() => ({tac: null}));

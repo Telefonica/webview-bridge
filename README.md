@@ -1043,7 +1043,7 @@ Read current profile picture
 
 ```ts
 getProfileImage: () => Promise<{
-    image: 'string' | null
+    image: string | null
 }>;
 ```
 
@@ -1065,6 +1065,25 @@ startProfileImageFlow: () => Promise<{
 -   `image`: base64 encoded image or null if the image was removed or the flow
     cancelled
 -   `isCancelled`: true if the user cancelled the flow
+
+### getDeviceTac
+
+<kbd>App version >=24.3</kbd>
+
+Get device [TAC identifier](https://en.wikipedia.org/wiki/Type_Allocation_Code).
+
+```ts
+getDeviceTac: () => Promise<{
+    tac: string | null
+}>;
+```
+
+-   `tac`: The TAC identifier is the first 8 digits of the IMEI. We already have
+    a method to get the IMEI but to obtain this value, we need carrier
+    privileges permission which in many cases we don't have. To get the TAC we
+    don't need any special permission because it only identifies the device
+    model, not the device itself. Will be `null` if it's not available (iOS
+    devices or Android < 10).
 
 ## Error handling
 

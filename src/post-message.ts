@@ -321,6 +321,13 @@ export type ResponsesFromNativeApp = {
             isCancelled: boolean;
         };
     };
+    TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION: {
+        type: 'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION';
+        id: string;
+        payload: {
+            result: 'USER_AUTHENTICATED' | 'USER_ENABLED_AUTHENTICATION' | 'LAST_AUTHENTICATION_STILL_VALID',
+        };
+    };
 };
 
 export type NativeAppResponsePayload<

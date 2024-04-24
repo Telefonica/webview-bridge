@@ -1085,6 +1085,35 @@ getDeviceTac: () => Promise<{
     model, not the device itself. Will be `null` if it's not available (iOS
     devices or Android < 10).
 
+### triggerPinOrBiometricAuthentication
+
+<kbd>App version >=24.4</kbd>
+
+Triggers pin/biometric authentication if necessary, taking into account 3
+possible scenarios:
+
+-   If user has pin/biometric already configured in the app:
+    -   If last previous authentication (or last pin/biometric setup) is still
+        valid, nothing will be presented to user and bridge method will succeed.
+    -   Otherwise, authentication will be required, blocking the user until it
+        is performed.
+-   In any other case, user will be taken to the pin/biometric screen to enable
+    any authentication method. In case user leaves the configuration screen
+    without providing an authentication method, bridge method will fail with
+    401 code.
+
+```ts
+triggerPinOrBiometricAuthentication: ({
+    maxSecondsSinceLastValidation: number
+}) => Promise<{
+    result: 'USER_AUTHENTICATED' | 'USER_ENABLED_AUTHENTICATION' | 'LAST_AUTHENTICATION_STILL_VALID',
+}>;
+```
+
+-   `maxSecondsSinceLastValidation`: if time elapsed since last
+    authentication is less than the number of seconds specified here
+    authentication will succeed without requesting it again.
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

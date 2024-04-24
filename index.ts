@@ -41,6 +41,7 @@ export {
     getTopazToken,
     getPincodeInfo,
     onNavigationBarIconClicked,
+    triggerPinOrBiometricAuthentication,
 } from './src/utils';
 export type {ShareOptions, NavigationBarIcon} from './src/utils';
 

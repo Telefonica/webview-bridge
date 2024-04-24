@@ -1099,8 +1099,8 @@ possible scenarios:
         is performed.
 -   In any other case, user will be taken to the pin/biometric screen to enable
     any authentication method. In case user leaves the configuration screen
-    without providing an authentication method, bridge method will fail with
-    401 code.
+    without providing an authentication method, bridge method will fail with 401
+    code.
 
 ```ts
 triggerPinOrBiometricAuthentication: ({
@@ -1110,9 +1110,9 @@ triggerPinOrBiometricAuthentication: ({
 }>;
 ```
 
--   `maxSecondsSinceLastValidation`: if time elapsed since last
-    authentication is less than the number of seconds specified here
-    authentication will succeed without requesting it again.
+-   `maxSecondsSinceLastValidation`: if time elapsed since last authentication
+    is less than the number of seconds specified here authentication will
+    succeed without requesting it again.
 
 ## Error handling
 

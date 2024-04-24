@@ -325,7 +325,10 @@ export type ResponsesFromNativeApp = {
         type: 'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION';
         id: string;
         payload: {
-            result: 'USER_AUTHENTICATED' | 'USER_ENABLED_AUTHENTICATION' | 'LAST_AUTHENTICATION_STILL_VALID',
+            result:
+                | 'USER_AUTHENTICATED'
+                | 'USER_ENABLED_AUTHENTICATION'
+                | 'LAST_AUTHENTICATION_STILL_VALID';
         };
     };
 };

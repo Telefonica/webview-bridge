@@ -306,8 +306,10 @@ export const getPincodeInfo = (): Promise<{status: 'enabled' | 'disabled'}> =>
     postMessageToNativeApp({type: 'GET_PINCODE_INFO'});
 
 export const triggerPinOrBiometricAuthentication = (
-    maxSecondsSinceLastValidation: number
-): Promise<NativeAppResponsePayload<'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION'>> =>
+    maxSecondsSinceLastValidation: number,
+): Promise<
+    NativeAppResponsePayload<'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION'>
+> =>
     postMessageToNativeApp({
         type: 'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION',
         payload: {maxSecondsSinceLastValidation},

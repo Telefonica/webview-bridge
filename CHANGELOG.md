@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.34.0 - 2024-05-06
+
+-   `triggerPinOrBiometricAuthentication` method
+
 ## v.3.33.0 - 2024-04-03
 
 -   `getDeviceTac` method

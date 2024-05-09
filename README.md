@@ -1097,10 +1097,10 @@ possible scenarios:
         valid, nothing will be presented to user and bridge method will succeed.
     -   Otherwise, authentication will be required, blocking the user until it
         is performed.
--   In any other case, user will be taken to the pin/biometric screen to enable
-    any authentication method. In case user leaves the configuration screen
-    without providing an authentication method, bridge method will fail with 401
-    code.
+-   In any other case, user will be taken directly to the screen where he can
+    introduce a new PIN and enable any other authentication methods. In case
+    user leaves the screen without providing an authentication method, bridge
+    method will fail with 401 code.
 
 ```ts
 triggerPinOrBiometricAuthentication: ({

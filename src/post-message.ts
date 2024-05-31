@@ -209,16 +209,6 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {isInstalled: boolean; marketUrl: string; appUrl: string};
     };
-    SET_CUSTOMER_HASH: {
-        type: 'SET_CUSTOMER_HASH';
-        id: string;
-        payload: void;
-    };
-    GET_CUSTOMER_HASH: {
-        type: 'GET_CUSTOMER_HASH';
-        id: string;
-        payload: {hash: string};
-    };
     GET_DISK_SPACE_INFO: {
         type: 'GET_DISK_SPACE_INFO';
         id: string;

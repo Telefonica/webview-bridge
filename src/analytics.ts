@@ -444,19 +444,6 @@ export const setUserProperty = (
     });
 };
 
-export const setCustomerHash = (hash: string): Promise<void> =>
-    postMessageToNativeApp({
-        type: 'SET_CUSTOMER_HASH',
-        payload: {
-            hash,
-        },
-    });
-
-export const getCustomerHash = (): Promise<{hash: string}> =>
-    postMessageToNativeApp({
-        type: 'GET_CUSTOMER_HASH',
-    });
-
 export const setTrackingProperty = (
     system: 'palitagem' | 'medallia',
     name: string,

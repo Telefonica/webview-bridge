@@ -654,26 +654,6 @@ getAppMetadata: (appToken: string) => Promise<{
 -   `appUrl`: string url to launch an app installed on the phone
 -   `marketUrl`: string url to launch the store in a specific application
 
-### setCustomerHash
-
-Sets the hash of the current subscription for the customer, which is used for
-tracking purposes.
-
-```javascript
-setCustomerHash(
-    'e658ad63bef9b86863b487697dfb75d64bddb6191ec14099abe443655f6b7cc6',
-);
-```
-
-### getCustomerHash
-
-Gets the hash of the current subscription for the customer, which is used for
-tracking purposes.
-
-```javascript
-getCustomerHash().then(({hash}) => { ... });
-```
-
 ### getDiskSpaceInfo
 
 <kbd>App version >=11.10</kbd>

@@ -65,8 +65,6 @@ export {
     CD_WEBAPP_INSTALLED,
     CD_NOVUM_UID,
     CD_EVENT_VALUE,
-    setCustomerHash,
-    getCustomerHash,
     setTrackingProperty,
     sanitizeAnalyticsParam,
     sanitizeAnalyticsParams,

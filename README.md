@@ -414,6 +414,8 @@ nativeAlert: ({
 <kbd>App version >=14.10 `withDismiss`, `duration` and `action` in
 response</kbd>.
 
+<kbd>App version >=24.6 `buttonAccessibilityLabel` support</kbd>.
+
 Show a native snackbar message. Use it to display feedback messages.
 
 If the bridge is not present (eg. showing the page in browser), fallbacks to a
@@ -426,6 +428,7 @@ nativeMessage: ({
         message: string;
         duration?: 'PERSISTENT';
         buttonText?: string;
+        buttonAccessibilityLabel?: string;
         type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS';
         withDismiss?: boolean;
 }) => Promise<{

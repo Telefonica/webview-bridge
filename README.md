@@ -361,6 +361,8 @@ isABTestingAvailable: (key: string) => Promise<boolean>;
 
 ### nativeConfirm
 
+<kbd>App version >=24.7 `destructive` support.</kbd>
+
 Show a native confirm dialog.
 
 If the bridge is not present (eg. showing the page in browser), fallbacks to a
@@ -374,6 +376,7 @@ nativeConfirm: ({
     title?: string;
     acceptText: string;
     cancelText: string;
+    destructive?: boolean;
 }) => Promise<boolean>;
 ```
 

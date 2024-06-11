@@ -9,16 +9,18 @@ export const nativeConfirm = ({
     title,
     acceptText,
     cancelText,
+    destructive,
 }: {
     message: string;
     title?: string;
     acceptText: string;
     cancelText: string;
+    destructive?: boolean;
 }): Promise<boolean> => {
     if (isWebViewBridgeAvailable()) {
         return postMessageToNativeApp({
             type: 'CONFIRM',
-            payload: {message, title, acceptText, cancelText},
+            payload: {message, title, acceptText, cancelText, destructive},
         }).then(({result}) => result);
     } else {
         return Promise.resolve(

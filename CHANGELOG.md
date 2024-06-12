@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.35.0
+
+-   `updateNavigationBar` add `sectionName` to top navbar actions
+
 ## v.3.34.0 - 2024-05-06
 
 -   `triggerPinOrBiometricAuthentication` method

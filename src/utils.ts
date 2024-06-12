@@ -82,6 +82,12 @@ export type NavigationBarIcon = Readonly<{
      * These properties will be merged to the tracking event produced by the native side
      */
     trackingProperties?: Record<string, string>;
+
+    /**
+     * Identifies the action, native app can then do specific logic for this action.
+     * Ex: if sectionName matches a maintenanceMode id, it may show a maintenance message instead of the usual behaviour
+     */
+    sectionName?: string;
 }>;
 
 /**

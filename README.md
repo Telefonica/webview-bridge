@@ -361,7 +361,7 @@ isABTestingAvailable: (key: string) => Promise<boolean>;
 
 ### nativeConfirm
 
-<kbd>App version >=24.7 `destructive` support.</kbd>
+<kbd>App version >=24.6 `destructive` support.</kbd>
 
 Show a native confirm dialog.
 

@@ -1,8 +1,14 @@
 # CHANGELOG
 
+## v.3.36.0
+
+-   `nativeConfirm`: added `destructive` mode
+-   `nativeMessag`: added `buttonAccessibilityLabel` prop
+
 ## v.3.35.0
 
 -   `updateNavigationBar` add `sectionName` to top navbar actions
+-   removed tealium methods: `getCustomerHash`/`setCustomerHash`
 
 ## v.3.34.0 - 2024-05-06
 

@@ -55,6 +55,7 @@ export const nativeMessage = ({
     message,
     duration,
     buttonText,
+    buttonAccessibilityLabel,
     type,
     withDismiss,
 }: {
@@ -66,6 +67,7 @@ export const nativeMessage = ({
      */
     duration?: 'PERSISTENT' | number;
     buttonText?: string;
+    buttonAccessibilityLabel?: string;
     type?: 'INFORMATIVE' | 'CRITICAL' | 'SUCCESS';
     /**
      * When true, the snackbar will have a dismiss button. By default is false.
@@ -77,7 +79,14 @@ export const nativeMessage = ({
     if (isWebViewBridgeAvailable()) {
         return postMessageToNativeApp({
             type: 'MESSAGE',
-            payload: {message, duration, buttonText, type, withDismiss},
+            payload: {
+                message,
+                duration,
+                buttonText,
+                buttonAccessibilityLabel,
+                type,
+                withDismiss,
+            },
         }).then((response) => {
             // old app versions didn't return a response or returned a response without action
             if (!response || !response.action) {

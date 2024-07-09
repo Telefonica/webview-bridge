@@ -321,6 +321,11 @@ export type ResponsesFromNativeApp = {
                 | 'LAST_AUTHENTICATION_STILL_VALID';
         };
     };
+    SHARE_BASE64: {
+        type: 'SHARE_BASE64';
+        id: string;
+        payload: void
+    }
 };
 
 export type NativeAppResponsePayload<

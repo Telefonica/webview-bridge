@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.37.0
+
+-   New `shareBase64` function
+
 ## v.3.36.0
 
 -   `nativeConfirm`: added `destructive` mode

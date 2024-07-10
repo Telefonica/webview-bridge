@@ -9,6 +9,7 @@ import {
     getEsimInfo,
     getAttStatus,
     getDeviceModel,
+    shareBase64,
 } from '../device';
 import {
     createFakeAndroidPostMessage,
@@ -336,5 +337,51 @@ test('getDeviceModel failure', async () => {
     const res = await getDeviceModel();
 
     expect(res).toBeNull();
+    removeFakeWebKitPostMessage();
+});
+
+test('shareBase64', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SHARE_BASE64');
+        },
+        getResponse: (msg) => ({
+            type: 'SHARE_BASE64',
+            id: msg.id,
+        }),
+    });
+
+    const res = await shareBase64({
+        contentInBase64: 'BA5E64C09739T==',
+        fileName: 'example.pdf',
+    });
+
+    expect(res).toBe(undefined);
+    removeFakeWebKitPostMessage();
+});
+
+test('shareBase64 failure', async () => {
+    const error = {
+        code: 400,
+        description: 'bar',
+    };
+
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SHARE_BASE64');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = shareBase64({
+        contentInBase64: 'BA5E64C09739T==',
+        fileName: 'example.pdf',
+    });
+
+    expect(res).rejects.toEqual(error);
     removeFakeWebKitPostMessage();
 });

@@ -207,18 +207,22 @@ share({url: 'https://path/to/file', fileName: 'lolcats.png'});
 
 <kbd>App version >=24.6</kbd>
 
-Invokes the native sharing mechanism of the device to share a file. The file is provided as a base64 encoded string.
+Invokes the native sharing mechanism of the device to share a file. The file is
+provided as a base64 encoded string.
 
 ```ts
 shareBase64: ({contentInBase64: string; fileName: string}) => Promise<void>;
 ```
 
-- The file type will be inferred from the `fileName` extension.
+-   The file type will be inferred from the `fileName` extension.
 
 #### Example
 
 ```ts
-shareBase64({contentInBase64: 'SGVsbG8sIHd(...)vcmxkCg==', fileName: 'hello.pdf'});
+shareBase64({
+    contentInBase64: 'SGVsbG8sIHd(...)vcmxkCg==',
+    fileName: 'hello.pdf',
+});
 ```
 
 ### updateNavigationBar

@@ -1,4 +1,4 @@
-import { postMessageToNativeApp} from './post-message';
+import {postMessageToNativeApp} from './post-message';
 
 const TIMEOUT = 200;
 
@@ -81,11 +81,14 @@ export const getDeviceTac = (): Promise<{tac: string | null}> =>
         type: 'TAC',
     }).catch(() => ({tac: null}));
 
-export const shareBase64 = (contentInBase64: string, fileName: string): Promise<void> =>
+export const shareBase64 = (params: {
+    contentInBase64: string;
+    fileName: string;
+}): Promise<void> =>
     postMessageToNativeApp({
         type: 'SHARE_BASE64',
         payload: {
-            content: contentInBase64,
-            fileName,
+            content: params.contentInBase64,
+            fileName: params.fileName,
         },
     });

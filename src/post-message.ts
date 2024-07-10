@@ -324,8 +324,8 @@ export type ResponsesFromNativeApp = {
     SHARE_BASE64: {
         type: 'SHARE_BASE64';
         id: string;
-        payload: void
-    }
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

@@ -10,7 +10,7 @@ import {
     getAttStatus,
     getDeviceModel,
     shareBase64,
-} from '../device';
+} from '../../index';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,

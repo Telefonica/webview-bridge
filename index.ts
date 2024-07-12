@@ -21,6 +21,7 @@ export {
     getAttStatus,
     getDeviceModel,
     getDeviceTac,
+    shareBase64,
 } from './src/device';
 
 export {

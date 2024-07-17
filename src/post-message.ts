@@ -321,6 +321,13 @@ export type ResponsesFromNativeApp = {
                 | 'LAST_AUTHENTICATION_STILL_VALID';
         };
     };
+    FOCUS_NAVBAR: {
+        type: 'FOCUS_NAVBAR';
+        id: string;
+        payload: {
+            focused: boolean;
+        };
+    };
 };
 
 export type NativeAppResponsePayload<

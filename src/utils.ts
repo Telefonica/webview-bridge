@@ -320,3 +320,6 @@ export const triggerPinOrBiometricAuthentication = (
         type: 'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION',
         payload: {maxSecondsSinceLastValidation},
     });
+
+export const focusNavbar = (): Promise<{focused: boolean}> =>
+    postMessageToNativeApp({type: 'FOCUS_NAVBAR'});

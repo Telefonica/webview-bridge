@@ -1100,6 +1100,24 @@ triggerPinOrBiometricAuthentication: ({
     is less than the number of seconds specified here authentication will
     succeed without requesting it again.
 
+### focusNavbar
+
+<kbd>App version >= 24.9</kbd>
+
+Sets the screen reader focus on the native navigation bar. If the webview
+doesn't have a native navbar, the native app will respond with
+`{focused: false}`.
+
+This is useful fo accessibility purposes. We need the focus to be set in the
+navbar when we navigate to a new screen using client side navigation (React
+Router).
+
+```ts
+focusNavbar: () => Promise<{
+    focused: boolean,
+}>;
+```
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

@@ -42,6 +42,7 @@ export {
     getPincodeInfo,
     onNavigationBarIconClicked,
     triggerPinOrBiometricAuthentication,
+    focusNavbar,
 } from './src/utils';
 export type {ShareOptions, NavigationBarIcon} from './src/utils';
 

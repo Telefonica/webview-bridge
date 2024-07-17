@@ -9,7 +9,8 @@ import {
     getEsimInfo,
     getAttStatus,
     getDeviceModel,
-} from '../device';
+    shareBase64,
+} from '../../index';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -21,6 +22,7 @@ const ANY_STRING = 'any-string';
 
 afterEach(() => {
     removeFakeAndroidPostMessage();
+    removeFakeWebKitPostMessage();
 });
 
 test('request sim icc', (done) => {
@@ -139,7 +141,6 @@ test('internal navigation', (done) => {
 
     internalNavigation('notification-settings').then((res) => {
         expect(res).toBeUndefined();
-        removeFakeAndroidPostMessage();
         done();
     });
 });
@@ -158,7 +159,6 @@ test('internal navigation to contact settings', (done) => {
 
     internalNavigation('contact-settings').then((res) => {
         expect(res).toBeUndefined();
-        removeFakeAndroidPostMessage();
         done();
     });
 });
@@ -177,7 +177,6 @@ test('dismiss', (done) => {
 
     dismiss('http://example.com').then((res) => {
         expect(res).toBeUndefined();
-        removeFakeAndroidPostMessage();
         done();
     });
 });
@@ -197,7 +196,6 @@ test('requestVibration', async () => {
     const res = await requestVibration('success');
 
     expect(res).toBeUndefined();
-    removeFakeAndroidPostMessage();
 });
 
 test('getDiskSpaceInfo', async () => {
@@ -224,7 +222,6 @@ test('getDiskSpaceInfo', async () => {
         availableBytes,
         totalBytes,
     });
-    removeFakeAndroidPostMessage();
 });
 
 test('getEsimInfo', async () => {
@@ -250,7 +247,6 @@ test('getEsimInfo', async () => {
     expect(res).toMatchObject({
         supportsEsim,
     });
-    removeFakeAndroidPostMessage();
 });
 
 test('getAttStatus Success', async () => {
@@ -272,7 +268,6 @@ test('getAttStatus Success', async () => {
     expect(res).toMatchObject({
         status: 'unknown',
     });
-    removeFakeWebKitPostMessage();
 });
 
 test('getAttStatus failure', async () => {
@@ -293,7 +288,6 @@ test('getAttStatus failure', async () => {
     const res = await getAttStatus();
 
     expect(res).toBeNull();
-    removeFakeWebKitPostMessage();
 });
 
 test('getDeviceModel Success', async () => {
@@ -315,7 +309,6 @@ test('getDeviceModel Success', async () => {
     expect(res).toMatchObject({
         model: 'Nokia 3310',
     });
-    removeFakeWebKitPostMessage();
 });
 
 test('getDeviceModel failure', async () => {
@@ -336,5 +329,48 @@ test('getDeviceModel failure', async () => {
     const res = await getDeviceModel();
 
     expect(res).toBeNull();
-    removeFakeWebKitPostMessage();
+});
+
+test('shareBase64', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SHARE_BASE64');
+        },
+        getResponse: (msg) => ({
+            type: 'SHARE_BASE64',
+            id: msg.id,
+        }),
+    });
+
+    const res = await shareBase64({
+        contentInBase64: ANY_STRING,
+        fileName: 'example.pdf',
+    });
+
+    expect(res).toBe(undefined);
+});
+
+test('shareBase64 failure', async () => {
+    const error = {
+        code: 400,
+        description: 'bar',
+    };
+
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SHARE_BASE64');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = shareBase64({
+        contentInBase64: ANY_STRING,
+        fileName: 'example.pdf',
+    });
+
+    expect(res).rejects.toEqual(error);
 });

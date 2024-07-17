@@ -328,6 +328,11 @@ export type ResponsesFromNativeApp = {
             focused: boolean;
         };
     };
+    SHARE_BASE64: {
+        type: 'SHARE_BASE64';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

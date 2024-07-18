@@ -1130,7 +1130,7 @@ Sets the screen reader focus on the native navigation bar. If the webview
 doesn't have a native navbar, the native app will respond with
 `{focused: false}`.
 
-This is useful fo accessibility purposes. We need the focus to be set in the
+This is useful for accessibility purposes. We need the focus to be set in the
 navbar when we navigate to a new screen using client side navigation (React
 Router).
 

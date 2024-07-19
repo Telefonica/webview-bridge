@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.38.0
+
+-   New `focusNavbar` function
+
 ## v.3.37.0
 
 -   New `shareBase64` function

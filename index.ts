@@ -40,6 +40,7 @@ export {
     getNetworkConnectionInfo,
     setActionBehavior,
     getTopazToken,
+    getTopazValues,
     getPincodeInfo,
     onNavigationBarIconClicked,
     triggerPinOrBiometricAuthentication,

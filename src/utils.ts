@@ -308,6 +308,12 @@ export const getTopazToken = (
         options.timeout,
     );
 
+export const getTopazValues = (): Promise<{syncId?: string}> =>
+    postMessageToNativeApp({
+        type: 'GET_TOPAZ_VALUES',
+        payload: {},
+    });
+
 export const getPincodeInfo = (): Promise<{status: 'enabled' | 'disabled'}> =>
     postMessageToNativeApp({type: 'GET_PINCODE_INFO'});
 

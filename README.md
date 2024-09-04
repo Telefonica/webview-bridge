@@ -820,6 +820,17 @@ Returns the [Topaz](https://www.topaz.com.br/ofd/index.php) token.
 getTopazToken = (options: {timeout?: number} = {}) => Promise<{token: string}>
 ```
 
+### getTopazValues
+
+<kbd>App version >=24.9</kbd>
+
+Returns an object containing values from the
+[Topaz](https://www.topaz.com.br/ofd/index.php) SDK.
+
+```ts
+getTopazValues = () => Promise<{syncId?: string}>
+```
+
 ### showAppRating
 
 Show native app rating dialog

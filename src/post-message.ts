@@ -239,6 +239,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {token: string};
     };
+    GET_TOPAZ_VALUES: {
+        type: 'GET_TOPAZ_VALUES';
+        id: string;
+        payload: {syncId?: string};
+    };
     LOG_OUT: {
         type: 'LOG_OUT';
         id: string;

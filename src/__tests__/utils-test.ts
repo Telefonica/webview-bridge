@@ -15,7 +15,11 @@ import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
 } from './fake-post-message';
-import {getAppMetadata, getNetworkConnectionInfo} from '../utils';
+import {
+    getAppMetadata,
+    getNetworkConnectionInfo,
+    getTopazValues,
+} from '../utils';
 
 const ANY_STRING = 'any-string';
 const ANY_OTHER_STRING = 'any-other-string';
@@ -625,5 +629,25 @@ test('set confirm action behavior', (done) => {
     setActionBehavior(actions).then((res) => {
         expect(res).toBeUndefined();
         done();
+    });
+});
+
+test('get Topaz values', async () => {
+    const syncId = 'id';
+
+    createFakeAndroidPostMessage({
+        checkMessage: (message) => {
+            expect(message.type).toBe('GET_TOPAZ_VALUES');
+            expect(message.payload).toEqual({});
+        },
+        getResponse: (message) => ({
+            type: message.type,
+            id: message.id,
+            payload: {syncId},
+        }),
+    });
+
+    await getTopazValues().then((res) => {
+        expect(res).toEqual({syncId});
     });
 });

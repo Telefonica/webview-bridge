@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.39.0
+
+-   New `getTopazValues` function
+
 ## v.3.38.0
 
 -   New `focusNavbar` function

@@ -294,7 +294,10 @@ updateNavigationBar = ({
 -   `expandedTitle`: updates NavigationBar expandedTitle. If the value is an
     empty string, the expanded navigation bar will not be shown. Only available
     in native app versions >= 11.8
--   `showBackButton`: shows or hides back icon in NavigationBar
+-   `showBackButton`: shows or hides back icon in NavigationBar. On android, in
+    case window does not support showing a back button (currently internal with
+    modal presentation, which shows an X) this flag is ignored, as in these
+    cases back navigation is always performed with the native back button
 -   `showReloadButton`: shows or hides NavigationBar Reload button
 -   `showProfileButton`: **DEPRECATED**. New apps will ignore this field
 -   `backgroundColor`: change NavigationBar background color, use a hex color

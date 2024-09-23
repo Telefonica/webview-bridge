@@ -225,6 +225,28 @@ shareBase64({
 });
 ```
 
+### downloadBase64
+
+<kbd>App version >=24.10</kbd>
+
+Opens the provided file using the download webview mode. The file is provided as
+a base64 encoded string.
+
+```ts
+downloadBase64: ({contentInBase64: string; fileName: string}) => Promise<void>;
+```
+
+-   The file type will be inferred from the `fileName` extension.
+
+#### Example
+
+```ts
+downloadBase64({
+    contentInBase64: 'SGVsbG8sIHd(...)vcmxkCg==',
+    fileName: 'hello.pdf',
+});
+```
+
 ### updateNavigationBar
 
 <kbd>App version >= 10.7: Partial support</kbd><br/> <kbd>App version >= 11.8:

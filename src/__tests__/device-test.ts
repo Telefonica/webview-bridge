@@ -10,6 +10,7 @@ import {
     getAttStatus,
     getDeviceModel,
     shareBase64,
+    downloadBase64,
 } from '../../index';
 import {
     createFakeAndroidPostMessage,
@@ -372,5 +373,53 @@ test('shareBase64 failure', async () => {
         fileName: 'example.pdf',
     });
 
-    expect(res).rejects.toEqual(error);
+    await expect(res).rejects.toEqual(error);
+});
+
+test('downloadBase64', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('DOWNLOAD_BASE64');
+            expect(msg.payload).toMatchObject({
+                content: ANY_STRING,
+                fileName: 'example.pdf',
+            });
+        },
+        getResponse: (msg) => ({
+            type: 'DOWNLOAD_BASE64',
+            id: msg.id,
+        }),
+    });
+
+    const res = await downloadBase64({
+        contentInBase64: ANY_STRING,
+        fileName: 'example.pdf',
+    });
+
+    expect(res).toBe(undefined);
+});
+
+test('downloadBase64 failure', async () => {
+    const error = {
+        code: 400,
+        description: 'bar',
+    };
+
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('DOWNLOAD_BASE64');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = downloadBase64({
+        contentInBase64: ANY_STRING,
+        fileName: 'example.pdf',
+    });
+
+    await expect(res).rejects.toEqual(error);
 });

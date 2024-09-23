@@ -92,3 +92,15 @@ export const shareBase64 = (params: {
             fileName: params.fileName,
         },
     });
+
+export const downloadBase64 = (params: {
+    contentInBase64: string;
+    fileName: string;
+}): Promise<void> =>
+    postMessageToNativeApp({
+        type: 'DOWNLOAD_BASE64',
+        payload: {
+            content: params.contentInBase64,
+            fileName: params.fileName,
+        },
+    });

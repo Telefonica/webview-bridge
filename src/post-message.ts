@@ -338,6 +338,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    DOWNLOAD_BASE64: {
+        type: 'DOWNLOAD_BASE64';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

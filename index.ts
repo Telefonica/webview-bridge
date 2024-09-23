@@ -22,6 +22,7 @@ export {
     getDeviceModel,
     getDeviceTac,
     shareBase64,
+    downloadBase64,
 } from './src/device';
 
 export {

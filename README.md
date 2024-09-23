@@ -236,7 +236,35 @@ a base64 encoded string.
 downloadBase64: ({contentInBase64: string; fileName: string}) => Promise<void>;
 ```
 
--   The file type will be inferred from the `fileName` extension.
+-   The file type will be inferred from the `fileName` extension. The file
+    extension is mandatory. Take into account that iOS webview won't be able to
+    render file types not supported by Safari.
+
+#### Behaviour
+
+##### Android
+
+1. Once file is correctly processed, a "Downloaded" notification is shown in the
+   system notifications inbox. System will try to open the file when clicking on
+   it.
+2. Simultaneously, app will try to open the given file, this may result in 3
+   situations:
+    - No app that can handle this type of file is available
+        - Nothing will happen, user feedback will be just the previous generated
+          notification.
+    - Multiple apps can handle this type of file
+        - System will show a desambiguator window to select the app which will
+          be used to open the file.
+    - Single app can open this type of file (Or an app is set as default for
+      these kind of files)
+        - App will be presented immediatly with the donwloaded content.
+
+https://github.com/user-attachments/assets/6feaed05-89f2-467b-b017-dc966bae1213
+
+##### iOS
+
+The app will open a new webview which will render the file content. The user
+will be able to download/share the file using the OS controls.
 
 #### Example
 

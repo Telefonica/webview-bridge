@@ -227,7 +227,7 @@ shareBase64({
 
 ### downloadBase64
 
-<kbd>App version >=24.10</kbd>
+<kbd>App version >=24.10</kbd> <kbd>App version >=24.9 in O2ES</kbd>
 
 Opens the provided file using the download webview mode. The file is provided as
 a base64 encoded string.

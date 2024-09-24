@@ -225,6 +225,64 @@ shareBase64({
 });
 ```
 
+### downloadBase64
+
+<kbd>App version >=24.10</kbd> <kbd>App version >=24.9 in O2ES</kbd>
+
+Opens the provided file using the download webview mode. The file is provided as
+a base64 encoded string.
+
+```ts
+downloadBase64: ({contentInBase64: string; fileName: string}) => Promise<void>;
+```
+
+-   The file type will be inferred from the `fileName` extension. The file
+    extension is mandatory. Take into account that iOS webview won't be able to
+    render file types not supported by Safari.
+
+#### Behaviour
+
+##### Android
+
+1. Once file is correctly processed, a "Downloaded" notification is shown in the
+   system notifications inbox. System will try to open the file when clicking on
+   it.
+2. Simultaneously, app will try to open the given file, this may result in 3
+   situations:
+    - No app that can handle this type of file is available
+        - Nothing will happen, user feedback will be just the previous generated
+          notification.
+    - Multiple apps can handle this type of file
+        - System will show a desambiguator window to select the app which will
+          be used to open the file.
+    - Single app can open this type of file (Or an app is set as default for
+      these kind of files)
+        - Downloaded content will be opened using the only available App that
+          supports its extension.
+
+https://github.com/user-attachments/assets/6feaed05-89f2-467b-b017-dc966bae1213
+
+##### iOS
+
+The behavior will be similar to the current webview download mode but
+downloading the file before showing it
+
+1.- Once the file is correctly procesed, it will be stored in a tmp directory
+2.- The app will open a modal webview presenting the local file in a web browser
+similar to the one used in download webview mode but hiding the "Open in Safari"
+button (due to no sense for a local file).
+
+https://github.com/user-attachments/assets/66726efd-4867-4c08-997e-a85f9cfb7c31
+
+#### Example
+
+```ts
+downloadBase64({
+    contentInBase64: 'SGVsbG8sIHd(...)vcmxkCg==',
+    fileName: 'hello.pdf',
+});
+```
+
 ### updateNavigationBar
 
 <kbd>App version >= 10.7: Partial support</kbd><br/> <kbd>App version >= 11.8:

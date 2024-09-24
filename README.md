@@ -257,14 +257,22 @@ downloadBase64: ({contentInBase64: string; fileName: string}) => Promise<void>;
           be used to open the file.
     - Single app can open this type of file (Or an app is set as default for
       these kind of files)
-        - App will be presented immediatly with the donwloaded content.
+        - Downloaded content will be opened using the only available App that
+          supports its extension.
 
 https://github.com/user-attachments/assets/6feaed05-89f2-467b-b017-dc966bae1213
 
 ##### iOS
 
-The app will open a new webview which will render the file content. The user
-will be able to download/share the file using the OS controls.
+The behavior will be similar to the current webview download mode but
+downloading the file before showing it
+
+1.- Once the file is correctly procesed, it will be stored in a tmp directory
+2.- The app will open a modal webview presenting the local file in a web browser
+similar to the one used in download webview mode but hiding the "Open in Safari"
+button (due to no sense for a local file).
+
+https://github.com/user-attachments/assets/66726efd-4867-4c08-997e-a85f9cfb7c31
 
 #### Example
 

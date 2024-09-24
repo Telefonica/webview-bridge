@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.40.0 - 2024-09-24
+
+-   New `downloadBase64` function
+
 ## v.3.39.0
 
 -   New `getTopazValues` function

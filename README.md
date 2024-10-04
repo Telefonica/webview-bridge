@@ -1212,6 +1212,31 @@ focusNavbar: () => Promise<{
 }>;
 ```
 
+### openOnboarding
+
+Opens the app Onboarding (as if it where the first time the user logs in)
+
+```ts
+openOnboarding = () => Promise<void>
+```
+
+### getBatteryInfo
+
+<kbd>App version >=24.10</kbd>
+
+Obtains information about the device battery status
+
+```ts
+getBatteryInfo: () => Promise<{
+    batteryLevel: number | null;
+    isPowerSafeMode: boolean;
+}>;
+```
+
+-   `batteryLevel`: battery level in percentage (0 - 100). `null` if the battery
+    information is unavailable.
+-   `isPowerSafeMode`: true if the device is in power saving mode.
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:
@@ -1226,14 +1251,6 @@ To inspect the bridge traffic, you can use the `setLogger` method:
 
 ```ts
 setLogger((...args) => console.log(...args));
-```
-
-### openOnboarding
-
-Opens the app Onboarding (as if it where the first time the user logs in)
-
-```ts
-openOnboarding = () => Promise<void>
 ```
 
 ## License

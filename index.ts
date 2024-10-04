@@ -23,6 +23,7 @@ export {
     getDeviceTac,
     shareBase64,
     downloadBase64,
+    getBatteryInfo,
 } from './src/device';
 
 export {

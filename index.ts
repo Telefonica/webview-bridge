@@ -95,3 +95,4 @@ export type {
 export {openOnboarding} from './src/open-onboarding';
 
 export {getProfileImage, startProfileImageFlow} from './src/profile';
+export {readTextFromClipboard, writeTextToClipboard} from './src/clipboard';

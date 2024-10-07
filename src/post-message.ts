@@ -343,6 +343,14 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    GET_BATTERY_INFO: {
+        type: 'GET_BATTERY_INFO';
+        id: string;
+        payload: {
+            batteryLevel: number | null;
+            isPowerSafeMode: boolean;
+        };
+    };
 };
 
 export type NativeAppResponsePayload<

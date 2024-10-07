@@ -104,3 +104,8 @@ export const downloadBase64 = (params: {
             fileName: params.fileName,
         },
     });
+
+export const getBatteryInfo = (): Promise<{
+    batteryLevel: number | null;
+    isPowerSafeMode: boolean;
+}> => postMessageToNativeApp({type: 'GET_BATTERY_INFO'});

@@ -11,6 +11,7 @@ import {
     getDeviceModel,
     shareBase64,
     downloadBase64,
+    getBatteryInfo,
 } from '../../index';
 import {
     createFakeAndroidPostMessage,
@@ -422,4 +423,27 @@ test('downloadBase64 failure', async () => {
     });
 
     await expect(res).rejects.toEqual(error);
+});
+
+test('getBatteryInfo', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_BATTERY_INFO');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_BATTERY_INFO',
+            payload: {
+                batteryLevel: 76,
+                isPowerSafeMode: false,
+            },
+            id: msg.id,
+        }),
+    });
+
+    const res = await getBatteryInfo();
+
+    expect(res).toEqual({
+        batteryLevel: 76,
+        isPowerSafeMode: false,
+    });
 });

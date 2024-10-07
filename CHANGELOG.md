@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.41.0 - 2024-10-07
+
+-   New `getBatteryInfo` function
+-   New `readTextFromClipboard` and `writeTextToClipboard` functions
+
 ## v.3.40.0 - 2024-09-24
 
 -   New `downloadBase64` function

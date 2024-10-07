@@ -351,6 +351,16 @@ export type ResponsesFromNativeApp = {
             isPowerSafeMode: boolean;
         };
     };
+    CLIPBOARD_READ_TEXT: {
+        type: 'CLIPBOARD_READ_TEXT';
+        id: string;
+        payload: string;
+    };
+    CLIPBOARD_WRITE_TEXT: {
+        type: 'CLIPBOARD_WRITE_TEXT';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

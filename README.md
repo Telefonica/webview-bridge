@@ -1237,6 +1237,26 @@ getBatteryInfo: () => Promise<{
     information is unavailable.
 -   `isPowerSafeMode`: true if the device is in power saving mode.
 
+### readTextFromClipboard
+
+<kbd>App version >=24.10</kbd>
+
+Reads the current text in the clipboard
+
+```ts
+readTextFromClipboard: () => Promise<string>;
+```
+
+### writeTextToClipboard
+
+<kbd>App version >=24.10</kbd>
+
+Writes the given text to the clipboard
+
+```ts
+writeTextToClipboard: (text: string) => Promise<void>;
+```
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

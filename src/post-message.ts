@@ -361,6 +361,16 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    SHOW_LOADING_OVERLAY: {
+        type: 'SHOW_LOADING_OVERLAY';
+        id: string;
+        payload: void;
+    };
+    HIDE_LOADING_OVERLAY: {
+        type: 'HIDE_LOADING_OVERLAY';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

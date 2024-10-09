@@ -15,7 +15,7 @@ export const renewSession = (
             payload: {accessToken: oldAccessToken || null},
         },
         options.timeout,
-    ).then(({accessToken}) => accessToken);
+    ).then((result) => result.accessToken);
 
 /**
  * This method is used to listen for session renewals made by native app. Whenever the native app
@@ -25,8 +25,8 @@ export const renewSession = (
 export const onSessionRenewed = (
     handler: (newAccessToken: string) => void,
 ): (() => void) =>
-    listenToNativeMessage('SESSION_RENEWED', ({accessToken}) =>
-        handler(accessToken),
+    listenToNativeMessage('SESSION_RENEWED', (result) =>
+        handler(result.accessToken),
     );
 
 /**

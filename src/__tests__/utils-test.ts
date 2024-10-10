@@ -384,7 +384,7 @@ test('fetch without bridge', async () => {
         expect(res).toEqual({
             status: 500,
             headers: {},
-            body: 'Bridge not available',
+            body: 'Bridge call failed',
         });
     });
 });

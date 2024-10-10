@@ -5,18 +5,18 @@ const TIMEOUT = 200;
 /** @deprecated */
 export const requestSimIcc = (): Promise<string | null> =>
     postMessageToNativeApp({type: 'SIM_ICC'}, TIMEOUT)
-        .then(({icc}) => icc)
+        .then((response) => response.icc)
         .catch(() => null);
 
 /** @deprecated */
 export const requestSimImsi = (): Promise<string | null> =>
     postMessageToNativeApp({type: 'IMSI'}, TIMEOUT)
-        .then(({imsi}) => imsi)
+        .then((response) => response.imsi)
         .catch(() => null);
 
 export const requestDeviceImei = (): Promise<string | null> =>
     postMessageToNativeApp({type: 'IMEI'}, TIMEOUT)
-        .then(({imei}) => imei)
+        .then((response) => response.imei)
         .catch(() => null);
 
 type RoutesAvalaible = 'notification-settings' | 'contact-settings';

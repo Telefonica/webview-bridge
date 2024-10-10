@@ -216,21 +216,14 @@ export const fetch = ({
     headers: {[key: string]: string};
     body: string;
 }): Promise<NativeAppResponsePayload<'FETCH'>> => {
-    if (isWebViewBridgeAvailable()) {
-        return postMessageToNativeApp({
-            type: 'FETCH',
-            payload: {url, method, headers, body},
-        }).catch(() => ({
-            status: 500,
-            headers: {},
-            body: 'Bridge call failed',
-        }));
-    }
-    return Promise.resolve({
+    return postMessageToNativeApp({
+        type: 'FETCH',
+        payload: {url, method, headers, body},
+    }).catch(() => ({
         status: 500,
         headers: {},
-        body: 'Bridge not available',
-    });
+        body: 'Bridge call failed',
+    }));
 };
 
 type PermissionsStatus = 'notifications' | 'read-contacts' | 'write-contacts';

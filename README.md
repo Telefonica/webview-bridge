@@ -1257,6 +1257,70 @@ Writes the given text to the clipboard
 writeTextToClipboard: (text: string) => Promise<void>;
 ```
 
+### showLoadingOverlay / hideLoadingOverlay
+
+<kbd>App version >=24.10</kbd>
+
+Shows a loading overlay screen while a task is being performed. You can control
+when to hide it with the `hideLoadingOverlay` method.
+
+```ts
+showLoadingOverlay: ({
+    /**
+     * Whether the in animation is enabled (false by default)
+     */
+    inAnimation?: boolean;
+    /**
+     * Whether the out animation is enabled (false by default)
+     */
+    outAnimation?: boolean;
+    /**
+     * Minimum duration of the loop animation in milliseconds (0 by default)
+     */
+    minimumLoopDurationMs?: number;
+    /**
+     * whether the loop animation should be stopped immediately or not (true by default)
+     */
+    stopAnimationCycle?: boolean;
+    /**
+     * Whether the background animation is enabled (false by default)
+     */
+    backgroundAnimation?: boolean;
+    /**
+     * List of description texts to be shown one after the other
+     */
+    descriptions?: Array<string>;
+    /**
+     * Duration of each description in milliseconds (3000 by default)
+     */
+    descriptionDurationMs?: number;
+    /**
+     * After this timeout loading screen would be hidden automatically (20000 by default)
+     */
+    timeoutMs?: number;
+    /**
+     * (Only Android) If true, after loading screen has been hidden, if user presses android back button, webview window will close (true by default)
+     */
+    closeOnBackButtonPressAfterFinish?: boolean;
+}) => Promise<void>;
+
+hideLoadingOverlay: () => Promise<void>;
+```
+
+#### Example
+
+```ts
+await showLoadingOverlay({
+    inAnimation: true,
+    outAnimation: true,
+    stopAnimationCycle: false,
+    descriptions: ['Loading...', 'Please wait...'],
+    descriptionDurationMs: 3000,
+});
+await doExpensiveTask();
+await hideLoadingOverlay();
+```
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

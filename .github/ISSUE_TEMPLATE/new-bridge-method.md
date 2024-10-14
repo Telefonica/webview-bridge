@@ -11,10 +11,12 @@ assignees: ''
 **Originator**: (specifies who initiates the request: Web or Native)
 
 ## Description
+Provide a description of the method and the behaviour of the apps
 
 ## Differences between iOS/Android (if any)
+To be filled only if apply
 
-## JS Method
+## Method
 **Signature**
 ```ts
 methodName: ({ param1: string, param2: string }) => Promise<{responseField: string}> 

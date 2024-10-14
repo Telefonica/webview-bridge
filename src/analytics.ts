@@ -146,7 +146,9 @@ export const sanitizeAnalyticsParams = (params: {
     [key: string]: FirebaseValue;
 }): {[key: string]: FirebaseValue} => {
     const sanitizedParams: {[key: string]: FirebaseValue} = {};
-    Object.entries(params).forEach(([key, value]) => {
+    Object.entries(params).forEach((entry) => {
+        const key = entry[0];
+        const value = entry[1];
         let sanitizedValue = value;
         const sanitizedKey = key.slice(0, EVENT_PARAM_NAME_CHARS_LIMIT);
         if (typeof value === 'string') {

@@ -4,7 +4,6 @@ about: Suggest a new bridge method
 title: ''
 labels: ''
 assignees: ''
-
 ---
 
 **Message type**: `MESSAGE_TYPE`
@@ -16,12 +15,14 @@ assignees: ''
 ## Request/Response shape
 
 **Request**
-```json
+
+```ts
 {"type": "MESSAGE_TYPE", "id": number, "payload": {}}
 ```
 
 **Response**
-```json
+
+```ts
 {"type": "MESSAGE_TYPE", "id": number, "payload": {}}
 ```
 

@@ -47,6 +47,8 @@ export {
     onNavigationBarIconClicked,
     triggerPinOrBiometricAuthentication,
     focusNavbar,
+    showLoadingOverlay,
+    hideLoadingOverlay,
 } from './src/utils';
 export type {ShareOptions, NavigationBarIcon} from './src/utils';
 

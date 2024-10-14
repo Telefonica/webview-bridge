@@ -19,6 +19,8 @@ import {
     getAppMetadata,
     getNetworkConnectionInfo,
     getTopazValues,
+    hideLoadingOverlay,
+    showLoadingOverlay,
 } from '../utils';
 
 const ANY_STRING = 'any-string';
@@ -650,4 +652,54 @@ test('get Topaz values', async () => {
     await getTopazValues().then((res) => {
         expect(res).toEqual({syncId});
     });
+});
+
+test('showLoadingOverlay', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (message) => {
+            expect(message.type).toBe('SHOW_LOADING_OVERLAY');
+            expect(message.payload).toEqual({
+                inAnimation: true,
+                outAnimation: true,
+                stopAnimationCycle: false,
+                timeoutMs: 30000,
+                descriptions: [
+                    'Loading your data',
+                    'Please wait',
+                    'We are almost there',
+                ],
+            });
+        },
+        getResponse: (message) => ({
+            type: message.type,
+            id: message.id,
+        }),
+    });
+
+    await showLoadingOverlay({
+        inAnimation: true,
+        outAnimation: true,
+        stopAnimationCycle: false,
+        timeoutMs: 30000,
+        descriptions: [
+            'Loading your data',
+            'Please wait',
+            'We are almost there',
+        ],
+    });
+});
+
+test('hideLoadingOverlay', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (message) => {
+            expect(message.type).toBe('HIDE_LOADING_OVERLAY');
+            expect(message.payload).toBeUndefined();
+        },
+        getResponse: (message) => ({
+            type: message.type,
+            id: message.id,
+        }),
+    });
+
+    await hideLoadingOverlay();
 });

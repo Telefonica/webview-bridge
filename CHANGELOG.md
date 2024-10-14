@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v.3.42.0 - 2024-10-14
+## v.3.43.0 - 2024-10-14
 
 -   New `showLoadingOverlay` / `hideLoadingOverlay` functions
 -   Use web api when available in `readTextFromClipboard` and

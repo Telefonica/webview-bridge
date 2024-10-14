@@ -8,22 +8,40 @@ assignees: ''
 
 **Message type**: `MESSAGE_TYPE`
 
+**Originator**: (specifies who initiates the request: Web or Native)
+
 ## Description
 
 ## Differences between iOS/Android (if any)
 
-## Request/Response shape
-
-**Request**
+## JS Method
+**Signature**
+```ts
+methodName: ({ param1: string, param2: string }) => Promise<{responseField: string}> 
+```
+**Request Payload**  
+Specify possible values for each field (enums, nullables, empty strings ...). And provide examples
 
 ```ts
-{"type": "MESSAGE_TYPE", "id": number, "payload": {}}
+param1: 'value_1' | 'value_2'
+param2: string | null
+```
+Examples:
+```json
+{"type":"MESSAGE_TYPE","id":"web-2","payload":{"param1":"value_1"}}
 ```
 
-**Response**
-
+**Response Payload**  
+Specify possible values for each field (enums, nullables, empty strings ...). And provide examples
 ```ts
-{"type": "MESSAGE_TYPE", "id": number, "payload": {}}
+responseField: string
+```
+Examples:
+```json
+{"type":"MESSAGE_TYPE","id":"web-2","payload":{"responseField":"value_1"}}
 ```
 
-## Possible error cases
+## Possible error cases  
+Include codes and description messages. Also explain when they can occur if necessary.
+
+401 → Missing permissions

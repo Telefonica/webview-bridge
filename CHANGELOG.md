@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v.3.42.0 - 2024-10-14
+
+-   New `showLoadingOverlay` / `hideLoadingOverlay` functions
+-   Use web api when available in `readTextFromClipboard` and
+    `writeTextToClipboard` functions
+-   Optimize bundle size
+
 ## v.3.41.0 - 2024-10-07
 
 -   New `getBatteryInfo` function

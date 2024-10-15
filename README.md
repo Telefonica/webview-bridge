@@ -1283,10 +1283,6 @@ showLoadingOverlay: ({
      */
     stopAnimationCycle?: boolean;
     /**
-     * Whether the background animation is enabled (false by default)
-     */
-    backgroundAnimation?: boolean;
-    /**
      * List of description texts to be shown one after the other
      */
     descriptions?: Array<string>;

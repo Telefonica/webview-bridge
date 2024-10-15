@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.43.1 - 2024-10-15
+
+-   Remove `backgroundAnimation` option from `showLoadingOverlay`
+
 ## v.3.43.0 - 2024-10-14
 
 -   New `showLoadingOverlay` / `hideLoadingOverlay` functions

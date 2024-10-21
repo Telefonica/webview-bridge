@@ -1317,6 +1317,17 @@ await doExpensiveTask();
 await hideLoadingOverlay();
 ```
 
+### getInstallationId
+
+<kbd>App version >=24.11</kbd>
+
+Returns the application installation id. A 32 hexadecimal characters long string
+that represents one installation of the native app.
+
+```ts
+getInstallationId: () => Promise<{installationId: string}>;
+```
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

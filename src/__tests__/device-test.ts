@@ -13,6 +13,7 @@ import {
     downloadBase64,
     getBatteryInfo,
 } from '../../index';
+import {getInstallationId} from '../device';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -445,5 +446,26 @@ test('getBatteryInfo', async () => {
     expect(res).toEqual({
         batteryLevel: 76,
         isPowerSafeMode: false,
+    });
+});
+
+test('getInstallationId', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_INSTALLATION_ID');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_INSTALLATION_ID',
+            id: msg.id,
+            payload: {
+                installationId: '123',
+            },
+        }),
+    });
+
+    const res = await getInstallationId();
+
+    expect(res).toEqual({
+        installationId: '123',
     });
 });

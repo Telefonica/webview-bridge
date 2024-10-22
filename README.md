@@ -64,6 +64,8 @@ Alternatively, you can import the library directly from a CDN:
 
 ### isWebViewBridgeAvailable
 
+<kbd>Available in B2P App version >=24.10</kbd>
+
 Returns true if WebView Bridge is available. Use this function to implement
 fallbacks in case the bridge is not available.
 
@@ -287,7 +289,7 @@ downloadBase64({
 
 <kbd>App version >= 10.7: Partial support</kbd><br/> <kbd>App version >= 11.8:
 expandedTitle</kbd><br/> <kbd>App version >= 14.8: Additional properties and
-deprecations</kbd>
+deprecations</kbd><br/> <kbd>Partial support in B2P App version <=24.10: title</kbd>
 
 Customize WebView NavigationBar properties. You can set one or more properties
 in a single call
@@ -382,7 +384,7 @@ updateNavigationBar({
     showBackButton: true,
     showReloadButton: false,
     backgroundColor: '#FF0000',
-    leftNavigationIcons: [
+    leftActions: [
         {
             name: 'icon name',
             iconEnum: 'SOME_ICON',
@@ -392,7 +394,7 @@ updateNavigationBar({
             },
         },
     ],
-    rightNavigationIcons: [
+    rightActions: [
         {
             name: 'icon name',
             iconEnum: 'icon enum value',
@@ -479,6 +481,8 @@ nativeConfirm({
 ```
 
 ### nativeAlert
+
+<kbd>Available in B2P App version >=24.10</kbd>
 
 Show a native alert dialog.
 
@@ -867,6 +871,8 @@ onSessionRenewed = (
 
 ### logout
 
+<kbd>Available in B2P App version >=24.10</kbd>
+
 A method that requests a user logout.
 
 ```ts
@@ -893,6 +899,8 @@ getTopazValues = () => Promise<{syncId?: string}>
 ```
 
 ### showAppRating
+
+<kbd>Available in B2P App version >=24.10</kbd>
 
 Show native app rating dialog
 
@@ -1213,6 +1221,8 @@ focusNavbar: () => Promise<{
 ```
 
 ### openOnboarding
+
+<kbd>Available in B2P App version >=24.10</kbd>
 
 Opens the app Onboarding (as if it where the first time the user logs in)
 

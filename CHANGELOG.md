@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.44.0 - 2024-10-23
+
+-   New `getInstallationId` function
+
 ## v.3.43.1 - 2024-10-15
 
 -   Remove `backgroundAnimation` option from `showLoadingOverlay`

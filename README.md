@@ -289,7 +289,8 @@ downloadBase64({
 
 <kbd>App version >= 10.7: Partial support</kbd><br/> <kbd>App version >= 11.8:
 expandedTitle</kbd><br/> <kbd>App version >= 14.8: Additional properties and
-deprecations</kbd><br/> <kbd>Partial support in B2P App version <=24.10: title</kbd>
+deprecations</kbd><br/> <kbd>Partial support in B2P App version <=24.10:
+title</kbd>
 
 Customize WebView NavigationBar properties. You can set one or more properties
 in a single call

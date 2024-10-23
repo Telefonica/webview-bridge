@@ -10,6 +10,8 @@ assignees: ''
 
 **Originator**: (specifies who initiates the request: Web or Native)
 
+**Min app version**: (specifies the app versions that support this method)
+
 ## Description
 
 Provide a description of the method and the behaviour of the apps

@@ -24,6 +24,7 @@ export {
     shareBase64,
     downloadBase64,
     getBatteryInfo,
+    getInstallationId,
 } from './src/device';
 
 export {

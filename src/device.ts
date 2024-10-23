@@ -109,3 +109,6 @@ export const getBatteryInfo = (): Promise<{
     batteryLevel: number | null;
     isPowerSafeMode: boolean;
 }> => postMessageToNativeApp({type: 'GET_BATTERY_INFO'});
+
+export const getInstallationId = (): Promise<{installationId: string}> =>
+    postMessageToNativeApp({type: 'GET_INSTALLATION_ID'});

@@ -371,6 +371,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    GET_INSTALLATION_ID: {
+        type: 'GET_INSTALLATION_ID';
+        id: string;
+        payload: {installationId: string};
+    };
 };
 
 export type NativeAppResponsePayload<

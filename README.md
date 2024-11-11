@@ -1358,8 +1358,8 @@ When the webview is opened, it will ask to the native app for the unseen
 notifications badge (`getUnseenNotificationsBadge`). This allows the webview to
 know if the native app has received any push while the webview was closed. The
 webview will check the `lastUpdated` timestamp receibed from the native app with
-the one persisted in the webview `localStorage`, if it's newer, the webview will
-fetch the inbox from server. When the webview updates their state, it will
+the one persisted in the webview `localStorage`, if it's different, the webview
+will fetch the inbox from server. When the webview updates their state, it will
 persist the lastUpdated timestamp in the localStorage and send it to the native
 app using the `setUnseenNotificationsBadge`. This way, the next time the webview
 use the getter, it will know if the `lastUpdated` matches with the one persisted

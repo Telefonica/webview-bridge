@@ -290,13 +290,18 @@ downloadBase64({
 <kbd>App version >= 10.7: Partial support</kbd><br/> <kbd>App version >= 11.8:
 expandedTitle</kbd><br/> <kbd>App version >= 14.8: Additional properties and
 deprecations</kbd><br/> <kbd>Partial support in B2P App version <=24.10:
-title</kbd>
+title</kbd><br/> <kbd>Partial support in B2P App version >=24.11: right
+actions</kbd><br/> <kbd>Full support in B2P App version >=24.12: title</kbd>
 
 Customize WebView NavigationBar properties. You can set one or more properties
 in a single call
 
 ```ts
 type NavigationBarIcon = {
+    /** Identifier. The native side will notify the WebView when the icon is clicked using this id*/
+    id: string;
+    /** URL to be opened by the app as a deep-link if present */
+    url?: string;
     /** Content description of the image used for accessibility */
     name: string;
     /**
@@ -387,6 +392,7 @@ updateNavigationBar({
     backgroundColor: '#FF0000',
     leftActions: [
         {
+            id: 'iconID',
             name: 'icon name',
             iconEnum: 'SOME_ICON',
             badge: {
@@ -397,6 +403,7 @@ updateNavigationBar({
     ],
     rightActions: [
         {
+            id: 'iconID',
             name: 'icon name',
             iconEnum: 'icon enum value',
             icon: {

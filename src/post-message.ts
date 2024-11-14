@@ -376,6 +376,16 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {installationId: string};
     };
+    GET_UNSEEN_NOTIFICATIONS_BADGE: {
+        type: 'GET_UNSEEN_NOTIFICATIONS_BADGE';
+        id: string;
+        payload: {unseenNotificationCounter: number; lastUpdated: number};
+    };
+    SET_UNSEEN_NOTIFICATIONS_BADGE: {
+        type: 'SET_UNSEEN_NOTIFICATIONS_BADGE';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

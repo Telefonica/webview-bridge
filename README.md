@@ -1346,6 +1346,32 @@ that represents one installation of the native app.
 getInstallationId: () => Promise<{installationId: string}>;
 ```
 
+### getUnseenNotificationsBadge / setUnseenNotificationsBadge
+
+<kbd>App version >=24.12</kbd>
+
+get/set the number of unseen notifications in the inbox and the last time the
+counter was updated (timestamp in milliseconds).
+
+```ts
+getUnseenNotificationsBadge: () => Promise<{unseenNotificationCounter: number; lastUpdated: number}>;
+```
+
+```ts
+setUnseenNotificationsBadge: ({unseenNotificationCounter: number; lastUpdated: number}) => Promise<void>;
+```
+
+When the webview is opened, it will ask to the native app for the unseen
+notifications badge (`getUnseenNotificationsBadge`). This allows the webview to
+know if the native app has received any push while the webview was closed. The
+webview will check the `lastUpdated` timestamp receibed from the native app with
+the one persisted in the webview `localStorage`, if it's different, the webview
+will fetch the inbox from server. When the webview updates their state, it will
+persist the lastUpdated timestamp in the localStorage and send it to the native
+app using the `setUnseenNotificationsBadge`. This way, the next time the webview
+use the getter, it will know if the `lastUpdated` matches with the one persisted
+in `localStorage`.
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

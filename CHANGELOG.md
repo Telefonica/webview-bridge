@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.45.0 - 2024-11-24
+
+-   New `getUnseenNotificationsBadge` / `setUnseenNotificationsBadge` functions
+
 ## v.3.44.0 - 2024-10-23
 
 -   New `getInstallationId` function

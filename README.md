@@ -1341,7 +1341,7 @@ getInstallationId: () => Promise<{installationId: string}>;
 
 ### getUnseenNotificationsBadge / setUnseenNotificationsBadge
 
-<kbd>App version >=24.11</kbd>
+<kbd>App version >=24.12</kbd>
 
 get/set the number of unseen notifications in the inbox and the last time the
 counter was updated (timestamp in milliseconds).

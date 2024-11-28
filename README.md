@@ -1372,6 +1372,77 @@ app using the `setUnseenNotificationsBadge`. This way, the next time the webview
 use the getter, it will know if the `lastUpdated` matches with the one persisted
 in `localStorage`.
 
+### requestDatamobDeviceAdmin
+
+<kbd>App version >=24.12</kbd>
+
+Datamob is a native library that offer developers a way to integrate security
+and remote device control features into their applications.
+
+The application that implements the Datamob library must be registered as a
+system management application (Device Admin). This configuration is essential to
+allow the application to have sufficient permissions to execute security
+commands, such as screen lock and factory reset.
+
+This method opens a setting screen asking the user to accept system management
+permissions for the application.
+
+```ts
+requestDatamobDeviceAdmin: () => Promise<{isAdmin: boolean}>;
+```
+
+`isAdmin` is true if the permission was granted.
+
+### registerDatamobUser
+
+<kbd>App version >=24.12</kbd>
+
+The application that implements the Datamob should have an user registered. This
+method is used to register an user.
+
+```ts
+registerDatamobUser: ({phoneNumber: string, tokenPassword: string}) => Promise<{success: boolean}>;
+```
+
+-   `phoneNumber`: The phone number of the user.
+-   `tokenPassword`: When registering the device, datamob generate an accessKey
+    that is recorded in the Datamob device registry. By combining this attribute
+    with a hash that we keep in a password vault, generate this token.
+
+-   `success`: true if the user was registered successfully.
+
+### validateDatamobRequirements
+
+<kbd>App version >=24.12</kbd>
+
+Datamob sdk allows to send remote commands to the user device. These remote
+commands include actions such as locking the device screen (lock screen) or even
+forcing a wipe (factory reset) of the device, providing additional security
+control for the end user.
+
+This new method will return a map with the requirements. Each requirement is a
+boolean value where true is valid, false is not valid.
+
+```ts
+validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => Promise<{
+    requirements: {
+        deviceAdmin: boolean;
+        googleAccount: boolean;
+        lockPassword: boolean;
+        accessibilityOption: boolean;
+        invalidPassword: boolean;
+        invalidToken: boolean;
+    }
+}>
+```
+
+-   `phoneNumber`: The phone number of the user.
+-   `tokenPassword`: When registering the device, datamob generate an accessKey
+    that is recorded in the Datamob device registry. By combining this attribute
+    with a hash that we keep in a password vault, generate this token.
+
+-   `requirements`: A map with the requirements.
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

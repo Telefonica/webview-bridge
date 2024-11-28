@@ -379,12 +379,39 @@ export type ResponsesFromNativeApp = {
     GET_UNSEEN_NOTIFICATIONS_BADGE: {
         type: 'GET_UNSEEN_NOTIFICATIONS_BADGE';
         id: string;
-        payload: {unseenNotificationCounter: number; lastUpdated: number};
+        payload: {
+            unseenNotificationCounter: number;
+            lastUpdated: number;
+        };
     };
     SET_UNSEEN_NOTIFICATIONS_BADGE: {
         type: 'SET_UNSEEN_NOTIFICATIONS_BADGE';
         id: string;
         payload: void;
+    };
+    REQUEST_DATAMOB_DEVICE_ADMIN: {
+        type: 'REQUEST_DATAMOB_DEVICE_ADMIN';
+        id: string;
+        payload: {isAdmin: boolean};
+    };
+    REGISTER_DATAMOB_USER: {
+        type: 'REGISTER_DATAMOB_USER';
+        id: string;
+        payload: {success: boolean};
+    };
+    VALIDATE_DATAMOB_REQUIREMENTS: {
+        type: 'VALIDATE_DATAMOB_REQUIREMENTS';
+        id: string;
+        payload: {
+            requirements: {
+                deviceAdmin: boolean;
+                googleAccount: boolean;
+                lockPassword: boolean;
+                accessibilityOption: boolean;
+                invalidPassword: boolean;
+                invalidToken: boolean;
+            };
+        };
     };
 };
 

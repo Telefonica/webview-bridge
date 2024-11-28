@@ -1393,6 +1393,10 @@ requestDatamobDeviceAdmin: () => Promise<{isAdmin: boolean}>;
 
 `isAdmin` is true if the permission was granted.
 
+#### Demo
+
+https://github.com/user-attachments/assets/28095f42-76db-4ac2-9586-e350acef7e1d
+
 ### registerDatamobUser
 
 <kbd>App version >=24.12</kbd>

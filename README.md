@@ -1402,7 +1402,7 @@ https://github.com/user-attachments/assets/28095f42-76db-4ac2-9586-e350acef7e1d
 <kbd>App version >=24.12</kbd>
 
 The application that implements the Datamob should have an user registered. This
-method is used to register an user.
+method is used to register one.
 
 ```ts
 registerDatamobUser: ({phoneNumber: string, tokenPassword: string}) => Promise<{success: boolean}>;
@@ -1424,8 +1424,8 @@ commands include actions such as locking the device screen (lock screen) or even
 forcing a wipe (factory reset) of the device, providing additional security
 control for the end user.
 
-This new method will return a map with the requirements. Each requirement is a
-boolean value where true is valid, false is not valid.
+This method returns a map with the requirements. Each requirement is a boolean
+value where true is valid, false is not valid.
 
 ```ts
 validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => Promise<{

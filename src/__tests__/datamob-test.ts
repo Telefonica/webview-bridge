@@ -61,7 +61,7 @@ test('validateDatamobRequirements', async () => {
                     googleAccount: true,
                     lockPassword: true,
                     accessibilityOption: true,
-                    invalidPassword: true,
+                    invalidPhoneNumber: true,
                     invalidToken: true,
                 },
             },
@@ -76,7 +76,7 @@ test('validateDatamobRequirements', async () => {
             googleAccount: true,
             lockPassword: true,
             accessibilityOption: true,
-            invalidPassword: true,
+            invalidPhoneNumber: true,
             invalidToken: true,
         },
     });

@@ -408,7 +408,7 @@ export type ResponsesFromNativeApp = {
                 googleAccount: boolean;
                 lockPassword: boolean;
                 accessibilityOption: boolean;
-                invalidPassword: boolean;
+                invalidPhoneNumber: boolean;
                 invalidToken: boolean;
             };
         };

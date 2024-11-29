@@ -1282,12 +1282,14 @@ writeTextToClipboard: (text: string) => Promise<void>;
 Shows a loading overlay screen while a task is being performed. You can control
 when to hide it with the `hideLoadingOverlay` method.
 
-Note: Depending on the configuration used to show the overlay, `hideLoadingOverlay` won't immediately hide it, in all cases you should wait for its promise to be resolved in order to know when the native overlay is effectively closed.
+Note: Depending on the configuration used to show the overlay,
+`hideLoadingOverlay` won't immediately hide it, in all cases you should wait for
+its promise to be resolved in order to know when the native overlay is
+effectively closed.
 
-
-| Overlay Success Example                                                                        | Overlay Failure Example                                                                       |
-|------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|
-| <video src="https://github.com/user-attachments/assets/d46bb10c-e868-42d7-bed3-a171f34192e7">  | <video src="https://github.com/user-attachments/assets/8f2f6a8e-0570-437b-8f98-c905bcb224fd"> |
+| Overlay Success Example                                                                       | Overlay Failure Example                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| <video src="https://github.com/user-attachments/assets/d46bb10c-e868-42d7-bed3-a171f34192e7"> | <video src="https://github.com/user-attachments/assets/8f2f6a8e-0570-437b-8f98-c905bcb224fd"> |
 
 ```ts
 showLoadingOverlay: ({

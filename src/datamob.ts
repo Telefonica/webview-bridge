@@ -12,11 +12,11 @@ export const registerDatamobUser = ({
 }: {
     phoneNumber: string;
     tokenPassword: string;
-}): Promise<{success: boolean}> =>
+}): Promise<{success: true} | {success: false; errorMessage: string}> =>
     postMessageToNativeApp({
         type: 'REGISTER_DATAMOB_USER',
         payload: {phoneNumber, tokenPassword},
-    }).then(({success}) => ({success}));
+    });
 
 export const validateDatamobRequirements = ({
     phoneNumber,
@@ -30,7 +30,7 @@ export const validateDatamobRequirements = ({
         googleAccount: boolean;
         lockPassword: boolean;
         accessibilityOption: boolean;
-        invalidPassword: boolean;
+        invalidPhoneNumber: boolean;
         invalidToken: boolean;
     };
 }> =>

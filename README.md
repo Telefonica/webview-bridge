@@ -1344,6 +1344,19 @@ await doExpensiveTask();
 await hideLoadingOverlay();
 ```
 
+#### Error cases
+
+If `showLoadingOverlay` is called while the loading overlay is already being
+shown, the promise will be rejected with an error object with the following
+type:
+
+```ts
+{
+    code: 503;
+    description: 'Loading screen already showing';
+}
+```
+
 ### getInstallationId
 
 <kbd>App version >=24.11</kbd>
@@ -1380,6 +1393,91 @@ persist the lastUpdated timestamp in the localStorage and send it to the native
 app using the `setUnseenNotificationsBadge`. This way, the next time the webview
 use the getter, it will know if the `lastUpdated` matches with the one persisted
 in `localStorage`.
+
+### requestDatamobDeviceAdmin
+
+<kbd>App version >=25.x</kbd>
+
+Datamob is a native library that offer developers a way to integrate security
+and remote device control features into their applications.
+
+The application that implements the Datamob library must be registered as a
+system management application (Device Admin). This configuration is essential to
+allow the application to have sufficient permissions to execute security
+commands, such as screen lock and factory reset.
+
+This method opens a setting screen asking the user to accept system management
+permissions for the application.
+
+```ts
+requestDatamobDeviceAdmin: () => Promise<{isAdmin: boolean}>;
+```
+
+`isAdmin` is true if the permission was granted.
+
+#### Demo
+
+https://github.com/user-attachments/assets/28095f42-76db-4ac2-9586-e350acef7e1d
+
+### registerDatamobUser
+
+<kbd>App version >=25.x</kbd>
+
+The application that implements the Datamob should have an user registered. This
+method is used to register one.
+
+```ts
+registerDatamobUser: ({phoneNumber: string, tokenPassword: string}) => Promise<void>;
+```
+
+-   `phoneNumber`: The phone number of the user.
+-   `tokenPassword`: When registering the device, datamob generate an accessKey
+    that is recorded in the Datamob device registry. By combining this attribute
+    with a hash that we keep in a password vault, generate this token.
+
+#### Error cases
+
+If the registration fails, the promise will be rejected with an error object
+with the following type:
+
+```ts
+{
+    code: 500;
+    reason: `Registration error: ${errorDescription}`;
+}
+```
+
+### validateDatamobRequirements
+
+<kbd>App version >=25.x</kbd>
+
+Datamob sdk allows to send remote commands to the user device. These remote
+commands include actions such as locking the device screen (lock screen) or even
+forcing a wipe (factory reset) of the device, providing additional security
+control for the end user.
+
+This method returns a map with the requirements. Each requirement is a boolean
+value where true is valid, false is not valid.
+
+```ts
+validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => Promise<{
+    requirements: {
+        deviceAdmin: boolean;
+        googleAccount: boolean;
+        lockPassword: boolean;
+        accessibilityOption: boolean;
+        invalidPassword: boolean;
+        invalidToken: boolean;
+    }
+}>
+```
+
+-   `phoneNumber`: The phone number of the user.
+-   `tokenPassword`: When registering the device, datamob generate an accessKey
+    that is recorded in the Datamob device registry. By combining this attribute
+    with a hash that we keep in a password vault, generate this token.
+
+-   `requirements`: A map with the requirements.
 
 ## Error handling
 

@@ -103,3 +103,9 @@ export {
     getUnseenNotificationsBadge,
     setUnseenNotificationsBadge,
 } from './src/inbox-notifications';
+
+export {
+    registerDatamobUser,
+    requestDatamobDeviceAdmin,
+    validateDatamobRequirements,
+} from './src/datamob';

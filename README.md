@@ -1335,6 +1335,19 @@ await doExpensiveTask();
 await hideLoadingOverlay();
 ```
 
+#### Error cases
+
+If `showLoadingOverlay` is called while the loading overlay is already being
+shown, the promise will be rejected with an error object with the following
+type:
+
+```ts
+{
+    code: 503;
+    description: 'Loading screen already showing';
+}
+```
+
 ### getInstallationId
 
 <kbd>App version >=24.11</kbd>
@@ -1405,7 +1418,7 @@ The application that implements the Datamob should have an user registered. This
 method is used to register one.
 
 ```ts
-registerDatamobUser: ({phoneNumber: string, tokenPassword: string}) => Promise<{success: boolean}>;
+registerDatamobUser: ({phoneNumber: string, tokenPassword: string}) => Promise<void>;
 ```
 
 -   `phoneNumber`: The phone number of the user.
@@ -1413,7 +1426,17 @@ registerDatamobUser: ({phoneNumber: string, tokenPassword: string}) => Promise<{
     that is recorded in the Datamob device registry. By combining this attribute
     with a hash that we keep in a password vault, generate this token.
 
--   `success`: true if the user was registered successfully.
+#### Error cases
+
+If the registration fails, the promise will be rejected with an error object
+with the following type:
+
+```ts
+{
+    code: 500;
+    reason: `Registration error: ${errorDescription}`;
+}
+```
 
 ### validateDatamobRequirements
 

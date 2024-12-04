@@ -12,7 +12,7 @@ export const registerDatamobUser = ({
 }: {
     phoneNumber: string;
     tokenPassword: string;
-}): Promise<{success: true} | {success: false; errorMessage: string}> =>
+}): Promise<void> =>
     postMessageToNativeApp({
         type: 'REGISTER_DATAMOB_USER',
         payload: {phoneNumber, tokenPassword},

@@ -397,7 +397,7 @@ export type ResponsesFromNativeApp = {
     REGISTER_DATAMOB_USER: {
         type: 'REGISTER_DATAMOB_USER';
         id: string;
-        payload: {success: true} | {success: false; errorMessage: string};
+        payload: void;
     };
     VALIDATE_DATAMOB_REQUIREMENTS: {
         type: 'VALIDATE_DATAMOB_REQUIREMENTS';

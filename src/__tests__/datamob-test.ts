@@ -34,14 +34,37 @@ test('registerDatamobUser', async () => {
         getResponse: (msg) => ({
             type: 'REGISTER_DATAMOB_USER',
             id: msg.id,
-            payload: {
-                success: true,
-            },
         }),
     });
 
     const res = await registerDatamobUser({phoneNumber, tokenPassword});
-    expect(res).toEqual({success: true});
+    expect(res).toBeUndefined();
+});
+
+test('registerDatamobUser error', async () => {
+    const phoneNumber = '666112233';
+    const tokenPassword = 'sometoken';
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('REGISTER_DATAMOB_USER');
+            expect(msg.payload).toEqual({phoneNumber, tokenPassword});
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: {
+                code: 500,
+                reason: 'Registration error',
+            },
+        }),
+    });
+
+    await expect(
+        registerDatamobUser({phoneNumber, tokenPassword}),
+    ).rejects.toEqual({
+        code: 500,
+        reason: 'Registration error',
+    });
 });
 
 test('validateDatamobRequirements', async () => {

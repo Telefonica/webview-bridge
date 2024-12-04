@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.46.0 - 2025-12-04
+
+-   Datamob sdk methods: `registerDatamobUser`, `requestDatamobDeviceAdmin`,
+    `validateDatamobRequirements`.
+
 ## v.3.45.0 - 2024-11-24
 
 -   New `getUnseenNotificationsBadge` / `setUnseenNotificationsBadge` functions

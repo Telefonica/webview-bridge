@@ -1,5 +1,5 @@
 {
-    "name": "@tef-novum/webview-bridge",
+    "name": "@telefonica/webview-bridge",
     "version": "3.46.0",
     "description": "JavaScript library to access to native functionality. Requires a webview with a postMessage bridge.",
     "main": "./dist/webview-bridge-cjs.js",
@@ -15,8 +15,8 @@
         "lint": "eslint --report-unused-disable-directives .",
         "ts-check": "tsc --project tsconfig.json --noEmit",
         "fix-code": "yarn lint -- --fix && yarn prettier -- --write",
-        "ci": "yarn prettier-check && yarn lint && yarn ts-check && yarn test --ci && yarn build",
-        "prepublishOnly": "yarn ci"
+        "prepublishOnly": "node scripts/prepublish-only.js",
+        "prepack": "yarn build"
     },
     "repository": {
         "type": "git",
@@ -28,8 +28,9 @@
         "url": "https://github.com/tef-dig/webview-bridge/issues"
     },
     "homepage": "https://github.com/tef-dig/webview-bridge#readme",
-    "dependencies": {},
     "devDependencies": {
+        "@semantic-release/changelog": "^6.0.3",
+        "@semantic-release/git": "^10.0.1",
         "@types/gtag.js": "^0.0.10",
         "@types/jest": "^27.0.3",
         "@typescript-eslint/eslint-plugin": "^5.6.0",
@@ -42,8 +43,20 @@
         "rimraf": "^3.0.2",
         "rollup": "^2.61.0",
         "rollup-plugin-typescript2": "^0.31.1",
+        "semantic-release": "^24.2.0",
         "ts-jest": "^27.1.1",
         "typescript": "^4.5.3",
         "uglify-es": "^3.3.9"
-    }
+    },
+    "release": {
+        "plugins": [
+            "@semantic-release/commit-analyzer",
+            "@semantic-release/release-notes-generator",
+            "@semantic-release/changelog",
+            "@semantic-release/npm",
+            "@semantic-release/git",
+            "@semantic-release/github"
+        ]
+    },
+    "packageManager": "yarn@4.5.3"
 }

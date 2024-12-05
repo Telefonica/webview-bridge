@@ -1,25 +1,23 @@
 name: CI
 on:
     push:
-        branches:
-            - master
+        branches: [master]
     pull_request:
-        branches:
-            - master
+        branches: [master]
+    merge_group:
+        branches: [master]
 
 jobs:
     build:
-        strategy:
-            matrix:
-                os: [windows-latest, ubuntu-latest]
-                node_version: [16]
-        name: CI on NodeJS v${{ matrix.node_version }} and ${{ matrix.os }}
-        runs-on: ${{ matrix.os }}
+        runs-on: ubuntu-latest
         steps:
-            - run: git config --global core.autocrlf false
-            - uses: actions/checkout@v2
-            - uses: actions/setup-node@v1
+            - uses: actions/checkout@v4
+            - uses: actions/setup-node@v4
               with:
-                  node-version: ${{ matrix.node_version }}
-            - run: yarn
-            - run: yarn ci
+                  node-version: 22
+            - run: yarn install --immutable --immutable-cache
+            - run: yarn lint
+            - run: yarn prettier-check
+            - run: yarn build
+            - run: yarn ts-check
+            - run: yarn test --ci

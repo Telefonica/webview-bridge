@@ -16,13 +16,13 @@ type QualtricsProperty<T> = {
 };
 
 export const setQualtricsProperties = ({
-    stringProperties,
-    numberProperties,
-    dateTimePropertyKeys,
+    stringProperties = [],
+    numberProperties = [],
+    dateTimePropertyKeys = [],
 }: {
-    stringProperties: Array<QualtricsProperty<string>>;
-    numberProperties: Array<QualtricsProperty<number>>;
-    dateTimePropertyKeys: Array<string>;
+    stringProperties?: Array<QualtricsProperty<string>>;
+    numberProperties?: Array<QualtricsProperty<number>>;
+    dateTimePropertyKeys?: Array<string>;
 }): Promise<void> =>
     postMessageToNativeApp({
         type: 'SET_QUALTRICS_PROPERTIES',

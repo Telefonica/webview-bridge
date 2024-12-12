@@ -1481,7 +1481,7 @@ validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => P
 
 ### displayQualtricsIntercept
 
-<kbd>App version >=24.12</kbd>
+<kbd>App version >=24.12 (iOS only)</kbd>
 
 Uses the Qualtrics SDK to display a survey intercept to the user if possible.
 
@@ -1512,7 +1512,7 @@ displayQualtricsIntercept: ({interceptId: string}) => Promise<{displayed: boolea
 
 ### setQualtricsProperties
 
-<kbd>App version >=24.12</kbd>
+<kbd>App version >=24.12 (iOS only)</kbd>
 
 Method to set properties in Qualtrics SDK before displaying a survey.
 
@@ -1542,7 +1542,7 @@ setQualtricsProperties: ({
 
 ### isQualtricsInterceptAvailableForUser
 
-<kbd>App version >=24.12</kbd>
+<kbd>App version >=24.12 (iOS only)</kbd>
 
 Check if a Qualtrics intercept is available for the user.
 

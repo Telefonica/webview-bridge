@@ -413,6 +413,21 @@ export type ResponsesFromNativeApp = {
             };
         };
     };
+    DISPLAY_QUALTRICS_INTERCEPT: {
+        type: 'DISPLAY_QUALTRICS_INTERCEPT';
+        id: string;
+        payload: {displayed: true};
+    };
+    SET_QUALTRICS_PROPERTIES: {
+        type: 'SET_QUALTRICS_PROPERTIES';
+        id: string;
+        payload: void;
+    };
+    IS_QUALTRICS_INTERCEPT_AVAILABLE_FOR_USER: {
+        type: 'IS_QUALTRICS_INTERCEPT_AVAILABLE_FOR_USER';
+        id: string;
+        payload: {isAvailable: boolean};
+    };
 };
 
 export type NativeAppResponsePayload<

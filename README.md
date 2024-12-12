@@ -1396,7 +1396,7 @@ in `localStorage`.
 
 ### requestDatamobDeviceAdmin
 
-<kbd>App version >=25.x</kbd>
+<kbd>App version >=25.0</kbd>
 
 Datamob is a native library that offer developers a way to integrate security
 and remote device control features into their applications.
@@ -1421,7 +1421,7 @@ https://github.com/user-attachments/assets/28095f42-76db-4ac2-9586-e350acef7e1d
 
 ### registerDatamobUser
 
-<kbd>App version >=25.x</kbd>
+<kbd>App version >=25.0</kbd>
 
 The application that implements the Datamob should have an user registered. This
 method is used to register one.
@@ -1449,7 +1449,7 @@ with the following type:
 
 ### validateDatamobRequirements
 
-<kbd>App version >=25.x</kbd>
+<kbd>App version >=25.0</kbd>
 
 Datamob sdk allows to send remote commands to the user device. These remote
 commands include actions such as locking the device screen (lock screen) or even
@@ -1478,6 +1478,93 @@ validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => P
     with a hash that we keep in a password vault, generate this token.
 
 -   `requirements`: A map with the requirements.
+
+### displayQualtricsIntercept
+
+<kbd>App version >=24.12</kbd>
+
+Uses the Qualtrics SDK to display a survey intercept to the user if possible.
+
+The native app will try to show the survey related to the provided `interceptId`
+
+It will return a boolean (`displayed`) indicating if the survey has been
+displayed or not.
+
+```ts
+displayQualtricsIntercept: ({interceptId: string}) => Promise<{displayed: boolean}>;
+```
+
+#### Error cases
+
+```ts
+{
+    code: 500;
+    reason: 'Internal Error'; // If an error occurred invoking the SDK;
+}
+```
+
+```ts
+{
+    code: 501;
+    reason: 'SDK not initialized';
+}
+```
+
+### setQualtricsProperties
+
+<kbd>App version >=24.12</kbd>
+
+Method to set properties in Qualtrics SDK before displaying a survey.
+
+```ts
+setQualtricsProperties: ({
+    stringProperties: Array<QualtricsProperty<string>>;
+    numberProperties: Array<QualtricsProperty<number>>;
+    dateTimePropertyKeys: Array<string>;
+}) => Promise<void>;
+```
+
+#### Error cases
+
+```ts
+{
+    code: 500;
+    reason: 'Internal Error'; // If an error occurred invoking the SDK;
+}
+```
+
+```ts
+{
+    code: 501;
+    reason: 'SDK not initialized';
+}
+```
+
+### isQualtricsInterceptAvailableForUser
+
+<kbd>App version >=24.12</kbd>
+
+Check if a Qualtrics intercept is available for the user.
+
+```ts
+isQualtricsInterceptAvailableForUser: ({interceptId: string}) => Promise<{isAvailable: boolean}>;
+```
+
+#### Error cases
+
+```ts
+{
+    code: 500;
+    reason: 'Internal Error'; // If an error occurred invoking the SDK;
+}
+```
+
+```ts
+{
+    code: 501;
+    reason: 'SDK not initialized';
+}
+```
 
 ## Error handling
 

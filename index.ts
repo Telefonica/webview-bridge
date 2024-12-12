@@ -109,3 +109,9 @@ export {
     requestDatamobDeviceAdmin,
     validateDatamobRequirements,
 } from './src/datamob';
+
+export {
+    displayQualtricsIntercept,
+    setQualtricsProperties,
+    isQualtricsInterceptAvailableForUser,
+} from './src/qualtrics';

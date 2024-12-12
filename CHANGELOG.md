@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.47.0 - 2025-12-12
+
+-   Qualtrics sdk methods: `displayQualtricsIntercept`,
+    `setQualtricsProperties`, `isQualtricsInterceptAvailableForUser`.
+
 ## v.3.46.0 - 2025-12-04
 
 -   Datamob sdk methods: `registerDatamobUser`, `requestDatamobDeviceAdmin`,

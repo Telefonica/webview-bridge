@@ -38,3 +38,6 @@ export const validateDatamobRequirements = ({
         type: 'VALIDATE_DATAMOB_REQUIREMENTS',
         payload: {phoneNumber, tokenPassword},
     }).then(({requirements}) => ({requirements}));
+
+export const unregisterDatamobDeviceAdmin = (): Promise<void> =>
+    postMessageToNativeApp({type: 'UNREGISTER_DATAMOB_DEVICE_ADMIN'});

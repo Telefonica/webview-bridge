@@ -108,6 +108,7 @@ export {
     registerDatamobUser,
     requestDatamobDeviceAdmin,
     validateDatamobRequirements,
+    unregisterDatamobDeviceAdmin,
 } from './src/datamob';
 
 export {

@@ -429,6 +429,48 @@ type RequestListener = (message: RequestFromNative) => void;
 type ResponseListener = (message: ResponseFromNative) => void;
 type MessageListener = RequestListener | ResponseListener;
 
+type NovumPostMessage = (jsonMessage: string) => void;
+
+type IosFirebase = {
+    postMessage: (message: {command: string; [key: string]: any}) => void;
+};
+
+type AndroidFirebase = {
+    logEvent: (name: string, eventJson: string) => void;
+    setScreenName: (name: string) => void;
+    setScreenNameWithParams?: (name: string, paramsJson: string) => void;
+    setUserProperty: (name: string, value: string) => void;
+};
+
+declare global {
+    interface Window {
+        // iOS
+        webkit?: {
+            messageHandlers?: {
+                tuentiWebView?: {
+                    postMessage?: NovumPostMessage;
+                };
+                firebase?: IosFirebase;
+            };
+        };
+
+        // Android
+        tuentiWebView?: {
+            postMessage?: NovumPostMessage;
+        };
+
+        AnalyticsWebInterface?: AndroidFirebase;
+
+        // Web
+        __tuenti_webview_bridge?: {
+            postMessage: NovumPostMessage;
+            messageListeners: Array<MessageListener>;
+        };
+
+        gtag?: Gtag.Gtag;
+    }
+}
+
 const BRIDGE = '__tuenti_webview_bridge';
 
 const hasAndroidPostMessage = () =>
@@ -474,14 +516,26 @@ const getWebViewPostMessage = (): NovumPostMessage | null => {
     return null;
 };
 
-let messageListeners: Array<MessageListener> = [];
+const getMessageListeners = () => {
+    if (typeof window === 'undefined') {
+        return [];
+    }
+    return window[BRIDGE]?.messageListeners ?? [];
+};
+
+const setMessageListeners = (listeners: Array<MessageListener>) => {
+    if (typeof window === 'undefined' || !window[BRIDGE]) {
+        return;
+    }
+    window[BRIDGE].messageListeners = listeners;
+};
 
 const subscribe = (listener: MessageListener) => {
-    messageListeners.push(listener);
+    getMessageListeners().push(listener);
 };
 
 const unsubscribe = (listener: MessageListener) => {
-    messageListeners = messageListeners.filter((f) => f !== listener);
+    setMessageListeners(getMessageListeners().filter((f) => f !== listener));
 };
 
 const isInIframe = () => {
@@ -572,10 +626,10 @@ export const postMessageToNativeApp = <T extends keyof ResponsesFromNativeApp>(
 };
 
 /**
- * Initiates WebApp postMessage function, which will be called by native apps
+ * Initiates postMessage function, which will be called by native apps
  */
 if (typeof window !== 'undefined') {
-    window[BRIDGE] = window[BRIDGE] || {
+    window[BRIDGE] = {
         postMessage: (jsonMessage: string) => {
             log?.('[WebView Bridge] RCVD:', jsonMessage);
             let message: any;
@@ -584,8 +638,9 @@ if (typeof window !== 'undefined') {
             } catch (e) {
                 throw Error(`Problem parsing webview message: ${jsonMessage}`);
             }
-            messageListeners.forEach((f) => f(message));
+            getMessageListeners().forEach((f) => f(message));
         },
+        messageListeners: getMessageListeners() ?? [],
     };
 }
 

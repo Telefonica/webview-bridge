@@ -413,6 +413,11 @@ export type ResponsesFromNativeApp = {
             };
         };
     };
+    UNREGISTER_DATAMOB_DEVICE_ADMIN: {
+        type: 'UNREGISTER_DATAMOB_DEVICE_ADMIN';
+        id: string;
+        payload: void;
+    };
     DISPLAY_QUALTRICS_INTERCEPT: {
         type: 'DISPLAY_QUALTRICS_INTERCEPT';
         id: string;

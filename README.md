@@ -1419,6 +1419,14 @@ requestDatamobDeviceAdmin: () => Promise<{isAdmin: boolean}>;
 
 https://github.com/user-attachments/assets/28095f42-76db-4ac2-9586-e350acef7e1d
 
+### unregisterDatamobDeviceAdmin
+
+Method to unregister the application as a system management application.
+
+```ts
+unregisterDatamobDeviceAdmin: () => Promise<void>;
+```
+
 ### registerDatamobUser
 
 <kbd>App version >=25.0</kbd>

@@ -1,6 +1,7 @@
 import {
     registerDatamobUser,
     requestDatamobDeviceAdmin,
+    unregisterDatamobDeviceAdmin,
     validateDatamobRequirements,
 } from '../datamob';
 import {createFakeAndroidPostMessage} from './fake-post-message';
@@ -103,4 +104,19 @@ test('validateDatamobRequirements', async () => {
             invalidToken: true,
         },
     });
+});
+
+test('unregisterDatamobDeviceAdmin', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('UNREGISTER_DATAMOB_DEVICE_ADMIN');
+        },
+        getResponse: (msg) => ({
+            type: 'UNREGISTER_DATAMOB_DEVICE_ADMIN',
+            id: msg.id,
+        }),
+    });
+
+    const res = await unregisterDatamobDeviceAdmin();
+    expect(res).toBeUndefined();
 });

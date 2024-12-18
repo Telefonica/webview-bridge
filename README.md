@@ -634,34 +634,6 @@ Report a given feature status
 reportStatus: ({feature: 'ACCOUNT', status: 'CRITICAL' | 'GOOD' | 'BAD', reason: string}) => Promise<void>;
 ```
 
-### onNativeEvent
-
-<kbd>App version >=11.3</kbd>
-
-Listens to native app events
-
-```ts
-type NativeEventHandler = ({ event }: {event: string}) => {action: 'default'};
-
-onNativeEvent: (handler: NativeEventHandler) => () => void;
-```
-
-#### Example
-
-```ts
-onNativeEvent(({event}) => {
-    if (event === 'tappedNavigationBarBackButton') {
-        // do something
-    }
-    return {action: 'default'};
-});
-```
-
-#### Available events
-
--   `tappedNavigationBarBackButton`: fired when the user taps on the back button
-    of the native Navigation Bar. Allowed response actions: `default`
-
 ### checkPermissionStatus
 
 <kbd>App version >=11.4</kbd>

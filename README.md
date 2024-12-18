@@ -1396,7 +1396,7 @@ in `localStorage`.
 
 ### requestDatamobDeviceAdmin
 
-<kbd>App version >=25.0</kbd>
+<kbd>App version >=25.1</kbd>
 
 Datamob is a native library that offer developers a way to integrate security
 and remote device control features into their applications.
@@ -1429,7 +1429,7 @@ unregisterDatamobDeviceAdmin: () => Promise<void>;
 
 ### registerDatamobUser
 
-<kbd>App version >=25.0</kbd>
+<kbd>App version >=25.1</kbd>
 
 The application that implements the Datamob should have an user registered. This
 method is used to register one.
@@ -1457,7 +1457,7 @@ with the following type:
 
 ### validateDatamobRequirements
 
-<kbd>App version >=25.0</kbd>
+<kbd>App version >=25.1</kbd>
 
 Datamob sdk allows to send remote commands to the user device. These remote
 commands include actions such as locking the device screen (lock screen) or even
@@ -1474,7 +1474,7 @@ validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => P
         googleAccount: boolean;
         lockPassword: boolean;
         accessibilityOption: boolean;
-        invalidPassword: boolean;
+        invalidPhoneNumber: boolean;
         invalidToken: boolean;
     }
 }>

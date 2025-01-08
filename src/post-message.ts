@@ -432,6 +432,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {isAvailable: boolean};
     };
+    REFRESH_NAV_BAR: {
+        type: 'REFRESH_NAV_BAR';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

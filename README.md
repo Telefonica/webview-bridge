@@ -1528,7 +1528,7 @@ Method to set properties in Qualtrics SDK before displaying a survey.
 setQualtricsProperties: ({
     stringProperties?: {[key: string]: string};
     numberProperties?: {[key: string]: number};
-    dateTimePropertyKeys: Array<string>;
+    dateTimePropertyKeys?: Array<string>;
 }) => Promise<void>;
 ```
 

@@ -31,8 +31,8 @@ test('setQualtricsProperties', async () => {
         checkMessage: (msg) => {
             expect(msg.type).toBe('SET_QUALTRICS_PROPERTIES');
             expect(msg.payload).toEqual({
-                stringProperties: [{key: 'stringKey', value: 'stringValue'}],
-                numberProperties: [{key: 'numberKey', value: 42}],
+                stringProperties: {stringKey: 'stringValue'},
+                numberProperties: {numberKey: 42},
                 dateTimePropertyKeys: ['dateTimeKey'],
             });
         },
@@ -43,8 +43,8 @@ test('setQualtricsProperties', async () => {
     });
 
     const res = await setQualtricsProperties({
-        stringProperties: [{key: 'stringKey', value: 'stringValue'}],
-        numberProperties: [{key: 'numberKey', value: 42}],
+        stringProperties: {stringKey: 'stringValue'},
+        numberProperties: {numberKey: 42},
         dateTimePropertyKeys: ['dateTimeKey'],
     });
 

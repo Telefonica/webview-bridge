@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.48.1 - 2025-01-13
+
+-   `setQualtricsProperties`: fix types.
+
 ## v.3.48.0 - 2024-12-16
 
 -   Datamob sdk: `unregisterDatamobDeviceAdmin`.

@@ -10,18 +10,13 @@ export const displayQualtricsIntercept = ({
         payload: {interceptId},
     });
 
-type QualtricsProperty<T> = {
-    key: string;
-    value: T;
-};
-
 export const setQualtricsProperties = ({
-    stringProperties = [],
-    numberProperties = [],
+    stringProperties = {},
+    numberProperties = {},
     dateTimePropertyKeys = [],
 }: {
-    stringProperties?: Array<QualtricsProperty<string>>;
-    numberProperties?: Array<QualtricsProperty<number>>;
+    stringProperties?: {[key: string]: string};
+    numberProperties?: {[key: string]: number};
     dateTimePropertyKeys?: Array<string>;
 }): Promise<void> =>
     postMessageToNativeApp({

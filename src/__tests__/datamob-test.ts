@@ -82,7 +82,6 @@ test('validateDatamobRequirements', async () => {
             payload: {
                 requirements: {
                     deviceAdmin: true,
-                    googleAccount: true,
                     lockPassword: true,
                     accessibilityOption: true,
                     invalidPhoneNumber: true,
@@ -97,7 +96,6 @@ test('validateDatamobRequirements', async () => {
     expect(res).toEqual({
         requirements: {
             deviceAdmin: true,
-            googleAccount: true,
             lockPassword: true,
             accessibilityOption: true,
             invalidPhoneNumber: true,

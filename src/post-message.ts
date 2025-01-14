@@ -405,7 +405,6 @@ export type ResponsesFromNativeApp = {
         payload: {
             requirements: {
                 deviceAdmin: boolean;
-                googleAccount: boolean;
                 lockPassword: boolean;
                 accessibilityOption: boolean;
                 invalidPhoneNumber: boolean;

@@ -27,7 +27,6 @@ export const validateDatamobRequirements = ({
 }): Promise<{
     requirements: {
         deviceAdmin: boolean;
-        googleAccount: boolean;
         lockPassword: boolean;
         accessibilityOption: boolean;
         invalidPhoneNumber: boolean;

@@ -1471,7 +1471,6 @@ value where true is valid, false is not valid.
 validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => Promise<{
     requirements: {
         deviceAdmin: boolean;
-        googleAccount: boolean;
         lockPassword: boolean;
         accessibilityOption: boolean;
         invalidPhoneNumber: boolean;

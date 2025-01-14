@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.48.2 - 2025-01-14
+
+-   `validateDatamobRequirements`: remove googleAccount.
+
 ## v.3.48.1 - 2025-01-13
 
 -   `setQualtricsProperties`: fix types.

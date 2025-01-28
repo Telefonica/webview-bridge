@@ -1457,7 +1457,7 @@ with the following type:
 
 ### validateDatamobRequirements
 
-<kbd>App version >=25.1</kbd>
+<kbd>App version >=25.1 (Android only)</kbd>
 
 Datamob sdk allows to send remote commands to the user device. These remote
 commands include actions such as locking the device screen (lock screen) or even
@@ -1469,13 +1469,11 @@ value where true is valid, false is not valid.
 
 ```ts
 validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => Promise<{
-    requirements: {
-        deviceAdmin: boolean;
-        lockPassword: boolean;
-        accessibilityOption: boolean;
-        invalidPhoneNumber: boolean;
-        invalidToken: boolean;
-    }
+    deviceAdmin: boolean;
+    lockPassword: boolean;
+    accessibilityOption: boolean;
+    invalidPhoneNumber: boolean;
+    invalidToken: boolean;
 }>
 ```
 
@@ -1484,7 +1482,7 @@ validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => P
     that is recorded in the Datamob device registry. By combining this attribute
     with a hash that we keep in a password vault, generate this token.
 
--   `requirements`: A map with the requirements.
+-   returns a map with the requirements.
 
 ### displayQualtricsIntercept
 

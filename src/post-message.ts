@@ -403,13 +403,11 @@ export type ResponsesFromNativeApp = {
         type: 'VALIDATE_DATAMOB_REQUIREMENTS';
         id: string;
         payload: {
-            requirements: {
-                deviceAdmin: boolean;
-                lockPassword: boolean;
-                accessibilityOption: boolean;
-                invalidPhoneNumber: boolean;
-                invalidToken: boolean;
-            };
+            deviceAdmin: boolean;
+            lockPassword: boolean;
+            accessibilityOption: boolean;
+            invalidPhoneNumber: boolean;
+            invalidToken: boolean;
         };
     };
     UNREGISTER_DATAMOB_DEVICE_ADMIN: {

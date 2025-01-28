@@ -80,13 +80,11 @@ test('validateDatamobRequirements', async () => {
             type: 'VALIDATE_DATAMOB_REQUIREMENTS',
             id: msg.id,
             payload: {
-                requirements: {
-                    deviceAdmin: true,
-                    lockPassword: true,
-                    accessibilityOption: true,
-                    invalidPhoneNumber: true,
-                    invalidToken: true,
-                },
+                deviceAdmin: true,
+                lockPassword: true,
+                accessibilityOption: true,
+                invalidPhoneNumber: true,
+                invalidToken: true,
             },
         }),
     });
@@ -94,13 +92,11 @@ test('validateDatamobRequirements', async () => {
     const res = await validateDatamobRequirements({phoneNumber, tokenPassword});
 
     expect(res).toEqual({
-        requirements: {
-            deviceAdmin: true,
-            lockPassword: true,
-            accessibilityOption: true,
-            invalidPhoneNumber: true,
-            invalidToken: true,
-        },
+        deviceAdmin: true,
+        lockPassword: true,
+        accessibilityOption: true,
+        invalidPhoneNumber: true,
+        invalidToken: true,
     });
 });
 

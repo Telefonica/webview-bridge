@@ -291,7 +291,7 @@ downloadBase64({
 expandedTitle</kbd><br/> <kbd>App version >= 14.8: Additional properties and
 deprecations</kbd><br/> <kbd>Partial support in B2P App version <=24.10:
 title</kbd><br/> <kbd>Partial support in B2P App version >=24.11: right
-actions</kbd><br/> <kbd>Full support in B2P App version >=24.12: title</kbd>
+actions</kbd><br/>
 
 Customize WebView NavigationBar properties. You can set one or more properties
 in a single call
@@ -552,6 +552,8 @@ nativeMessage({
 
 ### logEvent
 
+<kbd>Available in B2P App version >=24.10</kbd>
+
 Log an event to firebase
 
 ```ts
@@ -610,6 +612,8 @@ logEvent(yourEvent, {sanitize: false});
 
 ### setScreenName
 
+<kbd>Available in B2P App version >=24.10</kbd>
+
 Log the current screen name (or page name) to firebase
 
 ```ts
@@ -617,6 +621,8 @@ setScreenName: (screenName: string, params?: {[key: string]: any}) => Promise<vo
 ```
 
 ### setUserProperty
+
+<kbd>Available in B2P App version >=24.10</kbd>
 
 Set a user property to firebase
 
@@ -706,7 +712,7 @@ internalNavigation: (feature: string) => Promise<void>;
 
 ### dismiss
 
-<kbd>App version >=11.5</kbd>
+<kbd>App version >=11.5</kbd> <kbd>Available in B2P App version >=24.10</kbd>
 
 Dismiss the current webview and optionally navigate to another url
 
@@ -1569,6 +1575,39 @@ isQualtricsInterceptAvailableForUser: ({interceptId: string}) => Promise<{isAvai
     code: 501;
     reason: 'SDK not initialized';
 }
+```
+
+### refreshNavBar
+
+Method that allows WebView to refresh the navigation bars that are retrieved by
+Visual Modules API
+
+```ts
+refreshNavBar: ({
+    moduleId?: string,
+    productId?: string
+}) => Promise<void>;
+```
+
+where
+
+-   `moduleId` is an optional parameter
+    -   If it is not included, it means the app will refresh top and bottom bar
+    -   If it is included, it should be the same values used for Visual Modules
+        API and the app will request to refresh only the indicated bar
+-   `productId` is an optional parameter
+    -   If it is not included, visual modules is requested as it is today, just
+        with the userID as query param plus the `moduleId`
+    -   If it is included, visual modules will be requested for the current
+        userID and for the `productId`
+
+#### Example
+
+```ts
+refreshNavBar({
+    moduleId: 'bottombar',
+    productId: 'ID_00fe00a87b2',
+});
 ```
 
 ## Error handling

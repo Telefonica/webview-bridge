@@ -62,7 +62,7 @@ export {
     updatePhoneNumbers,
 } from './src/contacts';
 
-export {highlightNavigationTab} from './src/navigation-tabs';
+export {highlightNavigationTab, refreshNavBar} from './src/navigation-tabs';
 
 export {
     logEvent,

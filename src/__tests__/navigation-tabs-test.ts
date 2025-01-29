@@ -43,10 +43,8 @@ test('refresh navigation bars with params', (done) => {
         }),
     });
 
-    refreshNavBar({moduleId: MODULE_ID, productId: PRODUCT_ID}).then(
-        (res) => {
-            expect(res).toBeUndefined();
-            done();
-        },
-    );
+    refreshNavBar({moduleId: MODULE_ID, productId: PRODUCT_ID}).then((res) => {
+        expect(res).toBeUndefined();
+        done();
+    });
 });

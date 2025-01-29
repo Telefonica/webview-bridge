@@ -552,6 +552,8 @@ nativeMessage({
 
 ### logEvent
 
+<kbd>Available in B2P App version >=24.10</kbd>
+
 Log an event to firebase
 
 ```ts
@@ -610,6 +612,8 @@ logEvent(yourEvent, {sanitize: false});
 
 ### setScreenName
 
+<kbd>Available in B2P App version >=24.10</kbd>
+
 Log the current screen name (or page name) to firebase
 
 ```ts
@@ -617,6 +621,8 @@ setScreenName: (screenName: string, params?: {[key: string]: any}) => Promise<vo
 ```
 
 ### setUserProperty
+
+<kbd>Available in B2P App version >=24.10</kbd>
 
 Set a user property to firebase
 
@@ -706,7 +712,7 @@ internalNavigation: (feature: string) => Promise<void>;
 
 ### dismiss
 
-<kbd>App version >=11.5</kbd>
+<kbd>App version >=11.5</kbd> <kbd>Available in B2P App version >=24.10</kbd>
 
 Dismiss the current webview and optionally navigate to another url
 

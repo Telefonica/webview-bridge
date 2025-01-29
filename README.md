@@ -1580,29 +1580,29 @@ Visual Modules API
 
 ```ts
 refreshNavBar: ({
-    module-id?: string,
-    product-id?: string
+    moduleId?: string,
+    productId?: string
 }) => Promise<void>;
 ```
 
 where
 
--   `module-id` is an optional parameter
+-   `moduleId` is an optional parameter
     -   If it is not included, it means the app will refresh top and bottom bar
     -   If it is included, it should be the same values used for Visual Modules
         API and the app will request to refresh only the indicated bar
--   `product-id` is an optional parameter
+-   `productId` is an optional parameter
     -   If it is not included, visual modules is requested as it is today, just
-        with the userID as query param plus the `module-id`
+        with the userID as query param plus the `moduleId`
     -   If it is included, visual modules will be requested for the current
-        userID and for the `product-id`
+        userID and for the `productId`
 
 #### Example
 
 ```ts
 refreshNavBar({
-    module-id: 'bottombar',
-    product-id: 'ID_00fe00a87b2',
+    moduleId: 'bottombar',
+    productId: 'ID_00fe00a87b2',
 });
 ```
 

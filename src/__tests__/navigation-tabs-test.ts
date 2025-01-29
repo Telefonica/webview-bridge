@@ -33,8 +33,8 @@ test('refresh navigation bars with params', (done) => {
         checkMessage: (message) => {
             expect(message.type).toBe('REFRESH_NAV_BAR');
             expect(message.payload).toEqual({
-                module_id: MODULE_ID,
-                product_id: PRODUCT_ID,
+                moduleId: MODULE_ID,
+                productId: PRODUCT_ID,
             });
         },
         getResponse: (message) => ({
@@ -43,7 +43,7 @@ test('refresh navigation bars with params', (done) => {
         }),
     });
 
-    refreshNavBar({module_id: MODULE_ID, product_id: PRODUCT_ID}).then(
+    refreshNavBar({moduleId: MODULE_ID, productId: PRODUCT_ID}).then(
         (res) => {
             expect(res).toBeUndefined();
             done();

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.49.0 - 2025-02-03
+
+-   `refreshNavBar`: new method to refresh navigation bar with the response of
+    Visual Modules API
+
 ## v.3.48.3 - 2025-01-28
 
 -   `validateDatamobRequirements`: fix return types.

@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.48.3 - 2025-01-28
+
+-   `validateDatamobRequirements`: fix return types.
+
 ## v.3.48.2 - 2025-01-14
 
 -   `validateDatamobRequirements`: remove googleAccount.

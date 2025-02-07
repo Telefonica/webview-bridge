@@ -743,6 +743,8 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
 ```
 ### getAppDomain
 
+<kbd>Available in B2P App version >=25.3</kbd>
+
 Return info about appDomain
 
 ```ts

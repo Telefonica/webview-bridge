@@ -469,6 +469,7 @@ test('getInstallationId', async () => {
         installationId: '123',
     });
 });
+
 test('getAppDomain', async () => {
     createFakeWebKitPostMessage({
         checkMessage: (msg) => {
@@ -483,7 +484,7 @@ test('getAppDomain', async () => {
         }),
     });
 
-    const res = await getInstallationId();
+    const res = await getAppDomain();
 
     expect(res).toEqual({
         appDomain: '123',

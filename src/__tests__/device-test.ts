@@ -13,7 +13,7 @@ import {
     downloadBase64,
     getBatteryInfo,
 } from '../../index';
-import {getInstallationId} from '../device';
+import {getAppDomain, getInstallationId} from '../device';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -467,5 +467,25 @@ test('getInstallationId', async () => {
 
     expect(res).toEqual({
         installationId: '123',
+    });
+});
+test('getAppDomain', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_APP_DOMAIN');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_APP_DOMAIN',
+            id: msg.id,
+            payload: {
+                appDomain: '123',
+            },
+        }),
+    });
+
+    const res = await getInstallationId();
+
+    expect(res).toEqual({
+        appDomain: '123',
     });
 });

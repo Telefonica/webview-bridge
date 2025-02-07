@@ -741,6 +741,7 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
     encodedAvatar?: string;
 }>>;
 ```
+
 ### getAppDomain
 
 <kbd>Available in B2P App version >=25.3</kbd>

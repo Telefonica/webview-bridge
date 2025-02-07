@@ -741,6 +741,13 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
     encodedAvatar?: string;
 }>>;
 ```
+### getAppDomain
+
+Return info about appDomain
+
+```ts
+getAppDomain: () => Promise<{domain: string}>;
+```
 
 ### getAppMetadata
 

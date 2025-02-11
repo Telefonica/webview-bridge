@@ -751,6 +751,7 @@ Return info about appDomain
 ```ts
 getAppDomain: () => Promise<{domain: string}>;
 ```
+`domain`: the domain value of the environment that the app is pointing to.
 
 ### getAppMetadata
 

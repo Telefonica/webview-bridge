@@ -316,6 +316,11 @@ export type ResponsesFromNativeApp = {
             isCancelled: boolean;
         };
     };
+    SHOW_LINE_SELECTOR: {
+        type: 'SHOW_LINE_SELECTOR';
+        id: string;
+        payload: void;
+    };
     TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION: {
         type: 'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION';
         id: string;

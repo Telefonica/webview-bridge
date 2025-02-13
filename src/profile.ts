@@ -12,3 +12,8 @@ export const startProfileImageFlow = (): Promise<{
     postMessageToNativeApp({
         type: 'START_PROFILE_IMAGE_FLOW',
     });
+
+export const showLineSelector = (): Promise<void> =>
+    postMessageToNativeApp({
+        type: 'SHOW_LINE_SELECTOR',
+    });

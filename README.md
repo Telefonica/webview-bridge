@@ -1180,6 +1180,18 @@ startProfileImageFlow: () => Promise<{
     cancelled
 -   `isCancelled`: true if the user cancelled the flow
 
+### showLineSelector
+
+<kbd>App version >=25.x</kbd>
+
+Opens the native line selector dialog
+
+#### Error cases
+
+-   405: line selector feature is not allowed (feature is disabled)
+-   409: line selector is already presented (Invoking the selector if there is
+    already one showing causes this error)
+
 ### getDeviceTac
 
 <kbd>App version >=24.3</kbd>

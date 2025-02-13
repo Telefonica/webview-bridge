@@ -25,6 +25,7 @@ export {
     downloadBase64,
     getBatteryInfo,
     getInstallationId,
+    getAppDomain,
 } from './src/device';
 
 export {

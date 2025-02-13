@@ -742,6 +742,18 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
 }>>;
 ```
 
+### getAppDomain
+
+<kbd>Available in B2P App version >=25.3</kbd>
+
+Return info about appDomain
+
+```ts
+getAppDomain: () => Promise<{domain: string}>;
+```
+
+`domain`: the domain value of the environment that the app is pointing to.
+
 ### getAppMetadata
 
 <kbd>App version >=11.8</kbd>

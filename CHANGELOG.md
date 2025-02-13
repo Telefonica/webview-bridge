@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.50.0 - 2025-02-13
+
+-   `getAppDomain`: new method to get the app domain.
+-   `showLineSelector`: new method, onpens the native line selector dialog.
+
 ## v.3.49.0 - 2025-02-03
 
 -   `refreshNavBar`: new method to refresh navigation bar with the response of

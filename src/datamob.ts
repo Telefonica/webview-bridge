@@ -25,18 +25,16 @@ export const validateDatamobRequirements = ({
     phoneNumber: string;
     tokenPassword: string;
 }): Promise<{
-    requirements: {
-        deviceAdmin: boolean;
-        lockPassword: boolean;
-        accessibilityOption: boolean;
-        invalidPhoneNumber: boolean;
-        invalidToken: boolean;
-    };
+    deviceAdmin: boolean;
+    lockPassword: boolean;
+    accessibilityOption: boolean;
+    invalidPhoneNumber: boolean;
+    invalidToken: boolean;
 }> =>
     postMessageToNativeApp({
         type: 'VALIDATE_DATAMOB_REQUIREMENTS',
         payload: {phoneNumber, tokenPassword},
-    }).then(({requirements}) => ({requirements}));
+    });
 
 export const unregisterDatamobDeviceAdmin = (): Promise<void> =>
     postMessageToNativeApp({type: 'UNREGISTER_DATAMOB_DEVICE_ADMIN'});

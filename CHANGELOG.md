@@ -1,5 +1,19 @@
 # CHANGELOG
 
+## v.3.50.0 - 2025-02-13
+
+-   `getAppDomain`: new method to get the app domain.
+-   `showLineSelector`: new method, onpens the native line selector dialog.
+
+## v.3.49.0 - 2025-02-03
+
+-   `refreshNavBar`: new method to refresh navigation bar with the response of
+    Visual Modules API
+
+## v.3.48.3 - 2025-01-28
+
+-   `validateDatamobRequirements`: fix return types.
+
 ## v.3.48.2 - 2025-01-14
 
 -   `validateDatamobRequirements`: remove googleAccount.

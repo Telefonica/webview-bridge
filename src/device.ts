@@ -112,3 +112,6 @@ export const getBatteryInfo = (): Promise<{
 
 export const getInstallationId = (): Promise<{installationId: string}> =>
     postMessageToNativeApp({type: 'GET_INSTALLATION_ID'});
+
+export const getAppDomain = (): Promise<{appDomain: string}> =>
+    postMessageToNativeApp({type: 'GET_APP_DOMAIN'});

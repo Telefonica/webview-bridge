@@ -25,6 +25,7 @@ export {
     downloadBase64,
     getBatteryInfo,
     getInstallationId,
+    getAppDomain,
 } from './src/device';
 
 export {
@@ -62,7 +63,7 @@ export {
     updatePhoneNumbers,
 } from './src/contacts';
 
-export {highlightNavigationTab} from './src/navigation-tabs';
+export {highlightNavigationTab, refreshNavBar} from './src/navigation-tabs';
 
 export {
     logEvent,
@@ -98,7 +99,11 @@ export type {
 
 export {openOnboarding} from './src/open-onboarding';
 
-export {getProfileImage, startProfileImageFlow} from './src/profile';
+export {
+    getProfileImage,
+    startProfileImageFlow,
+    showLineSelector,
+} from './src/profile';
 export {readTextFromClipboard, writeTextToClipboard} from './src/clipboard';
 export {
     getUnseenNotificationsBadge,

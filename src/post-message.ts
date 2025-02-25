@@ -316,6 +316,11 @@ export type ResponsesFromNativeApp = {
             isCancelled: boolean;
         };
     };
+    SHOW_LINE_SELECTOR: {
+        type: 'SHOW_LINE_SELECTOR';
+        id: string;
+        payload: void;
+    };
     TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION: {
         type: 'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION';
         id: string;
@@ -403,13 +408,11 @@ export type ResponsesFromNativeApp = {
         type: 'VALIDATE_DATAMOB_REQUIREMENTS';
         id: string;
         payload: {
-            requirements: {
-                deviceAdmin: boolean;
-                lockPassword: boolean;
-                accessibilityOption: boolean;
-                invalidPhoneNumber: boolean;
-                invalidToken: boolean;
-            };
+            deviceAdmin: boolean;
+            lockPassword: boolean;
+            accessibilityOption: boolean;
+            invalidPhoneNumber: boolean;
+            invalidToken: boolean;
         };
     };
     UNREGISTER_DATAMOB_DEVICE_ADMIN: {
@@ -431,6 +434,16 @@ export type ResponsesFromNativeApp = {
         type: 'IS_QUALTRICS_INTERCEPT_AVAILABLE_FOR_USER';
         id: string;
         payload: {isAvailable: boolean};
+    };
+    REFRESH_NAV_BAR: {
+        type: 'REFRESH_NAV_BAR';
+        id: string;
+        payload: void;
+    };
+    GET_APP_DOMAIN: {
+        type: 'GET_APP_DOMAIN';
+        id: string;
+        payload: {appDomain: string};
     };
 };
 

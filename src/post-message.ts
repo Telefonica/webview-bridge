@@ -443,7 +443,7 @@ export type ResponsesFromNativeApp = {
     GET_APP_DOMAIN: {
         type: 'GET_APP_DOMAIN';
         id: string;
-        payload: {appDomain: string};
+        payload: {domain: string};
     };
 };
 

@@ -479,7 +479,7 @@ test('getAppDomain', async () => {
             type: 'GET_APP_DOMAIN',
             id: msg.id,
             payload: {
-                appDomain: 'https://example.com',
+                domain: 'https://example.com',
             },
         }),
     });
@@ -487,6 +487,6 @@ test('getAppDomain', async () => {
     const res = await getAppDomain();
 
     expect(res).toEqual({
-        appDomain: 'https://example.com',
+        domain: 'https://example.com',
     });
 });

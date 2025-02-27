@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.50.1 - 2025-02-27
+
+-   `getAppDomain`: rename `appDomain` to `domain` to follow the spec/doc
+
 ## v.3.50.0 - 2025-02-13
 
 -   `getAppDomain`: new method to get the app domain.

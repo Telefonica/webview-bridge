@@ -87,6 +87,7 @@ export {showAppRating} from './src/app-rating';
 export {
     bottomSheet,
     bottomSheetSingleSelector,
+    bottomSheetActions,
     bottomSheetActionSelector,
     bottomSheetInfo,
 } from './src/bottom-sheet';

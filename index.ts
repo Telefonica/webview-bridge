@@ -121,3 +121,28 @@ export {
     setQualtricsProperties,
     isQualtricsInterceptAvailableForUser,
 } from './src/qualtrics';
+
+export {
+    type AllowMeErrorCode,
+    type AllowMeError,
+    AllowMeGenericError,
+    AllowMeUnauthorizedError,
+    AllowMeSetupSdkError,
+    AllowMeTimeoutProcessingError,
+    AllowMeApiKeyError,
+    AllowMeInstanceCreationError,
+    AllowMeBiometricsTimeoutError,
+    AllowMeBiometricsSetupError,
+    AllowMeBiometricsCameraError,
+    AllowMeBiometricsCapturingError,
+    AllowMeBiometricsResultError,
+    AllowMeBiometricsCancelledByUserError,
+    AllowMeBiometricsInvalidImagesError,
+    AllowMeBiometricsCameraPermissionError,
+    AllowMeCanNotOpenFrontCameraError,
+    AllowMeGooglePayServicesError,
+    AllowMeFaceDetectionError,
+    AllowMeProviderError,
+    AllowMeCanNotSaveImageError,
+    requestAllowMeBiometrics,
+} from './src/allow-me';

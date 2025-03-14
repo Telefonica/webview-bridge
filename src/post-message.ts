@@ -445,6 +445,12 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {domain: string};
     };
+
+    REQUEST_ALLOWME_BIOMETRICS: {
+        type: 'REQUEST_ALLOWME_BIOMETRICS';
+        id: string;
+        payload: {result: string};
+    };
 };
 
 export type NativeAppResponsePayload<

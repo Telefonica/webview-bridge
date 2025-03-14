@@ -1603,6 +1603,8 @@ isQualtricsInterceptAvailableForUser: ({interceptId: string}) => Promise<{isAvai
 
 ### refreshNavBar
 
+<kbd>Available in B2P App version >=25.3</kbd>
+
 Method that allows WebView to refresh the navigation bars that are retrieved by
 Visual Modules API
 

@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.51.0 - 2025-03-14
+
+-   `requestAllowMeBiometrics`: new method to start the AllowMe native SDK
+    biometrics flow
+
 ## v.3.50.1 - 2025-02-27
 
 -   `getAppDomain`: rename `appDomain` to `domain` to follow the spec/doc

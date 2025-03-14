@@ -1634,6 +1634,76 @@ refreshNavBar({
 });
 ```
 
+### requestAllowMeBiometrics
+
+<kbd>App version >=25.3</kbd>
+
+Method to start the AllowMe native SDK biometrics flow.
+
+```ts
+requestAllowMeBiometrics: () => Promise<{result: string}>;
+```
+
+#### Error cases
+
+This SDK can return several errors, and they can be different between iOS and
+Android. Below you have the list of both platforms:
+
+| Error                                    | Android | iOS | Code    |
+| ---------------------------------------- | ------- | --- | ------- |
+| `AllowMeGenericError`                    | ❌      | ✅  | 500\*   |
+| `AllowMeUnauthorizedError`               | ✅      | ✅  | 401\*\* |
+| `AllowMeSetupSdkError`                   | ✅      | ✅  | 1001    |
+| `AllowMeTimeoutProcessingError`          | ❌      | ✅  | 1002    |
+| `AllowMeApiKeyError`                     | ❌      | ✅  | 1003    |
+| `AllowMeInstanceCreationError`           | ❌      | ✅  | 1004    |
+| `AllowMeBiometricsTimeoutError`          | ✅      | ✅  | 1005    |
+| `AllowMeBiometricsSetupError`            | ✅      | ✅  | 1006    |
+| `AllowMeBiometricsCameraError`           | ✅      | ✅  | 1007    |
+| `AllowMeBiometricsCapturingError`        | ✅      | ✅  | 1008    |
+| `AllowMeBiometricsResultError`           | ✅      | ✅  | 1009    |
+| `AllowMeBiometricsCancelledByUserError`  | ✅      | ✅  | 1010    |
+| `AllowMeBiometricsInvalidImagesError`    | ❌      | ✅  | 1011    |
+| `AllowMeBiometricsCameraPermissionError` | ✅      | ✅  | 1012    |
+| `AllowMeCanNotOpenFrontCameraError`      | ✅      | ❌  | 1013    |
+| `AllowMeGooglePayServicesError`          | ✅      | ❌  | 1014    |
+| `AllowMeFaceDetectionError`              | ✅      | ❌  | 1015    |
+| `AllowMeProviderError`                   | ✅      | ✅  | 1016    |
+| `AllowMeCanNotSaveImageError`            | ✅      | ❌  | 1017    |
+
+\*500: Generic error send by iOS with a descriptive error message
+
+\*\*401: Unauthorized error in case the bridge calls this method from an
+unsupported brand (any other than Vivo).
+
+When one of these errors occurs, the promise will be rejected with an error with
+this shape:
+
+```ts
+export type AllowMeError = {
+    code: AllowMeErrorCode;
+    description?: string;
+};
+```
+
+#### Example
+
+```ts
+try {
+    const {result} = await requestAllowMeBiometrics();
+} catch (error: AllowMeError) {
+    switch (error.code) {
+        case AllowMeSetupSdkError:
+            console.log('Setup error');
+            break;
+        case AllowMeUnauthorizedError:
+            console.log('Unauthorized error');
+            break;
+        // etc
+    }
+}
+```
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

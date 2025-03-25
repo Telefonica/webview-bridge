@@ -727,7 +727,7 @@ dismiss: (onCompletionUrl?: string) => Promise<void>;
 ```ts
 {
     code: 405;
-    reason: 'Webview is not allowed to dismiss';
+    reason: 'Webview is not allowed to dismiss because we only have one webview instance in the navigation stack.';
 }
 ```
 

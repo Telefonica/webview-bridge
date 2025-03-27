@@ -714,10 +714,21 @@ internalNavigation: (feature: string) => Promise<void>;
 
 <kbd>App version >=11.5</kbd> <kbd>Available in B2P App version >=24.10</kbd>
 
-Dismiss the current webview and optionally navigate to another url
+Dismiss the current webview if possible and optionally navigate to another URL.
+If we can't do the dismiss, for example, if the webview is one of the main tabs,
+the optional URL won't be opened.
 
 ```ts
 dismiss: (onCompletionUrl?: string) => Promise<void>;
+```
+
+#### Error cases
+
+```ts
+{
+    code: 405;
+    reason: 'Webview is not allowed to dismiss because we only have one webview instance in the navigation stack.';
+}
 ```
 
 ### requestVibration

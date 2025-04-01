@@ -610,11 +610,14 @@ export const postMessageToNativeApp = <T extends keyof ResponsesFromNativeApp>(
 };
 
 /**
- * Initiates WebApp postMessage function, which will be called by native apps
+ * Initiates postMessage function, which will be called by native apps
  */
 if (typeof window !== 'undefined') {
-    window[BRIDGE] = window[BRIDGE] || {
+    // if there is already a bridge instance, we need to call it too when we receive a message
+    const prevPostMessageImplementation = window[BRIDGE]?.postMessage;
+    window[BRIDGE] = {
         postMessage: (jsonMessage: string) => {
+            prevPostMessageImplementation?.(jsonMessage);
             log?.('[WebView Bridge] RCVD:', jsonMessage);
             let message: any;
             try {

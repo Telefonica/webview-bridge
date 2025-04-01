@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.52.0 - 2025-04-01
+
+-   webview bridge: allow multiple instances to work simultaneously in the same
+    page
+
 ## v.3.51.0 - 2025-03-14
 
 -   `requestAllowMeBiometrics`: new method to start the AllowMe native SDK

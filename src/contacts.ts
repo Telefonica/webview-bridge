@@ -28,3 +28,11 @@ export const updatePhoneNumbers = (
         type: 'UPDATE_PHONE_NUMBERS',
         payload: {phoneNumbers},
     });
+
+export const addOrEditContact = (
+    phoneNumber: string,
+): Promise<NativeAppResponsePayload<'ADD_OR_EDIT_CONTACT'>> =>
+    postMessageToNativeApp({
+        type: 'ADD_OR_EDIT_CONTACT',
+        payload: {phoneNumber},
+    });

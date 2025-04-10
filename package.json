@@ -28,7 +28,6 @@
         "url": "https://github.com/tef-dig/webview-bridge/issues"
     },
     "homepage": "https://github.com/tef-dig/webview-bridge#readme",
-    "dependencies": {},
     "devDependencies": {
         "@types/gtag.js": "^0.0.10",
         "@types/jest": "^27.0.3",

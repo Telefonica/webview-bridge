@@ -753,6 +753,30 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
 }>>;
 ```
 
+### addOrEditContact
+
+Opens native UI to add or edit a contact in the device's phonebook.
+
+```ts
+addOrEditContact: (phoneNumber: string) => Promise<{
+    phoneNumber: string;
+    firstName?: string;
+    middleName?: string;
+    lastName?: string;
+    encodedAvatar?: string;
+}>
+```
+
+-   If phoneNumber already exists in the device phonebook, the user will be able
+    to edit the information.
+-   If phoneNumber is saved under multiple names in the phonebook, when editing
+    it should choose the first one alphabetically
+-   If phoneNumber doesn't exist in the phonebook, the user will be able to add
+    it, providing the related info.
+
+Once the user has added or updated the contact, native returns the new
+information (all last values of every property).
+
 ### getAppDomain
 
 <kbd>Available in B2P App version >=25.3</kbd>

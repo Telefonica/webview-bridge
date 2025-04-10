@@ -61,6 +61,7 @@ export {
     fetchContactsByPhone,
     fetchPhoneNumbers,
     updatePhoneNumbers,
+    addOrEditContact,
 } from './src/contacts';
 
 export {highlightNavigationTab, refreshNavBar} from './src/navigation-tabs';

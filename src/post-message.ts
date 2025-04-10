@@ -199,6 +199,17 @@ export type ResponsesFromNativeApp = {
             encodedAvatar?: string;
         }>;
     };
+    ADD_OR_EDIT_CONTACT: {
+        id: string;
+        type: 'ADD_OR_EDIT_CONTACT';
+        payload: {
+            phoneNumber: string;
+            firstName?: string;
+            middleName?: string;
+            lastName?: string;
+            encodedAvatar?: string;
+        };
+    };
     RENEW_SESSION: {
         type: 'RENEW_SESSION';
         id: string;

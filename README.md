@@ -1553,7 +1553,7 @@ validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => P
 
 <kbd>App version >=24.12 (iOS only)</kbd>
 
-Uses the Qualtrics SDK to display a survey intercept to the user if possible.
+Uses the Qualtrics SDK to display a survey intercept to the user. It needs to be used in combination with `isQualtricsInterceptAvailableForUser`, ensuring intercept is available before requesting its display. Display result depends on the last evaluation performed by that method.
 
 The native app will try to show the survey related to the provided `interceptId`
 
@@ -1614,7 +1614,7 @@ setQualtricsProperties: ({
 
 <kbd>App version >=24.12 (iOS only)</kbd>
 
-Check if a Qualtrics intercept is available for the user.
+Check if a Qualtrics intercept is available for the user, performing its evaluation.
 
 ```ts
 isQualtricsInterceptAvailableForUser: ({interceptId: string}) => Promise<{isAvailable: boolean}>;

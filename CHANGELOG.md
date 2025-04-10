@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v.3.53.0 - 2025-04-10
+
+-   `addOrEditContact`: new method to add or edit a contact in the native phone
+    book
+
 ## v.3.52.0 - 2025-04-01
 
 -   webview bridge: allow multiple instances to work simultaneously in the same

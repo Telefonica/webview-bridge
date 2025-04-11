@@ -46,5 +46,7 @@ export type AllowMeError = {
     description?: string;
 };
 
-export const requestAllowMeBiometrics = (): Promise<{result: string}> =>
-    postMessageToNativeApp({type: 'REQUEST_ALLOWME_BIOMETRICS'});
+export const requestAllowMeBiometrics = (): Promise<{
+    result?: string;
+    images: Array<string>;
+}> => postMessageToNativeApp({type: 'REQUEST_ALLOWME_BIOMETRICS'});

@@ -11,12 +11,16 @@ test('requestAllowMeBiometrics', async () => {
             id: msg.id,
             payload: {
                 result: '81gUpIN3UhXAZU2',
+                images: ['data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA'],
             },
         }),
     });
 
     const res = await requestAllowMeBiometrics();
-    expect(res).toEqual({result: '81gUpIN3UhXAZU2'});
+    expect(res).toEqual({
+        result: '81gUpIN3UhXAZU2',
+        images: ['data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUA'],
+    });
 });
 
 test('requestAllowMeBiometrics errors', async () => {

@@ -1678,8 +1678,15 @@ refreshNavBar({
 Method to start the AllowMe native SDK biometrics flow.
 
 ```ts
-requestAllowMeBiometrics: () => Promise<{result: string}>;
+requestAllowMeBiometrics: () => Promise<{
+    result?: string;
+    images: Array<string>;
+}>;
 ```
+
+-   `result`: cryptographed payload containing safety information about the
+    image capture process.
+-   `images`: is an array of base64 encoded images captured during the process.
 
 #### Error cases
 
@@ -1727,7 +1734,7 @@ export type AllowMeError = {
 
 ```ts
 try {
-    const {result} = await requestAllowMeBiometrics();
+    const {result, images} = await requestAllowMeBiometrics();
 } catch (error: AllowMeError) {
     switch (error.code) {
         case AllowMeSetupSdkError:

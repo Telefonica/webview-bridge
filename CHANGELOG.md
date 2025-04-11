@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v.3.54.0 - 2025-04-11
+
+-   `requestAllowMeBiometrics`: return images array
+
 ## v.3.53.0 - 2025-04-10
 
 -   `addOrEditContact`: new method to add or edit a contact in the native phone

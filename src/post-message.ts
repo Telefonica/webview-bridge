@@ -460,7 +460,10 @@ export type ResponsesFromNativeApp = {
     REQUEST_ALLOWME_BIOMETRICS: {
         type: 'REQUEST_ALLOWME_BIOMETRICS';
         id: string;
-        payload: {result: string};
+        payload: {
+            result?: string;
+            images: Array<string>;
+        };
     };
 };
 

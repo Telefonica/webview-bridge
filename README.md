@@ -1267,13 +1267,23 @@ possible scenarios:
 triggerPinOrBiometricAuthentication: ({
     maxSecondsSinceLastValidation: number
 }) => Promise<{
-    result: 'USER_AUTHENTICATED' | 'USER_ENABLED_AUTHENTICATION' | 'LAST_AUTHENTICATION_STILL_VALID',
+    result: 'USER_AUTHENTICATED' | 'USER_ENABLED_AUTHENTICATION' | 'LAST_AUTHENTICATION_STILL_VALID' | 'DEVICE_HAS_NO_AUTHENTICATION',
 }>;
 ```
 
 -   `maxSecondsSinceLastValidation`: if time elapsed since last authentication
     is less than the number of seconds specified here authentication will
     succeed without requesting it again.
+
+<kbd>App version >=25.5</kbd>
+
+If the new PIN & Biometrics 2.0 (device authentication) feature is enabled,
+there are a couple of details to take into account:
+
+-   If the setting is not enabled by the user, the device authentication will be
+    asked and if it goes right, the setting will be enabled.
+-   If the device doesn't have any authentication configured, the method will
+    return `DEVICE_HAS_NO_AUTHENTICATION` as result.
 
 ### focusNavbar
 

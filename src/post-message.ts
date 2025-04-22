@@ -339,7 +339,8 @@ export type ResponsesFromNativeApp = {
             result:
                 | 'USER_AUTHENTICATED'
                 | 'USER_ENABLED_AUTHENTICATION'
-                | 'LAST_AUTHENTICATION_STILL_VALID';
+                | 'LAST_AUTHENTICATION_STILL_VALID'
+                | 'DEVICE_HAS_NO_AUTHENTICATION';
         };
     };
     FOCUS_NAVBAR: {

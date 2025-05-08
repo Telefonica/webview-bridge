@@ -349,7 +349,7 @@ export const setScreenName = (
         return Promise.resolve();
     }
 
-    const {sanitize = true} = {...defaultEventOptions, ...options};
+    const {sanitize} = {...defaultEventOptions, ...options};
     const previousScreenName = currentScreenName;
     currentScreenName = screenName;
 

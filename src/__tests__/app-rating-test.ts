@@ -41,7 +41,7 @@ test('webapp requests to increase an app rating trigger', (done) => {
         }),
     });
 
-    increaseAppRatingTrigger({key: ANY_TRIGGER_KEY}).then((res) => {
+    increaseAppRatingTrigger(ANY_TRIGGER_KEY).then((res) => {
         expect(res).toBeUndefined();
         done();
     });
@@ -61,7 +61,7 @@ test('webapp requests to reset an app rating trigger', (done) => {
         }),
     });
 
-    resetAppRatingTrigger({key: ANY_TRIGGER_KEY}).then((res) => {
+    resetAppRatingTrigger(ANY_TRIGGER_KEY).then((res) => {
         expect(res).toBeUndefined();
         done();
     });

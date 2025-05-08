@@ -481,8 +481,8 @@ export type ResponsesFromNativeApp = {
             key: string;
         };
     };
-    UPDATE_REMIND_ME_LATER_APP_RATING_TIMESTAMP: {
-        type: 'UPDATE_REMIND_ME_LATER_APP_RATING_TIMESTAMP';
+    APP_RATING_REMIND_ME_LATER: {
+        type: 'APP_RATING_REMIND_ME_LATER';
         id: string;
         payload: void;
     };

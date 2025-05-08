@@ -9,11 +9,14 @@ export const showAppRating = (): Promise<void> =>
 export const increaseAppRatingTrigger = (key: string): Promise<void> =>
     postMessageToNativeApp({
         type: 'INCREASE_APP_RATING_TRIGGER',
-        payload: {key},
+        payload: {key: key},
     });
 
 export const resetAppRatingTrigger = (key: string): Promise<void> =>
-    postMessageToNativeApp({type: 'RESET_APP_RATING_TRIGGER', payload: {key}});
+    postMessageToNativeApp({
+        type: 'RESET_APP_RATING_TRIGGER',
+        payload: {key: key},
+    });
 
 export const appRatingRemindMeLater = (): Promise<void> =>
     postMessageToNativeApp({type: 'APP_RATING_REMIND_ME_LATER'});

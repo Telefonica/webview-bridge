@@ -470,16 +470,12 @@ export type ResponsesFromNativeApp = {
     INCREASE_APP_RATING_TRIGGER: {
         type: 'INCREASE_APP_RATING_TRIGGER';
         id: string;
-        payload: {
-            key: string;
-        };
+        payload: void;
     };
     RESET_APP_RATING_TRIGGER: {
         type: 'RESET_APP_RATING_TRIGGER';
         id: string;
-        payload: {
-            key: string;
-        };
+        payload: void;
     };
     APP_RATING_REMIND_ME_LATER: {
         type: 'APP_RATING_REMIND_ME_LATER';

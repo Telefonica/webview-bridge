@@ -466,6 +466,26 @@ export type ResponsesFromNativeApp = {
             images: Array<string>;
         };
     };
+
+    INCREASE_APP_RATING_TRIGGER: {
+        type: 'INCREASE_APP_RATING_TRIGGER';
+        id: string;
+        payload: {
+            key: string;
+        };
+    };
+    RESET_APP_RATING_TRIGGER: {
+        type: 'RESET_APP_RATING_TRIGGER';
+        id: string;
+        payload: {
+            key: string;
+        };
+    };
+    UPDATE_REMIND_ME_LATER_APP_RATING_TIMESTAMP: {
+        type: 'UPDATE_REMIND_ME_LATER_APP_RATING_TIMESTAMP';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

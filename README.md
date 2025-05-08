@@ -971,6 +971,36 @@ Show native app rating dialog
 showAppRating = () => Promise<void>
 ```
 
+### increaseAppRatingTrigger
+
+<kbd>Available in B2P App version >=25.6</kbd>
+
+Request native app to increase appRating trigger value for a specific key
+
+```ts
+increaseAppRatingTrigger = (key: string) => Promise<void>
+```
+
+### resetAppRatingTrigger
+
+<kbd>Available in B2P App version >=25.6</kbd>
+
+Request native app to reset the appRating trigger value for a specific key
+
+```ts
+resetAppRatingTrigger = (key: string) => Promise<void>
+```
+
+### appRatingRemindMeLater
+
+<kbd>Available in B2P App version >=25.6 (Android only)</kbd>
+
+Notify the native app that a user has selected "Remind me later" in the app rating flow
+
+```ts
+appRatingRemindMeLater = () => Promise<void>
+```
+
 ### bottomSheet
 
 <kbd>App version >=13.8</kbd>

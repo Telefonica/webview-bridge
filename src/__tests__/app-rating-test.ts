@@ -1,4 +1,9 @@
-import {showAppRating, increaseAppRatingTrigger, resetAppRatingTrigger, appRatingRemindMeLater} from '../app-rating';
+import {
+    showAppRating,
+    increaseAppRatingTrigger,
+    resetAppRatingTrigger,
+    appRatingRemindMeLater,
+} from '../app-rating';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,

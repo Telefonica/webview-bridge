@@ -995,7 +995,8 @@ resetAppRatingTrigger = (key: string) => Promise<void>
 
 <kbd>Available in B2P App version >=25.6 (Android only)</kbd>
 
-Notify the native app that a user has selected "Remind me later" in the app rating flow
+Notify the native app that a user has selected "Remind me later" in the app
+rating flow
 
 ```ts
 appRatingRemindMeLater = () => Promise<void>

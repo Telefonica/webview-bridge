@@ -44,6 +44,8 @@ const origAnalyticsWebInterface = window.AnalyticsWebInterface;
 afterEach(() => {
     window.AnalyticsWebInterface = origAnalyticsWebInterface;
     window.webkit = origWebkit;
+    // Reset screen name
+    setScreenName('');
 });
 
 test('log event with default values', async () => {
@@ -385,15 +387,18 @@ test('logEvent in web is resilient to gtag script not working', async () => {
         }
     };
 
-    await expect(logEvent({name: 'any_event'})).resolves.toBeUndefined();
+    await expect(logEvent({ name: 'any_event' })).resolves.toBeUndefined();
     analyticsIsBroken = true;
-    await expect(logEvent({name: 'any_event'})).resolves.toBeUndefined();
+    await expect(logEvent({ name: 'any_event' })).resolves.toBeUndefined();
     delete (window as any).gtag;
-    await expect(logEvent({name: 'any_event'})).resolves.toBeUndefined();
+    await expect(logEvent({ name: 'any_event' })).resolves.toBeUndefined();
 });
 
 test('logEvent does not sanitize legacy events', async () => {
     const androidFirebaseMock = givenAndroidWebview();
+
+    // Set up screen name first
+    await setScreenName('any-screen-name');
 
     await logEvent({
         category: 'any category with weird characters ;!@+*',
@@ -459,7 +464,7 @@ test('sanitizeAnalyticsParam', () => {
 
 test('sanitizeAnalyticsParams', () => {
     expect(sanitizeAnalyticsParams({})).toEqual({});
-    expect(sanitizeAnalyticsParams({a: 'b', b: 1})).toEqual({a: 'b', b: 1});
+    expect(sanitizeAnalyticsParams({ a: 'b', b: 1 })).toEqual({ a: 'b', b: 1 });
     expect(
         sanitizeAnalyticsParams({
             this_is_a_very_long_param_name_with_more_than_40_characters:

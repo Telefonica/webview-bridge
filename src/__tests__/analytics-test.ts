@@ -286,6 +286,23 @@ test('set screen name in iOS', async () => {
     });
 });
 
+test('setScreenName allows to turn off params sanitization', async () => {
+    const androidFirebaseMock = givenAndroidWebview();
+    const params = {
+        special_param: '*&^%$#@!',
+        another_param: 'test!@#',
+    };
+
+    await setScreenName('test-screen', params, {
+        sanitize: false,
+    });
+
+    expect(androidFirebaseMock.setScreenNameWithParams).toBeCalledWith(
+        'test-screen',
+        JSON.stringify(params),
+    );
+});
+
 test('set user property in android', async () => {
     const androidFirebaseMock = givenAndroidWebview();
 

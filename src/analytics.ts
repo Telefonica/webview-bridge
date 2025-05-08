@@ -354,27 +354,24 @@ export const setScreenName = (
     currentScreenName = screenName;
 
     const sanitizedParams = sanitize ? sanitizeAnalyticsParams(params) : params;
-    const sanitizedScreenName = sanitize
-        ? sanitizeAnalyticsParam(screenName)
-        : screenName;
 
     return withAnalytics({
         onAndroid(androidFirebase) {
             // The method to send params with the screen name is only implemented in new app versions.
             if (androidFirebase.setScreenNameWithParams) {
                 androidFirebase.setScreenNameWithParams(
-                    sanitizedScreenName,
+                    screenName,
                     JSON.stringify(sanitizedParams),
                 );
             } else if (androidFirebase.setScreenName) {
-                androidFirebase.setScreenName(sanitizedScreenName);
+                androidFirebase.setScreenName(screenName);
             }
             return Promise.resolve();
         },
         onIos(iosFirebase) {
             iosFirebase.postMessage({
                 command: 'setScreenName',
-                name: sanitizedScreenName,
+                name: screenName,
                 parameters: sanitizedParams,
             });
             return Promise.resolve();
@@ -382,8 +379,8 @@ export const setScreenName = (
         onWeb(gtag) {
             return new Promise((resolve) => {
                 gtag('event', 'page_view', {
-                    screenName: sanitizedScreenName,
-                    page_title: sanitizedScreenName,
+                    screenName,
+                    page_title: screenName,
                     previousScreenName,
                     ...sanitizedParams,
                     event_callback: createCallback(resolve),

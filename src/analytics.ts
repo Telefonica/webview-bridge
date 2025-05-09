@@ -1,4 +1,4 @@
-import { postMessageToNativeApp } from './post-message';
+import {postMessageToNativeApp} from './post-message';
 
 /** @deprecated */
 export type CustomDimensionIdx =
@@ -112,7 +112,7 @@ type FirebaseValue =
     | string
     | number
     | undefined
-    | { [key: string]: FirebaseValue }
+    | {[key: string]: FirebaseValue}
     | Array<FirebaseValue>;
 
 type FirebaseEvent = {
@@ -144,8 +144,8 @@ export const sanitizeAnalyticsParam = (str: string): string =>
 
 export const sanitizeAnalyticsParams = (params: {
     [key: string]: FirebaseValue;
-}): { [key: string]: FirebaseValue } => {
-    const sanitizedParams: { [key: string]: FirebaseValue } = {};
+}): {[key: string]: FirebaseValue} => {
+    const sanitizedParams: {[key: string]: FirebaseValue} = {};
     Object.entries(params).forEach((entry) => {
         const key = entry[0];
         const value = entry[1];
@@ -188,7 +188,7 @@ type LogEventOptions = {
     /** Whether to sanitize the event params, this only affects to FirebaseEvents. true by default. */
     sanitize?: boolean;
 };
-const defaultEventOptions = { sanitize: true };
+const defaultEventOptions = {sanitize: true};
 
 let currentScreenName = '';
 
@@ -196,8 +196,8 @@ export const logEvent = (
     event: TrackingEvent,
     options?: LogEventOptions,
 ): Promise<void> => {
-    const { sanitize } = { ...defaultEventOptions, ...options };
-    let { name, ...params } = event;
+    const {sanitize} = {...defaultEventOptions, ...options};
+    let {name, ...params} = event;
 
     // If the event doesn't have a name, it's a legacy analytics event
     if (!name) {
@@ -226,7 +226,7 @@ export const logEvent = (
     }
 
     // set screen name if not set
-    params = { ...params, screenName: params.screenName || currentScreenName };
+    params = {...params, screenName: params.screenName || currentScreenName};
 
     return withAnalytics({
         onAndroid(androidFirebase) {
@@ -256,10 +256,10 @@ export const logEvent = (
 
 export const logEcommerceEvent = (
     name: string,
-    params: { [key: string]: any },
+    params: {[key: string]: any},
 ): Promise<void> => {
     // set screen name if not set
-    params = { ...params, screenName: params.screenName || currentScreenName };
+    params = {...params, screenName: params.screenName || currentScreenName};
 
     return withAnalytics({
         onAndroid(androidFirebase) {
@@ -297,7 +297,7 @@ export const logTiming = ({
     if (!category || !variable || !value) {
         console.warn(
             'Analytics timing should have "category", "variable" and "value"',
-            { category, variable, value },
+            {category, variable, value},
         );
         return Promise.resolve();
     }
@@ -341,7 +341,7 @@ export const logTiming = ({
 
 export const setScreenName = (
     screenName: string,
-    params: { [key: string]: any } = {},
+    params: {[key: string]: any} = {},
     options?: LogEventOptions,
 ): Promise<void> => {
     if (!screenName) {
@@ -349,7 +349,7 @@ export const setScreenName = (
         return Promise.resolve();
     }
 
-    const { sanitize } = { ...defaultEventOptions, ...options };
+    const {sanitize} = {...defaultEventOptions, ...options};
     const previousScreenName = currentScreenName;
     currentScreenName = screenName;
 

@@ -387,11 +387,11 @@ test('logEvent in web is resilient to gtag script not working', async () => {
         }
     };
 
-    await expect(logEvent({ name: 'any_event' })).resolves.toBeUndefined();
+    await expect(logEvent({name: 'any_event'})).resolves.toBeUndefined();
     analyticsIsBroken = true;
-    await expect(logEvent({ name: 'any_event' })).resolves.toBeUndefined();
+    await expect(logEvent({name: 'any_event'})).resolves.toBeUndefined();
     delete (window as any).gtag;
-    await expect(logEvent({ name: 'any_event' })).resolves.toBeUndefined();
+    await expect(logEvent({name: 'any_event'})).resolves.toBeUndefined();
 });
 
 test('logEvent does not sanitize legacy events', async () => {
@@ -464,7 +464,7 @@ test('sanitizeAnalyticsParam', () => {
 
 test('sanitizeAnalyticsParams', () => {
     expect(sanitizeAnalyticsParams({})).toEqual({});
-    expect(sanitizeAnalyticsParams({ a: 'b', b: 1 })).toEqual({ a: 'b', b: 1 });
+    expect(sanitizeAnalyticsParams({a: 'b', b: 1})).toEqual({a: 'b', b: 1});
     expect(
         sanitizeAnalyticsParams({
             this_is_a_very_long_param_name_with_more_than_40_characters:

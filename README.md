@@ -624,10 +624,13 @@ setScreenName: (
 ) => Promise<void>;
 ```
 
-By default, the screen name and params are sanitized (removing accents, special characters, lowercasing, etc). If you want to disable sanitization (for example, to send the screen name exactly as provided), you can pass the `sanitize: false` option:
+By default, the screen name and params are sanitized (removing accents, special
+characters, lowercasing, etc). If you want to disable sanitization (for example,
+to send the screen name exactly as provided), you can pass the `sanitize: false`
+option:
 
 ```javascript
-setScreenName('My Screen Name', {}, { sanitize: false });
+setScreenName('My Screen Name', {}, {sanitize: false});
 ```
 
 This will send the screen name and params as-is, without any transformation.

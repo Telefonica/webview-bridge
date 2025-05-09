@@ -203,7 +203,7 @@ export type ResponsesFromNativeApp = {
         id: string;
         type: 'ADD_OR_EDIT_CONTACT';
         payload: {
-            phoneNumber: string;
+            phoneNumber?: string;
             firstName?: string;
             middleName?: string;
             lastName?: string;

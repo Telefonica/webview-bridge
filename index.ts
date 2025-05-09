@@ -93,6 +93,7 @@ export {
 export {
     bottomSheet,
     bottomSheetSingleSelector,
+    bottomSheetActions,
     bottomSheetActionSelector,
     bottomSheetInfo,
 } from './src/bottom-sheet';

@@ -106,10 +106,15 @@ const isIOSWebView = () =>
 
 ### requestContact
 
+<kbd>Available in B2P App version >=25.5</kbd>
+
 Show native picker UI in order to let the user select a contact.
 
 -   Android only: picker UI elements can be filtered by available phones
     (default) or emails. `filter` property is ignored by iOS devices
+
+-   If the user exists the flow without selecting a a contact, an error is
+    returned
 
 <img height="550" src="doc/webview-bridge-contact-ios.png"><img height="550" src="doc/webview-bridge-contact-android.png">
 
@@ -171,7 +176,7 @@ createCalendarEvent({
 
 ### share
 
-<kbd>App version >=10.7</kbd>
+<kbd>App version >=10.7</kbd> <kbd>Available in B2P App version >=25.5</kbd>
 
 Invokes the native sharing mechanism of the device.
 
@@ -685,7 +690,7 @@ onNativeEvent(({event}) => {
 
 ### checkPermissionStatus
 
-<kbd>App version >=11.4</kbd>
+<kbd>App version >=11.4</kbd> <kbd>Available in B2P App version >=25.5</kbd>
 
 Returns true if the app has the specific notifications permissions. You have to
 pass feature and required params for this request.
@@ -712,7 +717,7 @@ checkPermissionStatus('notifications', {channelId: 'default'}).then(
 
 ### internalNavigation
 
-<kbd>App version >=11.4</kbd><br/>
+<kbd>App version >=11.4</kbd> <kbd>Available in B2P App version >=25.5</kbd>
 
 Init an internal and native navigation to a device specific feature
 
@@ -756,6 +761,8 @@ requestVibration('error');
 
 ### fetchContactsByPhone
 
+<kbd>Available in B2P App version >=25.5</kbd>
+
 Returns contacts info given an array of phone numbers.
 
 ```javascript
@@ -770,11 +777,13 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
 
 ### addOrEditContact
 
+<kbd>Available in B2P App version >=25.5</kbd>
+
 Opens native UI to add or edit a contact in the device's phonebook.
 
 ```ts
 addOrEditContact: (phoneNumber: string) => Promise<{
-    phoneNumber: string;
+    phoneNumber?: string;
     firstName?: string;
     middleName?: string;
     lastName?: string;
@@ -788,6 +797,10 @@ addOrEditContact: (phoneNumber: string) => Promise<{
     it should choose the first one alphabetically
 -   If phoneNumber doesn't exist in the phonebook, the user will be able to add
     it, providing the related info.
+-   If the user edits the phone number of the contact, the new value is returned
+    in the phoneNumber field
+-   If the user exists the flow without selecting a a contact, an error is
+    returned
 
 Once the user has added or updated the contact, native returns the new
 information (all last values of every property).
@@ -984,6 +997,47 @@ Show native app rating dialog
 
 ```ts
 showAppRating = () => Promise<void>
+```
+
+### increaseAppRatingTrigger
+
+<kbd>Available in B2P App version >=25.6</kbd>
+
+App rating flow in B2P apps is only launched if specific rules are fulfilled.
+Several of those rules are that X events of a given type have happened in the
+webviews side.
+
+This method is used to request native app to increase the appRating trigger
+value for a specific key.
+
+```ts
+increaseAppRatingTrigger = (key: string) => Promise<void>
+```
+
+### resetAppRatingTrigger
+
+<kbd>Available in B2P App version >=25.6</kbd>
+
+App rating flow in B2P apps is only launched if specific rules are fulfilled.
+Several of those rules are that X events of a given type have happened in the
+webviews side.
+
+This method is used to request native app to reset the appRating trigger value
+for a specific key
+
+```ts
+resetAppRatingTrigger = (key: string) => Promise<void>
+```
+
+### appRatingRemindMeLater
+
+<kbd>Available in B2P App version >=25.6 (Android only)</kbd>
+
+Notify the native app that a user has selected "Remind me later" in the app
+rating flow
+
+```ts
+appRatingRemindMeLater = () => Promise<void>
 ```
 
 ### bottomSheet

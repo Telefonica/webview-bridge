@@ -203,7 +203,7 @@ export type ResponsesFromNativeApp = {
         id: string;
         type: 'ADD_OR_EDIT_CONTACT';
         payload: {
-            phoneNumber: string;
+            phoneNumber?: string;
             firstName?: string;
             middleName?: string;
             lastName?: string;
@@ -465,6 +465,22 @@ export type ResponsesFromNativeApp = {
             result?: string;
             images: Array<string>;
         };
+    };
+
+    INCREASE_APP_RATING_TRIGGER: {
+        type: 'INCREASE_APP_RATING_TRIGGER';
+        id: string;
+        payload: void;
+    };
+    RESET_APP_RATING_TRIGGER: {
+        type: 'RESET_APP_RATING_TRIGGER';
+        id: string;
+        payload: void;
+    };
+    APP_RATING_REMIND_ME_LATER: {
+        type: 'APP_RATING_REMIND_ME_LATER';
+        id: string;
+        payload: void;
     };
 };
 

@@ -988,7 +988,12 @@ showAppRating = () => Promise<void>
 
 <kbd>Available in B2P App version >=25.6</kbd>
 
-Request native app to increase appRating trigger value for a specific key
+App rating flow in B2P apps is only launched if specific rules are fulfilled.
+Several of those rules are that X events of a given type have happened in the
+webviews side.
+
+This method is used to request native app to increase the appRating trigger
+value for a specific key.
 
 ```ts
 increaseAppRatingTrigger = (key: string) => Promise<void>
@@ -998,7 +1003,12 @@ increaseAppRatingTrigger = (key: string) => Promise<void>
 
 <kbd>Available in B2P App version >=25.6</kbd>
 
-Request native app to reset the appRating trigger value for a specific key
+App rating flow in B2P apps is only launched if specific rules are fulfilled.
+Several of those rules are that X events of a given type have happened in the
+webviews side.
+
+This method is used to request native app to reset the appRating trigger value
+for a specific key
 
 ```ts
 resetAppRatingTrigger = (key: string) => Promise<void>

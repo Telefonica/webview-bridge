@@ -83,7 +83,12 @@ export type {TrackingEvent, CustomDimensionIdx} from './src/analytics';
 
 export {renewSession, onSessionRenewed, logout} from './src/sessions';
 
-export {showAppRating} from './src/app-rating';
+export {
+    showAppRating,
+    increaseAppRatingTrigger,
+    resetAppRatingTrigger,
+    appRatingRemindMeLater,
+} from './src/app-rating';
 
 export {
     bottomSheet,

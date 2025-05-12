@@ -638,7 +638,7 @@ option:
 setScreenName('My Screen Name', {}, {sanitize: false});
 ```
 
-This will send the screen name and params as-is, without any transformation.
+This will send the params as-is, without any transformation.
 
 ### setUserProperty
 

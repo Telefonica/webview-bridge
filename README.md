@@ -630,9 +630,7 @@ setScreenName: (
 ```
 
 By default, the screen name and params are sanitized (removing accents, special
-characters, lowercasing, etc). If you want to disable sanitization (for example,
-to send the screen name exactly as provided), you can pass the `sanitize: false`
-option:
+characters, lowercasing, etc). If you want to disable sanitization for the params (for example, to send them exactly as provided), you can pass the `sanitize: false` option. Note that the screen name itself will always be sanitized.
 
 ```javascript
 setScreenName('My Screen Name', {}, {sanitize: false});

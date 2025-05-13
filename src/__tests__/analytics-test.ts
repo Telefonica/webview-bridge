@@ -44,6 +44,8 @@ const origAnalyticsWebInterface = window.AnalyticsWebInterface;
 afterEach(() => {
     window.AnalyticsWebInterface = origAnalyticsWebInterface;
     window.webkit = origWebkit;
+    // Reset screen name
+    setScreenName('');
 });
 
 test('log event with default values', async () => {
@@ -286,6 +288,23 @@ test('set screen name in iOS', async () => {
     });
 });
 
+test('setScreenName allows to turn off params sanitization', async () => {
+    const androidFirebaseMock = givenAndroidWebview();
+    const params = {
+        special_param: '*&^%$#@!',
+        another_param: 'test!@#',
+    };
+
+    await setScreenName('test-screen', params, {
+        sanitize: false,
+    });
+
+    expect(androidFirebaseMock.setScreenNameWithParams).toBeCalledWith(
+        'test-screen',
+        JSON.stringify(params),
+    );
+});
+
 test('set user property in android', async () => {
     const androidFirebaseMock = givenAndroidWebview();
 
@@ -377,6 +396,9 @@ test('logEvent in web is resilient to gtag script not working', async () => {
 
 test('logEvent does not sanitize legacy events', async () => {
     const androidFirebaseMock = givenAndroidWebview();
+
+    // Set up screen name first
+    await setScreenName('any-screen-name');
 
     await logEvent({
         category: 'any category with weird characters ;!@+*',

@@ -622,8 +622,24 @@ logEvent(yourEvent, {sanitize: false});
 Log the current screen name (or page name) to firebase
 
 ```ts
-setScreenName: (screenName: string, params?: {[key: string]: any}) => Promise<void>;
+setScreenName: (
+  screenName: string,
+  params?: { [key: string]: any },
+  options?: { sanitize?: boolean }
+) => Promise<void>;
 ```
+
+By default, the screen name and params are sanitized (removing accents, special
+characters, lowercasing, etc). If you want to disable sanitization for the
+params (for example, to send them exactly as provided), you can pass the
+`sanitize: false` option. Note that the screen name itself will always be
+sanitized.
+
+```javascript
+setScreenName('My Screen Name', {}, {sanitize: false});
+```
+
+This will send the params as-is, without any transformation.
 
 ### setUserProperty
 

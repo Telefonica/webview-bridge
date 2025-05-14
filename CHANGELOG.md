@@ -1,8 +1,17 @@
 # CHANGELOG
 
+## v3.55.0 - 2025-05-14
+
+-   `requestAllowMeBiometrics`: new method to start the AllowMe native SDK
+    biometrics flow
+-   App rating, new methods: `increaseAppRatingTrigger`,
+    `resetAppRatingTrigger`, `appRatingRemindMeLater`
+-   `setScreenName`: support disable params sanitization
+
 ## v.3.54.0 - 2025-04-11
 
--   `requestAllowMeBiometrics`: return images array
+-   `triggerPinOrBiometricAuthentication`: support new
+    DEVICE_HAS_NO_AUTHENTICATION result case
 
 ## v.3.53.0 - 2025-04-10
 

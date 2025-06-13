@@ -1059,7 +1059,11 @@ being opened (for example, user accidental double tap), it will throw an Error
 with code `423` (Locked)
 
 There are some specific cases of bottom sheet, and we have some utility methods
-to make them simpler to use:
+to make them simpler to use: `bottomSheetSingleSelector`, `bottomSheetActionSelector` and `bottomSheetInfo`.  
+
+⚠️ AVOID USING THESE METHODS ⚠️   
+There is a planned [BREAKING CHANGE: remove sheet specific methods](https://github.com/Telefonica/webview-bridge/pull/115) that will remove them from the webview-bridge library in the next major version.  
+The **bottomsheet** method should be used as it can be used to create all the specific cases.
 
 For single selection use `bottomSheetSingleSelector`:
 
@@ -1093,27 +1097,6 @@ bottomSheetInfo = ({
     description?: string;
     items: Array<SheetInfoItem>;
 }) => Promise<void>
-```
-
-For a bottom sheet with ButtonPrimary/ButtonSecondary/ButtonLink use
-`bottomSheetActions` <kbd>App version >=14.8</kbd>:
-
-```ts
-bottomSheetActions = ({
-    title?: string;
-    subtitle?: string;
-    description?: string;
-    button: {
-        text: string;
-    };
-    secondaryButton?: {
-        text: string;
-    };
-    link?: {
-        text: string;
-        withChevron?: boolean;
-    };
-}) => Promise<{action: 'PRIMARY' | 'SECONDARY' | 'LINK' | 'DISMISS'}>
 ```
 
 #### Example:

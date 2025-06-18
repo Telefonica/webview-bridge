@@ -1045,7 +1045,12 @@ appRatingRemindMeLater = () => Promise<void>
 
 <kbd>App version >=13.8</kbd>
 
-Show native bottom sheet UI
+Show native bottom sheet UI.
+
+We don't recommend using this method directly, instead use the
+[Mistica implementation](https://mistica-web.vercel.app/?path=/story/components-modals-sheet--show-sheet)
+which provides a more user-friendly interface with predefined cases and
+fallbacks to a web implementation when the native bridge is not available.
 
 <img height="460" src="doc/webview-bridge-bottom-sheet.png">
 
@@ -1057,92 +1062,6 @@ bottomSheet = (payload: SheetUI) => Promise<SheetResponse>
 :warning: If you try to call this method repeatedly while a sheet is already
 being opened (for example, user accidental double tap), it will throw an Error
 with code `423` (Locked)
-
-There are some specific cases of bottom sheet, and we have some utility methods
-to make them simpler to use:
-
-For single selection use `bottomSheetSingleSelector`:
-
-```ts
-bottomSheetSingleSelector = ({
-    title?: string;
-    subtitle?: string;
-    description?: string;
-    selectedId?: string;
-    items: Array<SheetRowItem>;
-}) => Promise<{action: 'SUBMIT' | 'DISMISS'; selectedId: string}>
-```
-
-For a bottom sheet with a list of actions use `bottomSheetActionSelector`:
-
-```ts
-bottomSheetActionSelector = ({
-    title?: string;
-    subtitle?: string;
-    description?: string;
-    items: Array<SheetActionItem>;
-}) => Promise<{action: 'SUBMIT' | 'DISMISS'; selectedId: string}>
-```
-
-For an informative bottom sheet use `bottomSheetInfo`:
-
-```ts
-bottomSheetInfo = ({
-    title?: string;
-    subtitle?: string;
-    description?: string;
-    items: Array<SheetInfoItem>;
-}) => Promise<void>
-```
-
-For a bottom sheet with ButtonPrimary/ButtonSecondary/ButtonLink use
-`bottomSheetActions` <kbd>App version >=14.8</kbd>:
-
-```ts
-bottomSheetActions = ({
-    title?: string;
-    subtitle?: string;
-    description?: string;
-    button: {
-        text: string;
-    };
-    secondaryButton?: {
-        text: string;
-    };
-    link?: {
-        text: string;
-        withChevron?: boolean;
-    };
-}) => Promise<{action: 'PRIMARY' | 'SECONDARY' | 'LINK' | 'DISMISS'}>
-```
-
-#### Example:
-
-```ts
-const {action, selected} = await bottomSheetSingleSelector({
-    title: 'Some title',
-    subtitle: 'Some subtitle',
-    description: 'Some description',
-    selectedId: 'item-1',
-    items: [
-        {
-            id: 'item-0',
-            title: 'item 0 title',
-            description: 'item 0 description',
-        },
-        {
-            id: 'item-1',
-            title: 'item 1 title',
-            description: 'item 1 description',
-        },
-        {
-            id: 'item-2',
-            title: 'item 2 title',
-            description: 'item 2 description',
-        },
-    ],
-});
-```
 
 ### fetchPhoneNumbers
 
@@ -1831,6 +1750,33 @@ try {
     }
 }
 ```
+
+### getBiometricsAuthenticationStatus
+
+<kbd>App version >=25.7</kbd>
+
+Retrieve information about the availability of Biometrics
+
+```ts
+getBiometricsAuthenticationStatus: () => Promise<{
+    result: 'DISABLED' | 'ENABLED' | 'DEVICE_HAS_NO_AUTHENTICATION',
+}>;
+```
+
+#### Result description
+
+-   `'DISABLED'`: The device has an authentication method (device PIN code at
+    least, and biometrics optionally) but it has the biometrics option disabled
+    in the app
+-   `'ENABLED'`: The device has an authentication method (device PIN code at
+    least, and biometrics optionally) and it has the biometrics option enabled
+    in the app (it requires authentication when launching the app)
+-   `'DEVICE_HAS_NO_AUTHENTICATION'`: The device has not any authentication
+    method (it has no device PIN code neither biometrics)
+
+#### Error cases
+
+-   `404`: The bridge implementation does not support this feature
 
 ## Error handling
 

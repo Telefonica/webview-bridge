@@ -26,6 +26,7 @@ export {
     getBatteryInfo,
     getInstallationId,
     getAppDomain,
+    getBiometricsAuthenticationStatus,
 } from './src/device';
 
 export {
@@ -92,8 +93,11 @@ export {
 
 export {
     bottomSheet,
+    // @deprecated - use Mistica implementation
     bottomSheetSingleSelector,
+    // @deprecated - use Mistica implementation
     bottomSheetActionSelector,
+    // @deprecated - use Mistica implementation
     bottomSheetInfo,
 } from './src/bottom-sheet';
 export type {

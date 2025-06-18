@@ -111,6 +111,7 @@ export const bottomSheet = (payload: SheetUI): Promise<SheetResponse> => {
         });
 };
 
+/** @deprecated - use Mistica implementation */
 export const bottomSheetSingleSelector = ({
     title,
     subtitle,
@@ -161,6 +162,7 @@ export const bottomSheetSingleSelector = ({
         }
     });
 
+/** @deprecated - use Mistica implementation */
 export const bottomSheetActionSelector = ({
     title,
     subtitle,
@@ -209,6 +211,7 @@ export const bottomSheetActionSelector = ({
         }
     });
 
+/** @deprecated - use Mistica implementation */
 export const bottomSheetInfo = ({
     title,
     subtitle,
@@ -237,6 +240,7 @@ export const bottomSheetInfo = ({
     }).then(() => undefined);
 };
 
+/** @deprecated - use Mistica implementation */
 export const bottomSheetActions = ({
     title,
     subtitle,

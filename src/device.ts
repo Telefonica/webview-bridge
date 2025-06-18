@@ -115,3 +115,22 @@ export const getInstallationId = (): Promise<{installationId: string}> =>
 
 export const getAppDomain = (): Promise<{domain: string}> =>
     postMessageToNativeApp({type: 'GET_APP_DOMAIN'});
+
+/**
+ * Get the current status of the biometrics authentication on the device.
+ *
+ * Possible results:
+ * - 'DISABLED': The device has an authentication method (device PIN code at least, and biometrics optionally) but it has the biometrics option disabled in the app
+ * - 'ENABLED': The device has an authentication method (device PIN code at least, and biometrics optionally) and it has the biometrics option enabled in the app (it requires authentication when launching the app)
+ * - 'DEVICE_HAS_NO_AUTHENTICATION': The device has not any authentication method (it has no device PIN code neither biometrics)
+ *
+ * Error cases:
+ * - 404: The bridge implementation does not support this feature
+ */
+export const getBiometricsAuthenticationStatus = (): Promise<{
+    result: 'DISABLED' | 'ENABLED' | 'DEVICE_HAS_NO_AUTHENTICATION';
+}> => {
+    return postMessageToNativeApp({
+        type: 'GET_BIOMETRICS_AUTHENTICATION_STATUS',
+    });
+};

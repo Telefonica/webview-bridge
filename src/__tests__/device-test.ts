@@ -13,7 +13,11 @@ import {
     downloadBase64,
     getBatteryInfo,
 } from '../../index';
-import {getAppDomain, getInstallationId} from '../device';
+import {
+    getAppDomain,
+    getBiometricsAuthenticationStatus,
+    getInstallationId,
+} from '../device';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -489,4 +493,50 @@ test('getAppDomain', async () => {
     expect(res).toEqual({
         domain: 'https://example.com',
     });
+});
+
+test('getBiometricsAuthenticationStatus', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_BIOMETRICS_AUTHENTICATION_STATUS');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_BIOMETRICS_AUTHENTICATION_STATUS',
+            id: msg.id,
+            payload: {
+                result: 'DISABLED',
+            },
+        }),
+    });
+
+    const res = await getBiometricsAuthenticationStatus();
+
+    expect(res).toEqual({
+        result: 'DISABLED',
+    });
+});
+
+test('getBiometricsAuthenticationStatus Error', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_BIOMETRICS_AUTHENTICATION_STATUS');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: {
+                code: 404,
+                description: 'Description',
+            },
+        }),
+    });
+
+    try {
+        await getBiometricsAuthenticationStatus();
+    } catch (error) {
+        expect(error).toEqual({
+            code: 404,
+            description: 'Description',
+        });
+    }
 });

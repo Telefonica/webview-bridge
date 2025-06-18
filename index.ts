@@ -26,6 +26,7 @@ export {
     getBatteryInfo,
     getInstallationId,
     getAppDomain,
+    getBiometricsAuthenticationStatus,
 } from './src/device';
 
 export {

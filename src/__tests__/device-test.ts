@@ -531,12 +531,8 @@ test('getBiometricsAuthenticationStatus Error', async () => {
         }),
     });
 
-    try {
-        await getBiometricsAuthenticationStatus();
-    } catch (error) {
-        expect(error).toEqual({
-            code: 404,
-            description: 'Description',
-        });
-    }
+    await expect(getBiometricsAuthenticationStatus()).rejects.toEqual({
+        code: 404,
+        description: 'Description',
+    });
 });

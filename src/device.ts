@@ -126,6 +126,7 @@ export const getAppDomain = (): Promise<{domain: string}> =>
  *
  * Error cases:
  * - 404: The bridge implementation does not support this feature
+ * - 500: User is not logged in
  */
 export const getBiometricsAuthenticationStatus = (): Promise<{
     result: 'DISABLED' | 'ENABLED' | 'DEVICE_HAS_NO_AUTHENTICATION';

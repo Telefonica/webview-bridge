@@ -1777,6 +1777,7 @@ getBiometricsAuthenticationStatus: () => Promise<{
 #### Error cases
 
 -   `404`: The bridge implementation does not support this feature
+-   `500`: User is not logged in
 
 ## Error handling
 

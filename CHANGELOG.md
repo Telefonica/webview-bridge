@@ -1,10 +1,15 @@
 # CHANGELOG
 
-## v3.55.1 - 2025-06-23
+## v3.56.1 - 2025-06-23
 
 -   `requestAllowMeBiometrics`: document "User not logged in" error case
 
-## v3.55.0 - 2025-06-14
+## v3.56.0 - 2025-06-18
+
+-   `getBiometricsAuthenticationStatus`: Get the current status of the
+    biometrics authentication on the device
+
+## v3.55.0 - 2025-05-14
 
 -   `requestAllowMeBiometrics`: new method to start the AllowMe native SDK
     biometrics flow

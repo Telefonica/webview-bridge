@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v3.57.0 - 2025-07-06
+
+-   `internalNavigation`: support "location-settings" feature
+
 ## v3.56.1 - 2025-06-23
 
 -   `requestAllowMeBiometrics`: document "User not logged in" error case

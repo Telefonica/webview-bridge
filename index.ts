@@ -27,6 +27,7 @@ export {
     getInstallationId,
     getAppDomain,
     getBiometricsAuthenticationStatus,
+    setBiometricsAuthenticationStatus,
 } from './src/device';
 
 export {

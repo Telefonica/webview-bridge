@@ -489,6 +489,11 @@ export type ResponsesFromNativeApp = {
             result: 'DISABLED' | 'ENABLED' | 'DEVICE_HAS_NO_AUTHENTICATION';
         };
     };
+    SET_BIOMETRICS_AUTHENTICATION_STATUS: {
+        type: 'SET_BIOMETRICS_AUTHENTICATION_STATUS';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

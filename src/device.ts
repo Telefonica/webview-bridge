@@ -144,7 +144,7 @@ export const getBiometricsAuthenticationStatus = (): Promise<{
  *
  * Possible request based on 'enable':
  * - false: Disable biometrics in the app and remove any related information
- * - true: Trigger the biometrics eanbling native UI
+ * - true: Trigger the biometrics enabling native UI
  *
  * Error cases:
  * - 400: enable parameter is missing

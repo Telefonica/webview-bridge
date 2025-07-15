@@ -1798,6 +1798,7 @@ setBiometricsAuthenticationStatus: (enable: boolean) => Promise<void>;
 #### Error cases
 
 -   `400`: enable parameter is missing
+-   `401`: User is not logged in
 -   `500`: Native side error while applying the setting
 -   `503`: The device has no biometrics available, or the user cancelled
     modifying biometric settings.

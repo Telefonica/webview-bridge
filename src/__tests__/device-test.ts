@@ -552,7 +552,7 @@ test('setBiometricsAuthenticationStatus happy case', async () => {
         }),
     });
 
-    const res = await setBiometricsAuthenticationStatus(true);
+    const res = await setBiometricsAuthenticationStatus({enable: true});
     expect(res).toBeUndefined();
 });
 
@@ -569,6 +569,6 @@ test('setBiometricsAuthenticationStatus error', async () => {
         }),
     });
 
-    const res = setBiometricsAuthenticationStatus(true);
+    const res = setBiometricsAuthenticationStatus({enable: true});
     await expect(res).rejects.toEqual(error);
 });

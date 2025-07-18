@@ -151,12 +151,12 @@ export const getBiometricsAuthenticationStatus = (): Promise<{
  * - 500: Native side error while applying the setting
  * - 503: The device has no biometrics available, or the user cancelled modifying biometric settings.
  */
-export const setBiometricsAuthenticationStatus = (
-    enable: boolean,
-): Promise<void> =>
+export const setBiometricsAuthenticationStatus = (params: {
+    enable: boolean;
+}): Promise<void> =>
     postMessageToNativeApp({
         type: 'SET_BIOMETRICS_AUTHENTICATION_STATUS',
         payload: {
-            enable: enable,
+            enable: params.enable,
         },
     });

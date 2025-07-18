@@ -1787,7 +1787,7 @@ getBiometricsAuthenticationStatus: () => Promise<{
 Set the current status of the biometrics authentication on the device.
 
 ```ts
-setBiometricsAuthenticationStatus: (enable: boolean) => Promise<void>;
+setBiometricsAuthenticationStatus: ({enable: boolean}) => Promise<void>;
 ```
 
 #### Parameters

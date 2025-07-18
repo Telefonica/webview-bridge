@@ -138,3 +138,25 @@ export const getBiometricsAuthenticationStatus = (): Promise<{
         type: 'GET_BIOMETRICS_AUTHENTICATION_STATUS',
     });
 };
+
+/**
+ * Set the current status of the biometrics authentication on the device.
+ *
+ * Possible request based on 'enable':
+ * - false: Disable biometrics in the app and remove any related information
+ * - true: Trigger the biometrics enabling native UI
+ *
+ * Error cases:
+ * - 400: enable parameter is missing
+ * - 500: Native side error while applying the setting
+ * - 503: The device has no biometrics available, or the user cancelled modifying biometric settings.
+ */
+export const setBiometricsAuthenticationStatus = (params: {
+    enable: boolean;
+}): Promise<void> =>
+    postMessageToNativeApp({
+        type: 'SET_BIOMETRICS_AUTHENTICATION_STATUS',
+        payload: {
+            enable: params.enable,
+        },
+    });

@@ -1780,6 +1780,29 @@ getBiometricsAuthenticationStatus: () => Promise<{
 -   `404`: The bridge implementation does not support this feature
 -   `500`: User is not logged in
 
+### setBiometricsAuthenticationStatus
+
+<kbd>Available in B2P App version >= 25.9</kbd>
+
+Set the current status of the biometrics authentication on the device.
+
+```ts
+setBiometricsAuthenticationStatus: ({enable: boolean}) => Promise<void>;
+```
+
+#### Parameters
+
+-   `enable`: Whether if the biometrics option has to be enabled (triggering the
+    biometrics setting UI) or disabled
+
+#### Error cases
+
+-   `400`: enable parameter is missing
+-   `401`: User is not logged in
+-   `500`: Native side error while applying the setting
+-   `503`: The device has no biometrics available, or the user cancelled
+    modifying biometric settings.
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

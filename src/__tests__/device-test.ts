@@ -17,6 +17,7 @@ import {
     getAppDomain,
     getBiometricsAuthenticationStatus,
     getInstallationId,
+    setBiometricsAuthenticationStatus,
 } from '../device';
 import {
     createFakeAndroidPostMessage,
@@ -26,6 +27,7 @@ import {
 } from './fake-post-message';
 
 const ANY_STRING = 'any-string';
+const ANY_ENABLE = true;
 
 afterEach(() => {
     removeFakeAndroidPostMessage();
@@ -535,4 +537,38 @@ test('getBiometricsAuthenticationStatus Error', async () => {
         code: 404,
         description: 'Description',
     });
+});
+
+test('setBiometricsAuthenticationStatus happy case', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SET_BIOMETRICS_AUTHENTICATION_STATUS');
+            expect(msg.payload).toMatchObject({enable: ANY_ENABLE});
+        },
+        getResponse: (msg) => ({
+            type: 'SET_BIOMETRICS_AUTHENTICATION_STATUS',
+            id: msg.id,
+            payload: undefined,
+        }),
+    });
+
+    const res = await setBiometricsAuthenticationStatus({enable: true});
+    expect(res).toBeUndefined();
+});
+
+test('setBiometricsAuthenticationStatus error', async () => {
+    const error = {code: 503, description: 'No biometrics available'};
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SET_BIOMETRICS_AUTHENTICATION_STATUS');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = setBiometricsAuthenticationStatus({enable: true});
+    await expect(res).rejects.toEqual(error);
 });

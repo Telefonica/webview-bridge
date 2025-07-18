@@ -1,5 +1,10 @@
 # CHANGELOG
 
+## v3.58.0 - 2025-07-18
+
+-   `setBiometricsAuthenticationStatus`: new method to set the biometrics
+    authentication status on the device.
+
 ## v3.57.0 - 2025-07-06
 
 -   `internalNavigation`: support "location-settings" feature

@@ -445,7 +445,7 @@ export type ResponsesFromNativeApp = {
     IS_QUALTRICS_INTERCEPT_AVAILABLE_FOR_USER: {
         type: 'IS_QUALTRICS_INTERCEPT_AVAILABLE_FOR_USER';
         id: string;
-        payload: {isAvailable: boolean};
+        payload: {isAvailable: boolean; surveyUrl?: string | null};
     };
     REFRESH_NAV_BAR: {
         type: 'REFRESH_NAV_BAR';

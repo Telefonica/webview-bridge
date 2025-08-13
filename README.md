@@ -1615,13 +1615,15 @@ setQualtricsProperties: ({
 
 ### isQualtricsInterceptAvailableForUser
 
-<kbd>App version >=24.12 (iOS only)</kbd>
+<kbd>App version >=24.12 (iOS only)</kbd> <kbd>App version >=25.10:
+surveyUrl</kbd>
 
 Check if a Qualtrics intercept is available for the user, performing its
-evaluation.
+evaluation. When available, a `surveyUrl` with the generated survey url is
+returned (only in App version >=25.10).
 
 ```ts
-isQualtricsInterceptAvailableForUser: ({interceptId: string}) => Promise<{isAvailable: boolean}>;
+isQualtricsInterceptAvailableForUser: ({interceptId: string}) => Promise<{isAvailable: boolean; surveyUrl?: string | null}>;
 ```
 
 #### Error cases

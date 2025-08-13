@@ -28,7 +28,7 @@ export const isQualtricsInterceptAvailableForUser = ({
     interceptId,
 }: {
     interceptId: string;
-}): Promise<{isAvailable: boolean}> =>
+}): Promise<{isAvailable: boolean; surveyUrl?: string | null}> =>
     postMessageToNativeApp({
         type: 'IS_QUALTRICS_INTERCEPT_AVAILABLE_FOR_USER',
         payload: {interceptId},

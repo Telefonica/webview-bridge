@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v3.59.0 - 2025-07-18
+
+-   `isQualtricsInterceptAvailableForUser`: return surveyUrl.
+
 ## v3.58.0 - 2025-07-18
 
 -   `setBiometricsAuthenticationStatus`: new method to set the biometrics

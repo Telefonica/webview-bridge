@@ -817,7 +817,7 @@ Return info about appDomain
 getAppDomain: () => Promise<{domain: string}>;
 ```
 
-`domain`: the domain value of the environment that the app is pointing to.
+`domain`: the domain value of the environment that the app uses for handling deeplinks.
 
 ### getAppMetadata
 

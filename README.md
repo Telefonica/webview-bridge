@@ -110,11 +110,11 @@ const isIOSWebView = () =>
 
 Show native picker UI in order to let the user select a contact.
 
-- Android only: picker UI elements can be filtered by available phones (default)
-  or emails. `filter` property is ignored by iOS devices
+-   Android only: picker UI elements can be filtered by available phones
+    (default) or emails. `filter` property is ignored by iOS devices
 
-- If the user exists the flow without selecting a a contact, an error is
-  returned
+-   If the user exists the flow without selecting a a contact, an error is
+    returned
 
 <img height="550" src="doc/webview-bridge-contact-ios.png"><img height="550" src="doc/webview-bridge-contact-android.png">
 
@@ -151,8 +151,11 @@ Inserts an event in calendar
 <img height="550" src="doc/webview-bridge-calendar-ios.png"><img height="550" src="doc/webview-bridge-calendar-android.png">
 
 ```ts
-createCalendarEvent: ({beginTime: number, endTime: number, title: string}) =>
-    Promise<void>;
+createCalendarEvent: ({
+    beginTime: number,
+    endTime: number,
+    title: string
+}) => Promise<void>;
 ```
 
 `beginTime` and `endTime` are timestamps with millisecond precision
@@ -191,11 +194,11 @@ type ShareOptions =
 share: (options: ShareOptions) => Promise<void>;
 ```
 
-- If no `url` is present, `text` is used as item to share
-- If `url` param is present, it contains the URL to the shared file
-- `fileName` param is mandatory if `url` is set
-- If `url` and `text` are set, `text` is used as `Intent BODY` (if platform
-  allows it)
+-   If no `url` is present, `text` is used as item to share
+-   If `url` param is present, it contains the URL to the shared file
+-   `fileName` param is mandatory if `url` is set
+-   If `url` and `text` are set, `text` is used as `Intent BODY` (if platform
+    allows it)
 
 #### Example
 
@@ -218,7 +221,7 @@ provided as a base64 encoded string.
 shareBase64: ({contentInBase64: string; fileName: string}) => Promise<void>;
 ```
 
-- The file type will be inferred from the `fileName` extension.
+-   The file type will be inferred from the `fileName` extension.
 
 #### Example
 
@@ -240,9 +243,9 @@ a base64 encoded string.
 downloadBase64: ({contentInBase64: string; fileName: string}) => Promise<void>;
 ```
 
-- The file type will be inferred from the `fileName` extension. The file
-  extension is mandatory. Take into account that iOS webview won't be able to
-  render file types not supported by Safari.
+-   The file type will be inferred from the `fileName` extension. The file
+    extension is mandatory. Take into account that iOS webview won't be able to
+    render file types not supported by Safari.
 
 #### Behaviour
 
@@ -358,26 +361,26 @@ updateNavigationBar = ({
 }) => Promise<void>
 ```
 
-- `title`: updates NavigationBar title
-- `expandedTitle`: updates NavigationBar expandedTitle. If the value is an empty
-  string, the expanded navigation bar will not be shown. Only available in
-  native app versions >= 11.8
-- `showBackButton`: shows or hides back icon in NavigationBar. On android, in
-  case window does not support showing a back button (currently internal with
-  modal presentation, which shows an X) this flag is ignored, as in these cases
-  back navigation is always performed with the native back button
-- `showReloadButton`: shows or hides NavigationBar Reload button
-- `showProfileButton`: **DEPRECATED**. New apps will ignore this field
-- `backgroundColor`: change NavigationBar background color, use a hex color
-  string (for example: `'#FF128A'`)
-- `leftActions`: array of icons to show in the left side
-- `rightActions`: array of icons to show in the right side
-- `colorVariant`: defines how the icons and the text of the top bar should be
-  tinted. If null or unknown value is received, the initial colors set by the
-  app or the last colorVariant set will be used
-- `resetToDefaultState`: This is a flag used to indicate that the appearance of
-  the top bar should be restored to its original state. The other fields that
-  may come in the same bridge call will be applied after the reset
+-   `title`: updates NavigationBar title
+-   `expandedTitle`: updates NavigationBar expandedTitle. If the value is an
+    empty string, the expanded navigation bar will not be shown. Only available
+    in native app versions >= 11.8
+-   `showBackButton`: shows or hides back icon in NavigationBar. On android, in
+    case window does not support showing a back button (currently internal with
+    modal presentation, which shows an X) this flag is ignored, as in these
+    cases back navigation is always performed with the native back button
+-   `showReloadButton`: shows or hides NavigationBar Reload button
+-   `showProfileButton`: **DEPRECATED**. New apps will ignore this field
+-   `backgroundColor`: change NavigationBar background color, use a hex color
+    string (for example: `'#FF128A'`)
+-   `leftActions`: array of icons to show in the left side
+-   `rightActions`: array of icons to show in the right side
+-   `colorVariant`: defines how the icons and the text of the top bar should be
+    tinted. If null or unknown value is received, the initial colors set by the
+    app or the last colorVariant set will be used
+-   `resetToDefaultState`: This is a flag used to indicate that the appearance
+    of the top bar should be restored to its original state. The other fields
+    that may come in the same bridge call will be applied after the reset
 
 #### Examples
 
@@ -620,9 +623,9 @@ Log the current screen name (or page name) to firebase
 
 ```ts
 setScreenName: (
-    screenName: string,
-    params?: {[key: string]: any},
-    options?: {sanitize?: boolean},
+  screenName: string,
+  params?: { [key: string]: any },
+  options?: { sanitize?: boolean }
 ) => Promise<void>;
 ```
 
@@ -683,8 +686,8 @@ onNativeEvent(({event}) => {
 
 #### Available events
 
-- `tappedNavigationBarBackButton`: fired when the user taps on the back button
-  of the native Navigation Bar. Allowed response actions: `default`
+-   `tappedNavigationBarBackButton`: fired when the user taps on the back button
+    of the native Navigation Bar. Allowed response actions: `default`
 
 ### checkPermissionStatus
 
@@ -695,13 +698,12 @@ pass feature and required params for this request.
 
 Avalaible features:
 
-- `notifications`
-- `read-contacts` (Available for app versions 13.10 and higher)
-- `write-contacts` (Available for app versions 13.10 and higher)
+-   `notifications`
+-   `read-contacts` (Available for app versions 13.10 and higher)
+-   `write-contacts` (Available for app versions 13.10 and higher)
 
 ```ts
-checkPermissionStatus: (feature: string, params?: {[key: string]: string}) =>
-    Promise<boolean>;
+checkPermissionStatus: (feature: string, params?: {[key: string]: string}) => Promise<boolean>;
 ```
 
 #### Example
@@ -722,9 +724,9 @@ Init an internal and native navigation to a device specific feature
 
 Avalaible features:
 
-- `notification-settings`
-- `contact-settings` <kbd>App version >=13.10 </kbd>
-- `location-settings` <kbd>App version >=25.8</kbd>
+-   `notification-settings`
+-   `contact-settings` <kbd>App version >=13.10 </kbd>
+-   `location-settings` <kbd>App version >=25.8</kbd>
 
 ```ts
 internalNavigation: (feature: string) => Promise<void>;
@@ -782,26 +784,25 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
 Opens native UI to add or edit a contact in the device's phonebook.
 
 ```ts
-addOrEditContact: (phoneNumber: string) =>
-    Promise<{
-        phoneNumber?: string;
-        firstName?: string;
-        middleName?: string;
-        lastName?: string;
-        encodedAvatar?: string;
-    }>;
+addOrEditContact: (phoneNumber: string) => Promise<{
+    phoneNumber?: string;
+    firstName?: string;
+    middleName?: string;
+    lastName?: string;
+    encodedAvatar?: string;
+}>
 ```
 
-- If phoneNumber already exists in the device phonebook, the user will be able
-  to edit the information.
-- If phoneNumber is saved under multiple names in the phonebook, when editing it
-  should choose the first one alphabetically
-- If phoneNumber doesn't exist in the phonebook, the user will be able to add
-  it, providing the related info.
-- If the user edits the phone number of the contact, the new value is returned
-  in the phoneNumber field
-- If the user exists the flow without selecting a a contact, an error is
-  returned
+-   If phoneNumber already exists in the device phonebook, the user will be able
+    to edit the information.
+-   If phoneNumber is saved under multiple names in the phonebook, when editing
+    it should choose the first one alphabetically
+-   If phoneNumber doesn't exist in the phonebook, the user will be able to add
+    it, providing the related info.
+-   If the user edits the phone number of the contact, the new value is returned
+    in the phoneNumber field
+-   If the user exists the flow without selecting a a contact, an error is
+    returned
 
 Once the user has added or updated the contact, native returns the new
 information (all last values of every property).
@@ -816,8 +817,7 @@ Return info about appDomain
 getAppDomain: () => Promise<{domain: string}>;
 ```
 
-`domain`: the domain value of the environment that the app uses for handling
-deeplinks.
+`domain`: the domain value of the environment that the app uses for handling deeplinks.
 
 ### getAppMetadata
 
@@ -826,18 +826,17 @@ deeplinks.
 Check if an app is installed in the phone
 
 ```ts
-getAppMetadata: (appToken: string) =>
-    Promise<{
-        isInstalled: boolean;
-        marketUrl: string;
-        appUrl: string;
-    }>;
+getAppMetadata: (appToken: string) => Promise<{
+    isInstalled: boolean;
+    marketUrl: string;
+    appUrl: string
+}>;
 ```
 
-- `appToken`: token that refers to a "friend" application
-- `isInstalled`: boolean to see if the app is installed
-- `appUrl`: string url to launch an app installed on the phone
-- `marketUrl`: string url to launch the store in a specific application
+-   `appToken`: token that refers to a "friend" application
+-   `isInstalled`: boolean to see if the app is installed
+-   `appUrl`: string url to launch an app installed on the phone
+-   `marketUrl`: string url to launch the store in a specific application
 
 ### getDiskSpaceInfo
 
@@ -846,11 +845,11 @@ getAppMetadata: (appToken: string) =>
 Return info about how much free disk space the device has
 
 ```ts
-getDiskSpaceInfo: () => Promise<{availableBytes: number; totalBytes: number}>;
+getDiskSpaceInfo: () => Promise<{availableBytes: number, totalBytes: number}>;
 ```
 
-- `availableBytes`: number to see available bytes in the device
-- `totalBytes`: number to see the total bytes in the device
+-   `availableBytes`: number to see available bytes in the device
+-   `totalBytes`: number to see the total bytes in the device
 
 ### getEsimInfo
 
@@ -860,12 +859,12 @@ getDiskSpaceInfo: () => Promise<{availableBytes: number; totalBytes: number}>;
 Return info about the esim capabilities of the device
 
 ```ts
-getEsimInfo: () => Promise<{supportsEsim: boolean; eid?: string | null}>;
+getEsimInfo: () => Promise<{supportsEsim: boolean, eid?: string | null}>;
 ```
 
-- `supportsEsim`: tells if the device supports esim
-- `eid`: "Embedded Identity Document". The serial number corresponding to the
-  eSIM installed in a device.
+-   `supportsEsim`: tells if the device supports esim
+-   `eid`: "Embedded Identity Document". The serial number corresponding to the
+    eSIM installed in a device.
 
 ### getDeviceModel
 
@@ -884,16 +883,12 @@ getDeviceModel: () => Promise<{model: string} | null>;
 Sets a property related to some specific tracking system
 
 ```ts
-setTrackingProperty: (
-    system: 'palitagem' | 'medallia',
-    name: string,
-    value?: string,
-) => Promise<void>;
+setTrackingProperty: (system: 'palitagem' | 'medallia', name: string, value?: string) => Promise<void>;
 ```
 
-- `system`: Tracking system that will handle the property
-- `name`: name of the property
-- `value`: value of the property (nullable)
+-   `system`: Tracking system that will handle the property
+-   `name`: name of the property
+-   `value`: value of the property (nullable)
 
 ### setActionBehavior
 
@@ -906,39 +901,37 @@ allows disabling any previous behaviors set.
 ```ts
 type ActionBehavior =
     | {
-          behavior: 'confirm';
-          title: string;
-          message: string;
-          acceptText: string;
-          cancelText: string;
-      }
+        behavior: 'confirm';
+        title: string;
+        message: string;
+        acceptText: string;
+        cancelText: string;
+    }
     | {
-          behavior: 'default';
-      }
+        behavior: 'default';
+    }
     | {
-          behavior: 'cancel';
-      };
+        behavior: 'cancel';
+    };
 
-setActionBehavior: (actions: {
-    webviewClose?: ActionBehavior;
-    navigationBack?: ActionBehavior;
-}) => Promise<void>;
+setActionBehavior: (actions: {webviewClose?: ActionBehavior, navigationBack?: ActionBehavior}) => Promise<void>;
 ```
 
 `navigationBack` and `webviewClose` actions are currently available:
 
-- `navigationBack`: Action bar back button pressed (also for physical back
-  button in android but not swipe back gesture in iOS, which will be disabled).
-- `webviewClose`: Action bar close button pressed. Includes both "X" and "Close"
-  buttons (but not swipe down gesture in iOS, which will be disabled).
+-   `navigationBack`: Action bar back button pressed (also for physical back
+    button in android but not swipe back gesture in iOS, which will be
+    disabled).
+-   `webviewClose`: Action bar close button pressed. Includes both "X" and
+    "Close" buttons (but not swipe down gesture in iOS, which will be disabled).
 
 Both have same allowed json parameters, and 3 allowed behaviors:
 
-- `confirm` Show a confirmation dialog with the required title, message and
-  buttons.
-- `cancel` Prevent action from being performed, just ignoring it.
-- `default` Set default behavior for the action. (Usually to reset any
-  previously specified behavior).
+-   `confirm` Show a confirmation dialog with the required title, message and
+    buttons.
+-   `cancel` Prevent action from being performed, just ignoring it.
+-   `default` Set default behavior for the action. (Usually to reset any
+    previously specified behavior).
 
 Actions can be optionally included in the payload. Any not included action won’t
 change its current behavior set.
@@ -953,7 +946,7 @@ Tell the app to renew the session.
 renewSession = (
     oldAccessToken: string | null,
     options: {timeout?: number} = {},
-) => Promise<string>;
+) => Promise<string>
 ```
 
 ### onSessionRenewed
@@ -974,7 +967,7 @@ onSessionRenewed = (
 A method that requests a user logout.
 
 ```ts
-logout = () => Promise<{success: boolean}>;
+logout = () => Promise<{success: boolean}>
 ```
 
 ### getTopazToken
@@ -982,7 +975,7 @@ logout = () => Promise<{success: boolean}>;
 Returns the [Topaz](https://www.topaz.com.br/ofd/index.php) token.
 
 ```ts
-getTopazToken = (options: {timeout?: number} = {}) => Promise<{token: string}>;
+getTopazToken = (options: {timeout?: number} = {}) => Promise<{token: string}>
 ```
 
 ### getTopazValues
@@ -993,7 +986,7 @@ Returns an object containing values from the
 [Topaz](https://www.topaz.com.br/ofd/index.php) SDK.
 
 ```ts
-getTopazValues = () => Promise<{syncId?: string}>;
+getTopazValues = () => Promise<{syncId?: string}>
 ```
 
 ### showAppRating
@@ -1005,7 +998,7 @@ Show native app rating dialog
 <img height="550" src="doc/webview-bridge-app-rating-ios.png"><img height="550" src="doc/webview-bridge-alert-android.png">
 
 ```ts
-showAppRating = () => Promise<void>;
+showAppRating = () => Promise<void>
 ```
 
 ### increaseAppRatingTrigger
@@ -1020,7 +1013,7 @@ This method is used to request native app to increase the appRating trigger
 value for a specific key.
 
 ```ts
-increaseAppRatingTrigger = (key: string) => Promise<void>;
+increaseAppRatingTrigger = (key: string) => Promise<void>
 ```
 
 ### resetAppRatingTrigger
@@ -1035,7 +1028,7 @@ This method is used to request native app to reset the appRating trigger value
 for a specific key
 
 ```ts
-resetAppRatingTrigger = (key: string) => Promise<void>;
+resetAppRatingTrigger = (key: string) => Promise<void>
 ```
 
 ### appRatingRemindMeLater
@@ -1046,7 +1039,7 @@ Notify the native app that a user has selected "Remind me later" in the app
 rating flow
 
 ```ts
-appRatingRemindMeLater = () => Promise<void>;
+appRatingRemindMeLater = () => Promise<void>
 ```
 
 ### bottomSheet
@@ -1063,7 +1056,7 @@ fallbacks to a web implementation when the native bridge is not available.
 <img height="460" src="doc/webview-bridge-bottom-sheet.png">
 
 ```ts
-bottomSheet = (payload: SheetUI) => Promise<SheetResponse>;
+bottomSheet = (payload: SheetUI) => Promise<SheetResponse>
 // see SheetUI and SheetResponse types
 ```
 
@@ -1078,13 +1071,10 @@ with code `423` (Locked)
 Fetch all the phone numbers of the native phonebook
 
 ```ts
-fetchPhoneNumbers: () =>
-    Promise<
-        Array<{
-            id: string;
-            value: string;
-        }>
-    >;
+fetchPhoneNumbers:() => Promise<Array<{
+    id: string;
+    value: string;
+}>>;
 ```
 
 ### updatePhoneNumbers
@@ -1113,10 +1103,10 @@ highlightNavigationTab: ({
 }) => Promise<void>;
 ```
 
-- If `highlight` is `false`: no badge is shown
-- If `highlight` is `true`:
-    - If `count` is not `null`, it will show a numeric badge with `count`value
-    - If `count` is `null`, it will show a non-numeric badge
+-   If `highlight` is `false`: no badge is shown
+-   If `highlight` is `true`:
+    -   If `count` is not `null`, it will show a numeric badge with `count`value
+    -   If `count` is `null`, it will show a non-numeric badge
 
 ### getAttStatus
 
@@ -1131,7 +1121,7 @@ Resolves to `null` if the app is not running on iOS or if the method is not
 available
 
 ```ts
-getAttStatus: () => Promise<{status: 'granted' | 'denied' | 'unknown'} | null>;
+getAttStatus: () => Promise<{status:'granted' | 'denied' | 'unknown'} | null>;
 ```
 
 ### getNetworkConnectionInfo
@@ -1141,37 +1131,36 @@ getAttStatus: () => Promise<{status: 'granted' | 'denied' | 'unknown'} | null>;
 Obtain metainformation about the current device data network connectivity
 
 ```ts
-getNetworkConnectionInfo: () =>
-    Promise<{
-        connectionType: 'MOBILE' | 'WIFI ' | 'OTHER' | 'NONE';
-        mobileConnectionType?:
-            | '2G'
-            | '3G'
-            | '4G'
-            | '5G'
-            | 'OTHER'
-            | 'PERMISSION_REQUIRED'
-            | null;
-        mobileCarrier?: string | null;
-        mobileSignalStrength?:
-            | 'NONE'
-            | 'POOR'
-            | 'MODERATE'
-            | 'GOOD'
-            | 'GREAT'
-            | null;
-    }>;
+getNetworkConnectionInfo: () => Promise<{
+    connectionType: 'MOBILE' | 'WIFI ' | 'OTHER' | 'NONE';
+    mobileConnectionType?:
+        | '2G'
+        | '3G'
+        | '4G'
+        | '5G'
+        | 'OTHER'
+        | 'PERMISSION_REQUIRED'
+        | null;
+    mobileCarrier?: string | null;
+    mobileSignalStrength?:
+        | 'NONE'
+        | 'POOR'
+        | 'MODERATE'
+        | 'GOOD'
+        | 'GREAT'
+        | null;
+}>;
 ```
 
-- `connectionType`: describes the network technology used currently for data
-- `mobileConnectionType`: in case connectionType is 'MOBILE' gives further
-  details about the network technology used. PERMISSION_REQUIRED value will be
-  returned only in Android when READ_PHONE_STATE permission has not been granted
-  by the user. The permission request is already managed by the Android
-  implementation itself.
-- `mobileCarrier`: identifies the carrier used for 'MOBILE' connectionType
-- `mobileSignalStrength`: gives a measure of the current signal strength for
-  'MOBILE' connectionType.
+-   `connectionType`: describes the network technology used currently for data
+-   `mobileConnectionType`: in case connectionType is 'MOBILE' gives further
+    details about the network technology used. PERMISSION_REQUIRED value will be
+    returned only in Android when READ_PHONE_STATE permission has not been
+    granted by the user. The permission request is already managed by the
+    Android implementation itself.
+-   `mobileCarrier`: identifies the carrier used for 'MOBILE' connectionType
+-   `mobileSignalStrength`: gives a measure of the current signal strength for
+    'MOBILE' connectionType.
 
 ### getPincodeInfo
 
@@ -1180,10 +1169,9 @@ getNetworkConnectionInfo: () =>
 Check if the pincode is enabled or not
 
 ```ts
-getPincodeInfo: () =>
-    Promise<{
-        status: 'enabled' | 'disabled';
-    }>;
+getPincodeInfo: () => Promise<{
+    status: 'enabled' | 'disabled'
+}>;
 ```
 
 ### getProfileImage
@@ -1193,13 +1181,12 @@ getPincodeInfo: () =>
 Read current profile picture
 
 ```ts
-getProfileImage: () =>
-    Promise<{
-        image: string | null;
-    }>;
+getProfileImage: () => Promise<{
+    image: string | null
+}>;
 ```
 
-- `image`: base64 encoded image or null if there is no image
+-   `image`: base64 encoded image or null if there is no image
 
 ### startProfileImageFlow
 
@@ -1208,16 +1195,15 @@ getProfileImage: () =>
 Starts the native flow to change the profile picture
 
 ```ts
-startProfileImageFlow: () =>
-    Promise<{
-        image: string | null;
-        isCancelled: boolean;
-    }>;
+startProfileImageFlow: () => Promise<{
+    image: string | null;
+    isCancelled: boolean;
+}>;
 ```
 
-- `image`: base64 encoded image or null if the image was removed or the flow
-  cancelled
-- `isCancelled`: true if the user cancelled the flow
+-   `image`: base64 encoded image or null if the image was removed or the flow
+    cancelled
+-   `isCancelled`: true if the user cancelled the flow
 
 ### showLineSelector
 
@@ -1227,9 +1213,9 @@ Opens the native line selector dialog
 
 #### Error cases
 
-- 405: line selector feature is not allowed (feature is disabled)
-- 409: line selector is already presented (Invoking the selector if there is
-  already one showing causes this error)
+-   405: line selector feature is not allowed (feature is disabled)
+-   409: line selector is already presented (Invoking the selector if there is
+    already one showing causes this error)
 
 ### getDeviceTac
 
@@ -1238,17 +1224,17 @@ Opens the native line selector dialog
 Get device [TAC identifier](https://en.wikipedia.org/wiki/Type_Allocation_Code).
 
 ```ts
-getDeviceTac: () =>
-    Promise<{
-        tac: string | null;
-    }>;
+getDeviceTac: () => Promise<{
+    tac: string | null
+}>;
 ```
 
-- `tac`: The TAC identifier is the first 8 digits of the IMEI. We already have a
-  method to get the IMEI but to obtain this value, we need carrier privileges
-  permission which in many cases we don't have. To get the TAC we don't need any
-  special permission because it only identifies the device model, not the device
-  itself. Will be `null` if it's not available (iOS devices or Android < 10).
+-   `tac`: The TAC identifier is the first 8 digits of the IMEI. We already have
+    a method to get the IMEI but to obtain this value, we need carrier
+    privileges permission which in many cases we don't have. To get the TAC we
+    don't need any special permission because it only identifies the device
+    model, not the device itself. Will be `null` if it's not available (iOS
+    devices or Android < 10).
 
 ### triggerPinOrBiometricAuthentication
 
@@ -1257,42 +1243,37 @@ getDeviceTac: () =>
 Triggers pin/biometric authentication if necessary, taking into account 3
 possible scenarios:
 
-- If user has pin/biometric already configured in the app:
-    - If last previous authentication (or last pin/biometric setup) is still
-      valid, nothing will be presented to user and bridge method will succeed.
-    - Otherwise, authentication will be required, blocking the user until it is
-      performed.
-- In any other case, user will be taken directly to the screen where user can
-  introduce a new PIN and enable any other authentication methods. In case user
-  leaves the screen without providing an authentication method, bridge method
-  will fail with 401 code.
+-   If user has pin/biometric already configured in the app:
+    -   If last previous authentication (or last pin/biometric setup) is still
+        valid, nothing will be presented to user and bridge method will succeed.
+    -   Otherwise, authentication will be required, blocking the user until it
+        is performed.
+-   In any other case, user will be taken directly to the screen where user can
+    introduce a new PIN and enable any other authentication methods. In case
+    user leaves the screen without providing an authentication method, bridge
+    method will fail with 401 code.
 
 ```ts
 triggerPinOrBiometricAuthentication: ({
-    maxSecondsSinceLastValidation: number,
-}) =>
-    Promise<{
-        result:
-            | 'USER_AUTHENTICATED'
-            | 'USER_ENABLED_AUTHENTICATION'
-            | 'LAST_AUTHENTICATION_STILL_VALID'
-            | 'DEVICE_HAS_NO_AUTHENTICATION';
-    }>;
+    maxSecondsSinceLastValidation: number
+}) => Promise<{
+    result: 'USER_AUTHENTICATED' | 'USER_ENABLED_AUTHENTICATION' | 'LAST_AUTHENTICATION_STILL_VALID' | 'DEVICE_HAS_NO_AUTHENTICATION',
+}>;
 ```
 
-- `maxSecondsSinceLastValidation`: if time elapsed since last authentication is
-  less than the number of seconds specified here authentication will succeed
-  without requesting it again.
+-   `maxSecondsSinceLastValidation`: if time elapsed since last authentication
+    is less than the number of seconds specified here authentication will
+    succeed without requesting it again.
 
 <kbd>App version >=25.5</kbd>
 
 If the new PIN & Biometrics 2.0 (device authentication) feature is enabled,
 there are a couple of details to take into account:
 
-- If the setting is not enabled by the user, the device authentication will be
-  asked and if it goes right, the setting will be enabled.
-- If the device doesn't have any authentication configured, the method will
-  return `DEVICE_HAS_NO_AUTHENTICATION` as result.
+-   If the setting is not enabled by the user, the device authentication will be
+    asked and if it goes right, the setting will be enabled.
+-   If the device doesn't have any authentication configured, the method will
+    return `DEVICE_HAS_NO_AUTHENTICATION` as result.
 
 ### focusNavbar
 
@@ -1307,10 +1288,9 @@ navbar when we navigate to a new screen using client side navigation (React
 Router).
 
 ```ts
-focusNavbar: () =>
-    Promise<{
-        focused: boolean;
-    }>;
+focusNavbar: () => Promise<{
+    focused: boolean,
+}>;
 ```
 
 ### openOnboarding
@@ -1320,7 +1300,7 @@ focusNavbar: () =>
 Opens the app Onboarding (as if it where the first time the user logs in)
 
 ```ts
-openOnboarding = () => Promise<void>;
+openOnboarding = () => Promise<void>
 ```
 
 ### getBatteryInfo
@@ -1330,16 +1310,15 @@ openOnboarding = () => Promise<void>;
 Obtains information about the device battery status
 
 ```ts
-getBatteryInfo: () =>
-    Promise<{
-        batteryLevel: number | null;
-        isPowerSafeMode: boolean;
-    }>;
+getBatteryInfo: () => Promise<{
+    batteryLevel: number | null;
+    isPowerSafeMode: boolean;
+}>;
 ```
 
-- `batteryLevel`: battery level in percentage (0 - 100). `null` if the battery
-  information is unavailable.
-- `isPowerSafeMode`: true if the device is in power saving mode.
+-   `batteryLevel`: battery level in percentage (0 - 100). `null` if the battery
+    information is unavailable.
+-   `isPowerSafeMode`: true if the device is in power saving mode.
 
 ### readTextFromClipboard
 
@@ -1462,8 +1441,7 @@ get/set the number of unseen notifications in the inbox and the last time the
 counter was updated (timestamp in milliseconds).
 
 ```ts
-getUnseenNotificationsBadge: () =>
-    Promise<{unseenNotificationCounter: number; lastUpdated: number}>;
+getUnseenNotificationsBadge: () => Promise<{unseenNotificationCounter: number; lastUpdated: number}>;
 ```
 
 ```ts
@@ -1522,14 +1500,13 @@ The application that implements the Datamob should have an user registered. This
 method is used to register one.
 
 ```ts
-registerDatamobUser: ({phoneNumber: string, tokenPassword: string}) =>
-    Promise<void>;
+registerDatamobUser: ({phoneNumber: string, tokenPassword: string}) => Promise<void>;
 ```
 
-- `phoneNumber`: The phone number of the user.
-- `tokenPassword`: When registering the device, datamob generate an accessKey
-  that is recorded in the Datamob device registry. By combining this attribute
-  with a hash that we keep in a password vault, generate this token.
+-   `phoneNumber`: The phone number of the user.
+-   `tokenPassword`: When registering the device, datamob generate an accessKey
+    that is recorded in the Datamob device registry. By combining this attribute
+    with a hash that we keep in a password vault, generate this token.
 
 #### Error cases
 
@@ -1556,22 +1533,21 @@ This method returns a map with the requirements. Each requirement is a boolean
 value where true is valid, false is not valid.
 
 ```ts
-validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) =>
-    Promise<{
-        deviceAdmin: boolean;
-        lockPassword: boolean;
-        accessibilityOption: boolean;
-        invalidPhoneNumber: boolean;
-        invalidToken: boolean;
-    }>;
+validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => Promise<{
+    deviceAdmin: boolean;
+    lockPassword: boolean;
+    accessibilityOption: boolean;
+    invalidPhoneNumber: boolean;
+    invalidToken: boolean;
+}>
 ```
 
-- `phoneNumber`: The phone number of the user.
-- `tokenPassword`: When registering the device, datamob generate an accessKey
-  that is recorded in the Datamob device registry. By combining this attribute
-  with a hash that we keep in a password vault, generate this token.
+-   `phoneNumber`: The phone number of the user.
+-   `tokenPassword`: When registering the device, datamob generate an accessKey
+    that is recorded in the Datamob device registry. By combining this attribute
+    with a hash that we keep in a password vault, generate this token.
 
-- returns a map with the requirements.
+-   returns a map with the requirements.
 
 ### displayQualtricsIntercept
 
@@ -1588,8 +1564,7 @@ It will return a boolean (`displayed`) indicating if the survey has been
 displayed or not.
 
 ```ts
-displayQualtricsIntercept: ({interceptId: string}) =>
-    Promise<{displayed: boolean}>;
+displayQualtricsIntercept: ({interceptId: string}) => Promise<{displayed: boolean}>;
 ```
 
 #### Error cases
@@ -1648,8 +1623,7 @@ evaluation. When available, a `surveyUrl` with the generated survey url is
 returned (only in App version >=25.10).
 
 ```ts
-isQualtricsInterceptAvailableForUser: ({interceptId: string}) =>
-    Promise<{isAvailable: boolean; surveyUrl?: string | null}>;
+isQualtricsInterceptAvailableForUser: ({interceptId: string}) => Promise<{isAvailable: boolean; surveyUrl?: string | null}>;
 ```
 
 #### Error cases
@@ -1684,15 +1658,15 @@ refreshNavBar: ({
 
 where
 
-- `moduleId` is an optional parameter
-    - If it is not included, it means the app will refresh top and bottom bar
-    - If it is included, it should be the same values used for Visual Modules
-      API and the app will request to refresh only the indicated bar
-- `productId` is an optional parameter
-    - If it is not included, visual modules is requested as it is today, just
-      with the userID as query param plus the `moduleId`
-    - If it is included, visual modules will be requested for the current userID
-      and for the `productId`
+-   `moduleId` is an optional parameter
+    -   If it is not included, it means the app will refresh top and bottom bar
+    -   If it is included, it should be the same values used for Visual Modules
+        API and the app will request to refresh only the indicated bar
+-   `productId` is an optional parameter
+    -   If it is not included, visual modules is requested as it is today, just
+        with the userID as query param plus the `moduleId`
+    -   If it is included, visual modules will be requested for the current
+        userID and for the `productId`
 
 #### Example
 
@@ -1710,16 +1684,15 @@ refreshNavBar({
 Method to start the AllowMe native SDK biometrics flow.
 
 ```ts
-requestAllowMeBiometrics: () =>
-    Promise<{
-        result?: string;
-        images: Array<string>;
-    }>;
+requestAllowMeBiometrics: () => Promise<{
+    result?: string;
+    images: Array<string>;
+}>;
 ```
 
-- `result`: cryptographed payload containing safety information about the image
-  capture process.
-- `images`: is an array of base64 encoded images captured during the process.
+-   `result`: cryptographed payload containing safety information about the
+    image capture process.
+-   `images`: is an array of base64 encoded images captured during the process.
 
 #### Error cases
 
@@ -1788,27 +1761,26 @@ try {
 Retrieve information about the availability of Biometrics
 
 ```ts
-getBiometricsAuthenticationStatus: () =>
-    Promise<{
-        result: 'DISABLED' | 'ENABLED' | 'DEVICE_HAS_NO_AUTHENTICATION';
-    }>;
+getBiometricsAuthenticationStatus: () => Promise<{
+    result: 'DISABLED' | 'ENABLED' | 'DEVICE_HAS_NO_AUTHENTICATION',
+}>;
 ```
 
 #### Result description
 
-- `'DISABLED'`: The device has an authentication method (device PIN code at
-  least, and biometrics optionally) but it has the biometrics option disabled in
-  the app
-- `'ENABLED'`: The device has an authentication method (device PIN code at
-  least, and biometrics optionally) and it has the biometrics option enabled in
-  the app (it requires authentication when launching the app)
-- `'DEVICE_HAS_NO_AUTHENTICATION'`: The device has not any authentication method
-  (it has no device PIN code neither biometrics)
+-   `'DISABLED'`: The device has an authentication method (device PIN code at
+    least, and biometrics optionally) but it has the biometrics option disabled
+    in the app
+-   `'ENABLED'`: The device has an authentication method (device PIN code at
+    least, and biometrics optionally) and it has the biometrics option enabled
+    in the app (it requires authentication when launching the app)
+-   `'DEVICE_HAS_NO_AUTHENTICATION'`: The device has not any authentication
+    method (it has no device PIN code neither biometrics)
 
 #### Error cases
 
-- `404`: The bridge implementation does not support this feature
-- `500`: User is not logged in
+-   `404`: The bridge implementation does not support this feature
+-   `500`: User is not logged in
 
 ### setBiometricsAuthenticationStatus
 
@@ -1822,16 +1794,16 @@ setBiometricsAuthenticationStatus: ({enable: boolean}) => Promise<void>;
 
 #### Parameters
 
-- `enable`: Whether if the biometrics option has to be enabled (triggering the
-  biometrics setting UI) or disabled
+-   `enable`: Whether if the biometrics option has to be enabled (triggering the
+    biometrics setting UI) or disabled
 
 #### Error cases
 
-- `400`: enable parameter is missing
-- `401`: User is not logged in
-- `500`: Native side error while applying the setting
-- `503`: The device has no biometrics available, or the user cancelled modifying
-  biometric settings.
+-   `400`: enable parameter is missing
+-   `401`: User is not logged in
+-   `500`: Native side error while applying the setting
+-   `503`: The device has no biometrics available, or the user cancelled
+    modifying biometric settings.
 
 ## Error handling
 

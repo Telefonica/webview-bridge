@@ -309,7 +309,7 @@ type NavigationBarIcon = {
     /** URL to be opened by the app as a deep-link if present */
     url?: string;
     /** @deprecated use 'accessibilityLabel' instead */
-    name: string;
+    name?: string;
     /** Accessibility label for the icon */
     accessibilityLabel?: string;
     /** default: true, set to false if the Icon is decorative */

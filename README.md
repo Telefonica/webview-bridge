@@ -294,7 +294,8 @@ downloadBase64({
 
 <kbd>App version >= 10.7: Partial support</kbd><br/> <kbd>App version >= 11.8:
 expandedTitle</kbd><br/> <kbd>App version >= 14.8: Additional properties and
-deprecations</kbd><br/> <kbd>Partial support in B2P App version <=24.10:
+deprecations</kbd><br/> <kbd>App version >= 25.12: accessibilityLabel and
+isButton</kbd><br/> <kbd>Partial support in B2P App version <=24.10:
 title</kbd><br/> <kbd>Partial support in B2P App version >=24.11: right
 actions</kbd><br/>
 
@@ -307,8 +308,12 @@ type NavigationBarIcon = {
     id: string;
     /** URL to be opened by the app as a deep-link if present */
     url?: string;
-    /** Content description of the image used for accessibility */
+    /** @deprecated use 'accessibilityLabel' instead */
     name: string;
+    /** Accessibility label for the icon */
+    accessibilityLabel?: string;
+    /** default: true, set to false if the Icon is decorative */
+    isButton?: boolean;
     /**
      * This is a string whose value will be mapped to a local resource that the app already knows.
      * See https://void.tuenti.io/idl-server/files/TopNavbarIcon/1.1 for available values.

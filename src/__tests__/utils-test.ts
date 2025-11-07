@@ -144,7 +144,7 @@ test('update navigation bar, with options', (done) => {
                     url: 'https://example.com/icon.png',
                     urlDark: 'https://example.com/icon-dark.png',
                 },
-                accessibilityLabel: 'Left',
+                name: 'Left',
                 badge: {
                     show: true,
                     nativeLogic: 'INBOX',
@@ -157,7 +157,7 @@ test('update navigation bar, with options', (done) => {
                 id: 'icon2',
                 url: 'https://example.com/action2',
                 iconEnum: 'SOME_ICON',
-                accessibilityLabel: 'Right',
+                name: 'Right',
                 badge: {
                     show: true,
                     number: 1,
@@ -167,7 +167,7 @@ test('update navigation bar, with options', (done) => {
             {
                 id: 'icon3',
                 iconEnum: 'OTHER_ICON',
-                accessibilityLabel: 'Right 2',
+                name: 'Right 2',
             },
         ],
         colorVariant: 'INVERSE',

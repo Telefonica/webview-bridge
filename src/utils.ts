@@ -44,10 +44,11 @@ export type NavigationBarIcon = Readonly<{
     id: string;
     /** URL to be opened by the app as a deep-link if present */
     url?: string;
-    /** @deprecated use 'accessibilityLabel' instead */
-    name?: string;
-    /** Accessibility label for the icon */
-    accessibilityLabel?: string;
+    /**
+     * Accessibility label for the icon. When isButton=true you should always set a name, when isButton=false if you don't want it to be
+     * read by screen readers, then explicitly set it to an empty string.
+     * */
+    name: string;
     /** default: true, set to false if the Icon is decorative */
     isButton?: boolean;
     /**

@@ -1279,7 +1279,11 @@ If the new PIN & Biometrics 2.0 (device authentication) feature is enabled,
 there are a couple of details to take into account:
 
 -   If the setting is not enabled by the user, the device authentication will be
-    asked and if it goes right, the setting will be enabled.
+    asked and if it goes right, the setting will be enabled and the method will 
+    return `USER_ENABLED_AUTHENTICATION`
+-   If the setting is already enabled by the user, the device authentication will
+    be asked and if it goes right, the setting will remain unchanged (enabled) 
+    and the method will return `USER_AUTHENTICATED`
 -   If the device doesn't have any authentication configured, the method will
     return `DEVICE_HAS_NO_AUTHENTICATION` as result.
 

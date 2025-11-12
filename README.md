@@ -1271,7 +1271,8 @@ triggerPinOrBiometricAuthentication: ({
 
 -   `maxSecondsSinceLastValidation`: if time elapsed since last authentication
     is less than the number of seconds specified here authentication will
-    succeed without requesting it again.
+    succeed without requesting it again, returning
+    `LAST_AUTHENTICATION_STILL_VALID`
 
 <kbd>App version >=25.5</kbd>
 

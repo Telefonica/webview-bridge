@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v3.60.0 - 2025-11-12
+
+-   `updateNavigationBar`: add isButton
+
 ## v3.59.0 - 2025-07-18
 
 -   `isQualtricsInterceptAvailableForUser`: return surveyUrl.

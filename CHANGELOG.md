@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v3.61.0 - 2026-01-13
+
+-   `openOcrScanner`: new method to open a native OCR scanner that looks for
+    text matching a provided regular expression
+-   `internalNavigation`: support "permissions-settings" feature
+
 ## v3.60.0 - 2025-11-12
 
 -   `updateNavigationBar`: add isButton

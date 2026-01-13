@@ -172,6 +172,24 @@ test('internal navigation to contact settings', (done) => {
     });
 });
 
+test('internal navigation to permissions settings', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('INTERNAL_NAVIGATION');
+            expect(msg.payload.feature).toBe('permissions-settings');
+        },
+        getResponse: (msg) => ({
+            type: 'INTERNAL_NAVIGATION',
+            id: msg.id,
+        }),
+    });
+
+    internalNavigation('permissions-settings').then((res) => {
+        expect(res).toBeUndefined();
+        done();
+    });
+});
+
 test('dismiss', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {

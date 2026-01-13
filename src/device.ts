@@ -22,7 +22,8 @@ export const requestDeviceImei = (): Promise<string | null> =>
 type RoutesAvalaible =
     | 'notification-settings'
     | 'contact-settings'
-    | 'location-settings';
+    | 'location-settings'
+    | 'permissions-settings';
 
 export const internalNavigation = (feature: RoutesAvalaible): Promise<void> =>
     postMessageToNativeApp({

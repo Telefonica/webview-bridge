@@ -160,3 +160,29 @@ export const setBiometricsAuthenticationStatus = (params: {
             enable: params.enable,
         },
     });
+
+/**
+ * Opens a native OCR scanner that looks for text matching the provided regular expression.
+ * When a text is found matching the pattern, the scanner closes and returns the scanned text.
+ * Only the first text that matches the pattern will be returned.
+ *
+ * The scanner will attempt to request camera permissions automatically.
+ * Only available in Mein Blau and Mein O2.
+ *
+ * Error cases:
+ * - 401: Missing permissions (user rejected camera permissions)
+ * - 405: Feature not supported in current brand (only available in Mein Blau and Mein O2)
+ * - 500: Internal error (e.g., unexpected error thrown by native scanner)
+ *
+ * @param params.regex - Regular expression pattern to match the scanned text
+ * @returns Promise that resolves to an object containing the scanned text or null if user closed the scanner
+ */
+export const openOcrScanner = (params: {
+    regex: string;
+}): Promise<{scannedText: string | null}> =>
+    postMessageToNativeApp({
+        type: 'OPEN_OCR_SCANNER',
+        payload: {
+            regex: params.regex,
+        },
+    });

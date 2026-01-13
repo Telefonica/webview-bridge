@@ -494,6 +494,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    OPEN_OCR_SCANNER: {
+        type: 'OPEN_OCR_SCANNER';
+        id: string;
+        payload: {scannedText: string | null};
+    };
 };
 
 export type NativeAppResponsePayload<

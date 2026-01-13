@@ -734,6 +734,7 @@ Avalaible features:
 -   `notification-settings`
 -   `contact-settings` <kbd>App version >=13.10 </kbd>
 -   `location-settings` <kbd>App version >=25.8</kbd>
+-   `permissions-settings` <kbd>App version >=26.1</kbd>
 
 ```ts
 internalNavigation: (feature: string) => Promise<void>;

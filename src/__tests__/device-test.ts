@@ -18,6 +18,7 @@ import {
     getBiometricsAuthenticationStatus,
     getInstallationId,
     setBiometricsAuthenticationStatus,
+    openOcrScanner,
 } from '../device';
 import {
     createFakeAndroidPostMessage,
@@ -588,5 +589,43 @@ test('setBiometricsAuthenticationStatus error', async () => {
     });
 
     const res = setBiometricsAuthenticationStatus({enable: true});
+    await expect(res).rejects.toEqual(error);
+});
+
+test('openOcrScanner - success with scanned text', async () => {
+    const regex = '\\b(?:\\d{4}-\\d{4}-\\d{4}-\\d{4}|\\d{16})\\b';
+    const scannedText = '1234-5678-8765-4321';
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('OPEN_OCR_SCANNER');
+            expect(msg.payload.regex).toBe(regex);
+        },
+        getResponse: (msg) => ({
+            type: 'OPEN_OCR_SCANNER',
+            id: msg.id,
+            payload: {scannedText},
+        }),
+    });
+
+    const res = await openOcrScanner({regex});
+    expect(res.scannedText).toBe(scannedText);
+});
+
+test('openOcrScanner - missing permissions error (401)', async () => {
+    const regex = '\\b(?:\\d{4}-\\d{4}-\\d{4}-\\d{4}|\\d{16})\\b';
+    const error = {code: 401, description: 'Missing permissions'};
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('OPEN_OCR_SCANNER');
+            expect(msg.payload.regex).toBe(regex);
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = openOcrScanner({regex});
     await expect(res).rejects.toEqual(error);
 });

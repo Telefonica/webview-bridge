@@ -28,6 +28,7 @@ export {
     getAppDomain,
     getBiometricsAuthenticationStatus,
     setBiometricsAuthenticationStatus,
+    openOcrScanner,
 } from './src/device';
 
 export {

@@ -1819,6 +1819,55 @@ setBiometricsAuthenticationStatus: ({enable: boolean}) => Promise<void>;
 -   `503`: The device has no biometrics available, or the user cancelled
     modifying biometric settings.
 
+### openOcrScanner
+
+<kbd>App version >=26.1</kbd>
+
+Opens a native OCR scanner that looks for text matching the provided regular
+expression. When a text is found matching the pattern, the scanner closes and
+returns the scanned text. Only the first text that matches the pattern will be
+returned.
+
+The scanner will attempt to request camera permissions automatically. Only
+available in Mein Blau and Mein O2.
+
+```ts
+openOcrScanner: ({regex: string}) => Promise<{scannedText: string | null}>;
+```
+
+#### Parameters
+
+-   `regex`: Regular expression pattern to match the scanned text
+
+#### Response
+
+-   `scannedText`: The scanned text matching the regex pattern, or `null` if the
+    user closed the scanner before any text was found
+
+#### Example
+
+```ts
+openOcrScanner({regex: '\\b(?:\\d{4}-\\d{4}-\\d{4}-\\d{4}|\\d{16})\\b'})
+    .then((result) => {
+        if (result.scannedText) {
+            console.log('Scanned text:', result.scannedText);
+            // Example output: "1234-5678-8765-4321"
+        } else {
+            console.log('User closed scanner without scanning');
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+```
+
+#### Error cases
+
+-   `401`: Missing permissions (user rejected camera permissions)
+-   `405`: Feature not supported in current brand (only available in Mein Blau
+    and Mein O2)
+-   `500`: Internal error (e.g., unexpected error thrown by native scanner)
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

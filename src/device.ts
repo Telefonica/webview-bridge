@@ -23,7 +23,8 @@ type RoutesAvalaible =
     | 'notification-settings'
     | 'contact-settings'
     | 'location-settings'
-    | 'permissions-settings';
+    | 'permissions-settings'
+    | 'accessibility-settings';
 
 export const internalNavigation = (feature: RoutesAvalaible): Promise<void> =>
     postMessageToNativeApp({

@@ -191,6 +191,24 @@ test('internal navigation to permissions settings', (done) => {
     });
 });
 
+test('internal navigation to accessibility settings', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('INTERNAL_NAVIGATION');
+            expect(msg.payload.feature).toBe('accessibility-settings');
+        },
+        getResponse: (msg) => ({
+            type: 'INTERNAL_NAVIGATION',
+            id: msg.id,
+        }),
+    });
+
+    internalNavigation('accessibility-settings').then((res) => {
+        expect(res).toBeUndefined();
+        done();
+    });
+});
+
 test('dismiss', (done) => {
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {

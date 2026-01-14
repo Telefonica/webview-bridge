@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v3.62.0 - 2026-01-14
+
+-   `internalNavigation`: support "accessibility-settings" feature
+
 ## v3.61.0 - 2026-01-13
 
 -   `openOcrScanner`: new method to open a native OCR scanner that looks for

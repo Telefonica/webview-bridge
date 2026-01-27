@@ -1839,7 +1839,8 @@ openOcrScanner: ({regex: string, timeout?: number}) => Promise<{scannedText: str
 #### Parameters
 
 -   `regex`: Regular expression pattern to match the scanned text
--   `timeout`: Timeout in seconds before closing the scanner automatically if no text is scanned. Optional, default is 15 seconds.
+-   `timeout`: Timeout in seconds before closing the scanner automatically if no
+    text is scanned. Optional, default is 15 seconds
 
 #### Response
 

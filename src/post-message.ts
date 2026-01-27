@@ -497,7 +497,7 @@ export type ResponsesFromNativeApp = {
     OPEN_OCR_SCANNER: {
         type: 'OPEN_OCR_SCANNER';
         id: string;
-        payload: {scannedText: string | null};
+        payload: {scannedText: string};
     };
 };
 

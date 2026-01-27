@@ -181,12 +181,12 @@ export const setBiometricsAuthenticationStatus = (params: {
  */
 export const openOcrScanner = (params: {
     regex: string;
-    timeout?: number;
+    timeoutMs?: number;
 }): Promise<{scannedText: string}> =>
     postMessageToNativeApp({
         type: 'OPEN_OCR_SCANNER',
         payload: {
             regex: params.regex,
-            timeout: params.timeout,
+            timeoutMs: params.timeoutMs,
         },
     });

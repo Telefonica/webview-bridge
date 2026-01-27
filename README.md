@@ -955,7 +955,7 @@ Tell the app to renew the session.
 ```ts
 renewSession = (
     oldAccessToken: string | null,
-    options: {timeout?: number} = {},
+    options: {timeoutMs?: number} = {},
 ) => Promise<string>
 ```
 
@@ -1839,8 +1839,8 @@ openOcrScanner: ({regex: string, timeout?: number}) => Promise<{scannedText: str
 #### Parameters
 
 -   `regex`: Regular expression pattern to match the scanned text
--   `timeout`: Timeout in seconds before closing the scanner automatically if no
-    text is scanned. Optional, default is 15 seconds
+-   `timeoutMs`: Timeout in milliseconds before closing the scanner
+    automatically if no text is scanned. Optional, default is 15000 milliseconds
 
 #### Response
 

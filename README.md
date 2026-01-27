@@ -955,7 +955,7 @@ Tell the app to renew the session.
 ```ts
 renewSession = (
     oldAccessToken: string | null,
-    options: {timeoutMs?: number} = {},
+    options: {timeout?: number} = {},
 ) => Promise<string>
 ```
 
@@ -1833,7 +1833,7 @@ The scanner will attempt to request camera permissions automatically. Only
 available in Mein Blau and Mein O2.
 
 ```ts
-openOcrScanner: ({regex: string, timeout?: number}) => Promise<{scannedText: string}>;
+openOcrScanner: ({regex: string, timeoutMs?: number}) => Promise<{scannedText: string}>;
 ```
 
 #### Parameters

@@ -1833,17 +1833,18 @@ The scanner will attempt to request camera permissions automatically. Only
 available in Mein Blau and Mein O2.
 
 ```ts
-openOcrScanner: ({regex: string}) => Promise<{scannedText: string | null}>;
+openOcrScanner: ({regex: string, timeoutMs?: number}) => Promise<{scannedText: string}>;
 ```
 
 #### Parameters
 
 -   `regex`: Regular expression pattern to match the scanned text
+-   `timeoutMs`: Timeout in milliseconds before closing the scanner
+    automatically if no text is scanned. Optional, default is 15000 milliseconds
 
 #### Response
 
--   `scannedText`: The scanned text matching the regex pattern, or `null` if the
-    user closed the scanner before any text was found
+-   `scannedText`: The scanned text matching the regex pattern.
 
 #### Example
 
@@ -1864,9 +1865,11 @@ openOcrScanner({regex: '\\b(?:\\d{4}-\\d{4}-\\d{4}-\\d{4}|\\d{16})\\b'})
 
 #### Error cases
 
+-   `204`: User manually closed OCR scanner
 -   `401`: Missing permissions (user rejected camera permissions)
 -   `405`: Feature not supported in current brand (only available in Mein Blau
     and Mein O2)
+-   `408`: Timeout reached without scanning any text
 -   `500`: Internal error (e.g., unexpected error thrown by native scanner)
 
 ## Error handling

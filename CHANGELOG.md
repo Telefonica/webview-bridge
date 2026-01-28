@@ -1,5 +1,11 @@
 # CHANGELOG
 
+## v3.63.0 - 2026-01-26
+
+-   `openOcrScanner`: added `timeoutMs` option to specify a timeout for the OCR
+    scanning operation. Raises 204 error if closed by user and 408 error if
+    timeout
+
 ## v3.62.0 - 2026-01-14
 
 -   `internalNavigation`: support "accessibility-settings" feature

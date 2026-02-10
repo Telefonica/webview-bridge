@@ -5,4 +5,3 @@ import {postMessageToNativeApp} from './post-message';
  */
 export const showAppRating = (): Promise<void> =>
     postMessageToNativeApp({type: 'SHOW_APP_RATING'});
-

@@ -1,6 +1,4 @@
-import {
-    showAppRating,
-} from '../app-rating';
+import {showAppRating} from '../app-rating';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,

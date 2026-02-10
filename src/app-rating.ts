@@ -6,12 +6,6 @@ import {postMessageToNativeApp} from './post-message';
 export const showAppRating = (): Promise<void> =>
     postMessageToNativeApp({type: 'SHOW_APP_RATING'});
 
-export const increaseAppRatingTrigger = (key: string): Promise<void> =>
-    postMessageToNativeApp({
-        type: 'INCREASE_APP_RATING_TRIGGER',
-        payload: {key: key},
-    });
-
 export const resetAppRatingTrigger = (key: string): Promise<void> =>
     postMessageToNativeApp({
         type: 'RESET_APP_RATING_TRIGGER',

@@ -1,6 +1,5 @@
 import {
     showAppRating,
-    increaseAppRatingTrigger,
     resetAppRatingTrigger,
     appRatingRemindMeLater,
 } from '../app-rating';
@@ -27,26 +26,6 @@ test('webapp requests to show the app rating', (done) => {
     });
 
     showAppRating().then((res) => {
-        expect(res).toBeUndefined();
-        done();
-    });
-});
-
-test('webapp requests to increase an app rating trigger', (done) => {
-    createFakeAndroidPostMessage({
-        checkMessage: (message) => {
-            expect(message.type).toBe('INCREASE_APP_RATING_TRIGGER');
-            expect(message.payload).toEqual({
-                key: ANY_TRIGGER_KEY,
-            });
-        },
-        getResponse: (message) => ({
-            type: message.type,
-            id: message.id,
-        }),
-    });
-
-    increaseAppRatingTrigger(ANY_TRIGGER_KEY).then((res) => {
         expect(res).toBeUndefined();
         done();
     });

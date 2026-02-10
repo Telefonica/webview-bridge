@@ -87,7 +87,6 @@ export {renewSession, onSessionRenewed, logout} from './src/sessions';
 
 export {
     showAppRating,
-    increaseAppRatingTrigger,
     resetAppRatingTrigger,
     appRatingRemindMeLater,
 } from './src/app-rating';

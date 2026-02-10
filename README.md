@@ -968,21 +968,6 @@ Show native app rating dialog
 showAppRating = () => Promise<void>
 ```
 
-### increaseAppRatingTrigger
-
-<kbd>Available in B2P App version >=25.6</kbd>
-
-App rating flow in B2P apps is only launched if specific rules are fulfilled.
-Several of those rules are that X events of a given type have happened in the
-webviews side.
-
-This method is used to request native app to increase the appRating trigger
-value for a specific key.
-
-```ts
-increaseAppRatingTrigger = (key: string) => Promise<void>
-```
-
 ### resetAppRatingTrigger
 
 <kbd>Available in B2P App version >=25.6</kbd>

@@ -25,7 +25,6 @@ export {
     downloadBase64,
     getBatteryInfo,
     getInstallationId,
-    getAppDomain,
     getBiometricsAuthenticationStatus,
     setBiometricsAuthenticationStatus,
     openOcrScanner,

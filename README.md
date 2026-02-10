@@ -1612,41 +1612,6 @@ isQualtricsInterceptAvailableForUser: ({interceptId: string}) => Promise<{isAvai
 }
 ```
 
-### refreshNavBar
-
-<kbd>Available in B2P App version >=25.3</kbd>
-
-Method that allows WebView to refresh the navigation bars that are retrieved by
-Visual Modules API
-
-```ts
-refreshNavBar: ({
-    moduleId?: string,
-    productId?: string
-}) => Promise<void>;
-```
-
-where
-
--   `moduleId` is an optional parameter
-    -   If it is not included, it means the app will refresh top and bottom bar
-    -   If it is included, it should be the same values used for Visual Modules
-        API and the app will request to refresh only the indicated bar
--   `productId` is an optional parameter
-    -   If it is not included, visual modules is requested as it is today, just
-        with the userID as query param plus the `moduleId`
-    -   If it is included, visual modules will be requested for the current
-        userID and for the `productId`
-
-#### Example
-
-```ts
-refreshNavBar({
-    moduleId: 'bottombar',
-    productId: 'ID_00fe00a87b2',
-});
-```
-
 ### requestAllowMeBiometrics
 
 <kbd>App version >=25.3</kbd>

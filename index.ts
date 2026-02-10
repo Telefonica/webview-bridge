@@ -66,7 +66,7 @@ export {
     addOrEditContact,
 } from './src/contacts';
 
-export {highlightNavigationTab, refreshNavBar} from './src/navigation-tabs';
+export {highlightNavigationTab} from './src/navigation-tabs';
 
 export {
     logEvent,

@@ -968,17 +968,6 @@ Show native app rating dialog
 showAppRating = () => Promise<void>
 ```
 
-### appRatingRemindMeLater
-
-<kbd>Available in B2P App version >=25.6 (Android only)</kbd>
-
-Notify the native app that a user has selected "Remind me later" in the app
-rating flow
-
-```ts
-appRatingRemindMeLater = () => Promise<void>
-```
-
 ### bottomSheet
 
 <kbd>App version >=13.8</kbd>

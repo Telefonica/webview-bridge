@@ -1,6 +1,5 @@
 import {
     showAppRating,
-    appRatingRemindMeLater,
 } from '../app-rating';
 import {
     createFakeAndroidPostMessage,
@@ -25,23 +24,6 @@ test('webapp requests to show the app rating', (done) => {
     });
 
     showAppRating().then((res) => {
-        expect(res).toBeUndefined();
-        done();
-    });
-});
-
-test('webapp notifies user "Remind me later" on app rating', (done) => {
-    createFakeAndroidPostMessage({
-        checkMessage: (message) => {
-            expect(message.type).toBe('APP_RATING_REMIND_ME_LATER');
-        },
-        getResponse: (message) => ({
-            type: message.type,
-            id: message.id,
-        }),
-    });
-
-    appRatingRemindMeLater().then((res) => {
         expect(res).toBeUndefined();
         done();
     });

@@ -6,5 +6,3 @@ import {postMessageToNativeApp} from './post-message';
 export const showAppRating = (): Promise<void> =>
     postMessageToNativeApp({type: 'SHOW_APP_RATING'});
 
-export const appRatingRemindMeLater = (): Promise<void> =>
-    postMessageToNativeApp({type: 'APP_RATING_REMIND_ME_LATER'});

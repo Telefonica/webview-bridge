@@ -1,9 +1,8 @@
 import {postMessageToNativeApp} from './post-message';
 
 // Family Locator SDK webview bridge methods.
-// https://telefonicacorp.sharepoint.com/:w:/r/sites/Colabora_TCX/_layouts/15/Doc.aspx?sourcedoc=%7BD524FA49-9937-4D20-958A-7055D67B65DB%7D&file=Shared%20Spec%20%25u2013%20OBVIVO-3177%20-%20Family%20locator.docx&nav=eyJjIjoxMjA3NDU5NjUzfQ&action=default&mobileredirect=true
 
-export type LocatorSdkMode = 'default' | 'observed' | 'sos';
+export type LocatorSdkMode = 'default' | 'observed' | 'sos' | string;
 export type LocatorSdkConfig = Record<string, unknown>;
 
 export const setupLocatorSdkConfig = (

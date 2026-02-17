@@ -501,7 +501,7 @@ export type ResponsesFromNativeApp = {
     GET_LOCATOR_SDK_MODE: {
         type: 'GET_LOCATOR_SDK_MODE';
         id: string;
-        payload: {mode: 'default' | 'observed' | 'sos'};
+        payload: {mode: 'default' | 'observed' | 'sos' | string};
     };
     GET_LOCATOR_SDK_CONFIG: {
         type: 'GET_LOCATOR_SDK_CONFIG';

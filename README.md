@@ -1859,7 +1859,7 @@ getLocatorSdkState: () => Promise<{state: string}>;
 Start real-time sharing or SOS. Wrapper for `setSdkMode`.
 
 ```ts
-setLocatorSdkMode: (mode: 'default' | 'observed' | 'sos') => Promise<void>;
+setLocatorSdkMode: (mode: 'default' | 'observed' | 'sos' | string) => Promise<void>;
 ```
 
 ### getLocatorJwtToken

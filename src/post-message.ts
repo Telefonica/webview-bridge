@@ -457,6 +457,57 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {domain: string};
     };
+    SETUP_LOCATOR_SDK_CONFIG: {
+        type: 'SETUP_LOCATOR_SDK_CONFIG';
+        id: string;
+        payload: void;
+    };
+    GET_LOCATOR_SDK_STATE: {
+        type: 'GET_LOCATOR_SDK_STATE';
+        id: string;
+        payload: {state: string};
+    };
+    SET_LOCATOR_SDK_MODE: {
+        type: 'SET_LOCATOR_SDK_MODE';
+        id: string;
+        payload: void;
+    };
+    GET_LOCATOR_JWT_TOKEN: {
+        type: 'GET_LOCATOR_JWT_TOKEN';
+        id: string;
+        payload: {token: string};
+    };
+    GET_LOCATOR_PENDING_PERMISSIONS: {
+        type: 'GET_LOCATOR_PENDING_PERMISSIONS';
+        id: string;
+        payload: {permissions: Array<string>};
+    };
+    GET_LOCATOR_SDK_VERSION: {
+        type: 'GET_LOCATOR_SDK_VERSION';
+        id: string;
+        payload: {version: string};
+    };
+    GET_LOCATOR_SDK_SESSION: {
+        type: 'GET_LOCATOR_SDK_SESSION';
+        id: string;
+        payload: {
+            session: {
+                id: string;
+                startAt: number;
+                endAt: number | null;
+            };
+        };
+    };
+    GET_LOCATOR_SDK_MODE: {
+        type: 'GET_LOCATOR_SDK_MODE';
+        id: string;
+        payload: {mode: 'default' | 'observed' | 'sos'};
+    };
+    GET_LOCATOR_SDK_CONFIG: {
+        type: 'GET_LOCATOR_SDK_CONFIG';
+        id: string;
+        payload: {config: Record<string, unknown> | null};
+    };
 
     REQUEST_ALLOWME_BIOMETRICS: {
         type: 'REQUEST_ALLOWME_BIOMETRICS';

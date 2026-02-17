@@ -1820,6 +1820,135 @@ setBiometricsAuthenticationStatus: ({enable: boolean}) => Promise<void>;
 -   `503`: The device has no biometrics available, or the user cancelled
     modifying biometric settings.
 
+### setupLocatorSdkConfig
+
+<kbd>App version >= TBD</kbd>
+
+Enable/configure Family Locator SDK. Wrapper for `sdk.setConfig(config)`.
+
+```ts
+setupLocatorSdkConfig: (config: Record<string, unknown>) => Promise<void>;
+```
+
+#### Example
+
+```ts
+setupLocatorSdkConfig({license: 'xxx', sdkVersion: '2.0.1'});
+```
+
+#### Error cases
+
+-   401: `LocatorSDKMissingPermissionsException`
+-   402: `LocatorSDKNoConfigSetException`
+-   500: Internal Error
+
+### getLocatorSdkState
+
+<kbd>App version >= TBD</kbd>
+
+Check if the SDK is configured. Wrapper for `getState`.
+
+```ts
+getLocatorSdkState: () => Promise<{state: string}>;
+```
+
+### setLocatorSdkMode
+
+<kbd>App version >= TBD</kbd>
+
+Start real-time sharing or SOS. Wrapper for `setSdkMode`.
+
+```ts
+setLocatorSdkMode: (mode: 'default' | 'observed' | 'sos') => Promise<void>;
+```
+
+### getLocatorJwtToken
+
+<kbd>App version >= TBD</kbd>
+
+Get JWT token for map backend auth. Wrapper for `getJwtToken`.
+
+```ts
+getLocatorJwtToken: () => Promise<{token: string}>;
+```
+
+### getLocatorPendingPermissions
+
+<kbd>App version >= TBD</kbd>
+
+Get pending permissions. Wrapper for `pendingPermissions`.
+
+```ts
+getLocatorPendingPermissions: () => Promise<{permissions: Array<string>}>;
+```
+
+#### Permission identifiers
+
+Android
+
+-   `location_fine`
+-   `location_coarse`
+-   `location_background`
+-   `activity_recognition`
+-   `body_sensors`
+-   `battery_optimization`
+-   `foreground_service`
+-   `foreground_service_location`
+-   `access_network_state`
+
+iOS
+
+-   `location_in_use`
+-   `location_background`
+-   `motion_usage`
+-   `fall_detection`
+
+### getLocatorSdkVersion
+
+<kbd>App version >= TBD</kbd>
+
+Get SDK version. Wrapper for `getVersion`.
+
+```ts
+getLocatorSdkVersion: () => Promise<{version: string}>;
+```
+
+### getLocatorSdkSession
+
+<kbd>App version >= TBD</kbd>
+
+Get SDK session. Wrapper for `getSession`.
+
+```ts
+getLocatorSdkSession: () => Promise<{
+    session: {
+        id: string;
+        startAt: number;
+        endAt: number | null;
+    };
+}>;
+```
+
+### getLocatorSdkMode
+
+<kbd>App version >= TBD</kbd>
+
+Get current SDK mode. Wrapper for `getSdkMode`.
+
+```ts
+getLocatorSdkMode: () => Promise<{mode: 'default' | 'observed' | 'sos' | string}>;
+```
+
+### getLocatorSdkConfig
+
+<kbd>App version >= TBD</kbd>
+
+Get current SDK config. Wrapper for `getConfig`.
+
+```ts
+getLocatorSdkConfig: () => Promise<{config: Record<string, unknown> | null}>;
+```
+
 ### openOcrScanner
 
 <kbd>App version >=26.1</kbd>

@@ -1827,7 +1827,79 @@ setBiometricsAuthenticationStatus: ({enable: boolean}) => Promise<void>;
 Enable/configure Family Locator SDK. Wrapper for `sdk.setConfig(config)`.
 
 ```ts
-setupLocatorSdkConfig: (config: Record<string, unknown>) => Promise<void>;
+setupLocatorSdkConfig: (config: LocatorSdkConfig) => Promise<void>;
+```
+
+#### Types
+
+```ts
+export type LocatorSdkConfig = {
+    license: string;
+    sdkVersion: string;
+    osPlatform: string;
+    api: {
+        token: string;
+        certUrl?: string;
+        scopesUrl?: string;
+        tokenUrl?: string;
+        configUrl?: string;
+        groupsUrl?: string;
+        featuresUrl?: string;
+        geofencesUrl?: string;
+    };
+    mqtt: {
+        clientId?: string;
+        broker?: string;
+        port?: string;
+        username?: string;
+    };
+    process: {
+        retryPolicy?: {
+            maxRetries?: number;
+            baseDelayMs?: number;
+            backoffFactor?: number;
+        };
+        offlineRetentionDays?: number;
+        foregroundServiceNotification?: {
+            title?: string;
+            message?: string;
+        };
+    };
+    battery?: {
+        events?: Array<{
+            name: string;
+            min: number;
+            max: number;
+            interval: number;
+            charging: boolean;
+            powerMode: Array<'normal' | 'power_saver' | 'super_saver'>;
+        }>;
+    };
+    motion?: {
+        sensitivity?: number;
+    };
+    collect?: {
+        collectIntervalMillis?: number;
+        sendIntervalMillis?: number;
+        minDisplacementMeters?: number;
+        maxTravelDistanceMeters?: number;
+        highAccuracy?: boolean;
+        maxBatchSize?: number;
+    };
+    audioRecord?: {
+        recordsCount: number;
+        durationSeconds: number;
+        retryCount: number;
+        intervalSeconds: number;
+        audioServiceNotification?: {
+            title?: string;
+            message?: string;
+        };
+    };
+    revision?: number;
+    createdAt?: number;
+    updatedAt?: number;
+};
 ```
 
 #### Example
@@ -1946,7 +2018,7 @@ getLocatorSdkMode: () => Promise<{mode: 'default' | 'observed' | 'sos' | string}
 Get current SDK config. Wrapper for `getConfig`.
 
 ```ts
-getLocatorSdkConfig: () => Promise<{config: Record<string, unknown> | null}>;
+getLocatorSdkConfig: () => Promise<{config: LocatorSdkConfig | null}>;
 ```
 
 ### openOcrScanner

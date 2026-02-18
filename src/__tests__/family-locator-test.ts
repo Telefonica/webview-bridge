@@ -19,7 +19,16 @@ afterEach(() => {
 });
 
 test('setupLocatorSdkConfig', async () => {
-    const config = {license: 'abc', sdkVersion: '2.0.1'};
+    const config = {
+        license: 'abc',
+        sdkVersion: '2.0.1',
+        osPlatform: 'android',
+        api: {
+            token: 'token',
+        },
+        mqtt: {},
+        process: {},
+    };
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
             expect(msg.type).toBe('SETUP_LOCATOR_SDK_CONFIG');
@@ -36,7 +45,16 @@ test('setupLocatorSdkConfig', async () => {
 });
 
 test('setupLocatorSdkConfig error', async () => {
-    const config = {license: 'abc'};
+    const config = {
+        license: 'abc',
+        sdkVersion: '2.0.1',
+        osPlatform: 'android',
+        api: {
+            token: 'token',
+        },
+        mqtt: {},
+        process: {},
+    };
     const error = {
         code: 401,
         reason: 'LocatorSDKMissingPermissionsException',
@@ -183,7 +201,16 @@ test('getLocatorSdkMode', async () => {
 });
 
 test('getLocatorSdkConfig', async () => {
-    const config = {license: 'abc'};
+    const config = {
+        license: 'abc',
+        sdkVersion: '2.0.1',
+        osPlatform: 'android',
+        api: {
+            token: 'token',
+        },
+        mqtt: {},
+        process: {},
+    };
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
             expect(msg.type).toBe('GET_LOCATOR_SDK_CONFIG');

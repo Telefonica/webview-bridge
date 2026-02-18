@@ -1,4 +1,5 @@
 import {getId} from './message-id';
+import type {LocatorSdkConfig} from './family-locator';
 
 /**
  * There are two possible kind of messages we can receive from native app:
@@ -506,7 +507,7 @@ export type ResponsesFromNativeApp = {
     GET_LOCATOR_SDK_CONFIG: {
         type: 'GET_LOCATOR_SDK_CONFIG';
         id: string;
-        payload: {config: Record<string, unknown> | null};
+        payload: {config: LocatorSdkConfig | null};
     };
 
     REQUEST_ALLOWME_BIOMETRICS: {

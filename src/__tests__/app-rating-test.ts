@@ -4,8 +4,6 @@ import {
     removeFakeAndroidPostMessage,
 } from './fake-post-message';
 
-const ANY_TRIGGER_KEY = 'topupSuccess';
-
 afterEach(() => {
     removeFakeAndroidPostMessage();
 });

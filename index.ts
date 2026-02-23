@@ -86,15 +86,7 @@ export {renewSession, onSessionRenewed, logout} from './src/sessions';
 
 export {showAppRating} from './src/app-rating';
 
-export {
-    bottomSheet,
-    // @deprecated - use Mistica implementation
-    bottomSheetSingleSelector,
-    // @deprecated - use Mistica implementation
-    bottomSheetActionSelector,
-    // @deprecated - use Mistica implementation
-    bottomSheetInfo,
-} from './src/bottom-sheet';
+export {bottomSheet} from './src/bottom-sheet';
 export type {
     SheetRowItem,
     SheetActionItem,

@@ -1,5 +1,18 @@
 # CHANGELOG
 
+## v4.0.0 - 2026-02-23
+
+-   **Breaking change**: remove sheet-specific methods:
+    `bottomSheetActionSelector`, `bottomSheetSingleSelector`, `bottomSheetInfo`
+-   **Breaking change**: remove `onNativeEvent`
+-   **Breaking change**: remove B2P methods: `getAppDomain`, `refreshNavBar`,
+    `increaseAppRatingTrigger`, `resetAppRatingTrigger`,
+    `appRatingRemindMeLater`
+-   Family Locator SDK methods: `setupLocatorSdkConfig`, `getLocatorSdkState`,
+    `setLocatorSdkMode`, `getLocatorJwtToken`, `getLocatorPendingPermissions`,
+    `getLocatorSdkVersion`, `getLocatorSdkSession`, `getLocatorSdkMode`,
+    `getLocatorSdkConfig`
+
 ## v3.63.0 - 2026-01-26
 
 -   `openOcrScanner`: added `timeoutMs` option to specify a timeout for the OCR

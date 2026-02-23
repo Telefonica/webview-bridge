@@ -1,6 +1,5 @@
 export {
     isWebViewBridgeAvailable,
-    onNativeEvent,
     NativeEventHandler,
     setLogger,
 } from './src/post-message';

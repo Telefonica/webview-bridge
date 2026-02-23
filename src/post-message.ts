@@ -7,11 +7,6 @@ import type {LocatorSdkConfig} from './family-locator';
  *     - ResponsesFromNativeApp: native app responds to a request initiated by the web
  */
 type RequestsFromNativeApp = {
-    NATIVE_EVENT: {
-        type: 'NATIVE_EVENT';
-        id: string;
-        payload: {event: string};
-    };
     SESSION_RENEWED: {
         type: 'SESSION_RENEWED';
         id: string;
@@ -764,22 +759,6 @@ export const listenToNativeMessage = <T extends keyof RequestsFromNativeApp>(
     return () => {
         unsubscribe(listener);
     };
-};
-
-export const onNativeEvent = (
-    eventHandler: NativeEventHandler,
-): (() => void) => {
-    const handler = (payload: NativeAppRequestPayload<'NATIVE_EVENT'>) => {
-        const response = eventHandler({
-            event: payload.event,
-        });
-
-        return {
-            action: response.action || 'default',
-        };
-    };
-
-    return listenToNativeMessage('NATIVE_EVENT', handler);
 };
 
 export const onSessionRenewal = (

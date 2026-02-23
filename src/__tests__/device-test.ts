@@ -13,7 +13,12 @@ import {
     downloadBase64,
     getBatteryInfo,
 } from '../../index';
-import {getInstallationId} from '../device';
+import {
+    getBiometricsAuthenticationStatus,
+    getInstallationId,
+    setBiometricsAuthenticationStatus,
+    openOcrScanner,
+} from '../device';
 import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
@@ -22,6 +27,7 @@ import {
 } from './fake-post-message';
 
 const ANY_STRING = 'any-string';
+const ANY_ENABLE = true;
 
 afterEach(() => {
     removeFakeAndroidPostMessage();
@@ -161,6 +167,42 @@ test('internal navigation to contact settings', (done) => {
     });
 
     internalNavigation('contact-settings').then((res) => {
+        expect(res).toBeUndefined();
+        done();
+    });
+});
+
+test('internal navigation to permissions settings', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('INTERNAL_NAVIGATION');
+            expect(msg.payload.feature).toBe('permissions-settings');
+        },
+        getResponse: (msg) => ({
+            type: 'INTERNAL_NAVIGATION',
+            id: msg.id,
+        }),
+    });
+
+    internalNavigation('permissions-settings').then((res) => {
+        expect(res).toBeUndefined();
+        done();
+    });
+});
+
+test('internal navigation to accessibility settings', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('INTERNAL_NAVIGATION');
+            expect(msg.payload.feature).toBe('accessibility-settings');
+        },
+        getResponse: (msg) => ({
+            type: 'INTERNAL_NAVIGATION',
+            id: msg.id,
+        }),
+    });
+
+    internalNavigation('accessibility-settings').then((res) => {
         expect(res).toBeUndefined();
         done();
     });
@@ -468,4 +510,118 @@ test('getInstallationId', async () => {
     expect(res).toEqual({
         installationId: '123',
     });
+});
+
+test('getBiometricsAuthenticationStatus', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_BIOMETRICS_AUTHENTICATION_STATUS');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_BIOMETRICS_AUTHENTICATION_STATUS',
+            id: msg.id,
+            payload: {
+                result: 'DISABLED',
+            },
+        }),
+    });
+
+    const res = await getBiometricsAuthenticationStatus();
+
+    expect(res).toEqual({
+        result: 'DISABLED',
+    });
+});
+
+test('getBiometricsAuthenticationStatus Error', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_BIOMETRICS_AUTHENTICATION_STATUS');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: {
+                code: 404,
+                description: 'Description',
+            },
+        }),
+    });
+
+    await expect(getBiometricsAuthenticationStatus()).rejects.toEqual({
+        code: 404,
+        description: 'Description',
+    });
+});
+
+test('setBiometricsAuthenticationStatus happy case', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SET_BIOMETRICS_AUTHENTICATION_STATUS');
+            expect(msg.payload).toMatchObject({enable: ANY_ENABLE});
+        },
+        getResponse: (msg) => ({
+            type: 'SET_BIOMETRICS_AUTHENTICATION_STATUS',
+            id: msg.id,
+            payload: undefined,
+        }),
+    });
+
+    const res = await setBiometricsAuthenticationStatus({enable: true});
+    expect(res).toBeUndefined();
+});
+
+test('setBiometricsAuthenticationStatus error', async () => {
+    const error = {code: 503, description: 'No biometrics available'};
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SET_BIOMETRICS_AUTHENTICATION_STATUS');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = setBiometricsAuthenticationStatus({enable: true});
+    await expect(res).rejects.toEqual(error);
+});
+
+test('openOcrScanner - success with scanned text', async () => {
+    const regex = '\\b(?:\\d{4}-\\d{4}-\\d{4}-\\d{4}|\\d{16})\\b';
+    const scannedText = '1234-5678-8765-4321';
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('OPEN_OCR_SCANNER');
+            expect(msg.payload.regex).toBe(regex);
+        },
+        getResponse: (msg) => ({
+            type: 'OPEN_OCR_SCANNER',
+            id: msg.id,
+            payload: {scannedText},
+        }),
+    });
+
+    const res = await openOcrScanner({regex});
+    expect(res.scannedText).toBe(scannedText);
+});
+
+test('openOcrScanner - missing permissions error (401)', async () => {
+    const regex = '\\b(?:\\d{4}-\\d{4}-\\d{4}-\\d{4}|\\d{16})\\b';
+    const error = {code: 401, description: 'Missing permissions'};
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('OPEN_OCR_SCANNER');
+            expect(msg.payload.regex).toBe(regex);
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = openOcrScanner({regex});
+    await expect(res).rejects.toEqual(error);
 });

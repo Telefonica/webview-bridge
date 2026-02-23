@@ -44,8 +44,13 @@ export type NavigationBarIcon = Readonly<{
     id: string;
     /** URL to be opened by the app as a deep-link if present */
     url?: string;
-    /** Content description of the image used for accessibility */
+    /**
+     * Accessibility label for the icon. When isButton=true you should always set a name, when isButton=false if you don't want it to be
+     * read by screen readers, then explicitly set it to an empty string.
+     * */
     name: string;
+    /** default: true, set to false if the Icon is decorative */
+    isButton?: boolean;
     /**
      * This is a string whose value will be mapped to a local resource that the app already knows.
      * See https://void.tuenti.io/idl-server/files/TopNavbarIcon/1.1 for available values.

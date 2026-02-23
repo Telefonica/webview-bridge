@@ -24,6 +24,9 @@ export {
     downloadBase64,
     getBatteryInfo,
     getInstallationId,
+    getBiometricsAuthenticationStatus,
+    setBiometricsAuthenticationStatus,
+    openOcrScanner,
 } from './src/device';
 
 export {
@@ -59,6 +62,7 @@ export {
     fetchContactsByPhone,
     fetchPhoneNumbers,
     updatePhoneNumbers,
+    addOrEditContact,
 } from './src/contacts';
 
 export {highlightNavigationTab} from './src/navigation-tabs';
@@ -84,8 +88,11 @@ export {showAppRating} from './src/app-rating';
 
 export {
     bottomSheet,
+    // @deprecated - use Mistica implementation
     bottomSheetSingleSelector,
+    // @deprecated - use Mistica implementation
     bottomSheetActionSelector,
+    // @deprecated - use Mistica implementation
     bottomSheetInfo,
 } from './src/bottom-sheet';
 export type {
@@ -96,9 +103,65 @@ export type {
 
 export {openOnboarding} from './src/open-onboarding';
 
-export {getProfileImage, startProfileImageFlow} from './src/profile';
+export {
+    getProfileImage,
+    startProfileImageFlow,
+    showLineSelector,
+} from './src/profile';
 export {readTextFromClipboard, writeTextToClipboard} from './src/clipboard';
 export {
     getUnseenNotificationsBadge,
     setUnseenNotificationsBadge,
 } from './src/inbox-notifications';
+
+export {
+    registerDatamobUser,
+    requestDatamobDeviceAdmin,
+    validateDatamobRequirements,
+    unregisterDatamobDeviceAdmin,
+} from './src/datamob';
+
+export {
+    displayQualtricsIntercept,
+    setQualtricsProperties,
+    isQualtricsInterceptAvailableForUser,
+} from './src/qualtrics';
+
+export {
+    type AllowMeErrorCode,
+    type AllowMeError,
+    AllowMeGenericError,
+    AllowMeUnauthorizedError,
+    AllowMeSetupSdkError,
+    AllowMeTimeoutProcessingError,
+    AllowMeApiKeyError,
+    AllowMeInstanceCreationError,
+    AllowMeBiometricsTimeoutError,
+    AllowMeBiometricsSetupError,
+    AllowMeBiometricsCameraError,
+    AllowMeBiometricsCapturingError,
+    AllowMeBiometricsResultError,
+    AllowMeBiometricsCancelledByUserError,
+    AllowMeBiometricsInvalidImagesError,
+    AllowMeBiometricsCameraPermissionError,
+    AllowMeCanNotOpenFrontCameraError,
+    AllowMeGooglePayServicesError,
+    AllowMeFaceDetectionError,
+    AllowMeProviderError,
+    AllowMeCanNotSaveImageError,
+    requestAllowMeBiometrics,
+} from './src/allow-me';
+
+export {
+    type LocatorSdkMode,
+    type LocatorSdkConfig,
+    setupLocatorSdkConfig,
+    getLocatorSdkState,
+    setLocatorSdkMode,
+    getLocatorJwtToken,
+    getLocatorPendingPermissions,
+    getLocatorSdkVersion,
+    getLocatorSdkSession,
+    getLocatorSdkMode,
+    getLocatorSdkConfig,
+} from './src/family-locator';

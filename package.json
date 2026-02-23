@@ -1,6 +1,6 @@
 {
     "name": "@tef-novum/webview-bridge",
-    "version": "3.45.0",
+    "version": "3.63.0",
     "description": "JavaScript library to access to native functionality. Requires a webview with a postMessage bridge.",
     "main": "./dist/webview-bridge-cjs.js",
     "module": "./dist/webview-bridge.mjs",
@@ -28,7 +28,6 @@
         "url": "https://github.com/tef-dig/webview-bridge/issues"
     },
     "homepage": "https://github.com/tef-dig/webview-bridge#readme",
-    "dependencies": {},
     "devDependencies": {
         "@types/gtag.js": "^0.0.10",
         "@types/jest": "^27.0.3",

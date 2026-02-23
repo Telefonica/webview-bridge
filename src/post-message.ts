@@ -1,4 +1,5 @@
 import {getId} from './message-id';
+import type {LocatorSdkConfig} from './family-locator';
 
 /**
  * There are two possible kind of messages we can receive from native app:
@@ -194,6 +195,17 @@ export type ResponsesFromNativeApp = {
             encodedAvatar?: string;
         }>;
     };
+    ADD_OR_EDIT_CONTACT: {
+        id: string;
+        type: 'ADD_OR_EDIT_CONTACT';
+        payload: {
+            phoneNumber?: string;
+            firstName?: string;
+            middleName?: string;
+            lastName?: string;
+            encodedAvatar?: string;
+        };
+    };
     RENEW_SESSION: {
         type: 'RENEW_SESSION';
         id: string;
@@ -311,6 +323,11 @@ export type ResponsesFromNativeApp = {
             isCancelled: boolean;
         };
     };
+    SHOW_LINE_SELECTOR: {
+        type: 'SHOW_LINE_SELECTOR';
+        id: string;
+        payload: void;
+    };
     TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION: {
         type: 'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION';
         id: string;
@@ -318,7 +335,8 @@ export type ResponsesFromNativeApp = {
             result:
                 | 'USER_AUTHENTICATED'
                 | 'USER_ENABLED_AUTHENTICATION'
-                | 'LAST_AUTHENTICATION_STILL_VALID';
+                | 'LAST_AUTHENTICATION_STILL_VALID'
+                | 'DEVICE_HAS_NO_AUTHENTICATION';
         };
     };
     FOCUS_NAVBAR: {
@@ -374,12 +392,159 @@ export type ResponsesFromNativeApp = {
     GET_UNSEEN_NOTIFICATIONS_BADGE: {
         type: 'GET_UNSEEN_NOTIFICATIONS_BADGE';
         id: string;
-        payload: {unseenNotificationCounter: number; lastUpdated: number};
+        payload: {
+            unseenNotificationCounter: number;
+            lastUpdated: number;
+        };
     };
     SET_UNSEEN_NOTIFICATIONS_BADGE: {
         type: 'SET_UNSEEN_NOTIFICATIONS_BADGE';
         id: string;
         payload: void;
+    };
+    REQUEST_DATAMOB_DEVICE_ADMIN: {
+        type: 'REQUEST_DATAMOB_DEVICE_ADMIN';
+        id: string;
+        payload: {isAdmin: boolean};
+    };
+    REGISTER_DATAMOB_USER: {
+        type: 'REGISTER_DATAMOB_USER';
+        id: string;
+        payload: void;
+    };
+    VALIDATE_DATAMOB_REQUIREMENTS: {
+        type: 'VALIDATE_DATAMOB_REQUIREMENTS';
+        id: string;
+        payload: {
+            deviceAdmin: boolean;
+            lockPassword: boolean;
+            accessibilityOption: boolean;
+            invalidPhoneNumber: boolean;
+            invalidToken: boolean;
+        };
+    };
+    UNREGISTER_DATAMOB_DEVICE_ADMIN: {
+        type: 'UNREGISTER_DATAMOB_DEVICE_ADMIN';
+        id: string;
+        payload: void;
+    };
+    DISPLAY_QUALTRICS_INTERCEPT: {
+        type: 'DISPLAY_QUALTRICS_INTERCEPT';
+        id: string;
+        payload: {displayed: true};
+    };
+    SET_QUALTRICS_PROPERTIES: {
+        type: 'SET_QUALTRICS_PROPERTIES';
+        id: string;
+        payload: void;
+    };
+    IS_QUALTRICS_INTERCEPT_AVAILABLE_FOR_USER: {
+        type: 'IS_QUALTRICS_INTERCEPT_AVAILABLE_FOR_USER';
+        id: string;
+        payload: {isAvailable: boolean; surveyUrl?: string | null};
+    };
+    REFRESH_NAV_BAR: {
+        type: 'REFRESH_NAV_BAR';
+        id: string;
+        payload: void;
+    };
+    GET_APP_DOMAIN: {
+        type: 'GET_APP_DOMAIN';
+        id: string;
+        payload: {domain: string};
+    };
+    SETUP_LOCATOR_SDK_CONFIG: {
+        type: 'SETUP_LOCATOR_SDK_CONFIG';
+        id: string;
+        payload: void;
+    };
+    GET_LOCATOR_SDK_STATE: {
+        type: 'GET_LOCATOR_SDK_STATE';
+        id: string;
+        payload: {state: string};
+    };
+    SET_LOCATOR_SDK_MODE: {
+        type: 'SET_LOCATOR_SDK_MODE';
+        id: string;
+        payload: void;
+    };
+    GET_LOCATOR_JWT_TOKEN: {
+        type: 'GET_LOCATOR_JWT_TOKEN';
+        id: string;
+        payload: {token: string};
+    };
+    GET_LOCATOR_PENDING_PERMISSIONS: {
+        type: 'GET_LOCATOR_PENDING_PERMISSIONS';
+        id: string;
+        payload: {permissions: Array<string>};
+    };
+    GET_LOCATOR_SDK_VERSION: {
+        type: 'GET_LOCATOR_SDK_VERSION';
+        id: string;
+        payload: {version: string};
+    };
+    GET_LOCATOR_SDK_SESSION: {
+        type: 'GET_LOCATOR_SDK_SESSION';
+        id: string;
+        payload: {
+            session: {
+                id: string;
+                startAt: number;
+                endAt: number | null;
+            };
+        };
+    };
+    GET_LOCATOR_SDK_MODE: {
+        type: 'GET_LOCATOR_SDK_MODE';
+        id: string;
+        payload: {mode: 'default' | 'observed' | 'sos' | string};
+    };
+    GET_LOCATOR_SDK_CONFIG: {
+        type: 'GET_LOCATOR_SDK_CONFIG';
+        id: string;
+        payload: {config: LocatorSdkConfig | null};
+    };
+
+    REQUEST_ALLOWME_BIOMETRICS: {
+        type: 'REQUEST_ALLOWME_BIOMETRICS';
+        id: string;
+        payload: {
+            result?: string;
+            images: Array<string>;
+        };
+    };
+
+    INCREASE_APP_RATING_TRIGGER: {
+        type: 'INCREASE_APP_RATING_TRIGGER';
+        id: string;
+        payload: void;
+    };
+    RESET_APP_RATING_TRIGGER: {
+        type: 'RESET_APP_RATING_TRIGGER';
+        id: string;
+        payload: void;
+    };
+    APP_RATING_REMIND_ME_LATER: {
+        type: 'APP_RATING_REMIND_ME_LATER';
+        id: string;
+        payload: void;
+    };
+    GET_BIOMETRICS_AUTHENTICATION_STATUS: {
+        type: 'GET_BIOMETRICS_AUTHENTICATION_STATUS';
+        id: string;
+        payload: {
+            result: 'DISABLED' | 'ENABLED' | 'DEVICE_HAS_NO_AUTHENTICATION';
+        };
+    };
+    SET_BIOMETRICS_AUTHENTICATION_STATUS: {
+        type: 'SET_BIOMETRICS_AUTHENTICATION_STATUS';
+        id: string;
+        payload: void;
+    };
+    OPEN_OCR_SCANNER: {
+        type: 'OPEN_OCR_SCANNER';
+        id: string;
+        payload: {scannedText: string};
     };
 };
 
@@ -540,11 +705,14 @@ export const postMessageToNativeApp = <T extends keyof ResponsesFromNativeApp>(
 };
 
 /**
- * Initiates WebApp postMessage function, which will be called by native apps
+ * Initiates postMessage function, which will be called by native apps
  */
 if (typeof window !== 'undefined') {
-    window[BRIDGE] = window[BRIDGE] || {
+    // if there is already a bridge instance, we need to call it too when we receive a message
+    const prevPostMessageImplementation = window[BRIDGE]?.postMessage;
+    window[BRIDGE] = {
         postMessage: (jsonMessage: string) => {
+            prevPostMessageImplementation?.(jsonMessage);
             log?.('[WebView Bridge] RCVD:', jsonMessage);
             let message: any;
             try {

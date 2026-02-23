@@ -1,5 +1,115 @@
 # CHANGELOG
 
+## v3.63.0 - 2026-01-26
+
+-   `openOcrScanner`: added `timeoutMs` option to specify a timeout for the OCR
+    scanning operation. Raises 204 error if closed by user and 408 error if
+    timeout
+
+## v3.62.0 - 2026-01-14
+
+-   `internalNavigation`: support "accessibility-settings" feature
+
+## v3.61.0 - 2026-01-13
+
+-   `openOcrScanner`: new method to open a native OCR scanner that looks for
+    text matching a provided regular expression
+-   `internalNavigation`: support "permissions-settings" feature
+
+## v3.60.0 - 2025-11-12
+
+-   `updateNavigationBar`: add isButton
+
+## v3.59.0 - 2025-07-18
+
+-   `isQualtricsInterceptAvailableForUser`: return surveyUrl.
+
+## v3.58.0 - 2025-07-18
+
+-   `setBiometricsAuthenticationStatus`: new method to set the biometrics
+    authentication status on the device.
+
+## v3.57.0 - 2025-07-06
+
+-   `internalNavigation`: support "location-settings" feature
+
+## v3.56.1 - 2025-06-23
+
+-   `requestAllowMeBiometrics`: document "User not logged in" error case
+
+## v3.56.0 - 2025-06-18
+
+-   `getBiometricsAuthenticationStatus`: Get the current status of the
+    biometrics authentication on the device
+
+## v3.55.0 - 2025-05-14
+
+-   `requestAllowMeBiometrics`: new method to start the AllowMe native SDK
+    biometrics flow
+-   App rating, new methods: `increaseAppRatingTrigger`,
+    `resetAppRatingTrigger`, `appRatingRemindMeLater`
+-   `setScreenName`: support disable params sanitization
+
+## v.3.54.0 - 2025-04-11
+
+-   `triggerPinOrBiometricAuthentication`: support new
+    DEVICE_HAS_NO_AUTHENTICATION result case
+
+## v.3.53.0 - 2025-04-10
+
+-   `addOrEditContact`: new method to add or edit a contact in the native phone
+    book
+
+## v.3.52.0 - 2025-04-01
+
+-   webview bridge: allow multiple instances to work simultaneously in the same
+    page
+
+## v.3.51.0 - 2025-03-14
+
+-   `requestAllowMeBiometrics`: new method to start the AllowMe native SDK
+    biometrics flow
+
+## v.3.50.1 - 2025-02-27
+
+-   `getAppDomain`: rename `appDomain` to `domain` to follow the spec/doc
+
+## v.3.50.0 - 2025-02-13
+
+-   `getAppDomain`: new method to get the app domain.
+-   `showLineSelector`: new method, onpens the native line selector dialog.
+
+## v.3.49.0 - 2025-02-03
+
+-   `refreshNavBar`: new method to refresh navigation bar with the response of
+    Visual Modules API
+
+## v.3.48.3 - 2025-01-28
+
+-   `validateDatamobRequirements`: fix return types.
+
+## v.3.48.2 - 2025-01-14
+
+-   `validateDatamobRequirements`: remove googleAccount.
+
+## v.3.48.1 - 2025-01-13
+
+-   `setQualtricsProperties`: fix types.
+
+## v.3.48.0 - 2024-12-16
+
+-   Datamob sdk: `unregisterDatamobDeviceAdmin`.
+
+## v.3.47.0 - 2024-12-12
+
+-   Qualtrics sdk methods: `displayQualtricsIntercept`,
+    `setQualtricsProperties`, `isQualtricsInterceptAvailableForUser`.
+
+## v.3.46.0 - 2024-12-04
+
+-   Datamob sdk methods: `registerDatamobUser`, `requestDatamobDeviceAdmin`,
+    `validateDatamobRequirements`.
+
 ## v.3.45.0 - 2024-11-24
 
 -   New `getUnseenNotificationsBadge` / `setUnseenNotificationsBadge` functions

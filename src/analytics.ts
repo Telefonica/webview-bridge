@@ -342,14 +342,18 @@ export const logTiming = ({
 export const setScreenName = (
     screenName: string,
     params: {[key: string]: any} = {},
+    options?: LogEventOptions,
 ): Promise<void> => {
     if (!screenName) {
         console.warn('Missing analytics screenName');
         return Promise.resolve();
     }
 
+    const {sanitize} = {...defaultEventOptions, ...options};
     const previousScreenName = currentScreenName;
     currentScreenName = screenName;
+
+    const sanitizedParams = sanitize ? sanitizeAnalyticsParams(params) : params;
 
     return withAnalytics({
         onAndroid(androidFirebase) {
@@ -357,7 +361,7 @@ export const setScreenName = (
             if (androidFirebase.setScreenNameWithParams) {
                 androidFirebase.setScreenNameWithParams(
                     screenName,
-                    JSON.stringify(sanitizeAnalyticsParams(params)),
+                    JSON.stringify(sanitizedParams),
                 );
             } else if (androidFirebase.setScreenName) {
                 androidFirebase.setScreenName(screenName);
@@ -368,7 +372,7 @@ export const setScreenName = (
             iosFirebase.postMessage({
                 command: 'setScreenName',
                 name: screenName,
-                parameters: sanitizeAnalyticsParams(params),
+                parameters: sanitizedParams,
             });
             return Promise.resolve();
         },
@@ -378,7 +382,7 @@ export const setScreenName = (
                     screenName,
                     page_title: screenName,
                     previousScreenName,
-                    ...sanitizeAnalyticsParams(params),
+                    ...sanitizedParams,
                     event_callback: createCallback(resolve),
                 });
             });

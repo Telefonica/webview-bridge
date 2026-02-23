@@ -64,8 +64,6 @@ Alternatively, you can import the library directly from a CDN:
 
 ### isWebViewBridgeAvailable
 
-<kbd>Available in B2P App version >=24.10</kbd>
-
 Returns true if WebView Bridge is available. Use this function to implement
 fallbacks in case the bridge is not available.
 
@@ -110,6 +108,9 @@ Show native picker UI in order to let the user select a contact.
 
 -   Android only: picker UI elements can be filtered by available phones
     (default) or emails. `filter` property is ignored by iOS devices
+
+-   If the user exists the flow without selecting a a contact, an error is
+    returned
 
 <img height="550" src="doc/webview-bridge-contact-ios.png"><img height="550" src="doc/webview-bridge-contact-android.png">
 
@@ -170,8 +171,6 @@ createCalendarEvent({
 ```
 
 ### share
-
-<kbd>App version >=10.7</kbd>
 
 Invokes the native sharing mechanism of the device.
 
@@ -289,9 +288,7 @@ downloadBase64({
 
 <kbd>App version >= 10.7: Partial support</kbd><br/> <kbd>App version >= 11.8:
 expandedTitle</kbd><br/> <kbd>App version >= 14.8: Additional properties and
-deprecations</kbd><br/> <kbd>Partial support in B2P App version <=24.10:
-title</kbd><br/> <kbd>Partial support in B2P App version >=24.11: right
-actions</kbd><br/> <kbd>Full support in B2P App version >=24.12: title</kbd>
+deprecations</kbd><br/> <kbd>App version >= 25.12: isButton</kbd><br/>
 
 Customize WebView NavigationBar properties. You can set one or more properties
 in a single call
@@ -302,8 +299,15 @@ type NavigationBarIcon = {
     id: string;
     /** URL to be opened by the app as a deep-link if present */
     url?: string;
-    /** Content description of the image used for accessibility */
+    /**
+     * Accessibility label for the icon. When isButton=true you should always set a name, when isButton=false if you don't want it to be
+     * read by screen readers, then explicitly set it to an empty string.
+     * */
     name: string;
+    /** Accessibility label for the icon */
+    accessibilityLabel?: string;
+    /** default: true, set to false if the Icon is decorative */
+    isButton?: boolean;
     /**
      * This is a string whose value will be mapped to a local resource that the app already knows.
      * See https://void.tuenti.io/idl-server/files/TopNavbarIcon/1.1 for available values.
@@ -490,8 +494,6 @@ nativeConfirm({
 
 ### nativeAlert
 
-<kbd>Available in B2P App version >=24.10</kbd>
-
 Show a native alert dialog.
 
 If the bridge is not present (eg. showing the page in browser), fallbacks to a
@@ -613,8 +615,24 @@ logEvent(yourEvent, {sanitize: false});
 Log the current screen name (or page name) to firebase
 
 ```ts
-setScreenName: (screenName: string, params?: {[key: string]: any}) => Promise<void>;
+setScreenName: (
+  screenName: string,
+  params?: { [key: string]: any },
+  options?: { sanitize?: boolean }
+) => Promise<void>;
 ```
+
+By default, the screen name and params are sanitized (removing accents, special
+characters, lowercasing, etc). If you want to disable sanitization for the
+params (for example, to send them exactly as provided), you can pass the
+`sanitize: false` option. Note that the screen name itself will always be
+sanitized.
+
+```javascript
+setScreenName('My Screen Name', {}, {sanitize: false});
+```
+
+This will send the params as-is, without any transformation.
 
 ### setUserProperty
 
@@ -635,8 +653,6 @@ reportStatus: ({feature: 'ACCOUNT', status: 'CRITICAL' | 'GOOD' | 'BAD', reason:
 ```
 
 ### checkPermissionStatus
-
-<kbd>App version >=11.4</kbd>
 
 Returns true if the app has the specific notifications permissions. You have to
 pass feature and required params for this request.
@@ -663,14 +679,15 @@ checkPermissionStatus('notifications', {channelId: 'default'}).then(
 
 ### internalNavigation
 
-<kbd>App version >=11.4</kbd><br/>
-
 Init an internal and native navigation to a device specific feature
 
 Avalaible features:
 
 -   `notification-settings`
 -   `contact-settings` <kbd>App version >=13.10 </kbd>
+-   `location-settings` <kbd>App version >=25.8</kbd>
+-   `permissions-settings` <kbd>App version >=26.1</kbd>
+-   `accessibility-settings` <kbd>App version >=26.1</kbd>
 
 ```ts
 internalNavigation: (feature: string) => Promise<void>;
@@ -678,12 +695,21 @@ internalNavigation: (feature: string) => Promise<void>;
 
 ### dismiss
 
-<kbd>App version >=11.5</kbd>
-
-Dismiss the current webview and optionally navigate to another url
+Dismiss the current webview if possible and optionally navigate to another URL.
+If we can't do the dismiss, for example, if the webview is one of the main tabs,
+the optional URL won't be opened.
 
 ```ts
 dismiss: (onCompletionUrl?: string) => Promise<void>;
+```
+
+#### Error cases
+
+```ts
+{
+    code: 405;
+    reason: 'Webview is not allowed to dismiss because we only have one webview instance in the navigation stack.';
+}
 ```
 
 ### requestVibration
@@ -707,6 +733,34 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
     encodedAvatar?: string;
 }>>;
 ```
+
+### addOrEditContact
+
+Opens native UI to add or edit a contact in the device's phonebook.
+
+```ts
+addOrEditContact: (phoneNumber: string) => Promise<{
+    phoneNumber?: string;
+    firstName?: string;
+    middleName?: string;
+    lastName?: string;
+    encodedAvatar?: string;
+}>
+```
+
+-   If phoneNumber already exists in the device phonebook, the user will be able
+    to edit the information.
+-   If phoneNumber is saved under multiple names in the phonebook, when editing
+    it should choose the first one alphabetically
+-   If phoneNumber doesn't exist in the phonebook, the user will be able to add
+    it, providing the related info.
+-   If the user edits the phone number of the contact, the new value is returned
+    in the phoneNumber field
+-   If the user exists the flow without selecting a a contact, an error is
+    returned
+
+Once the user has added or updated the contact, native returns the new
+information (all last values of every property).
 
 ### getAppMetadata
 
@@ -851,8 +905,6 @@ onSessionRenewed = (
 
 ### logout
 
-<kbd>Available in B2P App version >=24.10</kbd>
-
 A method that requests a user logout.
 
 ```ts
@@ -880,8 +932,6 @@ getTopazValues = () => Promise<{syncId?: string}>
 
 ### showAppRating
 
-<kbd>Available in B2P App version >=24.10</kbd>
-
 Show native app rating dialog
 
 <img height="550" src="doc/webview-bridge-app-rating-ios.png"><img height="550" src="doc/webview-bridge-alert-android.png">
@@ -894,7 +944,12 @@ showAppRating = () => Promise<void>
 
 <kbd>App version >=13.8</kbd>
 
-Show native bottom sheet UI
+Show native bottom sheet UI.
+
+We don't recommend using this method directly, instead use the
+[Mistica implementation](https://mistica-web.vercel.app/?path=/story/components-modals-sheet--show-sheet)
+which provides a more user-friendly interface with predefined cases and
+fallbacks to a web implementation when the native bridge is not available.
 
 <img height="460" src="doc/webview-bridge-bottom-sheet.png">
 
@@ -906,92 +961,6 @@ bottomSheet = (payload: SheetUI) => Promise<SheetResponse>
 :warning: If you try to call this method repeatedly while a sheet is already
 being opened (for example, user accidental double tap), it will throw an Error
 with code `423` (Locked)
-
-There are some specific cases of bottom sheet, and we have some utility methods
-to make them simpler to use:
-
-For single selection use `bottomSheetSingleSelector`:
-
-```ts
-bottomSheetSingleSelector = ({
-    title?: string;
-    subtitle?: string;
-    description?: string;
-    selectedId?: string;
-    items: Array<SheetRowItem>;
-}) => Promise<{action: 'SUBMIT' | 'DISMISS'; selectedId: string}>
-```
-
-For a bottom sheet with a list of actions use `bottomSheetActionSelector`:
-
-```ts
-bottomSheetActionSelector = ({
-    title?: string;
-    subtitle?: string;
-    description?: string;
-    items: Array<SheetActionItem>;
-}) => Promise<{action: 'SUBMIT' | 'DISMISS'; selectedId: string}>
-```
-
-For an informative bottom sheet use `bottomSheetInfo`:
-
-```ts
-bottomSheetInfo = ({
-    title?: string;
-    subtitle?: string;
-    description?: string;
-    items: Array<SheetInfoItem>;
-}) => Promise<void>
-```
-
-For a bottom sheet with ButtonPrimary/ButtonSecondary/ButtonLink use
-`bottomSheetActions` <kbd>App version >=14.8</kbd>:
-
-```ts
-bottomSheetActions = ({
-    title?: string;
-    subtitle?: string;
-    description?: string;
-    button: {
-        text: string;
-    };
-    secondaryButton?: {
-        text: string;
-    };
-    link?: {
-        text: string;
-        withChevron?: boolean;
-    };
-}) => Promise<{action: 'PRIMARY' | 'SECONDARY' | 'LINK' | 'DISMISS'}>
-```
-
-#### Example:
-
-```ts
-const {action, selected} = await bottomSheetSingleSelector({
-    title: 'Some title',
-    subtitle: 'Some subtitle',
-    description: 'Some description',
-    selectedId: 'item-1',
-    items: [
-        {
-            id: 'item-0',
-            title: 'item 0 title',
-            description: 'item 0 description',
-        },
-        {
-            id: 'item-1',
-            title: 'item 1 title',
-            description: 'item 1 description',
-        },
-        {
-            id: 'item-2',
-            title: 'item 2 title',
-            description: 'item 2 description',
-        },
-    ],
-});
-```
 
 ### fetchPhoneNumbers
 
@@ -1134,6 +1103,18 @@ startProfileImageFlow: () => Promise<{
     cancelled
 -   `isCancelled`: true if the user cancelled the flow
 
+### showLineSelector
+
+<kbd>App version >=25.x</kbd>
+
+Opens the native line selector dialog
+
+#### Error cases
+
+-   405: line selector feature is not allowed (feature is disabled)
+-   409: line selector is already presented (Invoking the selector if there is
+    already one showing causes this error)
+
 ### getDeviceTac
 
 <kbd>App version >=24.3</kbd>
@@ -1174,13 +1155,28 @@ possible scenarios:
 triggerPinOrBiometricAuthentication: ({
     maxSecondsSinceLastValidation: number
 }) => Promise<{
-    result: 'USER_AUTHENTICATED' | 'USER_ENABLED_AUTHENTICATION' | 'LAST_AUTHENTICATION_STILL_VALID',
+    result: 'USER_AUTHENTICATED' | 'USER_ENABLED_AUTHENTICATION' | 'LAST_AUTHENTICATION_STILL_VALID' | 'DEVICE_HAS_NO_AUTHENTICATION',
 }>;
 ```
 
 -   `maxSecondsSinceLastValidation`: if time elapsed since last authentication
     is less than the number of seconds specified here authentication will
-    succeed without requesting it again.
+    succeed without requesting it again, returning
+    `LAST_AUTHENTICATION_STILL_VALID`
+
+<kbd>App version >=25.5</kbd>
+
+If the new PIN & Biometrics 2.0 (device authentication) feature is enabled,
+there are a couple of details to take into account:
+
+-   If the setting is not enabled by the user, the device authentication will be
+    asked and if it goes right, the setting will be enabled and the method will
+    return `USER_ENABLED_AUTHENTICATION`
+-   If the setting is already enabled by the user, the device authentication
+    will be asked and if it goes right, the setting will remain unchanged
+    (enabled) and the method will return `USER_AUTHENTICATED`
+-   If the device doesn't have any authentication configured, the method will
+    return `DEVICE_HAS_NO_AUTHENTICATION` as result.
 
 ### focusNavbar
 
@@ -1201,8 +1197,6 @@ focusNavbar: () => Promise<{
 ```
 
 ### openOnboarding
-
-<kbd>Available in B2P App version >=24.10</kbd>
 
 Opens the app Onboarding (as if it where the first time the user logs in)
 
@@ -1253,6 +1247,15 @@ writeTextToClipboard: (text: string) => Promise<void>;
 
 Shows a loading overlay screen while a task is being performed. You can control
 when to hide it with the `hideLoadingOverlay` method.
+
+Note: Depending on the configuration used to show the overlay,
+`hideLoadingOverlay` won't immediately hide it, in all cases you should wait for
+its promise to be resolved in order to know when the native overlay is
+effectively closed.
+
+| Overlay Success Example                                                                       | Overlay Failure Example                                                                       |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| <video src="https://github.com/user-attachments/assets/d46bb10c-e868-42d7-bed3-a171f34192e7"> | <video src="https://github.com/user-attachments/assets/8f2f6a8e-0570-437b-8f98-c905bcb224fd"> |
 
 ```ts
 showLoadingOverlay: ({
@@ -1307,6 +1310,19 @@ await doExpensiveTask();
 await hideLoadingOverlay();
 ```
 
+#### Error cases
+
+If `showLoadingOverlay` is called while the loading overlay is already being
+shown, the promise will be rejected with an error object with the following
+type:
+
+```ts
+{
+    code: 503;
+    description: 'Loading screen already showing';
+}
+```
+
 ### getInstallationId
 
 <kbd>App version >=24.11</kbd>
@@ -1343,6 +1359,570 @@ persist the lastUpdated timestamp in the localStorage and send it to the native
 app using the `setUnseenNotificationsBadge`. This way, the next time the webview
 use the getter, it will know if the `lastUpdated` matches with the one persisted
 in `localStorage`.
+
+### requestDatamobDeviceAdmin
+
+<kbd>App version >=25.1</kbd>
+
+Datamob is a native library that offer developers a way to integrate security
+and remote device control features into their applications.
+
+The application that implements the Datamob library must be registered as a
+system management application (Device Admin). This configuration is essential to
+allow the application to have sufficient permissions to execute security
+commands, such as screen lock and factory reset.
+
+This method opens a setting screen asking the user to accept system management
+permissions for the application.
+
+```ts
+requestDatamobDeviceAdmin: () => Promise<{isAdmin: boolean}>;
+```
+
+`isAdmin` is true if the permission was granted.
+
+#### Demo
+
+https://github.com/user-attachments/assets/28095f42-76db-4ac2-9586-e350acef7e1d
+
+### unregisterDatamobDeviceAdmin
+
+Method to unregister the application as a system management application.
+
+```ts
+unregisterDatamobDeviceAdmin: () => Promise<void>;
+```
+
+### registerDatamobUser
+
+<kbd>App version >=25.1</kbd>
+
+The application that implements the Datamob should have an user registered. This
+method is used to register one.
+
+```ts
+registerDatamobUser: ({phoneNumber: string, tokenPassword: string}) => Promise<void>;
+```
+
+-   `phoneNumber`: The phone number of the user.
+-   `tokenPassword`: When registering the device, datamob generate an accessKey
+    that is recorded in the Datamob device registry. By combining this attribute
+    with a hash that we keep in a password vault, generate this token.
+
+#### Error cases
+
+If the registration fails, the promise will be rejected with an error object
+with the following type:
+
+```ts
+{
+    code: 500;
+    reason: `Registration error: ${errorDescription}`;
+}
+```
+
+### validateDatamobRequirements
+
+<kbd>App version >=25.1 (Android only)</kbd>
+
+Datamob sdk allows to send remote commands to the user device. These remote
+commands include actions such as locking the device screen (lock screen) or even
+forcing a wipe (factory reset) of the device, providing additional security
+control for the end user.
+
+This method returns a map with the requirements. Each requirement is a boolean
+value where true is valid, false is not valid.
+
+```ts
+validateDatamobRequirements: ({phoneNumber: string, tokenPassword: string}) => Promise<{
+    deviceAdmin: boolean;
+    lockPassword: boolean;
+    accessibilityOption: boolean;
+    invalidPhoneNumber: boolean;
+    invalidToken: boolean;
+}>
+```
+
+-   `phoneNumber`: The phone number of the user.
+-   `tokenPassword`: When registering the device, datamob generate an accessKey
+    that is recorded in the Datamob device registry. By combining this attribute
+    with a hash that we keep in a password vault, generate this token.
+
+-   returns a map with the requirements.
+
+### displayQualtricsIntercept
+
+<kbd>App version >=24.12 (iOS only)</kbd>
+
+Uses the Qualtrics SDK to display a survey intercept to the user. It needs to be
+used in combination with `isQualtricsInterceptAvailableForUser`, ensuring
+intercept is available before requesting its display. Display result depends on
+the last evaluation performed by that method.
+
+The native app will try to show the survey related to the provided `interceptId`
+
+It will return a boolean (`displayed`) indicating if the survey has been
+displayed or not.
+
+```ts
+displayQualtricsIntercept: ({interceptId: string}) => Promise<{displayed: boolean}>;
+```
+
+#### Error cases
+
+```ts
+{
+    code: 500;
+    reason: 'Internal Error'; // If an error occurred invoking the SDK;
+}
+```
+
+```ts
+{
+    code: 501;
+    reason: 'SDK not initialized';
+}
+```
+
+### setQualtricsProperties
+
+<kbd>App version >=24.12 (iOS only)</kbd>
+
+Method to set properties in Qualtrics SDK before displaying a survey.
+
+```ts
+setQualtricsProperties: ({
+    stringProperties?: {[key: string]: string};
+    numberProperties?: {[key: string]: number};
+    dateTimePropertyKeys?: Array<string>;
+}) => Promise<void>;
+```
+
+#### Error cases
+
+```ts
+{
+    code: 500;
+    reason: 'Internal Error'; // If an error occurred invoking the SDK;
+}
+```
+
+```ts
+{
+    code: 501;
+    reason: 'SDK not initialized';
+}
+```
+
+### isQualtricsInterceptAvailableForUser
+
+<kbd>App version >=24.12 (iOS only)</kbd> <kbd>App version >=25.10:
+surveyUrl</kbd>
+
+Check if a Qualtrics intercept is available for the user, performing its
+evaluation. When available, a `surveyUrl` with the generated survey url is
+returned (only in App version >=25.10).
+
+```ts
+isQualtricsInterceptAvailableForUser: ({interceptId: string}) => Promise<{isAvailable: boolean; surveyUrl?: string | null}>;
+```
+
+#### Error cases
+
+```ts
+{
+    code: 500;
+    reason: 'Internal Error'; // If an error occurred invoking the SDK;
+}
+```
+
+```ts
+{
+    code: 501;
+    reason: 'SDK not initialized';
+}
+```
+
+### requestAllowMeBiometrics
+
+<kbd>App version >=25.3</kbd>
+
+Method to start the AllowMe native SDK biometrics flow.
+
+```ts
+requestAllowMeBiometrics: () => Promise<{
+    result?: string;
+    images: Array<string>;
+}>;
+```
+
+-   `result`: cryptographed payload containing safety information about the
+    image capture process.
+-   `images`: is an array of base64 encoded images captured during the process.
+
+#### Error cases
+
+This SDK can return several errors, and they can be different between iOS and
+Android. Below you have the list of both platforms:
+
+| Error                                    | Android | iOS | Code    |
+| ---------------------------------------- | ------- | --- | ------- |
+| `AllowMeGenericError`                    | ❌      | ✅  | 500\*   |
+| `AllowMeUnauthorizedError`               | ✅      | ✅  | 401\*\* |
+| `AllowMeSetupSdkError`                   | ✅      | ✅  | 1001    |
+| `AllowMeTimeoutProcessingError`          | ❌      | ✅  | 1002    |
+| `AllowMeApiKeyError`                     | ❌      | ✅  | 1003    |
+| `AllowMeInstanceCreationError`           | ❌      | ✅  | 1004    |
+| `AllowMeBiometricsTimeoutError`          | ✅      | ✅  | 1005    |
+| `AllowMeBiometricsSetupError`            | ✅      | ✅  | 1006    |
+| `AllowMeBiometricsCameraError`           | ✅      | ✅  | 1007    |
+| `AllowMeBiometricsCapturingError`        | ✅      | ✅  | 1008    |
+| `AllowMeBiometricsResultError`           | ✅      | ✅  | 1009    |
+| `AllowMeBiometricsCancelledByUserError`  | ✅      | ✅  | 1010    |
+| `AllowMeBiometricsInvalidImagesError`    | ❌      | ✅  | 1011    |
+| `AllowMeBiometricsCameraPermissionError` | ✅      | ✅  | 1012    |
+| `AllowMeCanNotOpenFrontCameraError`      | ✅      | ❌  | 1013    |
+| `AllowMeGooglePayServicesError`          | ✅      | ❌  | 1014    |
+| `AllowMeFaceDetectionError`              | ✅      | ❌  | 1015    |
+| `AllowMeProviderError`                   | ✅      | ✅  | 1016    |
+| `AllowMeCanNotSaveImageError`            | ✅      | ❌  | 1017    |
+
+\*500: Generic error send by iOS with a descriptive error message
+
+\*\*401: Unauthorized error in case the bridge calls this method from an
+unsupported brand (any other than Vivo).
+
+When one of these errors occurs, the promise will be rejected with an error with
+this shape:
+
+```ts
+export type AllowMeError = {
+    code: AllowMeErrorCode;
+    description?: string;
+};
+```
+
+#### Example
+
+```ts
+try {
+    const {result, images} = await requestAllowMeBiometrics();
+} catch (error: AllowMeError) {
+    switch (error.code) {
+        case AllowMeSetupSdkError:
+            console.log('Setup error');
+            break;
+        case AllowMeUnauthorizedError:
+            console.log('Unauthorized error');
+            break;
+        // etc
+    }
+}
+```
+
+### getBiometricsAuthenticationStatus
+
+<kbd>App version >=25.7</kbd>
+
+Retrieve information about the availability of Biometrics
+
+```ts
+getBiometricsAuthenticationStatus: () => Promise<{
+    result: 'DISABLED' | 'ENABLED' | 'DEVICE_HAS_NO_AUTHENTICATION',
+}>;
+```
+
+#### Result description
+
+-   `'DISABLED'`: The device has an authentication method (device PIN code at
+    least, and biometrics optionally) but it has the biometrics option disabled
+    in the app
+-   `'ENABLED'`: The device has an authentication method (device PIN code at
+    least, and biometrics optionally) and it has the biometrics option enabled
+    in the app (it requires authentication when launching the app)
+-   `'DEVICE_HAS_NO_AUTHENTICATION'`: The device has not any authentication
+    method (it has no device PIN code neither biometrics)
+
+#### Error cases
+
+-   `404`: The bridge implementation does not support this feature
+-   `500`: User is not logged in
+
+### setBiometricsAuthenticationStatus
+
+<kbd>Available in B2P App version >= 25.9</kbd>
+
+Set the current status of the biometrics authentication on the device.
+
+```ts
+setBiometricsAuthenticationStatus: ({enable: boolean}) => Promise<void>;
+```
+
+#### Parameters
+
+-   `enable`: Whether if the biometrics option has to be enabled (triggering the
+    biometrics setting UI) or disabled
+
+#### Error cases
+
+-   `400`: enable parameter is missing
+-   `401`: User is not logged in
+-   `500`: Native side error while applying the setting
+-   `503`: The device has no biometrics available, or the user cancelled
+    modifying biometric settings.
+
+### setupLocatorSdkConfig
+
+<kbd>App version >= TBD</kbd>
+
+Enable/configure Family Locator SDK. Wrapper for `sdk.setConfig(config)`.
+
+```ts
+setupLocatorSdkConfig: (config: LocatorSdkConfig) => Promise<void>;
+```
+
+#### Types
+
+```ts
+export type LocatorSdkConfig = {
+    license: string;
+    sdkVersion: string;
+    osPlatform: string;
+    api: {
+        token: string;
+        certUrl?: string;
+        scopesUrl?: string;
+        tokenUrl?: string;
+        configUrl?: string;
+        groupsUrl?: string;
+        featuresUrl?: string;
+        geofencesUrl?: string;
+    };
+    mqtt: {
+        clientId?: string;
+        broker?: string;
+        port?: string;
+        username?: string;
+    };
+    process: {
+        retryPolicy?: {
+            maxRetries?: number;
+            baseDelayMs?: number;
+            backoffFactor?: number;
+        };
+        offlineRetentionDays?: number;
+        foregroundServiceNotification?: {
+            title?: string;
+            message?: string;
+        };
+    };
+    battery?: {
+        events?: Array<{
+            name: string;
+            min: number;
+            max: number;
+            interval: number;
+            charging: boolean;
+            powerMode: Array<'normal' | 'power_saver' | 'super_saver'>;
+        }>;
+    };
+    motion?: {
+        sensitivity?: number;
+    };
+    collect?: {
+        collectIntervalMillis?: number;
+        sendIntervalMillis?: number;
+        minDisplacementMeters?: number;
+        maxTravelDistanceMeters?: number;
+        highAccuracy?: boolean;
+        maxBatchSize?: number;
+    };
+    audioRecord?: {
+        recordsCount: number;
+        durationSeconds: number;
+        retryCount: number;
+        intervalSeconds: number;
+        audioServiceNotification?: {
+            title?: string;
+            message?: string;
+        };
+    };
+    revision?: number;
+    createdAt?: number;
+    updatedAt?: number;
+};
+```
+
+#### Example
+
+```ts
+setupLocatorSdkConfig({license: 'xxx', sdkVersion: '2.0.1'});
+```
+
+#### Error cases
+
+-   401: `LocatorSDKMissingPermissionsException`
+-   402: `LocatorSDKNoConfigSetException`
+-   500: Internal Error
+
+### getLocatorSdkState
+
+<kbd>App version >= TBD</kbd>
+
+Check if the SDK is configured. Wrapper for `getState`.
+
+```ts
+getLocatorSdkState: () => Promise<{state: string}>;
+```
+
+### setLocatorSdkMode
+
+<kbd>App version >= TBD</kbd>
+
+Start real-time sharing or SOS. Wrapper for `setSdkMode`.
+
+```ts
+setLocatorSdkMode: (mode: 'default' | 'observed' | 'sos' | string) => Promise<void>;
+```
+
+### getLocatorJwtToken
+
+<kbd>App version >= TBD</kbd>
+
+Get JWT token for map backend auth. Wrapper for `getJwtToken`.
+
+```ts
+getLocatorJwtToken: () => Promise<{token: string}>;
+```
+
+### getLocatorPendingPermissions
+
+<kbd>App version >= TBD</kbd>
+
+Get pending permissions. Wrapper for `pendingPermissions`.
+
+```ts
+getLocatorPendingPermissions: () => Promise<{permissions: Array<string>}>;
+```
+
+#### Permission identifiers
+
+Android
+
+-   `location_fine`
+-   `location_coarse`
+-   `location_background`
+-   `activity_recognition`
+-   `body_sensors`
+-   `battery_optimization`
+-   `foreground_service`
+-   `foreground_service_location`
+-   `access_network_state`
+
+iOS
+
+-   `location_in_use`
+-   `location_background`
+-   `motion_usage`
+-   `fall_detection`
+
+### getLocatorSdkVersion
+
+<kbd>App version >= TBD</kbd>
+
+Get SDK version. Wrapper for `getVersion`.
+
+```ts
+getLocatorSdkVersion: () => Promise<{version: string}>;
+```
+
+### getLocatorSdkSession
+
+<kbd>App version >= TBD</kbd>
+
+Get SDK session. Wrapper for `getSession`.
+
+```ts
+getLocatorSdkSession: () => Promise<{
+    session: {
+        id: string;
+        startAt: number;
+        endAt: number | null;
+    };
+}>;
+```
+
+### getLocatorSdkMode
+
+<kbd>App version >= TBD</kbd>
+
+Get current SDK mode. Wrapper for `getSdkMode`.
+
+```ts
+getLocatorSdkMode: () => Promise<{mode: 'default' | 'observed' | 'sos' | string}>;
+```
+
+### getLocatorSdkConfig
+
+<kbd>App version >= TBD</kbd>
+
+Get current SDK config. Wrapper for `getConfig`.
+
+```ts
+getLocatorSdkConfig: () => Promise<{config: LocatorSdkConfig | null}>;
+```
+
+### openOcrScanner
+
+<kbd>App version >=26.1</kbd>
+
+Opens a native OCR scanner that looks for text matching the provided regular
+expression. When a text is found matching the pattern, the scanner closes and
+returns the scanned text. Only the first text that matches the pattern will be
+returned.
+
+The scanner will attempt to request camera permissions automatically. Only
+available in Mein Blau and Mein O2.
+
+```ts
+openOcrScanner: ({regex: string, timeoutMs?: number}) => Promise<{scannedText: string}>;
+```
+
+#### Parameters
+
+-   `regex`: Regular expression pattern to match the scanned text
+-   `timeoutMs`: Timeout in milliseconds before closing the scanner
+    automatically if no text is scanned. Optional, default is 15000 milliseconds
+
+#### Response
+
+-   `scannedText`: The scanned text matching the regex pattern.
+
+#### Example
+
+```ts
+openOcrScanner({regex: '\\b(?:\\d{4}-\\d{4}-\\d{4}-\\d{4}|\\d{16})\\b'})
+    .then((result) => {
+        if (result.scannedText) {
+            console.log('Scanned text:', result.scannedText);
+            // Example output: "1234-5678-8765-4321"
+        } else {
+            console.log('User closed scanner without scanning');
+        }
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+```
+
+#### Error cases
+
+-   `204`: User manually closed OCR scanner
+-   `401`: Missing permissions (user rejected camera permissions)
+-   `405`: Feature not supported in current brand (only available in Mein Blau
+    and Mein O2)
+-   `408`: Timeout reached without scanning any text
+-   `500`: Internal error (e.g., unexpected error thrown by native scanner)
 
 ## Error handling
 

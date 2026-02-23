@@ -3,6 +3,7 @@ import {
     fetchContactsByPhone,
     fetchPhoneNumbers,
     updatePhoneNumbers,
+    addOrEditContact,
 } from '../contacts';
 import {
     createFakeAndroidPostMessage,
@@ -147,6 +148,27 @@ test('update phone numbers', (done) => {
 
     updatePhoneNumbers([ANY_PHONE_NUMBER_1, ANY_PHONE_NUMBER_2]).then((res) => {
         expect(res).toBeUndefined();
+        done();
+    });
+});
+
+test('Add or update a contact by phone', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (message) => {
+            expect(message.type).toBe('ADD_OR_EDIT_CONTACT');
+            expect(message.payload).toEqual({
+                phoneNumber: '123456',
+            });
+        },
+        getResponse: (message) => ({
+            type: message.type,
+            id: message.id,
+            payload: ANY_CONTACT_DATA_1,
+        }),
+    });
+
+    addOrEditContact('123456').then((res) => {
+        expect(res).toEqual(ANY_CONTACT_DATA_1);
         done();
     });
 });

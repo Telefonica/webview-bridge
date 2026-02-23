@@ -1,4 +1,5 @@
 import {getId} from './message-id';
+import type {LocatorSdkConfig} from './family-locator';
 
 /**
  * There are two possible kind of messages we can receive from native app:
@@ -456,6 +457,57 @@ export type ResponsesFromNativeApp = {
         type: 'GET_APP_DOMAIN';
         id: string;
         payload: {domain: string};
+    };
+    SETUP_LOCATOR_SDK_CONFIG: {
+        type: 'SETUP_LOCATOR_SDK_CONFIG';
+        id: string;
+        payload: void;
+    };
+    GET_LOCATOR_SDK_STATE: {
+        type: 'GET_LOCATOR_SDK_STATE';
+        id: string;
+        payload: {state: string};
+    };
+    SET_LOCATOR_SDK_MODE: {
+        type: 'SET_LOCATOR_SDK_MODE';
+        id: string;
+        payload: void;
+    };
+    GET_LOCATOR_JWT_TOKEN: {
+        type: 'GET_LOCATOR_JWT_TOKEN';
+        id: string;
+        payload: {token: string};
+    };
+    GET_LOCATOR_PENDING_PERMISSIONS: {
+        type: 'GET_LOCATOR_PENDING_PERMISSIONS';
+        id: string;
+        payload: {permissions: Array<string>};
+    };
+    GET_LOCATOR_SDK_VERSION: {
+        type: 'GET_LOCATOR_SDK_VERSION';
+        id: string;
+        payload: {version: string};
+    };
+    GET_LOCATOR_SDK_SESSION: {
+        type: 'GET_LOCATOR_SDK_SESSION';
+        id: string;
+        payload: {
+            session: {
+                id: string;
+                startAt: number;
+                endAt: number | null;
+            };
+        };
+    };
+    GET_LOCATOR_SDK_MODE: {
+        type: 'GET_LOCATOR_SDK_MODE';
+        id: string;
+        payload: {mode: 'default' | 'observed' | 'sos' | string};
+    };
+    GET_LOCATOR_SDK_CONFIG: {
+        type: 'GET_LOCATOR_SDK_CONFIG';
+        id: string;
+        payload: {config: LocatorSdkConfig | null};
     };
 
     REQUEST_ALLOWME_BIOMETRICS: {

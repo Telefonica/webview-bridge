@@ -25,7 +25,6 @@ export {
     downloadBase64,
     getBatteryInfo,
     getInstallationId,
-    getAppDomain,
     getBiometricsAuthenticationStatus,
     setBiometricsAuthenticationStatus,
     openOcrScanner,
@@ -67,7 +66,7 @@ export {
     addOrEditContact,
 } from './src/contacts';
 
-export {highlightNavigationTab, refreshNavBar} from './src/navigation-tabs';
+export {highlightNavigationTab} from './src/navigation-tabs';
 
 export {
     logEvent,
@@ -86,12 +85,7 @@ export type {TrackingEvent, CustomDimensionIdx} from './src/analytics';
 
 export {renewSession, onSessionRenewed, logout} from './src/sessions';
 
-export {
-    showAppRating,
-    increaseAppRatingTrigger,
-    resetAppRatingTrigger,
-    appRatingRemindMeLater,
-} from './src/app-rating';
+export {showAppRating} from './src/app-rating';
 
 export {
     bottomSheet,

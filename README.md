@@ -64,8 +64,6 @@ Alternatively, you can import the library directly from a CDN:
 
 ### isWebViewBridgeAvailable
 
-<kbd>Available in B2P App version >=24.10</kbd>
-
 Returns true if WebView Bridge is available. Use this function to implement
 fallbacks in case the bridge is not available.
 
@@ -105,8 +103,6 @@ const isIOSWebView = () =>
 ```
 
 ### requestContact
-
-<kbd>Available in B2P App version >=25.5</kbd>
 
 Show native picker UI in order to let the user select a contact.
 
@@ -175,8 +171,6 @@ createCalendarEvent({
 ```
 
 ### share
-
-<kbd>App version >=10.7</kbd> <kbd>Available in B2P App version >=25.5</kbd>
 
 Invokes the native sharing mechanism of the device.
 
@@ -295,8 +289,6 @@ downloadBase64({
 <kbd>App version >= 10.7: Partial support</kbd><br/> <kbd>App version >= 11.8:
 expandedTitle</kbd><br/> <kbd>App version >= 14.8: Additional properties and
 deprecations</kbd><br/> <kbd>App version >= 25.12: isButton</kbd><br/>
-<kbd>Partial support in B2P App version <=24.10: title</kbd><br/> <kbd>Partial
-support in B2P App version >=24.11: right actions</kbd><br/>
 
 Customize WebView NavigationBar properties. You can set one or more properties
 in a single call
@@ -502,8 +494,6 @@ nativeConfirm({
 
 ### nativeAlert
 
-<kbd>Available in B2P App version >=24.10</kbd>
-
 Show a native alert dialog.
 
 If the bridge is not present (eg. showing the page in browser), fallbacks to a
@@ -564,8 +554,6 @@ nativeMessage({
 
 ### logEvent
 
-<kbd>Available in B2P App version >=24.10</kbd>
-
 Log an event to firebase
 
 ```ts
@@ -624,8 +612,6 @@ logEvent(yourEvent, {sanitize: false});
 
 ### setScreenName
 
-<kbd>Available in B2P App version >=24.10</kbd>
-
 Log the current screen name (or page name) to firebase
 
 ```ts
@@ -649,8 +635,6 @@ setScreenName('My Screen Name', {}, {sanitize: false});
 This will send the params as-is, without any transformation.
 
 ### setUserProperty
-
-<kbd>Available in B2P App version >=24.10</kbd>
 
 Set a user property to firebase
 
@@ -698,8 +682,6 @@ onNativeEvent(({event}) => {
 
 ### checkPermissionStatus
 
-<kbd>App version >=11.4</kbd> <kbd>Available in B2P App version >=25.5</kbd>
-
 Returns true if the app has the specific notifications permissions. You have to
 pass feature and required params for this request.
 
@@ -725,8 +707,6 @@ checkPermissionStatus('notifications', {channelId: 'default'}).then(
 
 ### internalNavigation
 
-<kbd>App version >=11.4</kbd> <kbd>Available in B2P App version >=25.5</kbd>
-
 Init an internal and native navigation to a device specific feature
 
 Avalaible features:
@@ -742,8 +722,6 @@ internalNavigation: (feature: string) => Promise<void>;
 ```
 
 ### dismiss
-
-<kbd>App version >=11.5</kbd> <kbd>Available in B2P App version >=24.10</kbd>
 
 Dismiss the current webview if possible and optionally navigate to another URL.
 If we can't do the dismiss, for example, if the webview is one of the main tabs,
@@ -772,8 +750,6 @@ requestVibration('error');
 
 ### fetchContactsByPhone
 
-<kbd>Available in B2P App version >=25.5</kbd>
-
 Returns contacts info given an array of phone numbers.
 
 ```javascript
@@ -787,8 +763,6 @@ fetchContactsByPhone: (phoneNumbers: Array<string>) => Promise<Array<{
 ```
 
 ### addOrEditContact
-
-<kbd>Available in B2P App version >=25.5</kbd>
 
 Opens native UI to add or edit a contact in the device's phonebook.
 
@@ -815,19 +789,6 @@ addOrEditContact: (phoneNumber: string) => Promise<{
 
 Once the user has added or updated the contact, native returns the new
 information (all last values of every property).
-
-### getAppDomain
-
-<kbd>Available in B2P App version >=25.3</kbd>
-
-Return info about appDomain
-
-```ts
-getAppDomain: () => Promise<{domain: string}>;
-```
-
-`domain`: the domain value of the environment that the app uses for handling
-deeplinks.
 
 ### getAppMetadata
 
@@ -972,8 +933,6 @@ onSessionRenewed = (
 
 ### logout
 
-<kbd>Available in B2P App version >=24.10</kbd>
-
 A method that requests a user logout.
 
 ```ts
@@ -1001,55 +960,12 @@ getTopazValues = () => Promise<{syncId?: string}>
 
 ### showAppRating
 
-<kbd>Available in B2P App version >=24.10</kbd>
-
 Show native app rating dialog
 
 <img height="550" src="doc/webview-bridge-app-rating-ios.png"><img height="550" src="doc/webview-bridge-alert-android.png">
 
 ```ts
 showAppRating = () => Promise<void>
-```
-
-### increaseAppRatingTrigger
-
-<kbd>Available in B2P App version >=25.6</kbd>
-
-App rating flow in B2P apps is only launched if specific rules are fulfilled.
-Several of those rules are that X events of a given type have happened in the
-webviews side.
-
-This method is used to request native app to increase the appRating trigger
-value for a specific key.
-
-```ts
-increaseAppRatingTrigger = (key: string) => Promise<void>
-```
-
-### resetAppRatingTrigger
-
-<kbd>Available in B2P App version >=25.6</kbd>
-
-App rating flow in B2P apps is only launched if specific rules are fulfilled.
-Several of those rules are that X events of a given type have happened in the
-webviews side.
-
-This method is used to request native app to reset the appRating trigger value
-for a specific key
-
-```ts
-resetAppRatingTrigger = (key: string) => Promise<void>
-```
-
-### appRatingRemindMeLater
-
-<kbd>Available in B2P App version >=25.6 (Android only)</kbd>
-
-Notify the native app that a user has selected "Remind me later" in the app
-rating flow
-
-```ts
-appRatingRemindMeLater = () => Promise<void>
 ```
 
 ### bottomSheet
@@ -1309,8 +1225,6 @@ focusNavbar: () => Promise<{
 ```
 
 ### openOnboarding
-
-<kbd>Available in B2P App version >=24.10</kbd>
 
 Opens the app Onboarding (as if it where the first time the user logs in)
 
@@ -1655,41 +1569,6 @@ isQualtricsInterceptAvailableForUser: ({interceptId: string}) => Promise<{isAvai
     code: 501;
     reason: 'SDK not initialized';
 }
-```
-
-### refreshNavBar
-
-<kbd>Available in B2P App version >=25.3</kbd>
-
-Method that allows WebView to refresh the navigation bars that are retrieved by
-Visual Modules API
-
-```ts
-refreshNavBar: ({
-    moduleId?: string,
-    productId?: string
-}) => Promise<void>;
-```
-
-where
-
--   `moduleId` is an optional parameter
-    -   If it is not included, it means the app will refresh top and bottom bar
-    -   If it is included, it should be the same values used for Visual Modules
-        API and the app will request to refresh only the indicated bar
--   `productId` is an optional parameter
-    -   If it is not included, visual modules is requested as it is today, just
-        with the userID as query param plus the `moduleId`
-    -   If it is included, visual modules will be requested for the current
-        userID and for the `productId`
-
-#### Example
-
-```ts
-refreshNavBar({
-    moduleId: 'bottombar',
-    productId: 'ID_00fe00a87b2',
-});
 ```
 
 ### requestAllowMeBiometrics

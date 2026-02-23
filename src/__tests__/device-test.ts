@@ -14,7 +14,6 @@ import {
     getBatteryInfo,
 } from '../../index';
 import {
-    getAppDomain,
     getBiometricsAuthenticationStatus,
     getInstallationId,
     setBiometricsAuthenticationStatus,
@@ -510,27 +509,6 @@ test('getInstallationId', async () => {
 
     expect(res).toEqual({
         installationId: '123',
-    });
-});
-
-test('getAppDomain', async () => {
-    createFakeWebKitPostMessage({
-        checkMessage: (msg) => {
-            expect(msg.type).toBe('GET_APP_DOMAIN');
-        },
-        getResponse: (msg) => ({
-            type: 'GET_APP_DOMAIN',
-            id: msg.id,
-            payload: {
-                domain: 'https://example.com',
-            },
-        }),
-    });
-
-    const res = await getAppDomain();
-
-    expect(res).toEqual({
-        domain: 'https://example.com',
     });
 });
 

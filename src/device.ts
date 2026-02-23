@@ -118,9 +118,6 @@ export const getBatteryInfo = (): Promise<{
 export const getInstallationId = (): Promise<{installationId: string}> =>
     postMessageToNativeApp({type: 'GET_INSTALLATION_ID'});
 
-export const getAppDomain = (): Promise<{domain: string}> =>
-    postMessageToNativeApp({type: 'GET_APP_DOMAIN'});
-
 /**
  * Get the current status of the biometrics authentication on the device.
  *

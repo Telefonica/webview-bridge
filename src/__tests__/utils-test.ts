@@ -15,7 +15,13 @@ import {
     createFakeAndroidPostMessage,
     removeFakeAndroidPostMessage,
 } from './fake-post-message';
-import {getAppMetadata} from '../utils';
+import {
+    getAppMetadata,
+    getNetworkConnectionInfo,
+    getTopazValues,
+    hideLoadingOverlay,
+    showLoadingOverlay,
+} from '../utils';
 
 const ANY_STRING = 'any-string';
 const ANY_OTHER_STRING = 'any-other-string';
@@ -138,7 +144,7 @@ test('update navigation bar, with options', (done) => {
                     url: 'https://example.com/icon.png',
                     urlDark: 'https://example.com/icon-dark.png',
                 },
-                name: 'left',
+                name: 'Left',
                 badge: {
                     show: true,
                     nativeLogic: 'INBOX',
@@ -151,7 +157,7 @@ test('update navigation bar, with options', (done) => {
                 id: 'icon2',
                 url: 'https://example.com/action2',
                 iconEnum: 'SOME_ICON',
-                name: 'right',
+                name: 'Right',
                 badge: {
                     show: true,
                     number: 1,
@@ -161,9 +167,10 @@ test('update navigation bar, with options', (done) => {
             {
                 id: 'icon3',
                 iconEnum: 'OTHER_ICON',
-                name: 'right',
+                name: 'Right 2',
             },
         ],
+        colorVariant: 'INVERSE',
         resetToDefaultState: true,
     };
 
@@ -379,7 +386,7 @@ test('fetch without bridge', async () => {
         expect(res).toEqual({
             status: 500,
             headers: {},
-            body: 'Bridge not available',
+            body: 'Bridge call failed',
         });
     });
 });
@@ -560,6 +567,40 @@ test('get app metadata of installed application', async () => {
     });
 });
 
+test('get data connection info', async () => {
+    const connectionType = 'MOBILE';
+    const mobileConnectionType = '4G';
+    const mobileCarrier = 'Telefonica';
+    const mobileSignalStrength = 'POOR';
+
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('DATA_CONNECTION_INFO');
+            expect(msg.payload).toMatchObject({});
+        },
+        getResponse: (msg) => ({
+            type: 'DATA_CONNECTION_INFO',
+            id: msg.id,
+            payload: {
+                connectionType,
+                mobileConnectionType,
+                mobileCarrier,
+                mobileSignalStrength,
+            },
+        }),
+    });
+
+    await getNetworkConnectionInfo().then((res) => {
+        expect(res).toMatchObject({
+            connectionType,
+            mobileConnectionType,
+            mobileCarrier,
+            mobileSignalStrength,
+        });
+        removeFakeAndroidPostMessage();
+    });
+});
+
 test('set confirm action behavior', (done) => {
     const actions = {
         webviewClose: {
@@ -591,4 +632,74 @@ test('set confirm action behavior', (done) => {
         expect(res).toBeUndefined();
         done();
     });
+});
+
+test('get Topaz values', async () => {
+    const syncId = 'id';
+
+    createFakeAndroidPostMessage({
+        checkMessage: (message) => {
+            expect(message.type).toBe('GET_TOPAZ_VALUES');
+            expect(message.payload).toEqual({});
+        },
+        getResponse: (message) => ({
+            type: message.type,
+            id: message.id,
+            payload: {syncId},
+        }),
+    });
+
+    await getTopazValues().then((res) => {
+        expect(res).toEqual({syncId});
+    });
+});
+
+test('showLoadingOverlay', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (message) => {
+            expect(message.type).toBe('SHOW_LOADING_OVERLAY');
+            expect(message.payload).toEqual({
+                inAnimation: true,
+                outAnimation: true,
+                stopAnimationCycle: false,
+                timeoutMs: 30000,
+                descriptions: [
+                    'Loading your data',
+                    'Please wait',
+                    'We are almost there',
+                ],
+            });
+        },
+        getResponse: (message) => ({
+            type: message.type,
+            id: message.id,
+        }),
+    });
+
+    await showLoadingOverlay({
+        inAnimation: true,
+        outAnimation: true,
+        stopAnimationCycle: false,
+        timeoutMs: 30000,
+        descriptions: [
+            'Loading your data',
+            'Please wait',
+            'We are almost there',
+        ],
+    });
+});
+
+test('hideLoadingOverlay', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (message) => {
+            expect(message.type).toBe('HIDE_LOADING_OVERLAY');
+            expect(message.payload).toBeUndefined();
+        },
+        getResponse: (message) => ({
+            type: message.type,
+            id: message.id,
+        }),
+    });
+
+    await hideLoadingOverlay();
 });

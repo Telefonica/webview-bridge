@@ -8,6 +8,16 @@ import {
     getDiskSpaceInfo,
     getEsimInfo,
     getAttStatus,
+    getDeviceModel,
+    shareBase64,
+    downloadBase64,
+    getBatteryInfo,
+} from '../../index';
+import {
+    getBiometricsAuthenticationStatus,
+    getInstallationId,
+    setBiometricsAuthenticationStatus,
+    openOcrScanner,
 } from '../device';
 import {
     createFakeAndroidPostMessage,
@@ -17,9 +27,11 @@ import {
 } from './fake-post-message';
 
 const ANY_STRING = 'any-string';
+const ANY_ENABLE = true;
 
 afterEach(() => {
     removeFakeAndroidPostMessage();
+    removeFakeWebKitPostMessage();
 });
 
 test('request sim icc', (done) => {
@@ -138,7 +150,6 @@ test('internal navigation', (done) => {
 
     internalNavigation('notification-settings').then((res) => {
         expect(res).toBeUndefined();
-        removeFakeAndroidPostMessage();
         done();
     });
 });
@@ -157,7 +168,42 @@ test('internal navigation to contact settings', (done) => {
 
     internalNavigation('contact-settings').then((res) => {
         expect(res).toBeUndefined();
-        removeFakeAndroidPostMessage();
+        done();
+    });
+});
+
+test('internal navigation to permissions settings', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('INTERNAL_NAVIGATION');
+            expect(msg.payload.feature).toBe('permissions-settings');
+        },
+        getResponse: (msg) => ({
+            type: 'INTERNAL_NAVIGATION',
+            id: msg.id,
+        }),
+    });
+
+    internalNavigation('permissions-settings').then((res) => {
+        expect(res).toBeUndefined();
+        done();
+    });
+});
+
+test('internal navigation to accessibility settings', (done) => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('INTERNAL_NAVIGATION');
+            expect(msg.payload.feature).toBe('accessibility-settings');
+        },
+        getResponse: (msg) => ({
+            type: 'INTERNAL_NAVIGATION',
+            id: msg.id,
+        }),
+    });
+
+    internalNavigation('accessibility-settings').then((res) => {
+        expect(res).toBeUndefined();
         done();
     });
 });
@@ -176,7 +222,6 @@ test('dismiss', (done) => {
 
     dismiss('http://example.com').then((res) => {
         expect(res).toBeUndefined();
-        removeFakeAndroidPostMessage();
         done();
     });
 });
@@ -196,7 +241,6 @@ test('requestVibration', async () => {
     const res = await requestVibration('success');
 
     expect(res).toBeUndefined();
-    removeFakeAndroidPostMessage();
 });
 
 test('getDiskSpaceInfo', async () => {
@@ -223,11 +267,11 @@ test('getDiskSpaceInfo', async () => {
         availableBytes,
         totalBytes,
     });
-    removeFakeAndroidPostMessage();
 });
 
 test('getEsimInfo', async () => {
     const supportsEsim = true;
+    const eid = '123';
 
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
@@ -238,6 +282,7 @@ test('getEsimInfo', async () => {
             id: msg.id,
             payload: {
                 supportsEsim,
+                eid,
             },
         }),
     });
@@ -247,7 +292,6 @@ test('getEsimInfo', async () => {
     expect(res).toMatchObject({
         supportsEsim,
     });
-    removeFakeAndroidPostMessage();
 });
 
 test('getAttStatus Success', async () => {
@@ -269,7 +313,6 @@ test('getAttStatus Success', async () => {
     expect(res).toMatchObject({
         status: 'unknown',
     });
-    removeFakeWebKitPostMessage();
 });
 
 test('getAttStatus failure', async () => {
@@ -290,5 +333,295 @@ test('getAttStatus failure', async () => {
     const res = await getAttStatus();
 
     expect(res).toBeNull();
-    removeFakeWebKitPostMessage();
+});
+
+test('getDeviceModel Success', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('MODEL');
+        },
+        getResponse: (msg) => ({
+            type: 'MODEL',
+            id: msg.id,
+            payload: {
+                model: 'Nokia 3310',
+            },
+        }),
+    });
+
+    const res = await getDeviceModel();
+
+    expect(res).toMatchObject({
+        model: 'Nokia 3310',
+    });
+});
+
+test('getDeviceModel failure', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('MODEL');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: {
+                code: 'foo',
+                description: 'bar',
+            },
+        }),
+    });
+
+    const res = await getDeviceModel();
+
+    expect(res).toBeNull();
+});
+
+test('shareBase64', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SHARE_BASE64');
+        },
+        getResponse: (msg) => ({
+            type: 'SHARE_BASE64',
+            id: msg.id,
+        }),
+    });
+
+    const res = await shareBase64({
+        contentInBase64: ANY_STRING,
+        fileName: 'example.pdf',
+    });
+
+    expect(res).toBe(undefined);
+});
+
+test('shareBase64 failure', async () => {
+    const error = {
+        code: 400,
+        description: 'bar',
+    };
+
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SHARE_BASE64');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = shareBase64({
+        contentInBase64: ANY_STRING,
+        fileName: 'example.pdf',
+    });
+
+    await expect(res).rejects.toEqual(error);
+});
+
+test('downloadBase64', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('DOWNLOAD_BASE64');
+            expect(msg.payload).toMatchObject({
+                content: ANY_STRING,
+                fileName: 'example.pdf',
+            });
+        },
+        getResponse: (msg) => ({
+            type: 'DOWNLOAD_BASE64',
+            id: msg.id,
+        }),
+    });
+
+    const res = await downloadBase64({
+        contentInBase64: ANY_STRING,
+        fileName: 'example.pdf',
+    });
+
+    expect(res).toBe(undefined);
+});
+
+test('downloadBase64 failure', async () => {
+    const error = {
+        code: 400,
+        description: 'bar',
+    };
+
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('DOWNLOAD_BASE64');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = downloadBase64({
+        contentInBase64: ANY_STRING,
+        fileName: 'example.pdf',
+    });
+
+    await expect(res).rejects.toEqual(error);
+});
+
+test('getBatteryInfo', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_BATTERY_INFO');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_BATTERY_INFO',
+            payload: {
+                batteryLevel: 76,
+                isPowerSafeMode: false,
+            },
+            id: msg.id,
+        }),
+    });
+
+    const res = await getBatteryInfo();
+
+    expect(res).toEqual({
+        batteryLevel: 76,
+        isPowerSafeMode: false,
+    });
+});
+
+test('getInstallationId', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_INSTALLATION_ID');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_INSTALLATION_ID',
+            id: msg.id,
+            payload: {
+                installationId: '123',
+            },
+        }),
+    });
+
+    const res = await getInstallationId();
+
+    expect(res).toEqual({
+        installationId: '123',
+    });
+});
+
+test('getBiometricsAuthenticationStatus', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_BIOMETRICS_AUTHENTICATION_STATUS');
+        },
+        getResponse: (msg) => ({
+            type: 'GET_BIOMETRICS_AUTHENTICATION_STATUS',
+            id: msg.id,
+            payload: {
+                result: 'DISABLED',
+            },
+        }),
+    });
+
+    const res = await getBiometricsAuthenticationStatus();
+
+    expect(res).toEqual({
+        result: 'DISABLED',
+    });
+});
+
+test('getBiometricsAuthenticationStatus Error', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('GET_BIOMETRICS_AUTHENTICATION_STATUS');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: {
+                code: 404,
+                description: 'Description',
+            },
+        }),
+    });
+
+    await expect(getBiometricsAuthenticationStatus()).rejects.toEqual({
+        code: 404,
+        description: 'Description',
+    });
+});
+
+test('setBiometricsAuthenticationStatus happy case', async () => {
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SET_BIOMETRICS_AUTHENTICATION_STATUS');
+            expect(msg.payload).toMatchObject({enable: ANY_ENABLE});
+        },
+        getResponse: (msg) => ({
+            type: 'SET_BIOMETRICS_AUTHENTICATION_STATUS',
+            id: msg.id,
+            payload: undefined,
+        }),
+    });
+
+    const res = await setBiometricsAuthenticationStatus({enable: true});
+    expect(res).toBeUndefined();
+});
+
+test('setBiometricsAuthenticationStatus error', async () => {
+    const error = {code: 503, description: 'No biometrics available'};
+    createFakeWebKitPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('SET_BIOMETRICS_AUTHENTICATION_STATUS');
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = setBiometricsAuthenticationStatus({enable: true});
+    await expect(res).rejects.toEqual(error);
+});
+
+test('openOcrScanner - success with scanned text', async () => {
+    const regex = '\\b(?:\\d{4}-\\d{4}-\\d{4}-\\d{4}|\\d{16})\\b';
+    const scannedText = '1234-5678-8765-4321';
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('OPEN_OCR_SCANNER');
+            expect(msg.payload.regex).toBe(regex);
+        },
+        getResponse: (msg) => ({
+            type: 'OPEN_OCR_SCANNER',
+            id: msg.id,
+            payload: {scannedText},
+        }),
+    });
+
+    const res = await openOcrScanner({regex});
+    expect(res.scannedText).toBe(scannedText);
+});
+
+test('openOcrScanner - missing permissions error (401)', async () => {
+    const regex = '\\b(?:\\d{4}-\\d{4}-\\d{4}-\\d{4}|\\d{16})\\b';
+    const error = {code: 401, description: 'Missing permissions'};
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('OPEN_OCR_SCANNER');
+            expect(msg.payload.regex).toBe(regex);
+        },
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = openOcrScanner({regex});
+    await expect(res).rejects.toEqual(error);
 });

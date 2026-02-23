@@ -146,7 +146,9 @@ export const sanitizeAnalyticsParams = (params: {
     [key: string]: FirebaseValue;
 }): {[key: string]: FirebaseValue} => {
     const sanitizedParams: {[key: string]: FirebaseValue} = {};
-    Object.entries(params).forEach(([key, value]) => {
+    Object.entries(params).forEach((entry) => {
+        const key = entry[0];
+        const value = entry[1];
         let sanitizedValue = value;
         const sanitizedKey = key.slice(0, EVENT_PARAM_NAME_CHARS_LIMIT);
         if (typeof value === 'string') {
@@ -340,14 +342,18 @@ export const logTiming = ({
 export const setScreenName = (
     screenName: string,
     params: {[key: string]: any} = {},
+    options?: LogEventOptions,
 ): Promise<void> => {
     if (!screenName) {
         console.warn('Missing analytics screenName');
         return Promise.resolve();
     }
 
+    const {sanitize} = {...defaultEventOptions, ...options};
     const previousScreenName = currentScreenName;
     currentScreenName = screenName;
+
+    const sanitizedParams = sanitize ? sanitizeAnalyticsParams(params) : params;
 
     return withAnalytics({
         onAndroid(androidFirebase) {
@@ -355,7 +361,7 @@ export const setScreenName = (
             if (androidFirebase.setScreenNameWithParams) {
                 androidFirebase.setScreenNameWithParams(
                     screenName,
-                    JSON.stringify(sanitizeAnalyticsParams(params)),
+                    JSON.stringify(sanitizedParams),
                 );
             } else if (androidFirebase.setScreenName) {
                 androidFirebase.setScreenName(screenName);
@@ -366,7 +372,7 @@ export const setScreenName = (
             iosFirebase.postMessage({
                 command: 'setScreenName',
                 name: screenName,
-                parameters: sanitizeAnalyticsParams(params),
+                parameters: sanitizedParams,
             });
             return Promise.resolve();
         },
@@ -376,7 +382,7 @@ export const setScreenName = (
                     screenName,
                     page_title: screenName,
                     previousScreenName,
-                    ...sanitizeAnalyticsParams(params),
+                    ...sanitizedParams,
                     event_callback: createCallback(resolve),
                 });
             });
@@ -443,19 +449,6 @@ export const setUserProperty = (
         },
     });
 };
-
-export const setCustomerHash = (hash: string): Promise<void> =>
-    postMessageToNativeApp({
-        type: 'SET_CUSTOMER_HASH',
-        payload: {
-            hash,
-        },
-    });
-
-export const getCustomerHash = (): Promise<{hash: string}> =>
-    postMessageToNativeApp({
-        type: 'GET_CUSTOMER_HASH',
-    });
 
 export const setTrackingProperty = (
     system: 'palitagem' | 'medallia',

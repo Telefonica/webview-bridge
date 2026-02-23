@@ -44,8 +44,13 @@ export type NavigationBarIcon = Readonly<{
     id: string;
     /** URL to be opened by the app as a deep-link if present */
     url?: string;
-    /** Content description of the image used for accessibility */
+    /**
+     * Accessibility label for the icon. When isButton=true you should always set a name, when isButton=false if you don't want it to be
+     * read by screen readers, then explicitly set it to an empty string.
+     * */
     name: string;
+    /** default: true, set to false if the Icon is decorative */
+    isButton?: boolean;
     /**
      * This is a string whose value will be mapped to a local resource that the app already knows.
      * See https://void.tuenti.io/idl-server/files/TopNavbarIcon/1.1 for available values.
@@ -82,6 +87,12 @@ export type NavigationBarIcon = Readonly<{
      * These properties will be merged to the tracking event produced by the native side
      */
     trackingProperties?: Record<string, string>;
+
+    /**
+     * Identifies the action, native app can then do specific logic for this action.
+     * Ex: if sectionName matches a maintenanceMode id, it may show a maintenance message instead of the usual behaviour
+     */
+    sectionName?: string;
 }>;
 
 /**
@@ -98,6 +109,11 @@ export const updateNavigationBar = (
         backgroundColor?: string;
         leftActions?: ReadonlyArray<NavigationBarIcon>;
         rightActions?: ReadonlyArray<NavigationBarIcon>;
+        /**
+         * It defines how the icons and the text of the top bar should be tinted.
+         * If null or unknown value is received, the initial colors set by the app or the last colorVariant set will be used
+         */
+        colorVariant?: 'INVERSE' | 'REGULAR' | null;
         /**
          * This is a flag used to indicate that the appearance of the top bar should be restored to its original state.
          * The other fields that may come in the same bridge call will be applied after the reset
@@ -205,21 +221,14 @@ export const fetch = ({
     headers: {[key: string]: string};
     body: string;
 }): Promise<NativeAppResponsePayload<'FETCH'>> => {
-    if (isWebViewBridgeAvailable()) {
-        return postMessageToNativeApp({
-            type: 'FETCH',
-            payload: {url, method, headers, body},
-        }).catch(() => ({
-            status: 500,
-            headers: {},
-            body: 'Bridge call failed',
-        }));
-    }
-    return Promise.resolve({
+    return postMessageToNativeApp({
+        type: 'FETCH',
+        payload: {url, method, headers, body},
+    }).catch(() => ({
         status: 500,
         headers: {},
-        body: 'Bridge not available',
-    });
+        body: 'Bridge call failed',
+    }));
 };
 
 type PermissionsStatus = 'notifications' | 'read-contacts' | 'write-contacts';
@@ -244,6 +253,14 @@ export const getAppMetadata = (
         payload: {
             appToken,
         },
+    });
+
+export const getNetworkConnectionInfo = (): Promise<
+    NativeAppResponsePayload<'DATA_CONNECTION_INFO'>
+> =>
+    postMessageToNativeApp({
+        type: 'DATA_CONNECTION_INFO',
+        payload: {},
     });
 
 type ActionBehavior =
@@ -288,3 +305,64 @@ export const getTopazToken = (
         },
         options.timeout,
     );
+
+export const getTopazValues = (): Promise<{syncId?: string}> =>
+    postMessageToNativeApp({
+        type: 'GET_TOPAZ_VALUES',
+        payload: {},
+    });
+
+export const getPincodeInfo = (): Promise<{status: 'enabled' | 'disabled'}> =>
+    postMessageToNativeApp({type: 'GET_PINCODE_INFO'});
+
+export const triggerPinOrBiometricAuthentication = (
+    maxSecondsSinceLastValidation: number,
+): Promise<
+    NativeAppResponsePayload<'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION'>
+> =>
+    postMessageToNativeApp({
+        type: 'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION',
+        payload: {maxSecondsSinceLastValidation},
+    });
+
+export const focusNavbar = (): Promise<{focused: boolean}> =>
+    postMessageToNativeApp({type: 'FOCUS_NAVBAR'});
+
+export const showLoadingOverlay = (payload: {
+    /**
+     * Whether the in animation is enabled (false by default)
+     */
+    inAnimation?: boolean;
+    /**
+     * Whether the out animation is enabled (false by default)
+     */
+    outAnimation?: boolean;
+    /**
+     * Minimum duration of the loop animation in milliseconds (0 by default)
+     */
+    minimumLoopDurationMs?: number;
+    /**
+     * whether the loop animation should be stopped immediately or not (true by default)
+     */
+    stopAnimationCycle?: boolean;
+    /**
+     * List of description texts to be shown one after the other
+     */
+    descriptions?: Array<string>;
+    /**
+     * Duration of each description in milliseconds (3000 by default)
+     */
+    descriptionDurationMs?: number;
+    /**
+     * After this timeout loading screen would be hidden automatically (20000 by default)
+     */
+    timeoutMs?: number;
+    /**
+     * (Only Android) If true, after loading screen has been hidden, if user presses android back button, webview window will close (true by default)
+     */
+    closeOnBackButtonPressAfterFinish?: boolean;
+}): Promise<void> =>
+    postMessageToNativeApp({type: 'SHOW_LOADING_OVERLAY', payload});
+
+export const hideLoadingOverlay = (): Promise<void> =>
+    postMessageToNativeApp({type: 'HIDE_LOADING_OVERLAY'});

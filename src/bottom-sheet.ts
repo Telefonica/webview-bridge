@@ -85,12 +85,12 @@ type SheetUI = Readonly<{
 
 let sheetLock = false;
 
-export const bottomSheet = async (payload: SheetUI): Promise<SheetResponse> => {
+export const bottomSheet = (payload: SheetUI): Promise<SheetResponse> => {
     if (sheetLock) {
-        throw {
+        return Promise.reject({
             code: 423,
             reason: 'BottomSheet is locked. You can only have one bottom sheet in the screen',
-        };
+        });
     }
 
     sheetLock = true;
@@ -98,14 +98,15 @@ export const bottomSheet = async (payload: SheetUI): Promise<SheetResponse> => {
         sheetLock = false;
     }, 1000);
 
-    try {
-        const response = await postMessageToNativeApp({type: 'SHEET', payload});
-        sheetLock = false;
-        clearTimeout(tid);
-        return response;
-    } catch (e) {
-        sheetLock = false;
-        clearTimeout(tid);
-        throw e;
-    }
+    return postMessageToNativeApp({type: 'SHEET', payload})
+        .then((response) => {
+            sheetLock = false;
+            clearTimeout(tid);
+            return response;
+        })
+        .catch((e) => {
+            sheetLock = false;
+            clearTimeout(tid);
+            throw e;
+        });
 };

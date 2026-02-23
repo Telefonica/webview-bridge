@@ -3,8 +3,6 @@ import {
     setScreenName,
     setUserProperty,
     logTiming,
-    setCustomerHash,
-    getCustomerHash,
     setTrackingProperty,
     logEcommerceEvent,
     sanitizeAnalyticsParam,
@@ -46,6 +44,8 @@ const origAnalyticsWebInterface = window.AnalyticsWebInterface;
 afterEach(() => {
     window.AnalyticsWebInterface = origAnalyticsWebInterface;
     window.webkit = origWebkit;
+    // Reset screen name
+    setScreenName('');
 });
 
 test('log event with default values', async () => {
@@ -288,6 +288,23 @@ test('set screen name in iOS', async () => {
     });
 });
 
+test('setScreenName allows to turn off params sanitization', async () => {
+    const androidFirebaseMock = givenAndroidWebview();
+    const params = {
+        special_param: '*&^%$#@!',
+        another_param: 'test!@#',
+    };
+
+    await setScreenName('test-screen', params, {
+        sanitize: false,
+    });
+
+    expect(androidFirebaseMock.setScreenNameWithParams).toBeCalledWith(
+        'test-screen',
+        JSON.stringify(params),
+    );
+});
+
 test('set user property in android', async () => {
     const androidFirebaseMock = givenAndroidWebview();
 
@@ -338,42 +355,6 @@ test('log timing does not track float values', async () => {
     );
 });
 
-test('set customer hash', async () => {
-    createFakeAndroidPostMessage({
-        checkMessage: (msg) => {
-            expect(msg.type).toBe('SET_CUSTOMER_HASH');
-            expect(msg.payload.hash).toBe('ANY_HASH');
-        },
-        getResponse: (msg) => ({
-            type: 'SET_CUSTOMER_HASH',
-            id: msg.id,
-        }),
-    });
-
-    const res = await setCustomerHash('ANY_HASH');
-
-    expect(res).toBeUndefined();
-    removeFakeAndroidPostMessage();
-});
-
-test('get customer hash', async () => {
-    createFakeAndroidPostMessage({
-        checkMessage: (msg) => {
-            expect(msg.type).toBe('GET_CUSTOMER_HASH');
-        },
-        getResponse: (msg) => ({
-            type: 'GET_CUSTOMER_HASH',
-            id: msg.id,
-            payload: {hash: 'ANY_HASH'},
-        }),
-    });
-
-    await getCustomerHash().then((res) => {
-        expect(res).toMatchObject({hash: 'ANY_HASH'});
-        removeFakeAndroidPostMessage();
-    });
-});
-
 test('set tracking property for palitagem', async () => {
     const anySystem = 'palitagem';
 
@@ -415,6 +396,9 @@ test('logEvent in web is resilient to gtag script not working', async () => {
 
 test('logEvent does not sanitize legacy events', async () => {
     const androidFirebaseMock = givenAndroidWebview();
+
+    // Set up screen name first
+    await setScreenName('any-screen-name');
 
     await logEvent({
         category: 'any category with weird characters ;!@+*',

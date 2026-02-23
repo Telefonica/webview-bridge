@@ -1,4 +1,5 @@
 import {getId} from './message-id';
+import type {LocatorSdkConfig} from './family-locator';
 
 /**
  * There are two possible kind of messages we can receive from native app:
@@ -6,11 +7,6 @@ import {getId} from './message-id';
  *     - ResponsesFromNativeApp: native app responds to a request initiated by the web
  */
 type RequestsFromNativeApp = {
-    NATIVE_EVENT: {
-        type: 'NATIVE_EVENT';
-        id: string;
-        payload: {event: string};
-    };
     SESSION_RENEWED: {
         type: 'SESSION_RENEWED';
         id: string;
@@ -32,6 +28,30 @@ export type SheetResponse = {
     }>;
 };
 
+export type SnackbarResponse = {
+    action: 'DISMISS' | 'BUTTON' | 'TIMEOUT' | 'CONSECUTIVE';
+};
+
+type DataConnectionResponse = {
+    connectionType: 'MOBILE' | 'WIFI ' | 'OTHER' | 'NONE';
+    mobileConnectionType?:
+        | '2G'
+        | '3G'
+        | '4G'
+        | '5G'
+        | 'OTHER'
+        | 'PERMISSION_REQUIRED'
+        | null;
+    mobileCarrier?: string | null;
+    mobileSignalStrength?:
+        | 'NONE'
+        | 'POOR'
+        | 'MODERATE'
+        | 'GOOD'
+        | 'GREAT'
+        | null;
+};
+
 export type ResponsesFromNativeApp = {
     SIM_ICC: {
         id: string;
@@ -42,6 +62,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         type: 'IMEI';
         payload: {imei: string};
+    };
+    TAC: {
+        id: string;
+        type: 'TAC';
+        payload: {tac: string | null};
     };
     IMSI: {
         id: string;
@@ -76,7 +101,7 @@ export type ResponsesFromNativeApp = {
     MESSAGE: {
         id: string;
         type: 'MESSAGE';
-        payload: void;
+        payload: SnackbarResponse;
     };
     CONFIRM: {
         id: string;
@@ -170,6 +195,17 @@ export type ResponsesFromNativeApp = {
             encodedAvatar?: string;
         }>;
     };
+    ADD_OR_EDIT_CONTACT: {
+        id: string;
+        type: 'ADD_OR_EDIT_CONTACT';
+        payload: {
+            phoneNumber?: string;
+            firstName?: string;
+            middleName?: string;
+            lastName?: string;
+            encodedAvatar?: string;
+        };
+    };
     RENEW_SESSION: {
         type: 'RENEW_SESSION';
         id: string;
@@ -180,16 +216,6 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {isInstalled: boolean; marketUrl: string; appUrl: string};
     };
-    SET_CUSTOMER_HASH: {
-        type: 'SET_CUSTOMER_HASH';
-        id: string;
-        payload: void;
-    };
-    GET_CUSTOMER_HASH: {
-        type: 'GET_CUSTOMER_HASH';
-        id: string;
-        payload: {hash: string};
-    };
     GET_DISK_SPACE_INFO: {
         type: 'GET_DISK_SPACE_INFO';
         id: string;
@@ -198,7 +224,7 @@ export type ResponsesFromNativeApp = {
     GET_ESIM_INFO: {
         type: 'GET_ESIM_INFO';
         id: string;
-        payload: {supportsEsim: boolean};
+        payload: {supportsEsim: boolean; eid?: string | null};
     };
     SET_TRACKING_PROPERTY: {
         type: 'SET_TRACKING_PROPERTY';
@@ -219,6 +245,11 @@ export type ResponsesFromNativeApp = {
         type: 'GET_TOPAZ_TOKEN';
         id: string;
         payload: {token: string};
+    };
+    GET_TOPAZ_VALUES: {
+        type: 'GET_TOPAZ_VALUES';
+        id: string;
+        payload: {syncId?: string};
     };
     LOG_OUT: {
         type: 'LOG_OUT';
@@ -254,6 +285,266 @@ export type ResponsesFromNativeApp = {
         payload: {
             status: 'granted' | 'denied' | 'unknown';
         };
+    };
+    MODEL: {
+        type: 'MODEL';
+        id: string;
+        payload: {model: string};
+    };
+    OPEN_ONBOARDING: {
+        type: 'OPEN_ONBOARDING';
+        id: string;
+        payload: void;
+    };
+    DATA_CONNECTION_INFO: {
+        type: 'DATA_CONNECTION_INFO';
+        id: string;
+        payload: DataConnectionResponse;
+    };
+    GET_PINCODE_INFO: {
+        type: 'GET_PINCODE_INFO';
+        id: string;
+        payload: {
+            status: 'enabled' | 'disabled';
+        };
+    };
+    GET_PROFILE_IMAGE: {
+        type: 'GET_PROFILE_IMAGE';
+        id: string;
+        payload: {
+            image: string | null;
+        };
+    };
+    START_PROFILE_IMAGE_FLOW: {
+        type: 'START_PROFILE_IMAGE_FLOW';
+        id: string;
+        payload: {
+            image: string | null;
+            isCancelled: boolean;
+        };
+    };
+    SHOW_LINE_SELECTOR: {
+        type: 'SHOW_LINE_SELECTOR';
+        id: string;
+        payload: void;
+    };
+    TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION: {
+        type: 'TRIGGER_PIN_OR_BIOMETRIC_AUTHENTICATION';
+        id: string;
+        payload: {
+            result:
+                | 'USER_AUTHENTICATED'
+                | 'USER_ENABLED_AUTHENTICATION'
+                | 'LAST_AUTHENTICATION_STILL_VALID'
+                | 'DEVICE_HAS_NO_AUTHENTICATION';
+        };
+    };
+    FOCUS_NAVBAR: {
+        type: 'FOCUS_NAVBAR';
+        id: string;
+        payload: {
+            focused: boolean;
+        };
+    };
+    SHARE_BASE64: {
+        type: 'SHARE_BASE64';
+        id: string;
+        payload: void;
+    };
+    DOWNLOAD_BASE64: {
+        type: 'DOWNLOAD_BASE64';
+        id: string;
+        payload: void;
+    };
+    GET_BATTERY_INFO: {
+        type: 'GET_BATTERY_INFO';
+        id: string;
+        payload: {
+            batteryLevel: number | null;
+            isPowerSafeMode: boolean;
+        };
+    };
+    CLIPBOARD_READ_TEXT: {
+        type: 'CLIPBOARD_READ_TEXT';
+        id: string;
+        payload: string;
+    };
+    CLIPBOARD_WRITE_TEXT: {
+        type: 'CLIPBOARD_WRITE_TEXT';
+        id: string;
+        payload: void;
+    };
+    SHOW_LOADING_OVERLAY: {
+        type: 'SHOW_LOADING_OVERLAY';
+        id: string;
+        payload: void;
+    };
+    HIDE_LOADING_OVERLAY: {
+        type: 'HIDE_LOADING_OVERLAY';
+        id: string;
+        payload: void;
+    };
+    GET_INSTALLATION_ID: {
+        type: 'GET_INSTALLATION_ID';
+        id: string;
+        payload: {installationId: string};
+    };
+    GET_UNSEEN_NOTIFICATIONS_BADGE: {
+        type: 'GET_UNSEEN_NOTIFICATIONS_BADGE';
+        id: string;
+        payload: {
+            unseenNotificationCounter: number;
+            lastUpdated: number;
+        };
+    };
+    SET_UNSEEN_NOTIFICATIONS_BADGE: {
+        type: 'SET_UNSEEN_NOTIFICATIONS_BADGE';
+        id: string;
+        payload: void;
+    };
+    REQUEST_DATAMOB_DEVICE_ADMIN: {
+        type: 'REQUEST_DATAMOB_DEVICE_ADMIN';
+        id: string;
+        payload: {isAdmin: boolean};
+    };
+    REGISTER_DATAMOB_USER: {
+        type: 'REGISTER_DATAMOB_USER';
+        id: string;
+        payload: void;
+    };
+    VALIDATE_DATAMOB_REQUIREMENTS: {
+        type: 'VALIDATE_DATAMOB_REQUIREMENTS';
+        id: string;
+        payload: {
+            deviceAdmin: boolean;
+            lockPassword: boolean;
+            accessibilityOption: boolean;
+            invalidPhoneNumber: boolean;
+            invalidToken: boolean;
+        };
+    };
+    UNREGISTER_DATAMOB_DEVICE_ADMIN: {
+        type: 'UNREGISTER_DATAMOB_DEVICE_ADMIN';
+        id: string;
+        payload: void;
+    };
+    DISPLAY_QUALTRICS_INTERCEPT: {
+        type: 'DISPLAY_QUALTRICS_INTERCEPT';
+        id: string;
+        payload: {displayed: true};
+    };
+    SET_QUALTRICS_PROPERTIES: {
+        type: 'SET_QUALTRICS_PROPERTIES';
+        id: string;
+        payload: void;
+    };
+    IS_QUALTRICS_INTERCEPT_AVAILABLE_FOR_USER: {
+        type: 'IS_QUALTRICS_INTERCEPT_AVAILABLE_FOR_USER';
+        id: string;
+        payload: {isAvailable: boolean; surveyUrl?: string | null};
+    };
+    REFRESH_NAV_BAR: {
+        type: 'REFRESH_NAV_BAR';
+        id: string;
+        payload: void;
+    };
+    GET_APP_DOMAIN: {
+        type: 'GET_APP_DOMAIN';
+        id: string;
+        payload: {domain: string};
+    };
+    SETUP_LOCATOR_SDK_CONFIG: {
+        type: 'SETUP_LOCATOR_SDK_CONFIG';
+        id: string;
+        payload: void;
+    };
+    GET_LOCATOR_SDK_STATE: {
+        type: 'GET_LOCATOR_SDK_STATE';
+        id: string;
+        payload: {state: string};
+    };
+    SET_LOCATOR_SDK_MODE: {
+        type: 'SET_LOCATOR_SDK_MODE';
+        id: string;
+        payload: void;
+    };
+    GET_LOCATOR_JWT_TOKEN: {
+        type: 'GET_LOCATOR_JWT_TOKEN';
+        id: string;
+        payload: {token: string};
+    };
+    GET_LOCATOR_PENDING_PERMISSIONS: {
+        type: 'GET_LOCATOR_PENDING_PERMISSIONS';
+        id: string;
+        payload: {permissions: Array<string>};
+    };
+    GET_LOCATOR_SDK_VERSION: {
+        type: 'GET_LOCATOR_SDK_VERSION';
+        id: string;
+        payload: {version: string};
+    };
+    GET_LOCATOR_SDK_SESSION: {
+        type: 'GET_LOCATOR_SDK_SESSION';
+        id: string;
+        payload: {
+            session: {
+                id: string;
+                startAt: number;
+                endAt: number | null;
+            };
+        };
+    };
+    GET_LOCATOR_SDK_MODE: {
+        type: 'GET_LOCATOR_SDK_MODE';
+        id: string;
+        payload: {mode: 'default' | 'observed' | 'sos' | string};
+    };
+    GET_LOCATOR_SDK_CONFIG: {
+        type: 'GET_LOCATOR_SDK_CONFIG';
+        id: string;
+        payload: {config: LocatorSdkConfig | null};
+    };
+
+    REQUEST_ALLOWME_BIOMETRICS: {
+        type: 'REQUEST_ALLOWME_BIOMETRICS';
+        id: string;
+        payload: {
+            result?: string;
+            images: Array<string>;
+        };
+    };
+
+    INCREASE_APP_RATING_TRIGGER: {
+        type: 'INCREASE_APP_RATING_TRIGGER';
+        id: string;
+        payload: void;
+    };
+    RESET_APP_RATING_TRIGGER: {
+        type: 'RESET_APP_RATING_TRIGGER';
+        id: string;
+        payload: void;
+    };
+    APP_RATING_REMIND_ME_LATER: {
+        type: 'APP_RATING_REMIND_ME_LATER';
+        id: string;
+        payload: void;
+    };
+    GET_BIOMETRICS_AUTHENTICATION_STATUS: {
+        type: 'GET_BIOMETRICS_AUTHENTICATION_STATUS';
+        id: string;
+        payload: {
+            result: 'DISABLED' | 'ENABLED' | 'DEVICE_HAS_NO_AUTHENTICATION';
+        };
+    };
+    SET_BIOMETRICS_AUTHENTICATION_STATUS: {
+        type: 'SET_BIOMETRICS_AUTHENTICATION_STATUS';
+        id: string;
+        payload: void;
+    };
+    OPEN_OCR_SCANNER: {
+        type: 'OPEN_OCR_SCANNER';
+        id: string;
+        payload: {scannedText: string};
     };
 };
 
@@ -414,11 +705,14 @@ export const postMessageToNativeApp = <T extends keyof ResponsesFromNativeApp>(
 };
 
 /**
- * Initiates WebApp postMessage function, which will be called by native apps
+ * Initiates postMessage function, which will be called by native apps
  */
 if (typeof window !== 'undefined') {
-    window[BRIDGE] = window[BRIDGE] || {
+    // if there is already a bridge instance, we need to call it too when we receive a message
+    const prevPostMessageImplementation = window[BRIDGE]?.postMessage;
+    window[BRIDGE] = {
         postMessage: (jsonMessage: string) => {
+            prevPostMessageImplementation?.(jsonMessage);
             log?.('[WebView Bridge] RCVD:', jsonMessage);
             let message: any;
             try {
@@ -465,22 +759,6 @@ export const listenToNativeMessage = <T extends keyof RequestsFromNativeApp>(
     return () => {
         unsubscribe(listener);
     };
-};
-
-export const onNativeEvent = (
-    eventHandler: NativeEventHandler,
-): (() => void) => {
-    const handler = (payload: NativeAppRequestPayload<'NATIVE_EVENT'>) => {
-        const response = eventHandler({
-            event: payload.event,
-        });
-
-        return {
-            action: response.action || 'default',
-        };
-    };
-
-    return listenToNativeMessage('NATIVE_EVENT', handler);
 };
 
 export const onSessionRenewal = (

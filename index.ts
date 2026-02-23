@@ -152,3 +152,17 @@ export {
     AllowMeCanNotSaveImageError,
     requestAllowMeBiometrics,
 } from './src/allow-me';
+
+export {
+    type LocatorSdkMode,
+    type LocatorSdkConfig,
+    setupLocatorSdkConfig,
+    getLocatorSdkState,
+    setLocatorSdkMode,
+    getLocatorJwtToken,
+    getLocatorPendingPermissions,
+    getLocatorSdkVersion,
+    getLocatorSdkSession,
+    getLocatorSdkMode,
+    getLocatorSdkConfig,
+} from './src/family-locator';

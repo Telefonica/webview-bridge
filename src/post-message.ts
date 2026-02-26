@@ -169,6 +169,48 @@ export type ResponsesFromNativeApp = {
             granted: boolean;
         };
     };
+    REQUEST_PERMISSION_LOCATION: {
+        id: string;
+        type: 'REQUEST_PERMISSION_LOCATION';
+        payload: {
+            status: 'granted' | 'denied';
+        };
+    };
+    REQUEST_PERMISSION_BACKGROUND_LOCATION: {
+        id: string;
+        type: 'REQUEST_PERMISSION_BACKGROUND_LOCATION';
+        payload: {
+            status: 'granted' | 'denied' | 'settings_change_required';
+        };
+    };
+    REQUEST_PERMISSION_MICROPHONE: {
+        id: string;
+        type: 'REQUEST_PERMISSION_MICROPHONE';
+        payload: {
+            status: 'granted' | 'denied';
+        };
+    };
+    REQUEST_PERMISSION_NOTIFICATIONS: {
+        id: string;
+        type: 'REQUEST_PERMISSION_NOTIFICATIONS';
+        payload: {
+            status: 'granted' | 'denied';
+        };
+    };
+    REQUEST_PERMISSION_CRITICAL_ALERTS: {
+        id: string;
+        type: 'REQUEST_PERMISSION_CRITICAL_ALERTS';
+        payload: {
+            status: 'granted' | 'denied';
+        };
+    };
+    REQUEST_PERMISSION_BATTERY_OPTIMIZATION: {
+        id: string;
+        type: 'REQUEST_PERMISSION_BATTERY_OPTIMIZATION';
+        payload: {
+            status: 'denied' | 'settings_change_required';
+        };
+    };
     INTERNAL_NAVIGATION: {
         type: 'INTERNAL_NAVIGATION';
         id: string;

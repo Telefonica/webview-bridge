@@ -121,3 +121,29 @@ export const getLocatorSdkConfig = (): Promise<{
     postMessageToNativeApp({
         type: 'GET_LOCATOR_SDK_CONFIG',
     });
+
+type PermissionStatus = 'granted' | 'denied';
+
+export const requestPermissionLocation = (): Promise<{
+    status: PermissionStatus;
+}> => postMessageToNativeApp({type: 'REQUEST_PERMISSION_LOCATION'});
+
+export const requestPermissionBackgroundLocation = (): Promise<{
+    status: PermissionStatus | 'settings_change_required';
+}> => postMessageToNativeApp({type: 'REQUEST_PERMISSION_BACKGROUND_LOCATION'});
+
+export const requestPermissionMicrophone = (): Promise<{
+    status: PermissionStatus;
+}> => postMessageToNativeApp({type: 'REQUEST_PERMISSION_MICROPHONE'});
+
+export const requestPermissionNotifications = (): Promise<{
+    status: PermissionStatus;
+}> => postMessageToNativeApp({type: 'REQUEST_PERMISSION_NOTIFICATIONS'});
+
+export const requestPermissionCriticalAlerts = (): Promise<{
+    status: PermissionStatus;
+}> => postMessageToNativeApp({type: 'REQUEST_PERMISSION_CRITICAL_ALERTS'});
+
+export const requestPermissionBatteryOptimization = (): Promise<{
+    status: 'denied' | 'settings_change_required';
+}> => postMessageToNativeApp({type: 'REQUEST_PERMISSION_BATTERY_OPTIMIZATION'});

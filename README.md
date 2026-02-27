@@ -1872,6 +1872,103 @@ Get current SDK config. Wrapper for `getConfig`.
 getLocatorSdkConfig: () => Promise<{config: LocatorSdkConfig | null}>;
 ```
 
+### requestPermissionLocation
+
+<kbd>App version >= TBD</kbd>
+
+Request location permission from the user.
+
+```ts
+requestPermissionLocation: () => Promise<{status: 'granted' | 'denied'}>;
+```
+
+#### Error cases
+
+-   500: Internal Error
+
+### requestPermissionBackgroundLocation
+
+<kbd>App version >= TBD</kbd>
+
+Request background location permission from the user.
+
+```ts
+requestPermissionBackgroundLocation: () => Promise<{
+    status: 'granted' | 'denied' | 'settings_change_required';
+}>;
+```
+
+#### Notes
+
+-   Android: show a custom alert and navigate to OS settings on accept.
+-   iOS: upgrade to Always happens via OS escalation after background usage.
+
+#### Error cases
+
+-   500: Internal Error
+
+### requestPermissionMicrophone
+
+<kbd>App version >= TBD</kbd>
+
+Request microphone permission from the user.
+
+```ts
+requestPermissionMicrophone: () => Promise<{status: 'granted' | 'denied'}>;
+```
+
+#### Error cases
+
+-   500: Internal Error
+
+### requestPermissionNotifications
+
+<kbd>App version >= TBD</kbd>
+
+Request standard notifications permission from the user.
+
+```ts
+requestPermissionNotifications: () => Promise<{status: 'granted' | 'denied'}>;
+```
+
+#### Error cases
+
+-   500: Internal Error
+
+### requestPermissionCriticalAlerts
+
+<kbd>App version >= TBD</kbd>
+
+Request critical alerts permission from the user (iOS only).
+
+```ts
+requestPermissionCriticalAlerts: () => Promise<{status: 'granted' | 'denied'}>;
+```
+
+#### Error cases
+
+-   500: Internal Error
+
+### requestPermissionBatteryOptimization
+
+<kbd>App version >= TBD</kbd>
+
+Request permission to disable battery optimization (Android only).
+
+```ts
+requestPermissionBatteryOptimization: () => Promise<{
+    status: 'denied' | 'settings_change_required';
+}>;
+```
+
+#### Notes
+
+-   Android: show a custom alert and navigate to OS settings on accept.
+
+#### Error cases
+
+-   500: Internal Error
+
 ### openOcrScanner
 
 <kbd>App version >=26.1</kbd>

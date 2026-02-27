@@ -156,4 +156,10 @@ export {
     getLocatorSdkSession,
     getLocatorSdkMode,
     getLocatorSdkConfig,
+    requestPermissionLocation,
+    requestPermissionBackgroundLocation,
+    requestPermissionMicrophone,
+    requestPermissionNotifications,
+    requestPermissionCriticalAlerts,
+    requestPermissionBatteryOptimization,
 } from './src/family-locator';

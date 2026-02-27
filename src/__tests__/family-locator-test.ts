@@ -8,6 +8,12 @@ import {
     getLocatorSdkSession,
     getLocatorSdkMode,
     getLocatorSdkConfig,
+    requestPermissionLocation,
+    requestPermissionBackgroundLocation,
+    requestPermissionMicrophone,
+    requestPermissionNotifications,
+    requestPermissionCriticalAlerts,
+    requestPermissionBatteryOptimization,
 } from '../family-locator';
 import {
     createFakeAndroidPostMessage,
@@ -224,4 +230,100 @@ test('getLocatorSdkConfig', async () => {
 
     const res = await getLocatorSdkConfig();
     expect(res).toEqual({config});
+});
+
+test('requestPermissionLocation', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('REQUEST_PERMISSION_LOCATION');
+        },
+        getResponse: (msg) => ({
+            type: 'REQUEST_PERMISSION_LOCATION',
+            id: msg.id,
+            payload: {status: 'granted'},
+        }),
+    });
+
+    const res = await requestPermissionLocation();
+    expect(res).toEqual({status: 'granted'});
+});
+
+test('requestPermissionBackgroundLocation', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('REQUEST_PERMISSION_BACKGROUND_LOCATION');
+        },
+        getResponse: (msg) => ({
+            type: 'REQUEST_PERMISSION_BACKGROUND_LOCATION',
+            id: msg.id,
+            payload: {status: 'settings_change_required'},
+        }),
+    });
+
+    const res = await requestPermissionBackgroundLocation();
+    expect(res).toEqual({status: 'settings_change_required'});
+});
+
+test('requestPermissionMicrophone', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('REQUEST_PERMISSION_MICROPHONE');
+        },
+        getResponse: (msg) => ({
+            type: 'REQUEST_PERMISSION_MICROPHONE',
+            id: msg.id,
+            payload: {status: 'denied'},
+        }),
+    });
+
+    const res = await requestPermissionMicrophone();
+    expect(res).toEqual({status: 'denied'});
+});
+
+test('requestPermissionNotifications', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('REQUEST_PERMISSION_NOTIFICATIONS');
+        },
+        getResponse: (msg) => ({
+            type: 'REQUEST_PERMISSION_NOTIFICATIONS',
+            id: msg.id,
+            payload: {status: 'granted'},
+        }),
+    });
+
+    const res = await requestPermissionNotifications();
+    expect(res).toEqual({status: 'granted'});
+});
+
+test('requestPermissionCriticalAlerts', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('REQUEST_PERMISSION_CRITICAL_ALERTS');
+        },
+        getResponse: (msg) => ({
+            type: 'REQUEST_PERMISSION_CRITICAL_ALERTS',
+            id: msg.id,
+            payload: {status: 'denied'},
+        }),
+    });
+
+    const res = await requestPermissionCriticalAlerts();
+    expect(res).toEqual({status: 'denied'});
+});
+
+test('requestPermissionBatteryOptimization', async () => {
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('REQUEST_PERMISSION_BATTERY_OPTIMIZATION');
+        },
+        getResponse: (msg) => ({
+            type: 'REQUEST_PERMISSION_BATTERY_OPTIMIZATION',
+            id: msg.id,
+            payload: {status: 'settings_change_required'},
+        }),
+    });
+
+    const res = await requestPermissionBatteryOptimization();
+    expect(res).toEqual({status: 'settings_change_required'});
 });

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v4.1.0 - 2026-02-27
+
+-   Family Locator SDK request permission methods: `requestPermissionLocation`,
+    `requestPermissionBackgroundLocation`, `requestPermissionMicrophone`,
+    `requestPermissionNotifications`, `requestPermissionCriticalAlerts`,
+    `requestPermissionBatteryOptimization`
+
 ## v4.0.0 - 2026-02-23
 
 -   **Breaking change**: remove sheet-specific methods:

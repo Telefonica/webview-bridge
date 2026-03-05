@@ -964,7 +964,7 @@ with code `423` (Locked)
 
 > **Note**  
 > Sheets of type LIST -> SINGLE_SELECTION only have tags available since APP
-> version **TBD** // TODO:
+> version 26.3
 
 ### fetchPhoneNumbers
 

@@ -1,7 +1,20 @@
 import {postMessageToNativeApp, type SheetResponse} from './post-message';
 
+// TODO: Update doc and add app version since it is available
+// TODO: Link issue in the PR and close it after merge
 export type SheetRowItem = Readonly<{
     id: string;
+    tag?: {
+        type?:
+            | 'promo'
+            | 'info'
+            | 'active'
+            | 'inactive'
+            | 'success'
+            | 'warning'
+            | 'error'; // "promo" by default
+        text: string;
+    };
     title?: string;
     description?: string;
     icon?: Readonly<{

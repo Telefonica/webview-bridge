@@ -962,6 +962,10 @@ bottomSheet = (payload: SheetUI) => Promise<SheetResponse>
 being opened (for example, user accidental double tap), it will throw an Error
 with code `423` (Locked)
 
+> **Note**  
+> Sheets of type LIST -> SINGLE_SELECTION only have tags available since APP version
+> **TBD** // TODO:
+
 ### fetchPhoneNumbers
 
 <kbd>App version >=13.10</kbd>

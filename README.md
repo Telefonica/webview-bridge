@@ -1894,7 +1894,7 @@ Request background location permission from the user.
 
 ```ts
 requestPermissionBackgroundLocation: () => Promise<{
-    status: 'granted' | 'denied' | 'settings_change_required';
+    status: 'granted' | 'denied';
 }>;
 ```
 
@@ -1957,7 +1957,7 @@ Request permission to disable battery optimization (Android only).
 
 ```ts
 requestPermissionBatteryOptimization: () => Promise<{
-    status: 'denied' | 'settings_change_required';
+    status: 'granted' | 'denied';
 }>;
 ```
 

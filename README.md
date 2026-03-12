@@ -1894,13 +1894,13 @@ Request background location permission from the user.
 
 ```ts
 requestPermissionBackgroundLocation: () => Promise<{
-    status: 'granted' | 'denied' | 'settings_change_required';
+    status: 'granted' | 'denied';
 }>;
 ```
 
 #### Notes
 
--   Android: show a custom alert and navigate to OS settings on accept.
+-   Android: this method navigates to OS settings.
 -   iOS: upgrade to Always happens via OS escalation after background usage.
 
 #### Error cases
@@ -1957,13 +1957,13 @@ Request permission to disable battery optimization (Android only).
 
 ```ts
 requestPermissionBatteryOptimization: () => Promise<{
-    status: 'denied' | 'settings_change_required';
+    status: 'granted' | 'denied';
 }>;
 ```
 
 #### Notes
 
--   Android: show a custom alert and navigate to OS settings on accept.
+-   Android: this method navigates to OS settings.
 
 #### Error cases
 

@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v4.2.0 - 2026-03-12
+
+-   **Breaking change**: `requestPermissionBackgroundLocation` now returns
+    `'granted' | 'denied'` (removed `'settings_change_required'`)
+-   **Breaking change**: `requestPermissionBatteryOptimization` now returns
+    `'granted' | 'denied'` (removed `'settings_change_required'`)
+
 ## v4.1.0 - 2026-02-27
 
 -   Family Locator SDK request permission methods: `requestPermissionLocation`,

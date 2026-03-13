@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v4.2.0 - 2026-03-12
+## v5.0.0 - 2026-03-13
 
 -   **Breaking change**: `requestPermissionBackgroundLocation` now returns
     `'granted' | 'denied'` (removed `'settings_change_required'`)

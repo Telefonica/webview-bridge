@@ -1,5 +1,9 @@
 # CHANGELOG
 
+## v4.2.0 - 2026-03-13
+
+-   `bottomSheet`: Add basic Tag to Sheet of type LIST / SINGLE_SELECTION
+
 ## v4.1.0 - 2026-02-27
 
 -   Family Locator SDK request permission methods: `requestPermissionLocation`,

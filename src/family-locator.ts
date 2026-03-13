@@ -2,7 +2,7 @@ import {postMessageToNativeApp} from './post-message';
 
 // Family Locator SDK webview bridge methods.
 
-export type LocatorSdkMode = 'default' | 'observed' | 'sos' | string;
+export type LocatorSdkMode = string;
 
 export type LocatorSdkConfig = {
     license: string;

@@ -180,7 +180,7 @@ export type ResponsesFromNativeApp = {
         id: string;
         type: 'REQUEST_PERMISSION_BACKGROUND_LOCATION';
         payload: {
-            status: 'granted' | 'denied' | 'settings_change_required';
+            status: 'granted' | 'denied';
         };
     };
     REQUEST_PERMISSION_MICROPHONE: {
@@ -208,7 +208,7 @@ export type ResponsesFromNativeApp = {
         id: string;
         type: 'REQUEST_PERMISSION_BATTERY_OPTIMIZATION';
         payload: {
-            status: 'denied' | 'settings_change_required';
+            status: 'granted' | 'denied';
         };
     };
     INTERNAL_NAVIGATION: {

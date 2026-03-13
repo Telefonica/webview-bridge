@@ -1876,7 +1876,7 @@ requestPermissionLocation: () => Promise<{status: 'granted' | 'denied'}>;
 
 #### Error cases
 
-- 500: Internal Error
+-   500: Internal Error
 
 ### requestPermissionBackgroundLocation
 

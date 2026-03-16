@@ -256,12 +256,12 @@ test('requestPermissionBackgroundLocation', async () => {
         getResponse: (msg) => ({
             type: 'REQUEST_PERMISSION_BACKGROUND_LOCATION',
             id: msg.id,
-            payload: {status: 'settings_change_required'},
+            payload: {status: 'granted'},
         }),
     });
 
     const res = await requestPermissionBackgroundLocation();
-    expect(res).toEqual({status: 'settings_change_required'});
+    expect(res).toEqual({status: 'granted'});
 });
 
 test('requestPermissionMicrophone', async () => {
@@ -320,10 +320,10 @@ test('requestPermissionBatteryOptimization', async () => {
         getResponse: (msg) => ({
             type: 'REQUEST_PERMISSION_BATTERY_OPTIMIZATION',
             id: msg.id,
-            payload: {status: 'settings_change_required'},
+            payload: {status: 'denied'},
         }),
     });
 
     const res = await requestPermissionBatteryOptimization();
-    expect(res).toEqual({status: 'settings_change_required'});
+    expect(res).toEqual({status: 'denied'});
 });

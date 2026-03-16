@@ -129,7 +129,7 @@ export const requestPermissionLocation = (): Promise<{
 }> => postMessageToNativeApp({type: 'REQUEST_PERMISSION_LOCATION'});
 
 export const requestPermissionBackgroundLocation = (): Promise<{
-    status: PermissionStatus | 'settings_change_required';
+    status: PermissionStatus;
 }> => postMessageToNativeApp({type: 'REQUEST_PERMISSION_BACKGROUND_LOCATION'});
 
 export const requestPermissionMicrophone = (): Promise<{
@@ -145,5 +145,5 @@ export const requestPermissionCriticalAlerts = (): Promise<{
 }> => postMessageToNativeApp({type: 'REQUEST_PERMISSION_CRITICAL_ALERTS'});
 
 export const requestPermissionBatteryOptimization = (): Promise<{
-    status: 'denied' | 'settings_change_required';
+    status: PermissionStatus;
 }> => postMessageToNativeApp({type: 'REQUEST_PERMISSION_BATTERY_OPTIMIZATION'});

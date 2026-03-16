@@ -2,6 +2,17 @@ import {postMessageToNativeApp, type SheetResponse} from './post-message';
 
 export type SheetRowItem = Readonly<{
     id: string;
+    tag?: {
+        type?:
+            | 'promo'
+            | 'info'
+            | 'active'
+            | 'inactive'
+            | 'success'
+            | 'warning'
+            | 'error'; // "promo" by default
+        text: string;
+    };
     title?: string;
     description?: string;
     icon?: Readonly<{

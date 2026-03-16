@@ -962,6 +962,10 @@ bottomSheet = (payload: SheetUI) => Promise<SheetResponse>
 being opened (for example, user accidental double tap), it will throw an Error
 with code `423` (Locked)
 
+> **Note**  
+> Sheets of type LIST -> SINGLE_SELECTION only have tags available since APP
+> version 26.3
+
 ### fetchPhoneNumbers
 
 <kbd>App version >=13.10</kbd>
@@ -1769,7 +1773,9 @@ setupLocatorSdkConfig({license: 'xxx', sdkVersion: '2.0.1'});
 
 <kbd>App version >= TBD</kbd>
 
-Check if the SDK is configured. Wrapper for `getState`.
+Check if the SDK is configured. Wrapper for `getState`. See SDK type
+`LocatorState`:
+https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.4.5-getstate-locatorstate
 
 ```ts
 getLocatorSdkState: () => Promise<{state: string}>;
@@ -1779,17 +1785,21 @@ getLocatorSdkState: () => Promise<{state: string}>;
 
 <kbd>App version >= TBD</kbd>
 
-Start real-time sharing or SOS. Wrapper for `setSdkMode`.
+Start real-time sharing or SOS. Wrapper for `setSdkMode`. See SDK type
+`LocatorSdkMode`:
+https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.5.3-setsdkmode-mode-locatorsdkmode-void
 
 ```ts
-setLocatorSdkMode: (mode: 'default' | 'observed' | 'sos' | string) => Promise<void>;
+setLocatorSdkMode: (mode: string) => Promise<void>;
 ```
 
 ### getLocatorJwtToken
 
 <kbd>App version >= TBD</kbd>
 
-Get JWT token for map backend auth. Wrapper for `getJwtToken`.
+Get JWT token for map backend auth. Wrapper for `getJwtToken`. See SDK return
+contract:
+https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.4.9-getjwttoken-string
 
 ```ts
 getLocatorJwtToken: () => Promise<{token: string}>;
@@ -1799,38 +1809,20 @@ getLocatorJwtToken: () => Promise<{token: string}>;
 
 <kbd>App version >= TBD</kbd>
 
-Get pending permissions. Wrapper for `pendingPermissions`.
+Get pending permissions. Wrapper for `pendingPermissions`. See SDK type
+`LocatorPermission`:
+https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.4.10-pendingpermissions-locatorpermission
 
 ```ts
 getLocatorPendingPermissions: () => Promise<{permissions: Array<string>}>;
 ```
 
-#### Permission identifiers
-
-Android
-
--   `location_fine`
--   `location_coarse`
--   `location_background`
--   `activity_recognition`
--   `body_sensors`
--   `battery_optimization`
--   `foreground_service`
--   `foreground_service_location`
--   `access_network_state`
-
-iOS
-
--   `location_in_use`
--   `location_background`
--   `motion_usage`
--   `fall_detection`
-
 ### getLocatorSdkVersion
 
 <kbd>App version >= TBD</kbd>
 
-Get SDK version. Wrapper for `getVersion`.
+Get SDK version. Wrapper for `getVersion`. See SDK return contract:
+https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.4.8-getversion-string
 
 ```ts
 getLocatorSdkVersion: () => Promise<{version: string}>;
@@ -1840,33 +1832,37 @@ getLocatorSdkVersion: () => Promise<{version: string}>;
 
 <kbd>App version >= TBD</kbd>
 
-Get SDK session. Wrapper for `getSession`.
+Get SDK session. Wrapper for `getSession`. See SDK type `LocatorSession`:
+https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.4.7-getsession-locatorsession
 
 ```ts
-getLocatorSdkSession: () => Promise<{
-    session: {
-        id: string;
-        startAt: number;
-        endAt: number | null;
-    };
-}>;
+getLocatorSdkSession: () =>
+    Promise<{
+        session: {
+            id: string;
+            startAt: number;
+            endAt: number | null;
+        };
+    }>;
 ```
 
 ### getLocatorSdkMode
 
 <kbd>App version >= TBD</kbd>
 
-Get current SDK mode. Wrapper for `getSdkMode`.
+Get current SDK mode. Wrapper for `getSdkMode`. See SDK type `LocatorSdkMode`:
+https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.4.6-getsdkmode-locatorsdkmode
 
 ```ts
-getLocatorSdkMode: () => Promise<{mode: 'default' | 'observed' | 'sos' | string}>;
+getLocatorSdkMode: () => Promise<{mode: string}>;
 ```
 
 ### getLocatorSdkConfig
 
 <kbd>App version >= TBD</kbd>
 
-Get current SDK config. Wrapper for `getConfig`.
+Get current SDK config. Wrapper for `getConfig`. See SDK type `LocatorConfig`:
+https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.4.1-getconfig-locatorconfig
 
 ```ts
 getLocatorSdkConfig: () => Promise<{config: LocatorSdkConfig | null}>;

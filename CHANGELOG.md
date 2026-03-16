@@ -1,11 +1,15 @@
 # CHANGELOG
 
-## v5.0.0 - 2026-03-13
+## v5.0.0 - 2026-03-16
 
 -   **Breaking change**: `requestPermissionBackgroundLocation` now returns
     `'granted' | 'denied'` (removed `'settings_change_required'`)
 -   **Breaking change**: `requestPermissionBatteryOptimization` now returns
     `'granted' | 'denied'` (removed `'settings_change_required'`)
+
+## v4.2.0 - 2026-03-13
+
+-   `bottomSheet`: Add basic Tag to Sheet of type LIST / SINGLE_SELECTION
 
 ## v4.1.0 - 2026-02-27
 

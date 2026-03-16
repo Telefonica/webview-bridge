@@ -22,17 +22,21 @@ test('bottomSheet', (done) => {
                         url: 'https://example.com/icon.png',
                         urlDark: 'https://example.com/dark-icon.png',
                     },
-                },
+                } as const,
                 {
                     id: 'item-1',
                     title: 'item 1 title',
                     description: 'item 1 description',
-                },
+                } as const,
                 {
                     id: 'item-2',
+                    tag: {
+                        type: 'warning',
+                        text: 'item 2 tag',
+                    },
                     title: 'item 2 title',
                     description: 'item 2 description',
-                },
+                } as const,
             ],
         },
     ];

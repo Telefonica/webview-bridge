@@ -1897,8 +1897,9 @@ requestPermissionBackgroundLocation: () => Promise<{
 #### Notes
 
 -   Android:
-    - Android 9 and below, background access is granted with foreground location
-    - While Android 10 and above foreground location is requested first,
+    -   Android 9 and below, background access is granted with foreground
+    location
+    -   While Android 10 and above foreground location is requested first,
     if not granted, followed by background.
 -   iOS: upgrade to Always happens via OS escalation after background usage.
 

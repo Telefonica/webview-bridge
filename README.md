@@ -1679,11 +1679,12 @@ setBiometricsAuthenticationStatus: ({enable: boolean}) => Promise<void>;
 
 <kbd>App version >= TBD</kbd>
 
-Enable/configure Family Locator SDK. Wrapper for `sdk.setConfig(config)`. See SDK type `LocatorConfig`: 
-https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/portuguese-brasil/service/types-interfaces#id-2.9-locatorconfig
+Enable/configure Family Locator SDK. Wrapper for `sdk.setConfig(config)`. See
+SDK type `LocatorConfig`:
+https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.5.1-setconfig-config-locatorconfig-void
 
 ```ts
-setupLocatorSdkConfig: (config: LocatorConfig) => Promise<void>;
+setupLocatorSdkConfig: (config: Record<string, unknown>) => Promise<void>;
 ```
 
 #### Error cases
@@ -1788,7 +1789,7 @@ Get current SDK config. Wrapper for `getConfig`. See SDK type `LocatorConfig`:
 https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.4.1-getconfig-locatorconfig
 
 ```ts
-getLocatorSdkConfig: () => Promise<{config: LocatorSdkConfig | null}>;
+getLocatorSdkConfig: () => Promise<{config: Record<string, unknown> | null}>;
 ```
 
 ### requestPermissionLocation

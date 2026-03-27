@@ -1693,14 +1693,14 @@ export type LocatorSdkConfig = {
     sdkVersion: string;
     osPlatform: string;
     api: {
-        token: string;
-        certUrl?: string;
-        scopesUrl?: string;
-        tokenUrl?: string;
-        configUrl?: string;
-        groupsUrl?: string;
-        featuresUrl?: string;
-        geofencesUrl?: string;
+        token?: string;
+        certUrl: string;
+        scopesUrl: string;
+        tokenUrl: string;
+        configUrl: string;
+        groupsUrl: string;
+        featuresUrl: string;
+        geofencesUrl: string;
     };
     mqtt: {
         clientId?: string;
@@ -1710,8 +1710,8 @@ export type LocatorSdkConfig = {
     };
     process: {
         retryPolicy?: {
-            maxRetries?: number;
-            baseDelayMs?: number;
+            maxRetries: number;
+            baseDelayMs: number;
             backoffFactor?: number;
         };
         offlineRetentionDays?: number;
@@ -1721,7 +1721,7 @@ export type LocatorSdkConfig = {
         };
     };
     battery?: {
-        events?: Array<{
+        events: Array<{
             name: string;
             min: number;
             max: number;
@@ -1734,22 +1734,12 @@ export type LocatorSdkConfig = {
         sensitivity?: number;
     };
     collect?: {
-        collectIntervalMillis?: number;
-        sendIntervalMillis?: number;
+        collectIntervalMillis: number;
+        sendIntervalMillis: number;
         minDisplacementMeters?: number;
         maxTravelDistanceMeters?: number;
         highAccuracy?: boolean;
         maxBatchSize?: number;
-    };
-    audioRecord?: {
-        recordsCount: number;
-        durationSeconds: number;
-        retryCount: number;
-        intervalSeconds: number;
-        audioServiceNotification?: {
-            title?: string;
-            message?: string;
-        };
     };
     revision?: number;
     createdAt?: number;

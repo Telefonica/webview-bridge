@@ -146,7 +146,6 @@ export {
 
 export {
     type LocatorSdkMode,
-    type LocatorSdkConfig,
     setupLocatorSdkConfig,
     getLocatorSdkState,
     setLocatorSdkMode,

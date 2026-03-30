@@ -1679,88 +1679,12 @@ setBiometricsAuthenticationStatus: ({enable: boolean}) => Promise<void>;
 
 <kbd>App version >= TBD</kbd>
 
-Enable/configure Family Locator SDK. Wrapper for `sdk.setConfig(config)`.
+Enable/configure Family Locator SDK. Wrapper for `sdk.setConfig(config)`. See
+SDK type `LocatorConfig`:
+https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.5.1-setconfig-config-locatorconfig-void
 
 ```ts
-setupLocatorSdkConfig: (config: LocatorSdkConfig) => Promise<void>;
-```
-
-#### Types
-
-```ts
-export type LocatorSdkConfig = {
-    license: string;
-    sdkVersion: string;
-    osPlatform: string;
-    api: {
-        token: string;
-        certUrl?: string;
-        scopesUrl?: string;
-        tokenUrl?: string;
-        configUrl?: string;
-        groupsUrl?: string;
-        featuresUrl?: string;
-        geofencesUrl?: string;
-    };
-    mqtt: {
-        clientId?: string;
-        broker?: string;
-        port?: string;
-        username?: string;
-    };
-    process: {
-        retryPolicy?: {
-            maxRetries?: number;
-            baseDelayMs?: number;
-            backoffFactor?: number;
-        };
-        offlineRetentionDays?: number;
-        foregroundServiceNotification?: {
-            title?: string;
-            message?: string;
-        };
-    };
-    battery?: {
-        events?: Array<{
-            name: string;
-            min: number;
-            max: number;
-            interval: number;
-            charging: boolean;
-            powerMode: Array<'normal' | 'power_saver' | 'super_saver'>;
-        }>;
-    };
-    motion?: {
-        sensitivity?: number;
-    };
-    collect?: {
-        collectIntervalMillis?: number;
-        sendIntervalMillis?: number;
-        minDisplacementMeters?: number;
-        maxTravelDistanceMeters?: number;
-        highAccuracy?: boolean;
-        maxBatchSize?: number;
-    };
-    audioRecord?: {
-        recordsCount: number;
-        durationSeconds: number;
-        retryCount: number;
-        intervalSeconds: number;
-        audioServiceNotification?: {
-            title?: string;
-            message?: string;
-        };
-    };
-    revision?: number;
-    createdAt?: number;
-    updatedAt?: number;
-};
-```
-
-#### Example
-
-```ts
-setupLocatorSdkConfig({license: 'xxx', sdkVersion: '2.0.1'});
+setupLocatorSdkConfig: (config: Record<string, unknown>) => Promise<void>;
 ```
 
 #### Error cases
@@ -1865,7 +1789,7 @@ Get current SDK config. Wrapper for `getConfig`. See SDK type `LocatorConfig`:
 https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.4.1-getconfig-locatorconfig
 
 ```ts
-getLocatorSdkConfig: () => Promise<{config: LocatorSdkConfig | null}>;
+getLocatorSdkConfig: () => Promise<{config: Record<string, unknown> | null}>;
 ```
 
 ### requestPermissionLocation

@@ -1,12 +1,5 @@
 # CHANGELOG
 
-## v5.1.0 - 2026-03-27
-
--   `setupLocatorSdkConfig`: config parameter now accepts a generic object
-    (`Record<string, unknown>`) instead of the specific `LocatorSdkConfig` type
--   `getLocatorSdkConfig`: return type now uses `Record<string, unknown> | null`
-    instead of `LocatorSdkConfig | null`
-
 ## v5.0.0 - 2026-03-16
 
 -   **Breaking change**: `requestPermissionBackgroundLocation` now returns

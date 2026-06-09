@@ -27,6 +27,7 @@ export {
     getBiometricsAuthenticationStatus,
     setBiometricsAuthenticationStatus,
     openOcrScanner,
+    openQrScanner,
 } from './src/device';
 
 export {

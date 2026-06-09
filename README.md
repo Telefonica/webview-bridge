@@ -1945,6 +1945,52 @@ openOcrScanner({regex: '\\b(?:\\d{4}-\\d{4}-\\d{4}-\\d{4}|\\d{16})\\b'})
 -   `408`: Timeout reached without scanning any text
 -   `500`: Internal error (e.g., unexpected error thrown by native scanner)
 
+### openQrScanner
+
+<kbd>App version >= TBD</kbd>
+
+Opens a native QR code scanner. When a QR code is detected, its decoded text is
+returned as a result.
+
+The scanner will attempt to request camera permissionsautomatically. Only
+available in Mein Blau and Mein O2.
+
+```ts
+openQrScanner: (params?: {timeoutMs?: number}) => Promise<{data: string}>;
+```
+
+#### Parameters
+
+-   `timeoutMs`: Timeout in milliseconds before closing the scanner
+    automatically if no QR code is scanned. Optional, default is 15000
+    milliseconds
+
+#### Response
+
+-   `data`: The decoded text from the scanned QR code.
+
+#### Example
+
+```ts
+openQrScanner({timeoutMs: 5000})
+    .then((result) => {
+        console.log('Scanned QR data:', result.data);
+        // Example output: "https://some.decoded.url"
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+```
+
+#### Error cases
+
+-   `204`: User manually closed QR scanner
+-   `401`: Missing permissions (user rejected camera permissions)
+-   `405`: Feature not supported in current brand (only available in Mein Blau
+    and Mein O2)
+-   `408`: Timeout reached without scanning any QR code
+-   `500`: Internal error (e.g., unexpected error thrown by native scanner)
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

@@ -100,7 +100,10 @@ test('setLocatorSdkMode', async () => {
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
             expect(msg.type).toBe('SET_LOCATOR_SDK_MODE');
-            expect(msg.payload).toEqual({mode: 'observed'});
+            expect(msg.payload).toEqual({
+                mode: 'observed',
+                correlation: {traceId: 'abc123'},
+            });
         },
         getResponse: (msg) => ({
             type: 'SET_LOCATOR_SDK_MODE',
@@ -108,7 +111,7 @@ test('setLocatorSdkMode', async () => {
         }),
     });
 
-    const res = await setLocatorSdkMode('observed');
+    const res = await setLocatorSdkMode('observed', {traceId: 'abc123'});
     expect(res).toBeUndefined();
 });
 

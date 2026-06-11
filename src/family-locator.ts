@@ -26,8 +26,8 @@ export const setLocatorSdkMode = (
         payload: {
             mode,
             ...(correlation && Object.keys(correlation).length > 0
-            ? {correlation}
-            : {}),
+                ? {correlation}
+                : {}),
         },
     });
 

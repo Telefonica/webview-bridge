@@ -1,5 +1,12 @@
 # CHANGELOG
 
+## v5.2.0 - 2026-06-11
+
+-   `openQrScanner`: new method to open a native QR code scanner that returns
+    the decoded text of the scanned QR code
+-   `setLocatorSdkMode`: add optional `correlation` parameter
+    (`Record<string, string>`) to pass correlation data alongside the mode
+
 ## v5.1.0 - 2026-03-27
 
 -   `setupLocatorSdkConfig`: config parameter now accepts a generic object

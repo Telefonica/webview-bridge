@@ -1714,7 +1714,7 @@ Start real-time sharing or SOS. Wrapper for `setSdkMode`. See SDK type
 https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.5.3-setsdkmode-mode-locatorsdkmode-void
 
 ```ts
-setLocatorSdkMode: (mode: string) => Promise<void>;
+setLocatorSdkMode: (mode: string,  correlation?: Record<string, string>) => Promise<void>;
 ```
 
 ### getLocatorJwtToken

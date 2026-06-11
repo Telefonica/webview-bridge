@@ -96,11 +96,17 @@ test('getLocatorSdkState', async () => {
     expect(res).toEqual({state: 'collecting'});
 });
 
-test('setLocatorSdkMode', async () => {
+test.each`
+    name                                  | mode          | correlation                        | expectedPayload
+    ${'with correlation'}                 | ${'observed'} | ${{traceId: 'abc123'}}             | ${{mode: 'observed', correlation: {traceId: 'abc123'}}}
+    ${'with multiple correlation fields'} | ${'sos'}      | ${{traceId: 'xyz', spanId: '456'}} | ${{mode: 'sos', correlation: {traceId: 'xyz', spanId: '456'}}}
+    ${'without correlation'}              | ${'observed'} | ${undefined}                       | ${{mode: 'observed'}}
+    ${'with empty correlation'}           | ${'hidden'}   | ${{}}                              | ${{mode: 'hidden'}}
+`('setLocatorSdkMode $name', async ({mode, correlation, expectedPayload}) => {
     createFakeAndroidPostMessage({
         checkMessage: (msg) => {
             expect(msg.type).toBe('SET_LOCATOR_SDK_MODE');
-            expect(msg.payload).toEqual({mode: 'observed'});
+            expect(msg.payload).toEqual(expectedPayload);
         },
         getResponse: (msg) => ({
             type: 'SET_LOCATOR_SDK_MODE',
@@ -108,7 +114,7 @@ test('setLocatorSdkMode', async () => {
         }),
     });
 
-    const res = await setLocatorSdkMode('observed');
+    const res = await setLocatorSdkMode(mode, correlation);
     expect(res).toBeUndefined();
 });
 

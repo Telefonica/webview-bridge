@@ -29,7 +29,8 @@ git commit -m "Changelog"
 
 ### 2. Bump the version
 
-Use `npm version` to bump `package.json` and create the git commit and tag in one step:
+Use `npm version` to bump `package.json` and create the git commit and tag in
+one step:
 
 ```sh
 npm version patch   # bug fixes
@@ -51,7 +52,8 @@ git push && git push --tags
 npm publish
 ```
 
-The `prepublishOnly` hook runs the full CI suite (`lint`, `type-check`, `tests`, `build`) before publishing. Fix any failures before retrying.
+The `prepublishOnly` hook runs the full CI suite (`lint`, `type-check`, `tests`,
+`build`) before publishing. Fix any failures before retrying.
 
 ### 5. Create a GitHub release
 

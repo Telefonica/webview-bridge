@@ -23,12 +23,12 @@ jobs:
         # Also applies the production environment's required-reviewer gate.
         environment: production
         steps:
-            - uses: actions/checkout@v4
+            - uses: actions/checkout@v6
 
             # Do NOT set registry-url here: it writes an .npmrc that conflicts
             # with semantic-release's OIDC authentication.
             # Node 26 bundles npm >= 11.5.1, required for OIDC trusted publishing.
-            - uses: actions/setup-node@v4
+            - uses: actions/setup-node@v6
               with:
                   node-version: 26
 

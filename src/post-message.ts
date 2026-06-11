@@ -592,6 +592,11 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: {data: string};
     };
+    VERIFY_IDENTITY: {
+        type: 'VERIFY_IDENTITY';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

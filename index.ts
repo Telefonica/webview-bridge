@@ -145,6 +145,8 @@ export {
     requestAllowMeBiometrics,
 } from './src/allow-me';
 
+export {verifyIdentity} from './src/identity-verification';
+
 export {
     type LocatorSdkMode,
     setupLocatorSdkConfig,

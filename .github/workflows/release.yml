@@ -27,15 +27,12 @@ jobs:
 
             # Do NOT set registry-url here: it writes an .npmrc that conflicts
             # with semantic-release's OIDC authentication.
+            # Node 26 bundles npm >= 11.5.1, required for OIDC trusted publishing.
             - uses: actions/setup-node@v4
               with:
-                  node-version: 24
+                  node-version: 26
 
             - run: yarn install --frozen-lockfile
-
-            # npm OIDC trusted publishing requires npm >= 11.5.1; upgrade to be
-            # independent of the version bundled with Node 24.
-            - run: npm install -g npm@latest
 
             - name: Release
               env:

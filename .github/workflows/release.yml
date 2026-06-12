@@ -1,0 +1,40 @@
+name: Release
+on:
+    workflow_dispatch:
+        inputs:
+            cliArgs:
+                description: 'CLI args'
+                required: false
+                default: ''
+
+# Least-privilege token for semantic-release. id-token is required for npm
+# OIDC trusted publishing (no NPM_TOKEN needed) and npm provenance.
+permissions:
+    contents: write
+    issues: write
+    pull-requests: write
+    id-token: write
+
+jobs:
+    release:
+        name: Release
+        runs-on: ubuntu-latest
+        # Must match the environment configured on the npm trusted publisher.
+        # Also applies the production environment's required-reviewer gate.
+        environment: production
+        steps:
+            - uses: actions/checkout@v6
+
+            # Do NOT set registry-url here: it writes an .npmrc that conflicts
+            # with semantic-release's OIDC authentication.
+            # Node 26 bundles npm >= 11.5.1, required for OIDC trusted publishing.
+            - uses: actions/setup-node@v6
+              with:
+                  node-version: 26
+
+            - run: yarn install --frozen-lockfile
+
+            - name: Release
+              env:
+                  GITHUB_TOKEN: ${{ secrets.FLOW_GITHUB_TOKEN }}
+              run: npx semantic-release ${{ github.event.inputs.cliArgs }}

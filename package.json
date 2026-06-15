@@ -21,14 +21,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/tef-dig/webview-bridge.git"
+        "url": "git+https://github.com/Telefonica/webview-bridge.git"
     },
     "author": "appscore@tuenti.com",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/tef-dig/webview-bridge/issues"
+        "url": "https://github.com/Telefonica/webview-bridge/issues"
     },
-    "homepage": "https://github.com/tef-dig/webview-bridge#readme",
+    "homepage": "https://github.com/Telefonica/webview-bridge#readme",
     "devDependencies": {
         "@semantic-release/changelog": "^6.0.3",
         "@semantic-release/git": "^10.0.1",

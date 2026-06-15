@@ -35,4 +35,9 @@ jobs:
             - run: yarn install --frozen-lockfile
 
             - name: Release
-              run: npx semantic-release ${{ github.event.inputs.cliArgs }}
+              env:
+                  GITHUB_TOKEN: ${{ secrets.GH_TOKEN_WEBVIEW_BRIDGE }}
+              run: |
+                  # Configure git remote with token for push
+                  git remote set-url origin "https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git"
+                  npx semantic-release ${{ github.event.inputs.cliArgs }}

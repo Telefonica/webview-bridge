@@ -1,3 +1,16 @@
+# [5.3.0](https://github.com/Telefonica/webview-bridge/compare/v5.2.0...v5.3.0) (2026-06-16)
+
+
+### Bug Fixes
+
+* persisting a temporary token with fewer privileges ([#274](https://github.com/Telefonica/webview-bridge/issues/274)) ([cb661ae](https://github.com/Telefonica/webview-bridge/commit/cb661ae8eb481c6b581ec7520cd6418ce96c7431))
+
+
+### Features
+
+* automate releases with semantic-release and npm OIDC trusted publishing ([#272](https://github.com/Telefonica/webview-bridge/issues/272)) ([fb8bc4a](https://github.com/Telefonica/webview-bridge/commit/fb8bc4adb30a69fd44fd462f27b16c6e2f85f253)), closes [Telefonica/tf-github-cdo-repos#256](https://github.com/Telefonica/tf-github-cdo-repos/issues/256)
+* **verifyIdentity:** new method ([#271](https://github.com/Telefonica/webview-bridge/issues/271)) ([cff1bf1](https://github.com/Telefonica/webview-bridge/commit/cff1bf1ab34ff4d9886394329a9e198013871563))
+
 # CHANGELOG
 
 ## v5.2.0 - 2026-06-11

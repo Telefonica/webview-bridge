@@ -24,6 +24,8 @@ jobs:
         environment: production
         steps:
             - uses: actions/checkout@v6
+              with:
+                  persist-credentials: false
 
             # Do NOT set registry-url here: it writes an .npmrc that conflicts
             # with semantic-release's OIDC authentication.

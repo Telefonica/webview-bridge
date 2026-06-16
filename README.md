@@ -1714,7 +1714,7 @@ Start real-time sharing or SOS. Wrapper for `setSdkMode`. See SDK type
 https://datamob.gitbook.io/doc-locator/TQfkVhcPsZiXIvXxq8Bv/english/service#id-4.5.3-setsdkmode-mode-locatorsdkmode-void
 
 ```ts
-setLocatorSdkMode: (mode: string) => Promise<void>;
+setLocatorSdkMode: (mode: string,  correlation?: Record<string, string>) => Promise<void>;
 ```
 
 ### getLocatorJwtToken
@@ -1944,6 +1944,90 @@ openOcrScanner({regex: '\\b(?:\\d{4}-\\d{4}-\\d{4}-\\d{4}|\\d{16})\\b'})
     and Mein O2)
 -   `408`: Timeout reached without scanning any text
 -   `500`: Internal error (e.g., unexpected error thrown by native scanner)
+
+### openQrScanner
+
+<kbd>App version >= TBD</kbd>
+
+Opens a native QR code scanner. When a QR code is detected, its decoded text is
+returned as a result.
+
+The scanner will attempt to request camera permissionsautomatically. Only
+available in Mein Blau and Mein O2.
+
+```ts
+openQrScanner: (params?: {timeoutMs?: number}) => Promise<{data: string}>;
+```
+
+#### Parameters
+
+-   `timeoutMs`: Timeout in milliseconds before closing the scanner
+    automatically if no QR code is scanned. Optional, default is 15000
+    milliseconds
+
+#### Response
+
+-   `data`: The decoded text from the scanned QR code.
+
+#### Example
+
+```ts
+openQrScanner({timeoutMs: 5000})
+    .then((result) => {
+        console.log('Scanned QR data:', result.data);
+        // Example output: "https://some.decoded.url"
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+```
+
+#### Error cases
+
+-   `204`: User manually closed QR scanner
+-   `401`: Missing permissions (user rejected camera permissions)
+-   `405`: Feature not supported in current brand (only available in Mein Blau
+    and Mein O2)
+-   `408`: Timeout reached without scanning any QR code
+-   `500`: Internal error (e.g., unexpected error thrown by native scanner)
+
+### verifyIdentity
+
+<kbd>App version >= TBD</kbd>
+
+Starts the IDnow SDK identity verification flow for a given order ID. Only
+available in Mein O2 and Mein Blau. All required permissions are handled by the
+SDK itself.
+
+```ts
+verifyIdentity: (params: {orderId: string}) => Promise<void>;
+```
+
+#### Parameters
+
+-   `orderId`: The order ID for the identity verification flow.
+
+#### Example
+
+```ts
+verifyIdentity({orderId: '123456789AAA'})
+    .then(() => {
+        console.log('Identity verification completed successfully');
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+```
+
+#### Error cases
+
+-   `204`: Flow was cancelled (e.g., closed manually by the user)
+-   `405`: Feature not supported in current brand (only available in Mein Blau
+    and Mein O2)
+-   `500`: Internal error (e.g., unexpected error thrown by identity
+    verification SDK)
+-   `505`: Identity verification flow is not supported on this device (Android
+    < 9)
 
 ## Error handling
 

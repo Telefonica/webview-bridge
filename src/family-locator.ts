@@ -17,11 +17,17 @@ export const setupLocatorSdkConfig = (
 export const getLocatorSdkState = (): Promise<{state: string}> =>
     postMessageToNativeApp({type: 'GET_LOCATOR_SDK_STATE'});
 
-export const setLocatorSdkMode = (mode: LocatorSdkMode): Promise<void> =>
+export const setLocatorSdkMode = (
+    mode: LocatorSdkMode,
+    correlation?: Record<string, string>,
+): Promise<void> =>
     postMessageToNativeApp({
         type: 'SET_LOCATOR_SDK_MODE',
         payload: {
             mode,
+            ...(correlation && Object.keys(correlation).length > 0
+                ? {correlation}
+                : {}),
         },
     });
 

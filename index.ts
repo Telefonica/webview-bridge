@@ -27,6 +27,7 @@ export {
     getBiometricsAuthenticationStatus,
     setBiometricsAuthenticationStatus,
     openOcrScanner,
+    openQrScanner,
 } from './src/device';
 
 export {
@@ -143,6 +144,8 @@ export {
     AllowMeCanNotSaveImageError,
     requestAllowMeBiometrics,
 } from './src/allow-me';
+
+export {verifyIdentity} from './src/identity-verification';
 
 export {
     type LocatorSdkMode,

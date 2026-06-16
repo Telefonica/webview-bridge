@@ -187,3 +187,30 @@ export const openOcrScanner = (params: {
             timeoutMs: params.timeoutMs,
         },
     });
+
+/**
+ * Opens a native QR code scanner. When a QR code is detected, its decoded text
+ * is returned as a result.
+ *
+ * The scanner will attempt to request camera permissions
+ * automatically. Only available in Mein Blau and Mein O2.
+ *
+ * Error cases:
+ * - 204: User manually closed QR scanner
+ * - 401: Missing permissions (user rejected camera permissions)
+ * - 405: Feature not supported in current brand (only available in Mein Blau and Mein O2)
+ * - 408: Timeout reached without scanning any QR code
+ * - 500: Internal error (e.g., unexpected error thrown by native scanner)
+ *
+ * @param params.timeoutMs - Timeout in milliseconds before closing the scanner automatically if no QR code is scanned. Optional, default is 15000 milliseconds
+ * @returns Promise that resolves to an object containing the decoded QR code data
+ */
+export const openQrScanner = (params?: {
+    timeoutMs?: number;
+}): Promise<{data: string}> =>
+    postMessageToNativeApp({
+        type: 'OPEN_QR_SCANNER',
+        payload: {
+            timeoutMs: params?.timeoutMs,
+        },
+    });

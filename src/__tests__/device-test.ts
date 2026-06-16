@@ -18,6 +18,7 @@ import {
     getInstallationId,
     setBiometricsAuthenticationStatus,
     openOcrScanner,
+    openQrScanner,
 } from '../device';
 import {
     createFakeAndroidPostMessage,
@@ -623,5 +624,37 @@ test('openOcrScanner - missing permissions error (401)', async () => {
     });
 
     const res = openOcrScanner({regex});
+    await expect(res).rejects.toEqual(error);
+});
+
+test('openQrScanner - success with scanned data', async () => {
+    const data = 'https://some.decoded.url';
+    createFakeAndroidPostMessage({
+        checkMessage: (msg) => {
+            expect(msg.type).toBe('OPEN_QR_SCANNER');
+            expect(msg.payload.timeoutMs).toBe(5000);
+        },
+        getResponse: (msg) => ({
+            type: 'OPEN_QR_SCANNER',
+            id: msg.id,
+            payload: {data},
+        }),
+    });
+
+    const res = await openQrScanner({timeoutMs: 5000});
+    expect(res.data).toBe(data);
+});
+
+test('openQrScanner - missing permissions error (401)', async () => {
+    const error = {code: 401, description: 'Missing permissions'};
+    createFakeAndroidPostMessage({
+        getResponse: (msg) => ({
+            type: 'ERROR',
+            id: msg.id,
+            payload: error,
+        }),
+    });
+
+    const res = openQrScanner();
     await expect(res).rejects.toEqual(error);
 });

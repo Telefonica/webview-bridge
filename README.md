@@ -2029,6 +2029,38 @@ verifyIdentity({orderId: '123456789AAA'})
 -   `505`: Identity verification flow is not supported on this device (Android
     < 9)
 
+### subscribeToPushNotifications
+
+<kbd>App version >= TBD</kbd>
+
+Tells the native app to start the push notification subscription flow. The app
+first verifies that notifications permission is granted; if so, it starts the
+corresponding SDK and executes the push subscription through it.
+
+```ts
+subscribeToPushNotifications: () => Promise<void>;
+```
+
+#### Error cases
+
+-   `401`: Push notifications permission is not granted
+-   `500`: Any other error that prevented the operation from completing
+
+### unsubscribeFromPushNotifications
+
+<kbd>App version >= TBD</kbd>
+
+Tells the native app to unsubscribe from pushes through the corresponding SDK.
+No permission is required.
+
+```ts
+unsubscribeFromPushNotifications: () => Promise<void>;
+```
+
+#### Error cases
+
+-   `500`: Any other error that prevented the operation from completing
+
 ## Error handling
 
 If an uncontrolled error occurs, promise will be rejected with an error object:

@@ -148,6 +148,11 @@ export {
 export {verifyIdentity} from './src/identity-verification';
 
 export {
+    subscribeToPushNotifications,
+    unsubscribeFromPushNotifications,
+} from './src/push-notifications';
+
+export {
     type LocatorSdkMode,
     setupLocatorSdkConfig,
     getLocatorSdkState,

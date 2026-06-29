@@ -1,3 +1,10 @@
+# [5.4.0](https://github.com/Telefonica/webview-bridge/compare/v5.3.0...v5.4.0) (2026-06-29)
+
+
+### Features
+
+* subscribeTo and subscribeFrom push notifications ([#276](https://github.com/Telefonica/webview-bridge/issues/276)) ([9d09931](https://github.com/Telefonica/webview-bridge/commit/9d09931ab41adb9be823ffc56800c898272e8d2d))
+
 # [5.3.0](https://github.com/Telefonica/webview-bridge/compare/v5.2.0...v5.3.0) (2026-06-16)
 
 

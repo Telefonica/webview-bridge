@@ -597,6 +597,16 @@ export type ResponsesFromNativeApp = {
         id: string;
         payload: void;
     };
+    SUBSCRIBE_TO_PUSH_NOTIFICATIONS: {
+        type: 'SUBSCRIBE_TO_PUSH_NOTIFICATIONS';
+        id: string;
+        payload: void;
+    };
+    UNSUBSCRIBE_FROM_PUSH_NOTIFICATIONS: {
+        type: 'UNSUBSCRIBE_FROM_PUSH_NOTIFICATIONS';
+        id: string;
+        payload: void;
+    };
 };
 
 export type NativeAppResponsePayload<

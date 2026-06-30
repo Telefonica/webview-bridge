@@ -2037,6 +2037,8 @@ Tells the native app to start the push notification subscription flow. The app
 first verifies that notifications permission is granted; if so, it starts the
 corresponding SDK and executes the push subscription through it.
 
+Only available in Mein O2 and Mein Blau.
+
 ```ts
 subscribeToPushNotifications: () => Promise<void>;
 ```
@@ -2044,6 +2046,8 @@ subscribeToPushNotifications: () => Promise<void>;
 #### Error cases
 
 -   `401`: Push notifications permission is not granted
+-   `405`: Feature not supported in current brand (only available in Mein Blau
+    and Mein O2)
 -   `500`: Any other error that prevented the operation from completing
 
 ### unsubscribeFromPushNotifications
@@ -2053,12 +2057,16 @@ subscribeToPushNotifications: () => Promise<void>;
 Tells the native app to unsubscribe from pushes through the corresponding SDK.
 No permission is required.
 
+Only available in Mein O2 and Mein Blau.
+
 ```ts
 unsubscribeFromPushNotifications: () => Promise<void>;
 ```
 
 #### Error cases
 
+-   `405`: Feature not supported in current brand (only available in Mein Blau
+    and Mein O2)
 -   `500`: Any other error that prevented the operation from completing
 
 ## Error handling

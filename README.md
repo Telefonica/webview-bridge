@@ -2026,6 +2026,7 @@ verifyIdentity({orderId: '123456789AAA'})
     and Mein O2)
 -   `500`: Internal error (e.g., unexpected error thrown by identity
     verification SDK)
+-   `503`: Feature is disabled.
 -   `505`: Identity verification flow is not supported on this device (Android
     < 9)
 

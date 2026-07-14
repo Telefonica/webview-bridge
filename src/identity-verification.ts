@@ -9,6 +9,7 @@ import {postMessageToNativeApp} from './post-message';
  * - 204: Flow was cancelled (e.g., closed manually by the user)
  * - 405: Feature not supported in current brand (only available in Mein Blau and Mein O2)
  * - 500: Internal error (e.g., unexpected error thrown by identity verification SDK)
+ * - 503: Feature is disabled.
  * - 505: Identity verification flow is not supported on this device (Android < 9)
  */
 export const verifyIdentity = ({orderId}: {orderId: string}): Promise<void> =>
